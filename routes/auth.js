@@ -14,7 +14,7 @@ router.get('/signIn', function(req, res) {
 
 // process the login form
 router.post('/signIn', passport.authenticate('local-login', {
-    successRedirect : '/auth/home', // redirect to the secure profile section
+    successRedirect : '/home', // redirect to the secure profile section
     failureRedirect : '/auth/signIn', // redirect back to the signup page if there is an error
     failureFlash : true // allow flash messages
 }));

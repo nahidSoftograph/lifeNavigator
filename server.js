@@ -19,6 +19,8 @@ var expressHbs   = require('express-handlebars');
 var viewRoutes   = require('./routes/viewRoutes');
 
 let instancesRouter = require('./routes/instances'),
+    authRoutes = require('./routes/auth'),
+    homeRoutes = require('./routes/home'),
     defaultSiteRouter = require('./routes/defaultSite');
 
 var configDB     = require('./config/database');
@@ -68,6 +70,8 @@ app.use(function (req, res, next) {
 });
 
 app.use('/view', viewRoutes);
+app.use('/auth', authRoutes);
+app.use('/home', homeRoutes);
 app.use('/defaultSite', defaultSiteRouter);
 app.use('/instances', instancesRouter);
 
