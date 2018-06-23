@@ -21,6 +21,7 @@ var viewRoutes   = require('./routes/viewRoutes');
 let instancesRouter = require('./routes/instances'),
     authRoutes = require('./routes/auth'),
     homeRoutes = require('./routes/home'),
+    userRoutes = require('./routes/user'),
     defaultSiteRouter = require('./routes/defaultSite');
 
 var configDB     = require('./config/database');
@@ -70,6 +71,7 @@ app.use(function (req, res, next) {
 });
 
 app.use('/view', viewRoutes);
+app.use('/user', userRoutes);
 app.use('/auth', authRoutes);
 app.use('/home', homeRoutes);
 app.use('/defaultSite', defaultSiteRouter);
