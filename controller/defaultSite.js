@@ -1,5 +1,10 @@
+
 let renderHomePage = (req, res, next) => {
     res.render('defaultSite/homePage', {'title': 'Home Page'});
+};
+
+let createHomePage = (req, res, next) => {
+
 };
 
 let renderAccomplishments = (req, res, next) => {
@@ -23,5 +28,6 @@ module.exports = {
     renderAccomplishments,
     renderFutureGoals,
     renderAssessRisk,
-    renderMyPlan
+    renderMyPlan,
+    createHomePage
 };

@@ -1,104 +1,73 @@
-<br>
 <div class="row">
     <div class="col-12">
-        <div class="custom-file">
-            <input type="file" class="custom-file-input" id="customFile">
-            <label class="custom-file-label font-weight-bold" for="customFile">Choose Logo</label>
-        </div>
-    </div>
-</div>
-<hr>
+        <form action="/defaultSite/homePage" method="post" enctype="multipart/form-data">
+            <div class="form-group row">
+                <div class="custom-file">
+                    <input type="file" name="image" class="custom-file-input">
+                    <label class="custom-file-label font-weight-bold" for="customFile">Choose Logo</label>
+                </div>
+            </div>
 
-<br>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label font-weight-bold">Instance Id</label>
+                <div class="col-sm-10">
+                    <input type="text" name="instanceId" class="form-control" placeholder="Instance Id">
+                </div>
+            </div>
 
-<div class="row">
-    <div class="col-6">
-        <div class="text-center font-weight-bold d-block p-2 bg-secondary text-white">Enter Button Texts</div>
-        <hr>
-        <ul class="list-group">
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon3">Button 1 Text</span>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label font-weight-bold">Welcome Text</label>
+                <div class="col-sm-10">
+                    <input type="text" name="welComeText" class="form-control" placeholder="Welcome Text">
                 </div>
-                <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
             </div>
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon3">Button 2 Text</span>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label font-weight-bold">Enter Header</label>
+                <div class="col-sm-10">
+                    <input type="text" name="header" class="form-control" placeholder="Header">
                 </div>
-                <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
             </div>
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon3">Button 3 Text</span>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label font-weight-bold">Enter Info</label>
+                <div class="col-sm-10">
+                    <input type="text" name="info" class="form-control" placeholder="Home Page Info">
                 </div>
-                <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
             </div>
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon3">Button 4 Text</span>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label font-weight-bold">Anchor Text</label>
+                <div class="col-sm-10">
+                    <input type="text" name="anchorText" class="form-control" placeholder="Anchor Text">
                 </div>
-                <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
             </div>
-        </ul>
-    </div>
-    <div class="col-6">
-        <div class="text-center font-weight-bold d-block p-2 bg-secondary text-white">Enter Button Link</div>
-        <hr>
-        <form>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label font-weight-bold">Anchor Link</label>
+                <div class="col-sm-10">
+                    <input type="text" name="anchorLink" class="form-control" placeholder="Anchor Link">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label font-weight-bold">Button Text</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="buttonText" placeholder="Button Text">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label font-weight-bold">Button Link</label>
+                <div class="col-sm-10">
+                    <input type="text" name="buttonLink" class="form-control" placeholder="Button Link">
+                </div>
+            </div>
             <div class="row">
-                <div class="col-6">
-                    <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
-                        <option selected>Select Button</option>
-                        <option value="1">Button 1</option>
-                        <option value="2">Button 2</option>
-                        <option value="3">Button 3</option>
-                    </select>
-                </div>
-                <div class="col-6">
-                    <div class="">
-                        <input type="text" class="form-control" id="" placeholder="Enter Link">
-                    </div>
+                <div class="col-12">
+                    <button class="btn btn-primary btn-block" type="submit">Submit</button>
                 </div>
             </div>
         </form>
     </div>
 </div>
-
-<hr class="font-weight-bold">
-
-<div class="row">
-    <div class="col-12">
-        <form>
-            <div class="form-group row">
-                <label for="inputEmail" class="col-sm-2 col-form-label font-weight-bold">Enter Header</label>
-                <div class="col-sm-10">
-                    <input type="email" class="form-control" id="inputEmail" placeholder="Header">
-                </div>
-            </div>
-            <div class="form-group row">
-                <label for="inputPassword" class="col-sm-2 col-form-label font-weight-bold">Enter Sub Header</label>
-                <div class="col-sm-10">
-                    <input type="password" class="form-control" id="inputPassword" placeholder="Sub Header">
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
-
-
-<footer class="footer">
-    <br>
-    <hr>
-    <div class="container">
-        <div class="row">
-            <div class="col-5 bg-success">
-                <div class="text-center largeFont">Preview</div>
-            </div>
-            <div class="col-2"></div>
-            <div class="col-5 bg-info">
-                <div class="text-center largeFont">Update</div>
-            </div>
-        </div>
-    </div>
-</footer>
