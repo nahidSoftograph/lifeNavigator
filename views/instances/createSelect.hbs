@@ -4,83 +4,87 @@
         <table class="table table-hover">
             <thead>
             <tr>
-                <th scope="col">Name</th>
+                <th scope="col">Instance Name</th>
+                <th scope="col">Company Name</th>
                 <th scope="col">URL</th>
                 <th scope="col">Activation</th>
                 <th scope="col">Operation</th>
             </tr>
             </thead>
             <tbody>
-
+            {{#each instances}}
             <tr>
-                <td>Instance Name 1</td>
-                <td><input type="text" class="form-control" id="" placeholder="Enter Goal Text"></td>
+                <td>{{this.instanceName}}</td>
+                <td>{{this.companyName}}</td>
+                <td>{{this.instanceLink}}</td>
                 <td>
-                    <div class="form-group row">
-                        <label class="switch">
-                            <input type="checkbox">
-                            <span class="slider"></span>
-                        </label>
+                    {{#if this.isActive}}
+                        <a href="/instances/changeInstanceActivation/{{this._id}}">
+                            <button type="button" class="btn btn-danger">Deactivate</button>
+                        </a>
+                    {{else}}
+                        <a href="/instances/changeInstanceActivation/{{this._id}}">
+                            <button type="button" class="btn btn-success">Activate</button>
+                        </a>
+                    {{/if}}
+                </td>
+                <td>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#updateInstanceModal">
+                        Update
+                    </button>
+                    <div class="modal fade" id="updateInstanceModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Update Instance</h5>
+                                    <a href="/instances/deleteInstance/{{this._id}}">
+                                        <button class="btn btn-danger">Delete Instance</button>
+                                    </a>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="/instances/updateInstance" method="post">
+                                        <input type="hidden" name="id" value="{{this._id}}">
+                                        <div class="form-group">
+                                            <label>Instance Name</label>
+                                            <input type="text" class="form-control" name="instanceName" placeholder="Enter Instance Name" value="{{this.instanceName}}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Company Name</label>
+                                            <input type="text" class="form-control" name="companyName" placeholder="Enter Company Name" value="{{this.companyName}}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Instance Link</label>
+                                            <input type="text" class="form-control" name="instanceLink" placeholder="Instance Link" value="{{this.instanceLink}}">
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </td>
-                <td>
-                    <button type="button" class="btn btn-primary">Update</button>
-                </td>
             </tr>
-
-            <tr>
-                <td>Instance Name 1</td>
-                <td><input type="text" class="form-control" id="" placeholder="Enter Goal Text"></td>
-                <td>
-                    <div class="form-group row">
-                        <label class="switch">
-                            <input type="checkbox">
-                            <span class="slider"></span>
-                        </label>
-                    </div>
-                </td>
-                <td>
-                    <button type="button" class="btn btn-primary">Update</button>
-                </td>
-            </tr>
-
-            <tr>
-                <td>Instance Name 1</td>
-                <td><input type="text" class="form-control" id="" placeholder="Enter Goal Text"></td>
-                <td>
-                    <div class="form-group row">
-                        <label class="switch">
-                            <input type="checkbox">
-                            <span class="slider"></span>
-                        </label>
-                    </div>
-                </td>
-                <td>
-                    <button type="button" class="btn btn-primary">Update</button>
-                </td>
-            </tr>
-
+            {{/each}}
             </tbody>
         </table>
     </div>
 
     <div class="col-3">
         <div class="text-center font-weight-bold d-block p-2 bg-secondary text-white">Instances List</div>
-        <form>
+        <form action="/instances/createInstance" method="post">
             <div class="form-group">
                 <label>Instance Name</label>
-                <input type="text" class="form-control" placeholder="Enter Instance Name">
+                <input type="text" class="form-control" name="instanceName" placeholder="Enter Instance Name">
             </div>
             <div class="form-group">
                 <label>Company Name</label>
-                <input type="text" class="form-control" placeholder="Enter Company Name">
+                <input type="text" class="form-control" name="companyName" placeholder="Enter Company Name">
             </div>
             <div class="form-group">
-                <label for="exampleInputPassword1">Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                <label>Instance Link</label>
+                <input type="text" class="form-control" name="instanceLink" placeholder="Password">
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
-
     </div>
 </div>
