@@ -5,18 +5,35 @@
             <thead>
                 <tr>
                     <th scope="col">Email</th>
+                    <th scope="col">Name</th>
                 </tr>
             </thead>
             <tbody>
             {{#each users}}
                 <tr>
                     <td>{{this.local.email}}</td>
+                    <td>{{this.local.name}}</td>
                 </tr>
             {{/each}}
             </tbody>
         </table>
     </div>
     <div class="col-4">
-        This is creating users
+        <div class="text-center font-weight-bold d-block p-2 bg-secondary text-white">Create User</div>
+        <form action="/user" method="post">
+            <div class="form-group">
+                <label>User Name</label>
+                <input type="text" class="form-control" name="name" placeholder="Enter User Name">
+            </div>
+            <div class="form-group">
+                <label>User Email</label>
+                <input type="text" class="form-control" name="email" placeholder="Enter User Email">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">User Password</label>
+                <input type="password" class="form-control" name="password" placeholder="Enter User Password">
+            </div>
+            <button type="submit" class="btn btn-primary">Create</button>
+        </form>
     </div>
 </div>

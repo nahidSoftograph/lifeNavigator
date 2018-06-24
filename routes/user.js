@@ -3,5 +3,6 @@ let express = require('express'),
     userController = require('../controller/user');
 
 router.get('/', userController.renderUsers);
+router.post('/', userController.createUser);
 
 module.exports = router;
