@@ -1,53 +1,45 @@
-<br>
-
 <div class="row">
-    <div class="col-6">
-        <div class="text-center font-weight-bold d-block p-2 bg-secondary text-white">Enter Button Texts</div>
-        <hr>
-        <ul class="list-group">
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon3">Button 1 Text</span>
+    <div class="col-12">
+        <form action="/defaultSite/accomplishments" method="post">
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label font-weight-bold">Enter Header</label>
+                <div class="col-sm-10">
+                    <input type="text" name="headerText" class="form-control" placeholder="Header">
                 </div>
-                <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
             </div>
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon3">Button 2 Text</span>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label font-weight-bold">Enter Sub Header</label>
+                <div class="col-sm-10">
+                    <input type="text" name="subHeaderText" class="form-control" placeholder="Sub Header">
                 </div>
-                <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
             </div>
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon3">Button 3 Text</span>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label font-weight-bold">Button Text</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="buttonText" placeholder="Button Text">
                 </div>
-                <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
             </div>
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon3">Button 4 Text</span>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label font-weight-bold">Button Link</label>
+                <div class="col-sm-10">
+                    <input type="text" name="buttonLink" class="form-control" placeholder="Button Link">
                 </div>
-                <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
             </div>
-        </ul>
-    </div>
-    <div class="col-6">
-        <div class="text-center font-weight-bold d-block p-2 bg-secondary text-white">Enter Button Link</div>
-        <hr>
-        <form>
             <div class="row">
-                <div class="col-6">
-                    <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
-                        <option selected>Select Button</option>
-                        <option value="1">Button 1</option>
-                        <option value="2">Button 2</option>
-                        <option value="3">Button 3</option>
-                    </select>
+                <div class="col-12">
+                    <button class="btn btn-primary btn-block" type="submit">Submit</button>
                 </div>
-                <div class="col-6">
-                    <div class="">
-                        <input type="text" class="form-control" id="" placeholder="Enter Link">
-                    </div>
+            </div>
+
+            <br>
+
+            <div class="row">
+                <div class="col-12">
+                    <button class="btn btn-success btn-block">Preview</button>
                 </div>
             </div>
         </form>
@@ -57,111 +49,156 @@
 <br>
 <hr class="font-weight-bold">
 
-<div class="row">
-    <div class="col-12">
-        <hr>
-        <form>
-            <div class="form-group row">
-                <label for="inputEmail" class="col-sm-2 col-form-label font-weight-bold">Enter Header</label>
-                <div class="col-sm-10">
-                    <input type="email" class="form-control" id="inputEmail" placeholder="Header">
-                </div>
-            </div>
-            <div class="form-group row">
-                <label for="inputPassword" class="col-sm-2 col-form-label font-weight-bold">Enter Sub Header</label>
-                <div class="col-sm-10">
-                    <input type="password" class="form-control" id="inputPassword" placeholder="Sub Header">
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
-
 <br>
 <hr class="font-weight-bold">
 
 <div class="row">
     <div class="col-12">
-        <div class="text-center font-weight-bold d-block p-2 bg-secondary text-white">Goal List</div>
+        <div class="text-center font-weight-bold d-block p-2 bg-secondary text-white">Goal Category</div>
         <table class="table table-hover">
             <thead>
             <tr>
-                <th scope="col">Goal Category</th>
-                <th scope="col">Goal Text</th>
-                <th scope="col">Visibility</th>
+                <th scope="col">Goal Category Name</th>
+                <th scope="col">Goal Caegory Text</th>
+                <th scope="col">Update</th>
+                <th scope="col">Goals</th>
             </tr>
             </thead>
             <tbody>
             <tr>
-                <td>Goal Category 1</td>
-                <td><input type="text" class="form-control" id="" placeholder="Enter Goal Text"></td>
+                <td>Career</td>
+                <td><input type="text" class="form-control" id="" placeholder="Enter Goal Category 1 Text"></td>
                 <td>
-                    <div class="form-group row">
-                        <label class="switch">
-                            <input type="checkbox">
-                            <span class="slider"></span>
-                        </label>
+                    <button class="btn btn-primary">Update Text</button>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#career">
+                        Goal List
+                    </button>
+                    <div class="modal lg fade" id="career" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Change Goals Visibilty and Text</h5>
+                                </div>
+                                <div class="modal-body">
+                                    <table class="table table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th scope="col">Name</th>
+                                            <th scope="col">Text</th>
+                                            <th scope="col">Update</th>
+                                            <th scope="col">Visibility</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>Goal Name</td>
+                                            <td><input type="text" class="form-control" id="" placeholder="Enter Goal 1 Text"></td>
+                                            <td>
+                                                <button class="btn btn-primary">Update</button>
+                                            </td>
+                                            <td>
+                                                <button class="btn btn-primary">Update</button>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Goal Name</td>
+                                            <td><input type="text" class="form-control" id="" placeholder="Enter Goal 1 Text"></td>
+                                            <td>
+                                                <button class="btn btn-primary">Update</button>
+                                            </td>
+                                            <td>
+                                                <button class="btn btn-primary">Update</button>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Goal Name</td>
+                                            <td><input type="text" class="form-control" id="" placeholder="Enter Goal 1 Text"></td>
+                                            <td>
+                                                <button class="btn btn-primary">Update</button>
+                                            </td>
+                                            <td>
+                                                <button class="btn btn-primary">Update</button>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Goal Name</td>
+                                            <td><input type="text" class="form-control" id="" placeholder="Enter Goal 1 Text"></td>
+                                            <td>
+                                                <button class="btn btn-primary">Update</button>
+                                            </td>
+                                            <td>
+                                                <button class="btn btn-primary">Update</button>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Goal Name</td>
+                                            <td><input type="text" class="form-control" id="" placeholder="Enter Goal 1 Text"></td>
+                                            <td>
+                                                <button class="btn btn-primary">Update</button>
+                                            </td>
+                                            <td>
+                                                <button class="btn btn-primary">Update</button>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </td>
             </tr>
 
             <tr>
-                <td>Goal Category 2</td>
+                <td>Home</td>
                 <td><input type="text" class="form-control" id="" placeholder="Enter Goal Text"></td>
                 <td>
-                    <div class="form-group row">
-                        <label class="switch">
-                            <input type="checkbox">
-                            <span class="slider"></span>
-                        </label>
-                    </div>
+                    <button class="btn btn-primary">Update Text</button>
+                </td>
+                <td>
+                    <button class="btn-primary">Goal Lists</button>
                 </td>
             </tr>
 
             <tr>
-                <td>Goal Category 3</td>
+                <td>Relationship</td>
                 <td><input type="text" class="form-control" id="" placeholder="Enter Goal Text"></td>
                 <td>
-                    <div class="form-group row">
-                        <label class="switch">
-                            <input type="checkbox">
-                            <span class="slider"></span>
-                        </label>
-                    </div>
+                    <button class="btn btn-primary">Update Text</button>
+                </td>
+                <td>
+                    <button class="btn-primary">Goal Lists</button>
                 </td>
             </tr>
 
             <tr>
-                <td>Goal Category 4</td>
+                <td>Family</td>
                 <td><input type="text" class="form-control" id="" placeholder="Enter Goal Text"></td>
                 <td>
-                    <div class="form-group row">
-                        <label class="switch">
-                            <input type="checkbox">
-                            <span class="slider"></span>
-                        </label>
-                    </div>
+                    <button class="btn btn-primary">Update Text</button>
+                </td>
+                <td>
+                    <button class="btn-primary">Goal Lists</button>
                 </td>
             </tr>
 
+            <tr>
+                <td>Golden Years</td>
+                <td><input type="text" class="form-control" id="" placeholder="Enter Goal Text"></td>
+                <td>
+                    <button class="btn btn-primary">Update Text</button>
+                </td>
+                <td>
+                    <button class="btn-primary">Goal Lists</button>
+                </td>
+            </tr>
             </tbody>
         </table>
     </div>
 </div>
-
-
-<footer class="footer">
-    <br>
-    <hr>
-    <div class="container">
-        <div class="row">
-            <div class="col-5 bg-success">
-                <div class="text-center largeFont">Preview</div>
-            </div>
-            <div class="col-2"></div>
-            <div class="col-5 bg-info">
-                <div class="text-center largeFont">Update</div>
-            </div>
-        </div>
-    </div>
-</footer>
