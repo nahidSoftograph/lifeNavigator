@@ -1,4 +1,5 @@
 let Instance = require('../models/instance'),
+    Category = require('../models/category'),
     Accomplishment = require('../models/accomplishment');
 
 let renderHomePage = (req, res, next) => {
@@ -10,7 +11,29 @@ let createHomePage = (req, res, next) => {
 };
 
 let renderAccomplishments = (req, res, next) => {
-    res.render('defaultSite/accomplishments', {'title': 'Accomplishments'});
+    Instance.findOne({isHome: true}, (err, instance) => {
+        if (err) {
+            console.log('Error: ' + err);
+        } else {
+            Accomplishment.findOne({instanceId: instance._id }, (err, accomplishment) => {
+                if (err) {
+                    console.log('Error: ' + err)    ;
+                } else {
+                    Category.find({parentSectionId: accomplishment._id}, (err, categories) => {
+                        if (err) {
+                            console.log('Error: ' + err);
+                        } else {
+                            res.render('defaultSite/accomplishments', {
+                                title: 'Accomplishments',
+                                accomplishment: accomplishment,
+                                categories: categories
+                            });
+                        }
+                    });
+                }
+            });
+        }
+    });
 };
 
 let createAccomplishment = (req, res, next) => {

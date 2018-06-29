@@ -53,23 +53,66 @@
 <hr class="font-weight-bold">
 
 <div class="row">
+    <div class="col-8"></div>
+    <div class="col-4">
+        <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#category">
+            Create Category
+        </button>
+        <div class="modal fade" id="category" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Create Category</h5>
+                    </div>
+                    <div class="modal-body">
+                        <form action="/category" method="post">
+                            <input type="hidden" name="callBackURL" value="defaultSite/accomplishments">
+                            <input type="hidden" name="isCategoryUnderAccomplishment" value=true>
+                            <input type="hidden" name="isCategoryUnderFutureGoals" value=false>
+                            <input type="hidden" name="parentSectionId" value="{{accomplishment._id}}">
+                            <div class="form-group">
+                                <label>Category Name</label>
+                                <input type="text" class="form-control" name="categoryName" placeholder="Enter Category Name">
+                            </div>
+                            <div class="form-group">
+                                <label>Category Text</label>
+                                <input type="text" class="form-control" name="categoryText" placeholder="Enter Category Text">
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Create</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br>
+
+<div class="row">
     <div class="col-12">
         <div class="text-center font-weight-bold d-block p-2 bg-secondary text-white">Goal Category</div>
         <table class="table table-hover">
             <thead>
             <tr>
                 <th scope="col">Goal Category Name</th>
-                <th scope="col">Goal Caegory Text</th>
+                <th scope="col">Goal Category Text</th>
+                <th scope="col">Visibility</th>
                 <th scope="col">Update</th>
                 <th scope="col">Goals</th>
             </tr>
             </thead>
             <tbody>
+            {{#each categories}}
             <tr>
-                <td>Career</td>
-                <td><input type="text" class="form-control" id="" placeholder="Enter Goal Category 1 Text"></td>
+                <td>{{this.categoryName}}</td>
+                <td><input type="text" value="{{this.categoryText}}" class="form-control" id="" placeholder="Enter Goal Category 1 Text"></td>
                 <td>
                     <button class="btn btn-primary">Update Text</button>
+                </td>
+                <td>
+                    <button class="btn btn-primary">Change Visibility</button>
                 </td>
                 <td>
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#career">
@@ -154,50 +197,7 @@
                     </div>
                 </td>
             </tr>
-
-            <tr>
-                <td>Home</td>
-                <td><input type="text" class="form-control" id="" placeholder="Enter Goal Text"></td>
-                <td>
-                    <button class="btn btn-primary">Update Text</button>
-                </td>
-                <td>
-                    <button class="btn-primary">Goal Lists</button>
-                </td>
-            </tr>
-
-            <tr>
-                <td>Relationship</td>
-                <td><input type="text" class="form-control" id="" placeholder="Enter Goal Text"></td>
-                <td>
-                    <button class="btn btn-primary">Update Text</button>
-                </td>
-                <td>
-                    <button class="btn-primary">Goal Lists</button>
-                </td>
-            </tr>
-
-            <tr>
-                <td>Family</td>
-                <td><input type="text" class="form-control" id="" placeholder="Enter Goal Text"></td>
-                <td>
-                    <button class="btn btn-primary">Update Text</button>
-                </td>
-                <td>
-                    <button class="btn-primary">Goal Lists</button>
-                </td>
-            </tr>
-
-            <tr>
-                <td>Golden Years</td>
-                <td><input type="text" class="form-control" id="" placeholder="Enter Goal Text"></td>
-                <td>
-                    <button class="btn btn-primary">Update Text</button>
-                </td>
-                <td>
-                    <button class="btn-primary">Goal Lists</button>
-                </td>
-            </tr>
+            {{/each}}
             </tbody>
         </table>
     </div>
