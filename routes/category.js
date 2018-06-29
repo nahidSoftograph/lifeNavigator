@@ -14,6 +14,9 @@ let storage = multer.diskStorage({
 });
 let upload = multer({storage: storage});
 
-router.post('/', categoryController.createCategory);
+router.post('/create', categoryController.createCategory);
+router.post('/update/:categoryId', categoryController.updateCategory);
+router.post('/delete/:categoryId', categoryController.deleteCategory);
+router.post('/alterVisibility/:categoryId', categoryController.alterCategoryVisibility);
 
 module.exports = router;
