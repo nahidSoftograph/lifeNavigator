@@ -23,6 +23,7 @@ let instancesRouter = require('./routes/instances'),
     homeRoutes = require('./routes/home'),
     userRoutes = require('./routes/user'),
     categoryRoutes = require('./routes/category'),
+    goalRoutes = require('./routes/goal'),
     defaultSiteRouter = require('./routes/defaultSite');
 
 var configDB     = require('./config/database');
@@ -78,6 +79,7 @@ app.use('/home', homeRoutes);
 app.use('/defaultSite', defaultSiteRouter);
 app.use('/instances', instancesRouter);
 app.use('/category', categoryRoutes);
+app.use('/goal', goalRoutes);
 
 // launch ======================================================================
 app.listen(port);

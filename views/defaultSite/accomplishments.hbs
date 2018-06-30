@@ -90,6 +90,8 @@
 
 <br>
 
+{{accomplishment.instanceId}}
+
 <div class="row">
     <div class="col-12">
         <div class="text-center font-weight-bold d-block p-2 bg-secondary text-white">Goal Category</div>
@@ -147,7 +149,7 @@
                         {{#if this.isVisible}}
                             <button class="btn btn-danger" type="submit">Make Invisible</button>
                         {{else}}
-                            <button class="btn btn-primary" type="submit">Make Visibile</button>
+                            <button class="btn btn-success" type="submit">Make Visibile</button>
                         {{/if}}
                     </form>
                 </td>
@@ -160,6 +162,40 @@
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="exampleModalLabel">Change Goals Visibilty and Text</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <button class="btn btn-primary" data-toggle="modal" data-target="#createGoal">Create Goal for {{this.categoryName}}</button>
+                                    </button>
+                                    <div class="modal fade" id="createGoal" tabindex="-1" role="dialog" aria-labelledby="createGoal" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="createGoal">Creating Goal for {{this.categoryName}}</h5>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form action="/goal/create" method="post"  enctype="multipart/form-data">
+                                                        <input type="hidden" name="callBackURL" value="/defaultSite/accomplishments">
+                                                        <input type="hidden" name="categoryId" value={{this._id}}>
+                                                        <div class="form-group row">
+                                                            <div class="custom-file">
+                                                                <input type="file" name="image" class="custom-file-input">
+                                                                <label class="custom-file-label font-weight-bold" for="customFile">Choose Goal Logo</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Goal Name</label>
+                                                            <input type="text" class="form-control" name="goalName" placeholder="Enter Goal Name">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Goal Text</label>
+                                                            <input type="text" class="form-control" name="goalText" placeholder="Enter Goal Text">
+                                                        </div>
+
+                                                        <button type="submit" class="btn btn-primary">Create</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="modal-body">
                                     <table class="table table-hover">
