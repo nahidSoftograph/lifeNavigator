@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="53cb04c1-6808-4418-9409-caeed569a6bd" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/controller/goal.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/routes/goal.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/goal.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/goal.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/category.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/category.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/defaultSite/accomplishments.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/defaultSite/accomplishments.hbs" afterDir="false" />
-    </list>
+    <list default="true" id="53cb04c1-6808-4418-9409-caeed569a6bd" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -25,8 +17,8 @@
       <file leaf-file-name="accomplishments.hbs" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/views/defaultSite/accomplishments.hbs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="712">
-              <caret line="174" column="124" selection-start-line="174" selection-start-column="124" selection-end-line="174" selection-end-column="124" />
+            <state relative-caret-position="650">
+              <caret line="175" column="35" selection-start-line="175" selection-start-column="35" selection-end-line="175" selection-end-column="35" />
               <folding>
                 <element signature="n#div#0;n#!!top" />
                 <element signature="n#button#0;n#div#1;n#div#1;n#!!top" />
@@ -74,7 +66,7 @@
         <entry file="file://$PROJECT_DIR$/controller/goal.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="372">
-              <caret line="12" column="2" lean-forward="true" selection-start-line="12" selection-start-column="2" selection-end-line="12" selection-end-column="2" />
+              <caret line="12" column="2" selection-start-line="12" selection-start-column="2" selection-end-line="12" selection-end-column="2" />
             </state>
           </provider>
         </entry>
@@ -260,12 +252,12 @@
       <workItem from="1530079346174" duration="1122000" />
       <workItem from="1530282653221" duration="20733000" />
       <workItem from="1530355346700" duration="127000" />
-      <workItem from="1530359546849" duration="8206000" />
+      <workItem from="1530359546849" duration="9802000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="84213000" />
+    <option name="totallyTimeSpent" value="85809000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="30" width="1920" height="1050" extended-state="6" />
@@ -575,7 +567,7 @@
     <entry file="file://$PROJECT_DIR$/controller/goal.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="372">
-          <caret line="12" column="2" lean-forward="true" selection-start-line="12" selection-start-column="2" selection-end-line="12" selection-end-column="2" />
+          <caret line="12" column="2" selection-start-line="12" selection-start-column="2" selection-end-line="12" selection-end-column="2" />
         </state>
       </provider>
     </entry>
@@ -588,8 +580,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/views/defaultSite/accomplishments.hbs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="712">
-          <caret line="174" column="124" selection-start-line="174" selection-start-column="124" selection-end-line="174" selection-end-column="124" />
+        <state relative-caret-position="650">
+          <caret line="175" column="35" selection-start-line="175" selection-start-column="35" selection-end-line="175" selection-end-column="35" />
           <folding>
             <element signature="n#div#0;n#!!top" />
             <element signature="n#button#0;n#div#1;n#div#1;n#!!top" />
