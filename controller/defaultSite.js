@@ -1,5 +1,6 @@
 let Instance = require('../models/instance'),
     Category = require('../models/category'),
+    Goal = require('../models/goal'),
     Accomplishment = require('../models/accomplishment');
 
 let renderHomePage = (req, res, next) => {
@@ -23,10 +24,16 @@ let renderAccomplishments = (req, res, next) => {
                         if (err) {
                             console.log('Error: ' + err);
                         } else {
-                            res.render('defaultSite/accomplishments', {
-                                title: 'Accomplishments',
-                                accomplishment: accomplishment,
-                                categories: categories
+                            traverseAllCategories(categories, (err, categories) => {
+                                if (err) {
+                                    console.log('Error: ' + err);
+                                } else {
+                                    res.render('defaultSite/accomplishments', {
+                                        title: 'Accomplishments',
+                                        accomplishment: accomplishment,
+                                        categories: categories
+                                    });
+                                }
                             });
                         }
                     });
@@ -99,4 +106,22 @@ module.exports = {
     renderMyPlan,
     createHomePage,
     createAccomplishment
+};
+
+let traverseAllCategories = (categories, cb) => {
+    for (let index=0; index<categories.length; index++) {
+        Goal.find({categoryId: categories[index]._id}, (err, goals) => {
+            if (err) {
+                return cb (err, null);
+            } else {
+                categories[index].goals = goals;
+                console.log('For category: ' + categories[index].categoryName);
+                console.log('  Goals ');
+                console.log(categories[index].goals);
+                if (categories.length - 1 == index) {
+                    return cb (null, categories);
+                }
+            }
+        });
+    }
 };

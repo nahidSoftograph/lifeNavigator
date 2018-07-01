@@ -90,8 +90,6 @@
 
 <br>
 
-{{accomplishment.instanceId}}
-
 <div class="row">
     <div class="col-12">
         <div class="text-center font-weight-bold d-block p-2 bg-secondary text-white">Goal Category</div>
@@ -154,18 +152,18 @@
                     </form>
                 </td>
                 <td>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#career">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#{{this._id}}">
                         Goal List
                     </button>
-                    <div class="modal lg fade" id="career" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+                    <div class="modal lg fade" id="{{this._id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
                         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="exampleModalLabel">Change Goals Visibilty and Text</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <button class="btn btn-primary" data-toggle="modal" data-target="#createGoal">Create Goal for {{this.categoryName}}</button>
+                                        <button class="btn btn-primary" data-toggle="modal" data-target="#{{this.categoryName}}">Create Goal for {{this.categoryName}}</button>
                                     </button>
-                                    <div class="modal fade" id="createGoal" tabindex="-1" role="dialog" aria-labelledby="createGoal" aria-hidden="true">
+                                    <div class="modal fade" id="{{this.categoryName}}" tabindex="-1" role="dialog" aria-labelledby="createGoal" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
@@ -208,9 +206,10 @@
                                         </tr>
                                         </thead>
                                         <tbody>
+                                        {{#each this.this.goals}}
                                         <tr>
-                                            <td>Goal Name</td>
-                                            <td><input type="text" class="form-control" id="" placeholder="Enter Goal 1 Text"></td>
+                                            <td>{{this.goalName}}</td>
+                                            <td>{{this.goalText}}</td>
                                             <td>
                                                 <button class="btn btn-primary">Update</button>
                                             </td>
@@ -218,50 +217,7 @@
                                                 <button class="btn btn-primary">Update</button>
                                             </td>
                                         </tr>
-
-                                        <tr>
-                                            <td>Goal Name</td>
-                                            <td><input type="text" class="form-control" id="" placeholder="Enter Goal 1 Text"></td>
-                                            <td>
-                                                <button class="btn btn-primary">Update</button>
-                                            </td>
-                                            <td>
-                                                <button class="btn btn-primary">Update</button>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>Goal Name</td>
-                                            <td><input type="text" class="form-control" id="" placeholder="Enter Goal 1 Text"></td>
-                                            <td>
-                                                <button class="btn btn-primary">Update</button>
-                                            </td>
-                                            <td>
-                                                <button class="btn btn-primary">Update</button>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>Goal Name</td>
-                                            <td><input type="text" class="form-control" id="" placeholder="Enter Goal 1 Text"></td>
-                                            <td>
-                                                <button class="btn btn-primary">Update</button>
-                                            </td>
-                                            <td>
-                                                <button class="btn btn-primary">Update</button>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>Goal Name</td>
-                                            <td><input type="text" class="form-control" id="" placeholder="Enter Goal 1 Text"></td>
-                                            <td>
-                                                <button class="btn btn-primary">Update</button>
-                                            </td>
-                                            <td>
-                                                <button class="btn btn-primary">Update</button>
-                                            </td>
-                                        </tr>
+                                        {{/each}}
                                         </tbody>
                                     </table>
                                 </div>

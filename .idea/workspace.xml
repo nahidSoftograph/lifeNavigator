@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="53cb04c1-6808-4418-9409-caeed569a6bd" name="Default" comment="" />
+    <list default="true" id="53cb04c1-6808-4418-9409-caeed569a6bd" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/controller/defaultSite.js" beforeDir="false" afterPath="$PROJECT_DIR$/controller/defaultSite.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/defaultSite/accomplishments.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/defaultSite/accomplishments.hbs" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -17,42 +20,42 @@
       <file leaf-file-name="accomplishments.hbs" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/views/defaultSite/accomplishments.hbs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="650">
-              <caret line="175" column="35" selection-start-line="175" selection-start-column="35" selection-end-line="175" selection-end-column="35" />
+            <state relative-caret-position="298">
+              <caret line="90" column="4" selection-start-line="90" selection-start-column="4" selection-end-line="90" selection-end-column="4" />
               <folding>
-                <element signature="n#div#0;n#!!top" />
-                <element signature="n#button#0;n#div#1;n#div#1;n#!!top" />
-                <element signature="n#div#0;n#div#1;n#div#1;n#!!top" />
                 <element signature="n#td#2;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#2;n#!!top" />
-                <element signature="n#td#3;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#2;n#!!top" />
+                <element signature="n#form#0;n#td#3;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#2;n#!!top" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="homePage.hbs" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/views/defaultSite/homePage.hbs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="62">
-              <caret line="2" column="88" selection-start-line="2" selection-start-column="58" selection-end-line="2" selection-end-column="88" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="category.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/models/category.js">
+        <entry file="file://$PROJECT_DIR$/controller/category.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="248">
-              <caret line="8" column="21" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
+            <state relative-caret-position="124">
+              <caret line="42" column="41" selection-start-line="42" selection-start-column="41" selection-end-line="42" selection-end-column="41" />
+              <folding>
+                <element signature="e#88#1566#0" />
+                <element signature="e#1610#3072#0" />
+                <element signature="e#3116#3596#0" />
+                <element signature="e#3649#4394#0" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="goal.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/routes/goal.js">
+      <file leaf-file-name="defaultSite.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/controller/defaultSite.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="329">
-              <caret line="30" column="30" selection-start-line="30" selection-start-column="30" selection-end-line="30" selection-end-column="30" />
+            <state relative-caret-position="515">
+              <caret line="120" column="40" selection-start-line="120" selection-start-column="40" selection-end-line="120" selection-end-column="40" />
+              <folding>
+                <element signature="e#1349#2863#0" />
+                <element signature="e#2910#2983#0" />
+                <element signature="e#3029#3100#0" />
+                <element signature="e#3142#3205#0" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -62,20 +65,12 @@
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
-      <file leaf-file-name="goal.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/controller/goal.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="372">
-              <caret line="12" column="2" selection-start-line="12" selection-start-column="2" selection-end-line="12" selection-end-column="2" />
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
       <find>make</find>
+      <find>each</find>
     </findStrings>
     <replaceStrings>
       <replace>&lt;button class=&quot;btn btn-primary&quot;&gt;Update Text&lt;/button&gt;</replace>
@@ -101,7 +96,6 @@
         <option value="$PROJECT_DIR$/models/accomplishment.js" />
         <option value="$PROJECT_DIR$/routes/defaultSite.js" />
         <option value="$PROJECT_DIR$/models/category.js" />
-        <option value="$PROJECT_DIR$/controller/defaultSite.js" />
         <option value="$PROJECT_DIR$/views/instances/createSelect.hbs" />
         <option value="$PROJECT_DIR$/controller/category.js" />
         <option value="$PROJECT_DIR$/controller/goal.js" />
@@ -109,6 +103,7 @@
         <option value="$PROJECT_DIR$/server.js" />
         <option value="$PROJECT_DIR$/models/goal.js" />
         <option value="$PROJECT_DIR$/routes/goal.js" />
+        <option value="$PROJECT_DIR$/controller/defaultSite.js" />
         <option value="$PROJECT_DIR$/views/defaultSite/accomplishments.hbs" />
       </list>
     </option>
@@ -162,36 +157,6 @@
             <path>
               <item name="seed-project" type="b2602c69:ProjectViewProjectNode" />
               <item name="seed-project" type="462c0819:PsiDirectoryNode" />
-              <item name="public" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="seed-project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="seed-project" type="462c0819:PsiDirectoryNode" />
-              <item name="public" type="462c0819:PsiDirectoryNode" />
-              <item name="images" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="seed-project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="seed-project" type="462c0819:PsiDirectoryNode" />
-              <item name="public" type="462c0819:PsiDirectoryNode" />
-              <item name="images" type="462c0819:PsiDirectoryNode" />
-              <item name="categoryLogo" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="seed-project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="seed-project" type="462c0819:PsiDirectoryNode" />
-              <item name="public" type="462c0819:PsiDirectoryNode" />
-              <item name="images" type="462c0819:PsiDirectoryNode" />
-              <item name="goalLogo" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="seed-project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="seed-project" type="462c0819:PsiDirectoryNode" />
-              <item name="routes" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="seed-project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="seed-project" type="462c0819:PsiDirectoryNode" />
               <item name="views" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -199,12 +164,6 @@
               <item name="seed-project" type="462c0819:PsiDirectoryNode" />
               <item name="views" type="462c0819:PsiDirectoryNode" />
               <item name="defaultSite" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="seed-project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="seed-project" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="instances" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -253,17 +212,18 @@
       <workItem from="1530282653221" duration="20733000" />
       <workItem from="1530355346700" duration="127000" />
       <workItem from="1530359546849" duration="9802000" />
+      <workItem from="1530457511781" duration="3584000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="85809000" />
+    <option name="totallyTimeSpent" value="89393000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="30" width="1920" height="1050" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24895833" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.13958333" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="13" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
@@ -481,23 +441,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/controller/category.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1674">
-          <caret line="92" column="42" selection-start-line="92" selection-start-column="42" selection-end-line="92" selection-end-column="42" />
-          <folding>
-            <element signature="e#88#1566#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/controller/defaultSite.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="825">
-          <caret line="28" column="54" selection-start-line="28" selection-start-column="54" selection-end-line="28" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/routes/instances.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="155">
@@ -549,7 +492,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/goal.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="329">
+        <state relative-caret-position="930">
           <caret line="30" column="30" selection-start-line="30" selection-start-column="30" selection-end-line="30" selection-end-column="30" />
         </state>
       </provider>
@@ -560,9 +503,6 @@
           <caret line="24" column="46" selection-start-line="24" selection-start-column="46" selection-end-line="24" selection-end-column="46" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/goal.js">
-      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/controller/goal.js">
       <provider selected="true" editor-type-id="text-editor">
@@ -578,16 +518,42 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/controller/category.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="124">
+          <caret line="42" column="41" selection-start-line="42" selection-start-column="41" selection-end-line="42" selection-end-column="41" />
+          <folding>
+            <element signature="e#88#1566#0" />
+            <element signature="e#1610#3072#0" />
+            <element signature="e#3116#3596#0" />
+            <element signature="e#3649#4394#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controller/defaultSite.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="515">
+          <caret line="120" column="40" selection-start-line="120" selection-start-column="40" selection-end-line="120" selection-end-column="40" />
+          <folding>
+            <element signature="e#1349#2863#0" />
+            <element signature="e#2910#2983#0" />
+            <element signature="e#3029#3100#0" />
+            <element signature="e#3142#3205#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/goal.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/views/defaultSite/accomplishments.hbs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="650">
-          <caret line="175" column="35" selection-start-line="175" selection-start-column="35" selection-end-line="175" selection-end-column="35" />
+        <state relative-caret-position="298">
+          <caret line="90" column="4" selection-start-line="90" selection-start-column="4" selection-end-line="90" selection-end-column="4" />
           <folding>
-            <element signature="n#div#0;n#!!top" />
-            <element signature="n#button#0;n#div#1;n#div#1;n#!!top" />
-            <element signature="n#div#0;n#div#1;n#div#1;n#!!top" />
             <element signature="n#td#2;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#2;n#!!top" />
-            <element signature="n#td#3;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#2;n#!!top" />
+            <element signature="n#form#0;n#td#3;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#2;n#!!top" />
           </folding>
         </state>
       </provider>
