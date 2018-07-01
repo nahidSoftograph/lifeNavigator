@@ -86,7 +86,7 @@ let deleteCategory = (req, res, next) => {
     } else if (!callBackURL) {
         console.log('Invalid callback URL');
     } else {
-        Category.findOneAndRemove(categoryId, (err, category) => {
+        Category.findByIdAndRemove(categoryId, (err, category) => {
             if (err) {
                 console.log('Error: ' + err);
             } else {

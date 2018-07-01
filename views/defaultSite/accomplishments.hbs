@@ -55,10 +55,10 @@
 <div class="row">
     <div class="col-8"></div>
     <div class="col-4">
-        <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#category">
+        <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#{{accomplishment._id}}categoryCreate">
             Create Category
         </button>
-        <div class="modal fade" id="category" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="{{accomplishment._id}}categoryCreate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -117,7 +117,7 @@
                                     <h5 class="modal-title" id="exampleModalLabel">Update Category</h5>
                                     <form action="/category/delete/{{this._id}}" method="post">
                                         <input type="hidden" name="callBackURL" value="/defaultSite/accomplishments">
-                                        <button class="btn btn-danger" type="submit">Delete</button>
+                                        <button class="btn btn-danger" type="submit">Delete {{this.categoryName}}</button>
                                     </form>
                                 </div>
                                 <div class="modal-body">
@@ -152,18 +152,18 @@
                     </form>
                 </td>
                 <td>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#{{this._id}}">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#{{this._id}}goalList">
                         Goal List
                     </button>
-                    <div class="modal lg fade" id="{{this._id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+                    <div class="modal lg fade" id="{{this._id}}goalList" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
                         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="exampleModalLabel">Change Goals Visibilty and Text</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <button class="btn btn-primary" data-toggle="modal" data-target="#{{this.categoryName}}">Create Goal for {{this.categoryName}}</button>
+                                        <button class="btn btn-primary" data-toggle="modal" data-target="#{{this.categoryName}}createGoal">Create Goal for {{this.categoryName}}</button>
                                     </button>
-                                    <div class="modal fade" id="{{this.categoryName}}" tabindex="-1" role="dialog" aria-labelledby="createGoal" aria-hidden="true">
+                                    <div class="modal fade" id="{{this.categoryName}}createGoal" tabindex="-1" role="dialog" aria-labelledby="createGoal" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
@@ -206,12 +206,40 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        {{#each this.this.goals}}
+                                        {{#each this.goals}}
                                         <tr>
                                             <td>{{this.goalName}}</td>
                                             <td>{{this.goalText}}</td>
                                             <td>
-                                                <button class="btn btn-primary">Update</button>
+                                                <button class="btn btn-primary" data-toggle="modal" data-target="#updateModal{{this._id}}">Update</button>
+                                                <div class="modal fade" id="updateModal{{this._id}}" tabindex="-1" role="dialog" aria-labelledby="leModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLabel">Update Goal</h5>
+                                                                <form action="#" method="post">
+                                                                    <input type="hidden" name="goalId" value="{{this._id}}">
+                                                                    <button class="btn btn-danger" type="submit">Delete</button>
+                                                                </form>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <form action="/goal/update" method="post">
+                                                                    <input type="hidden" name="callBackURL" value="/defaultSite/accomplishments">
+                                                                    <input type="hidden" name="goalId" value="{{this._id}}">
+                                                                    <div class="form-group">
+                                                                        <label>Goal Name</label>
+                                                                        <input type="text" class="form-control" name="goalName" placeholder="Enter Goal Name" value="{{this.goalName}}">
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label>Goal Text</label>
+                                                                        <input type="text" class="form-control" name="goalText" placeholder="Enter Goal Name" value="{{this.goalText}}">
+                                                                    </div>
+                                                                    <button type="submit" class="btn btn-primary">Update Goal</button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </td>
                                             <td>
                                                 <button class="btn btn-primary">Update</button>
