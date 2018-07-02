@@ -29,6 +29,7 @@ let createHomePage = (req, res, next) => {
 };
 
 let renderAccomplishments = (req, res, next) => {
+    console.log('Rendering accomplishments');
     Instance.findOne({isHome: true}, (err, instance) => {
         if (err) {
             console.log('Error: ' + err);
@@ -41,6 +42,7 @@ let renderAccomplishments = (req, res, next) => {
                         if (err) {
                             console.log('Error: ' + err);
                         } else {
+                            console.log('Before traversing the categories.');
                             traverseAllCategories(categories, (err, categories) => {
                                 if (err) {
                                     console.log('Error: ' + err);
@@ -164,19 +166,23 @@ module.exports = {
 };
 
 let traverseAllCategories = (categories, cb) => {
-    for (let index=0; index<categories.length; index++) {
-        Goal.find({categoryId: categories[index]._id}, (err, goals) => {
-            if (err) {
-                return cb (err, null);
-            } else {
-                categories[index].goals = goals;
-                console.log('For category: ' + categories[index].categoryName);
-                console.log('  Goals ');
-                console.log(categories[index].goals);
-                if (categories.length - 1 == index) {
-                    return cb (null, categories);
+    if (categories.length == 0) {
+        return cb (null, categories);
+    } else {
+        for (let index=0; index<categories.length; index++) {
+            Goal.find({categoryId: categories[index]._id}, (err, goals) => {
+                if (err) {
+                    return cb (err, null);
+                } else {
+                    categories[index].goals = goals;
+                    console.log('For category: ' + categories[index].categoryName);
+                    console.log('  Goals ');
+                    console.log(categories[index].goals);
+                    if (categories.length - 1 == index) {
+                        return cb (null, categories);
+                    }
                 }
-            }
-        });
+            });
+        }
     }
 };

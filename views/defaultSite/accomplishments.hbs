@@ -206,6 +206,7 @@
                                             <th scope="col">Text</th>
                                             <th scope="col">Update</th>
                                             <th scope="col">Visibility</th>
+                                            <th scope="col">Icon</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -245,7 +246,17 @@
                                                 </div>
                                             </td>
                                             <td>
-                                                <button class="btn btn-primary">Update</button>
+                                                <form action="/goal/alterVisibility/{{this._id}}" method="post">
+                                                    <input type="hidden" name="callBackURL" value="/defaultSite/accomplishments">
+                                                    {{#if this.goalVisibility}}
+                                                        <button class="btn btn-danger" type="submit">Make Goal Invisible</button>
+                                                    {{else}}
+                                                        <button class="btn btn-success" type="submit">Make Goal Visibile</button>
+                                                    {{/if}}
+                                                </form>
+                                            </td>
+                                            <td>
+                                                <img src="{{this.goalIconPath}}" alt="{{this.goalIconPath}}" height="35px" width="35px">
                                             </td>
                                         </tr>
                                         {{/each}}

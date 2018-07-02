@@ -7,7 +7,7 @@ let express = require('express'),
 
 let storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, 'public/images/logo')
+        cb(null, 'public/images/goalLogo/accomplishment/')
     },
     filename: (req, file, cb) => {
         cb(null, file.fieldname + '-' + Date.now())
@@ -56,5 +56,6 @@ router.post('/create', upload.single('image'), (req, res, next) => {
 
 router.post('/update', goalController.updateGoal);
 router.post('/delete', goalController.deleteGoal);
+router.post('/alterVisibility/:goalId', goalController.alterGoalVisibility);
 
 module.exports = router;

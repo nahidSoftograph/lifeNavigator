@@ -43,8 +43,34 @@ let deleteGoal = (req, res, next) => {
 
 };
 
+let alterGoalVisibility = (req, res, next) => {
+    let goalId = req.params.goalId,
+        callBackURL = req.body.callBackURL;
+    if (!goalId) {
+        console.log('Invalid goal Id.');
+    } else if (!callBackURL) {
+        console.log('Invalid callback URL');
+    } else {
+        Goal.findById(goalId, (err, goal) => {
+            if (err) {
+                console.log('Error: ' + err);
+            } else {
+                goal.goalVisibility = !goal.goalVisibility;
+                goal.save((err, goal) => {
+                    if (err) {
+                        console.log('Error: ' + err);
+                    } else {
+                        res.redirect(callBackURL);
+                    }
+                });
+            }
+        });
+    }
+};
+
 module.exports = {
-  createGoal,
-  updateGoal,
-  deleteGoal
+    createGoal,
+    updateGoal,
+    deleteGoal,
+    alterGoalVisibility
 };
