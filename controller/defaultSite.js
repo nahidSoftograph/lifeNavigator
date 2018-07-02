@@ -1,10 +1,27 @@
 let Instance = require('../models/instance'),
     Category = require('../models/category'),
     Goal = require('../models/goal'),
+    Home = require('../models/home');
     Accomplishment = require('../models/accomplishment');
 
 let renderHomePage = (req, res, next) => {
-    res.render('defaultSite/homePage', {'title': 'Home Page'});
+    Instance.findOne({isHome: true}, (err, instance) => {
+        if (err) {
+            console.log('Error: ' + err);
+        } else {
+            console.log('Home Instance');
+            console.log(instance);
+            Home.findOne({instanceId: instance._id}, (err, home) => {
+                if (err) {
+                    console.log('Error: ' + err);
+                } else {
+                    console.log('Got Home Page');
+                    console.log(home);
+                    res.render('defaultSite/homePage', {'title': 'Home Page', home: home});
+                }
+            });
+        }
+    });
 };
 
 let createHomePage = (req, res, next) => {

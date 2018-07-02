@@ -32,24 +32,24 @@ router.post('/homePage', upload.single('image'), (req, res, next) => {
         buttonLink = req.body.buttonLink;
 
     if (!welComeText) {
-
+        console.log('Invalid well come text');
     } else if (!header) {
-
+        console.log('Invalid header');
     } else if (!info) {
-
+        console.log('Invalid info');
     } else if (!anchorText) {
-
+        console.log('Invalid anchor text');
     } else if (!anchorLink) {
-
+        console.log('Invalid anchor link');
     } else if (!buttonText) {
-
+        console.log('Invalid button text');
     } else if (!buttonLink) {
-
+        console.log('Invalid button link');
     } else {
 
         Instance.findOne({isHome: true}, (err, instance) => {
             if (err) {
-
+                console.log('Error ' + err);
             } else {
                 let home = new Home({
                     instanceId: instance._id,
@@ -73,8 +73,10 @@ router.post('/homePage', upload.single('image'), (req, res, next) => {
         });
     }
 });
-router.post('/updateHomePage', upload.single('image'), (req, res, next) => {
-    let instanceId = req.body.instanceId,
+
+router.post('/updateHomePage/:id', upload.single('image'), (req, res, next) => {
+    let id = req.params.id,
+        instanceId = req.body.instanceId,
         welComeText = req.body.welComeText,
         header = req.body.header,
         info = req.body.info,
@@ -83,40 +85,49 @@ router.post('/updateHomePage', upload.single('image'), (req, res, next) => {
         buttonText = req.body.buttonText,
         buttonLink = req.body.buttonLink;
 
-    if (!instanceId) {
-
+    if (!id) {
+        console.log('Invalid id');
+    } else if (!instanceId) {
+        console.log('Invalid instance id');
     } else if (!welComeText) {
-
+        console.log('Invalid  wellcome text');
     } else if (!header) {
-
+        console.log('Invalid header');
     } else if (!info) {
-
+        console.log('Invalid info');
     } else if (!anchorText) {
-
+        console.log('Invalid anchor text');
     } else if (!anchorLink) {
-
+        console.log('Invalid anchor link');
     } else if (!buttonText) {
-
+        console.log('Invalid button text');
     } else if (!buttonLink) {
-
+        console.log('Invalid button link');
     } else {
-        console.log(req.file);
-        let home = new Home({
-            instanceId: instanceId,
-            welComeText: req.body.welComeText,
-            header: req.body.header,
-            info: req.body.info,
-            anchorText: req.body.anchorText,
-            anchorLink: req.body.anchorLink,
-            buttonText: req.body.buttonText,
-            buttonLink: req.body.buttonLink,
-            logoPath: 'public/images/logo/' + req.file.filename
-        });
-        home.save((err, home) => {
-            if (err) {
 
+        Home.findById(id, (err, home) => {
+            if (err) {
+                console.log('Error: ' + err);
             } else {
-                res.render('defaultSite/homePage', {'title': 'Home Page', defaultHome: home});
+                home.instanceId = instanceId || home.instanceId;
+                home.welComeText = req.body.welComeText || home.welComeText;
+                home.header = req.body.header || home.header;
+                home.info = req.body.info || home.info;
+                home.anchorText = req.body.anchorText || home.anchorText;
+                home.anchorLink = req.body.anchorLink || home.anchorLink;
+                home.buttonText = req.body.buttonText || home.buttonText;
+                home.buttonLink = req.body.buttonLink || home.buttonLink;
+                if (typeof req.file != 'undefined') {
+                    home.logoPath = '/images/logo/' + req.file.filename || home.logoPath;
+                }
+                home.save((err, home) => {
+                    if (err) {
+                        console.log('Error: ' + err);
+                    } else {
+                        res.redirect('/defaultSite/homePage');
+                        // res.render('defaultSite/homePage', {'title': 'Home Page', defaultHome: home});
+                    }
+                });
             }
         });
     }

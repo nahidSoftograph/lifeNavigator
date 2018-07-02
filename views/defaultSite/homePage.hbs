@@ -1,64 +1,72 @@
+{{home}}
+
 <div class="row">
     <div class="col-12">
-        <form action="/defaultSite/homePage" method="post" enctype="multipart/form-data">
+        <form action="/defaultSite/updateHomePage/{{home._id}}" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="instanceId" value="{{home.instanceId}}">
             <div class="form-group row">
-                <div class="custom-file">
-                    <input type="file" name="image" class="custom-file-input">
-                    <label class="custom-file-label font-weight-bold" for="customFile">Choose Logo</label>
+                <div class="col-sm-10">
+                    <div class="custom-file">
+                        <input type="file" name="image" class="custom-file-input">
+                        <label class="custom-file-label font-weight-bold" for="customFile">Update Logo</label>
+                    </div>
                 </div>
+                <label class="col-sm-2 col-form-label font-weight-bold">
+                    <img src="{{home.logoPath}}" alt="" width="40px" height="40px">
+                </label>
             </div>
 
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label font-weight-bold">Welcome Text</label>
                 <div class="col-sm-10">
-                    <input type="text" name="welComeText" class="form-control" placeholder="Welcome Text">
+                    <input type="text" name="welComeText" class="form-control" placeholder="Welcome Text" value="{{home.welComeText}}">
                 </div>
             </div>
 
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label font-weight-bold">Enter Header</label>
                 <div class="col-sm-10">
-                    <input type="text" name="header" class="form-control" placeholder="Header">
+                    <input type="text" name="header" class="form-control" placeholder="Header" value="{{home.header}}">
                 </div>
             </div>
 
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label font-weight-bold">Enter Info</label>
                 <div class="col-sm-10">
-                    <input type="text" name="info" class="form-control" placeholder="Home Page Info">
+                    <input type="text" name="info" class="form-control" placeholder="Home Page Info" value="{{home.info}}">
                 </div>
             </div>
 
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label font-weight-bold">Anchor Text</label>
                 <div class="col-sm-10">
-                    <input type="text" name="anchorText" class="form-control" placeholder="Anchor Text">
+                    <input type="text" name="anchorText" class="form-control" placeholder="Anchor Text" value="{{home.anchorText}}">
                 </div>
             </div>
 
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label font-weight-bold">Anchor Link</label>
                 <div class="col-sm-10">
-                    <input type="text" name="anchorLink" class="form-control" placeholder="Anchor Link">
+                    <input type="text" name="anchorLink" class="form-control" placeholder="Anchor Link" value="{{home.anchorLink}}">
                 </div>
             </div>
 
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label font-weight-bold">Button Text</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" name="buttonText" placeholder="Button Text">
+                    <input type="text" class="form-control" name="buttonText" placeholder="Button Text" value="{{home.buttonText}}">
                 </div>
             </div>
 
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label font-weight-bold">Button Link</label>
                 <div class="col-sm-10">
-                    <input type="text" name="buttonLink" class="form-control" placeholder="Button Link">
+                    <input type="text" name="buttonLink" class="form-control" placeholder="Button Link" value="{{home.buttonLink}}">
                 </div>
             </div>
             <div class="row">
                 <div class="col-12">
-                    <button class="btn btn-primary btn-block" type="submit">Submit</button>
+                    <button class="btn btn-primary btn-block" type="submit">Update</button>
                 </div>
             </div>
         </form>
