@@ -61,8 +61,6 @@ let renderAccomplishments = (req, res, next) => {
 };
 
 let createAccomplishment = (req, res, next) => {
-    console.log('creating accomplishments');
-    console.log(req.body);
     let headerText = req.body.headerText,
         subHeaderText = req.body.subHeaderText,
         buttonText = req.body.buttonText,
@@ -103,6 +101,45 @@ let createAccomplishment = (req, res, next) => {
     }
 };
 
+let updateAccomplishment = (req, res, next) => {
+    let id = req.params.id,
+        headerText = req.body.headerText,
+        subHeaderText = req.body.subHeaderText,
+        buttonText = req.body.buttonText,
+        buttonLink = req.body.buttonLink;
+    if (!id) {
+        console.log('invalid id');
+    } else if (!headerText) {
+        console.log('Invalid header text');
+    } else if (!subHeaderText) {
+        console.log('Invalid sub header text');
+    } else if (!buttonText) {
+        console.log('Invalid button text');
+    } else if (!buttonLink) {
+        console.log('Invalid button link');
+    } else {
+        Accomplishment.findById(id, (err, accomplishment) => {
+            if (err) {
+                console.log('Error: ' + err);
+            } else {
+                accomplishment.headerText = headerText|| accomplishment.headerText;
+                accomplishment.subHeaderText = subHeaderText || accomplishment.subHeaderText;
+                accomplishment.buttonText = buttonText || accomplishment.buttonText;
+                accomplishment.buttonLink = buttonLink || accomplishment.buttonLink;
+                accomplishment.save((err, accomplishment) => {
+                    if (err) {
+                        console.log('Error: ' + error);
+                    } else {
+                        console.log('updated Accomplishment');
+                        console.log(accomplishment);
+                        res.redirect('/defaultSite/accomplishments');
+                    }
+                });
+            }
+        });
+    }
+};
+
 let renderFutureGoals = (req, res, next) => {
     res.render('defaultSite/futureGoals', {'title': 'Future Goals'});
 };
@@ -122,7 +159,8 @@ module.exports = {
     renderAssessRisk,
     renderMyPlan,
     createHomePage,
-    createAccomplishment
+    createAccomplishment,
+    updateAccomplishment
 };
 
 let traverseAllCategories = (categories, cb) => {

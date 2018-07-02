@@ -18,6 +18,7 @@ let upload = multer({storage: storage});
 router.get('/homePage', defaultSiteController.renderHomePage);
 router.get('/accomplishments', defaultSiteController.renderAccomplishments);
 router.post('/accomplishments', defaultSiteController.createAccomplishment);
+router.post('/updateAccomplishment/:id', defaultSiteController.updateAccomplishment);
 router.get('/futureGoals', defaultSiteController.renderFutureGoals);
 router.get('/assessRisk', defaultSiteController.renderAssessRisk);
 router.get('/myPlan', defaultSiteController.renderMyPlan);
