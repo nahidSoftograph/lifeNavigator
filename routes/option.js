@@ -59,6 +59,49 @@ router.post('/create', upload.single('image'), (req, res, next) => {
 
 });
 router.post('/alterVisibility/:id', optionController.alterVisibility);
-router.post('/update/:id', optionController.updateOption);
+router.post('/update/:id', upload.single('image'), (req, res, next) => {
+    console.log(req.body);
+    let id = req.params.id,
+        optionName = req.body.optionName,
+        titlePast = req.body.titlePast,
+        titleFuture = req.body.titleFuture,
+        callBackURL = req.body.callBackURL;
+
+    if (!id) {
+        console.log('Invalid id');
+    } else if (!optionName) {
+        console.log('Invalid option name');
+    } else if (!titlePast) {
+        console.log('Invalid title past');
+    } else if (!callBackURL) {
+        console.log('Invalid call back url');
+    } else if (!titleFuture) {
+        console.log('Invalid title future');
+    } else {
+        Option.findById(id, (err, option) => {
+            if (err) {
+                console.log('Error: ' + err);
+            } else {
+                option.optionName = optionName || option.optionName;
+                option.titlePast = titlePast || option.titlePast;
+                option.titleFuture = titleFuture || option.titleFuture;
+                console.log(req.file);
+                if (typeof req.file != 'undefined') {
+                    option.iconPath = '/images/optionLogo/' + req.file.filename;
+                }
+                option.save((err, option) => {
+                    if (err) {
+                        console.log('Error: ' + err);
+                    } else {
+                        console.log('Updated option');
+                        console.log(option);
+                        res.redirect(callBackURL);
+                    }
+                });
+            }
+        });
+    }
+});
+router.post('/delete/:id', optionController.deleteOption);
 
 module.exports = router;

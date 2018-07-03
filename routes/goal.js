@@ -16,14 +16,10 @@ let storage = multer.diskStorage({
 let upload = multer({storage: storage});
 
 router.post('/create', upload.single('image'), (req, res, next) => {
-    console.log('---------------------------------------------------');
-    console.log('Body');
-    console.log(req.body);
     let goalText = req.body.goalText,
         goalName = req.body.goalName,
         categoryId = req.body.categoryId,
         callBackURL = req.body.callBackURL;
-    console.log(categoryId);
     if (!goalText) {
         console.log('Invalid goal text');
     } else if (!goalName) {
@@ -57,7 +53,7 @@ router.post('/create', upload.single('image'), (req, res, next) => {
     }
 });
 
-router.post('/update', goalController.updateGoal);
+router.post('/update/:id', upload.single('image'), (req, res, next) => {});
 router.post('/delete', goalController.deleteGoal);
 router.post('/alterVisibility/:goalId', goalController.alterGoalVisibility);
 

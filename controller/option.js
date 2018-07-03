@@ -7,7 +7,24 @@ let updateOption = (req, res, next) => {
 };
 
 let deleteOption = (req, res, next) => {
+    let id = req.params.id,
+        callBackURL = req.body.callBackURL;
 
+    if (!id) {
+        console.log('invalid id.');
+    } else if (!callBackURL) {
+        console.log('invalid call back url');
+    } else {
+        Option.findByIdAndRemove(id, (err, option) => {
+            if (err) {
+                console.log('Error: ' + err);
+            } else {
+                console.log('Deleted option');
+                console.log(option);
+                res.redirect(callBackURL);
+            }
+        });
+    }
 };
 
 let alterVisibility = (req, res, next) => {

@@ -205,9 +205,9 @@
                                     <table class="table table-hover">
                                         <thead>
                                         <tr>
-                                            <th scope="col">Option Id</th>
-                                            <th scope="col">Category Id</th>
                                             <th scope="col">Name</th>
+                                            <th scope="col">Past</th>
+                                            <th scope="col">Future</th>
                                             <th scope="col">Update</th>
                                             <th scope="col">Visibility</th>
                                             <th scope="col">Icon</th>
@@ -216,33 +216,43 @@
                                         <tbody>
                                         {{#each this.options}}
                                         <tr>
-                                            <td>{{this.optId}}</td>
-                                            <td>{{this.catId}}</td>
                                             <td>{{this.optionName}}</td>
+                                            <td>{{this.titlePast}}</td>
+                                            <td>{{this.titleFuture}}</td>
                                             <td>
                                                 <button class="btn btn-primary" data-toggle="modal" data-target="#updateModal{{this._id}}">Update</button>
                                                 <div class="modal fade" id="updateModal{{this._id}}" tabindex="-1" role="dialog" aria-labelledby="leModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLabel">Update Goal</h5>
-                                                                <form action="#" method="post">
-                                                                    <input type="hidden" name="goalId" value="{{this._id}}">
+                                                                <h5 class="modal-title" id="exampleModalLabel">Update Option</h5>
+                                                                <form action="/option/delete/{{this._id}}" method="post">
+                                                                    <input type="hidden" name="callBackURL" value="/defaultSite/accomplishments">
                                                                     <button class="btn btn-danger" type="submit">Delete</button>
                                                                 </form>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <form action="/option/update/{{this._id}}" method="post">
+                                                                <form action="/option/update/{{this._id}}" method="post" enctype="multipart/form-data">
                                                                     <input type="hidden" name="callBackURL" value="/defaultSite/accomplishments">
-                                                                    <div class="form-group">
-                                                                        <label>Goal Id</label>
-                                                                        <input type="text" class="form-control" name="goalName" placeholder="Enter Goal Name" value="{{this.goalName}}">
+                                                                    <div class="form-group row">
+                                                                        <div class="custom-file">
+                                                                            <input type="file" name="image" class="custom-file-input">
+                                                                            <label class="custom-file-label font-weight-bold" for="customFile">Choose Option Logo</label>
+                                                                        </div>
                                                                     </div>
                                                                     <div class="form-group">
-                                                                        <label>Goal Text</label>
-                                                                        <input type="text" class="form-control" name="goalText" placeholder="Enter Goal Name" value="{{this.goalText}}">
+                                                                        <label>Option Name</label>
+                                                                        <input type="text" class="form-control" name="optionName" placeholder="Enter Option Name" value="{{this.optionName}}">
                                                                     </div>
-                                                                    <button type="submit" class="btn btn-primary">Update Goal</button>
+                                                                    <div class="form-group">
+                                                                        <label>Past Title</label>
+                                                                        <input type="text" class="form-control" name="titlePast" placeholder="Enter Past Title" value="{{this.titlePast}}">
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label>Future Title</label>
+                                                                        <input type="text" class="form-control" name="titleFuture" placeholder="Enter Future Title" value="{{this.titleFuture}}">
+                                                                    </div>
+                                                                    <button type="submit" class="btn btn-primary">Update Option</button>
                                                                 </form>
                                                             </div>
                                                         </div>
