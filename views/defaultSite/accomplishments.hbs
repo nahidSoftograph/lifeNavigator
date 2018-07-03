@@ -1,4 +1,5 @@
 {{accomplishment}}
+{{categories}}
 
 <div class="row">
     <div class="col-12">
@@ -150,7 +151,7 @@
                 </td>
                 <td>
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#{{this._id}}goalList">
-                        Goal List
+                        Option List
                     </button>
                     <div class="modal lg fade" id="{{this._id}}goalList" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
                         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
@@ -158,27 +159,23 @@
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="exampleModalLabel">Change Goals Visibilty and Text</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <button class="btn btn-primary" data-toggle="modal" data-target="#{{this.categoryName}}createGoal">Create Option for {{this.categoryName}}</button>
+                                        <button class="btn btn-primary" data-toggle="modal" data-target="#{{this.name}}createGoal">Create Option for {{this.name}}</button>
                                     </button>
-                                    <div class="modal fade" id="{{this.categoryName}}createGoal" tabindex="-1" role="dialog" aria-labelledby="createGoal" aria-hidden="true">
+                                    <div class="modal fade" id="{{this.name}}createGoal" tabindex="-1" role="dialog" aria-labelledby="createGoal" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="createGoal">Creating Option for {{this.categoryName}}</h5>
+                                                    <h5 class="modal-title" id="createGoal">Creating Option for {{this.name}}</h5>
                                                 </div>
                                                 <div class="modal-body">
                                                     <form action="/option/create" method="post"  enctype="multipart/form-data">
                                                         <input type="hidden" name="callBackURL" value="/defaultSite/accomplishments">
-                                                        <input type="hidden" name="catId" value={{this._id}}>
+                                                        <input type="hidden" name="catId" value={{this.catId}}>
                                                         <div class="form-group row">
                                                             <div class="custom-file">
                                                                 <input type="file" name="image" class="custom-file-input">
                                                                 <label class="custom-file-label font-weight-bold" for="customFile">Choose Goal Logo</label>
                                                             </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label>Category Id</label>
-                                                            <input type="text" class="form-control" name="catId" placeholder="Enter Category Id">
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Option Id</label>
@@ -208,18 +205,20 @@
                                     <table class="table table-hover">
                                         <thead>
                                         <tr>
+                                            <th scope="col">Option Id</th>
+                                            <th scope="col">Category Id</th>
                                             <th scope="col">Name</th>
-                                            <th scope="col">Text</th>
                                             <th scope="col">Update</th>
                                             <th scope="col">Visibility</th>
                                             <th scope="col">Icon</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        {{#each this.goals}}
+                                        {{#each this.options}}
                                         <tr>
-                                            <td>{{this.goalName}}</td>
-                                            <td>{{this.goalText}}</td>
+                                            <td>{{this.optId}}</td>
+                                            <td>{{this.catId}}</td>
+                                            <td>{{this.optionName}}</td>
                                             <td>
                                                 <button class="btn btn-primary" data-toggle="modal" data-target="#updateModal{{this._id}}">Update</button>
                                                 <div class="modal fade" id="updateModal{{this._id}}" tabindex="-1" role="dialog" aria-labelledby="leModalLabel" aria-hidden="true">
@@ -233,11 +232,10 @@
                                                                 </form>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <form action="/goal/update" method="post">
+                                                                <form action="/option/update/{{this._id}}" method="post">
                                                                     <input type="hidden" name="callBackURL" value="/defaultSite/accomplishments">
-                                                                    <input type="hidden" name="goalId" value="{{this._id}}">
                                                                     <div class="form-group">
-                                                                        <label>Goal Name</label>
+                                                                        <label>Goal Id</label>
                                                                         <input type="text" class="form-control" name="goalName" placeholder="Enter Goal Name" value="{{this.goalName}}">
                                                                     </div>
                                                                     <div class="form-group">
@@ -252,17 +250,17 @@
                                                 </div>
                                             </td>
                                             <td>
-                                                <form action="/goal/alterVisibility/{{this._id}}" method="post">
+                                                <form action="/option/alterVisibility/{{this._id}}" method="post">
                                                     <input type="hidden" name="callBackURL" value="/defaultSite/accomplishments">
-                                                    {{#if this.goalVisibility}}
-                                                        <button class="btn btn-danger" type="submit">Make Goal Invisible</button>
+                                                    {{#if this.isVisible}}
+                                                        <button class="btn btn-danger" type="submit">Make Option Invisible</button>
                                                     {{else}}
-                                                        <button class="btn btn-success" type="submit">Make Goal Visibile</button>
+                                                        <button class="btn btn-success" type="submit">Make Option Visibile</button>
                                                     {{/if}}
                                                 </form>
                                             </td>
                                             <td>
-                                                <img src="{{this.goalIconPath}}" alt="{{this.goalIconPath}}" height="35px" width="35px">
+                                                <img src="{{this.iconPath}}" alt="{{this.iconPath}}" height="35px" width="35px">
                                             </td>
                                         </tr>
                                         {{/each}}

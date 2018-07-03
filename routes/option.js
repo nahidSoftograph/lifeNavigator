@@ -1,5 +1,6 @@
 let express = require('express'),
     Option = require('../models/option'),
+    optionController = require('../controller/option'),
     multer = require('multer'),
     router = express.Router();
 
@@ -20,6 +21,9 @@ router.post('/create', upload.single('image'), (req, res, next) => {
         titlePast = req.body.titlePast,
         titleFuture = req.body.titleFuture,
         callBackURL = req.body.callBackURL;
+
+    console.log('Category Id');
+    console.log(catId);
 
     if (!optionName) {
         console.log('Invalid option name.');
@@ -54,5 +58,7 @@ router.post('/create', upload.single('image'), (req, res, next) => {
     }
 
 });
+router.post('/alterVisibility/:id', optionController.alterVisibility);
+router.post('/update/:id', optionController.updateOption);
 
 module.exports = router;

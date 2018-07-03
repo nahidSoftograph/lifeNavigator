@@ -15,6 +15,7 @@ let createCategory = (req, res, next) => {
         let category = new Category({
             name: name,
             catId: catId,
+            class: name.toLowerCase(),
             isVisible: true
         });
         category.save((err, category) => {

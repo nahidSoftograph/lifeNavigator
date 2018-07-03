@@ -1,6 +1,7 @@
 let Instance = require('../models/instance'),
     Category = require('../models/category'),
     Goal = require('../models/goal'),
+    Option = require('../models/option'),
     Home = require('../models/home');
     Accomplishment = require('../models/accomplishment');
 
@@ -42,7 +43,6 @@ let renderAccomplishments = (req, res, next) => {
                         if (err) {
                             console.log('Error: ' + err);
                         } else {
-                            console.log('Before traversing the categories.');
                             traverseAllCategories(categories, (err, categories) => {
                                 if (err) {
                                     console.log('Error: ' + err);
@@ -166,18 +166,16 @@ module.exports = {
 };
 
 let traverseAllCategories = (categories, cb) => {
+
     if (categories.length == 0) {
         return cb (null, categories);
     } else {
         for (let index=0; index<categories.length; index++) {
-            Goal.find({catId: categories[index].catId}, (err, options) => {
+            Option.find({catId: categories[index].catId}, (err, options) => {
                 if (err) {
                     return cb (err, null);
                 } else {
                     categories[index].options = options;
-                    console.log('For category: ' + categories[index].categoryName);
-                    console.log('  Goals ');
-                    console.log(categories[index].goals);
                     if (categories.length - 1 == index) {
                         return cb (null, categories);
                     }

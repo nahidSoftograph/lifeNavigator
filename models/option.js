@@ -7,7 +7,8 @@ let optionSchema = mongoose.Schema({
     titlePast: { type: String, required: true },
     titleFuture: { type: String, required: true },
     selected: { type: Boolean, required: true, default: false },
-    iconPath: { type: String, required: true }
+    iconPath: { type: String, required: true },
+    isVisible: { type: Boolean, required: true, default: true }
 });
 
 module.exports = mongoose.model('Option', optionSchema);
