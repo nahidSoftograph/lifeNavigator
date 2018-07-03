@@ -1,32 +1,20 @@
 let Category = require('../models/category');
 
 let createCategory = (req, res, next) => {
-    let categoryName = req.body.categoryName,
-        categoryText = req.body.categoryText,
-        callBackURL = req.body.callBackURL,
-        isCategoryUnderAccomplishment = req.body.isCategoryUnderAccomplishment,
-        isCategoryUnderFutureGoals = req.body.isCategoryUnderFutureGoals,
-        parentSectionId = req.body.parentSectionId;
+    let name = req.body.categoryName,
+        catId = req.body.catId,
+        callBackURL = req.body.callBackURL;
 
-    if (!categoryName) {
+    if (!name) {
         console.log('Invalid category name');
-    } else if (!categoryText) {
-        console.log('Invalid category text');
+    } else if (!catId) {
+        console.log('Invalid catId');
     } else if (!callBackURL) {
         console.log('call back url');
-    } else if (!isCategoryUnderAccomplishment) {
-        console.log('invalid category accomplishment validity');
-    } else if (!isCategoryUnderFutureGoals) {
-        console.log('invalid category future goals validity');
-    } else if (!parentSectionId) {
-        console.log('Invalid parent section id');
     } else {
         let category = new Category({
-            categoryName: categoryName,
-            categoryText: categoryText,
-            isCategoryUnderAccomplishment: isCategoryUnderAccomplishment,
-            isCategoryUnderFutureGoals: isCategoryUnderFutureGoals,
-            parentSectionId: parentSectionId,
+            name: name,
+            catId: catId,
             isVisible: true
         });
         category.save((err, category) => {
@@ -41,35 +29,31 @@ let createCategory = (req, res, next) => {
 };
 
 let updateCategory = (req, res, next) => {
-    let categoryId = req.params.categoryId,
-        categoryName = req.body.categoryName,
-        categoryText = req.body.categoryText,
-        callBackURL = req.body.callBackURL,
-        isCategoryUnderAccomplishment = req.body.isCategoryUnderAccomplishment,
-        isCategoryUnderFutureGoals = req.body.isCategoryUnderFutureGoals;
-    if (!categoryId) {
+    let id = req.params.id,
+        name = req.body.categoryName,
+        catId = req.body.catId,
+        callBackURL = req.body.callBackURL;
+    if (!id) {
         console.log('Invalid category id');
-    } else if (!categoryName) {
+    } else if (!name) {
         console.log('Invalid category name');
-    } else if (!categoryText) {
-        console.log('Invalid category text');
+    } else if (!catId) {
+        console.log('Invalid category cat Id');
     } else if (!callBackURL) {
-        console.log('call back url');
-    } else if (!isCategoryUnderAccomplishment) {
-        console.log('invalid category accomplishment validity');
-    } else if (!isCategoryUnderFutureGoals) {
-        console.log('invalid category future goals validity');
+        console.log('invalid call back url');
     } else {
-        Category.findById(categoryId, (err, category) => {
+        Category.findById(id, (err, category) => {
             if (err) {
                 console.log('Error: ' + err);
             } else {
-                category.categoryName = categoryName || category.categoryName;
-                category.categoryText = categoryText || category.categoryText;
+                category.name = name || category.name;
+                category.catId = catId || category.catId;
                 category.save((err, category) => {
                     if (err) {
                         console.log('Error: ' + err);
                     } else {
+                        console.log('Updated category: ');
+                        console.log(category);
                         res.redirect(callBackURL);
                     }
                 });

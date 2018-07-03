@@ -38,7 +38,7 @@ let renderAccomplishments = (req, res, next) => {
                 if (err) {
                     console.log('Error: ' + err)    ;
                 } else {
-                    Category.find({parentSectionId: accomplishment._id}, (err, categories) => {
+                    Category.find({}, (err, categories) => {
                         if (err) {
                             console.log('Error: ' + err);
                         } else {
@@ -170,11 +170,11 @@ let traverseAllCategories = (categories, cb) => {
         return cb (null, categories);
     } else {
         for (let index=0; index<categories.length; index++) {
-            Goal.find({categoryId: categories[index]._id}, (err, goals) => {
+            Goal.find({catId: categories[index].catId}, (err, options) => {
                 if (err) {
                     return cb (err, null);
                 } else {
-                    categories[index].goals = goals;
+                    categories[index].options = options;
                     console.log('For category: ' + categories[index].categoryName);
                     console.log('  Goals ');
                     console.log(categories[index].goals);

@@ -5,7 +5,7 @@ let express = require('express'),
     Category = require('../models/category');
 
 router.post('/create', categoryController.createCategory);
-router.post('/update/:categoryId', categoryController.updateCategory);
+router.post('/update/:id', categoryController.updateCategory);
 router.post('/delete/:categoryId', categoryController.deleteCategory);
 router.post('/alterVisibility/:categoryId', categoryController.alterCategoryVisibility);
 

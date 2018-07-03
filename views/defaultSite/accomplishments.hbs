@@ -70,16 +70,13 @@
                     <div class="modal-body">
                         <form action="/category/create" method="post">
                             <input type="hidden" name="callBackURL" value="/defaultSite/accomplishments">
-                            <input type="hidden" name="isCategoryUnderAccomplishment" value=true>
-                            <input type="hidden" name="isCategoryUnderFutureGoals" value=false>
-                            <input type="hidden" name="parentSectionId" value="{{accomplishment._id}}">
+                            <div class="form-group">
+                                <label>Category Id</label>
+                                <input type="text" class="form-control" name="catId" placeholder="Enter Category Id">
+                            </div>
                             <div class="form-group">
                                 <label>Category Name</label>
                                 <input type="text" class="form-control" name="categoryName" placeholder="Enter Category Name">
-                            </div>
-                            <div class="form-group">
-                                <label>Category Text</label>
-                                <input type="text" class="form-control" name="categoryText" placeholder="Enter Category Text">
                             </div>
 
                             <button type="submit" class="btn btn-primary">Create</button>
@@ -95,12 +92,12 @@
 
 <div class="row">
     <div class="col-12">
-        <div class="text-center font-weight-bold d-block p-2 bg-secondary text-white">Goal Category</div>
+        <div class="text-center font-weight-bold d-block p-2 bg-secondary text-white">Category</div>
         <table class="table table-hover">
             <thead>
             <tr>
-                <th scope="col">Goal Category Name</th>
-                <th scope="col">Goal Category Text</th>
+                <th scope="col">Id</th>
+                <th scope="col">Name</th>
                 <th scope="col">Edit</th>
                 <th scope="col">Visibility</th>
                 <th scope="col">Goals</th>
@@ -109,8 +106,8 @@
             <tbody>
             {{#each categories}}
             <tr>
-                <td>{{this.categoryName}}</td>
-                <td>{{this.categoryText}}</td>
+                <td>{{this.catId}}</td>
+                <td>{{this.name}}</td>
                 <td>
                     <button class="btn btn-primary" data-toggle="modal" data-target="#updateCategory{{this._id}}">Update</button>
                     <div class="modal fade" id="updateCategory{{this._id}}" tabindex="-1" role="dialog" aria-labelledby="leModalLabel" aria-hidden="true">
@@ -126,18 +123,15 @@
                                 <div class="modal-body">
                                     <form action="/category/update/{{this._id}}" method="post">
                                         <input type="hidden" name="callBackURL" value="/defaultSite/accomplishments">
-                                        <input type="hidden" name="isCategoryUnderAccomplishment" value={{this.isCategoryUnderAccomplishment}}>
-                                        <input type="hidden" name="isCategoryUnderFutureGoals" value={{this.isCategoryUnderAccomplishment}}>
+                                        <div class="form-group">
+                                            <label>Category Id</label>
+                                            <input type="text" class="form-control" name="catId" placeholder="Enter Category Id" value="{{this.catId}}">
+                                        </div>
                                         <div class="form-group">
                                             <label>Category Name</label>
-                                            <input type="text" class="form-control" name="categoryName" placeholder="Enter Category Name" value="{{this.categoryName}}">
+                                            <input type="text" class="form-control" name="categoryName" placeholder="Enter Category Name" value="{{this.name}}">
                                         </div>
-                                        <div class="form-group">
-                                            <label>Category Text</label>
-                                            <input type="text" class="form-control" name="categoryText" placeholder="Enter Category Text" value="{{this.categoryText}}">
-                                        </div>
-
-                                        <button type="submit" class="btn btn-primary">Create</button>
+                                        <button type="submit" class="btn btn-primary">Update</button>
                                     </form>
                                 </div>
                             </div>
