@@ -2,10 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="53cb04c1-6808-4418-9409-caeed569a6bd" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/option.js" beforeDir="false" afterPath="$PROJECT_DIR$/controller/option.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/goal.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/goal.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/option.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/option.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/defaultSite/accomplishments.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/defaultSite/accomplishments.hbs" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -22,11 +18,7 @@
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="accomplishments.hbs" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/views/defaultSite/accomplishments.hbs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="313">
-              <caret line="228" column="121" selection-start-line="228" selection-start-column="121" selection-end-line="228" selection-end-column="121" />
-            </state>
-          </provider>
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file leaf-file-name="option.js" pinned="false" current-in-tab="false">
@@ -226,12 +218,12 @@
       <workItem from="1530457511781" duration="6955000" />
       <workItem from="1530536974649" duration="7134000" />
       <workItem from="1530590021614" duration="32000" />
-      <workItem from="1530594753011" duration="14344000" />
+      <workItem from="1530594753011" duration="14952000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="114274000" />
+    <option name="totallyTimeSpent" value="114882000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="30" width="1920" height="1050" extended-state="6" />
@@ -592,11 +584,7 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/views/defaultSite/accomplishments.hbs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="313">
-          <caret line="228" column="121" selection-start-line="228" selection-start-column="121" selection-end-line="228" selection-end-column="121" />
-        </state>
-      </provider>
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
   </component>
 </project>
