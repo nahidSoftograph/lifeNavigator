@@ -2,17 +2,21 @@ let Category = require('../models/category');
 
 let createCategory = (req, res, next) => {
     let name = req.body.categoryName,
+        instanceId = req.body.instanceId,
         catId = req.body.catId,
         callBackURL = req.body.callBackURL;
 
     if (!name) {
         console.log('Invalid category name');
+    } else if (!instanceId) {
+        console.log('Invalid instance id');
     } else if (!catId) {
         console.log('Invalid catId');
     } else if (!callBackURL) {
         console.log('call back url');
     } else {
         let category = new Category({
+            instanceId: instanceId,
             name: name,
             catId: catId,
             class: name.toLowerCase(),

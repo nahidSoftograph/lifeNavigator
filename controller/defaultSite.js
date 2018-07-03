@@ -1,9 +1,9 @@
 let Instance = require('../models/instance'),
     Category = require('../models/category'),
-    Goal = require('../models/goal'),
     Option = require('../models/option'),
-    Home = require('../models/home');
-    Accomplishment = require('../models/accomplishment');
+    Home = require('../models/home'),
+    Accomplishment = require('../models/accomplishment'),
+    FutureGoal = require('../models/futureGoal');
 
 let renderHomePage = (req, res, next) => {
     Instance.findOne({isHome: true}, (err, instance) => {
@@ -30,29 +30,23 @@ let createHomePage = (req, res, next) => {
 };
 
 let renderAccomplishments = (req, res, next) => {
-    console.log('Rendering accomplishments');
     Instance.findOne({isHome: true}, (err, instance) => {
         if (err) {
             console.log('Error: ' + err);
         } else {
-            Accomplishment.findOne({instanceId: instance._id }, (err, accomplishment) => {
+            Accomplishment.findOne({instanceId: instance._id}, (err, accomplishment) => {
                 if (err) {
                     console.log('Error: ' + err)    ;
                 } else {
-                    Category.find({}, (err, categories) => {
+                    cookCategories(instance._id, (err, categories) => {
                         if (err) {
                             console.log('Error: ' + err);
                         } else {
-                            traverseAllCategories(categories, (err, categories) => {
-                                if (err) {
-                                    console.log('Error: ' + err);
-                                } else {
-                                    res.render('defaultSite/accomplishments', {
-                                        title: 'Accomplishments',
-                                        accomplishment: accomplishment,
-                                        categories: categories
-                                    });
-                                }
+                            res.render('defaultSite/accomplishments', {
+                                title: 'Accomplishments',
+                                accomplishment: accomplishment,
+                                categories: categories,
+                                instanceId: instance._id
                             });
                         }
                     });
@@ -143,7 +137,112 @@ let updateAccomplishment = (req, res, next) => {
 };
 
 let renderFutureGoals = (req, res, next) => {
-    res.render('defaultSite/futureGoals', {'title': 'Future Goals'});
+    Instance.findOne({isHome: true}, (err, instance) => {
+        if (err) {
+            console.log('Error: ' + err);
+        } else {
+            FutureGoal.findOne({instanceId: instance._id}, (err, futureGoal) => {
+                if (err) {
+                    console.log('Error: ' + err)    ;
+                } else {
+                    cookCategories(instance._id, (err, categories) => {
+                        if (err) {
+                            console.log('Error: ' + err);
+                        } else {
+                            res.render('defaultSite/futureGoals', {
+                                title: 'Future Goal',
+                                futureGoal: futureGoal,
+                                categories: categories,
+                                instanceId: instance._id
+                            });
+                        }
+                    });
+                }
+            });
+        }
+    });
+};
+
+let updateFutureGoal = (req, res, next) => {
+    let id = req.params.id,
+        headerText = req.body.headerText,
+        subHeaderText = req.body.subHeaderText,
+        buttonText = req.body.buttonText,
+        buttonLink = req.body.buttonLink;
+    if (!id) {
+        console.log('invalid id');
+    } else if (!headerText) {
+        console.log('Invalid header text');
+    } else if (!subHeaderText) {
+        console.log('Invalid sub header text');
+    } else if (!buttonText) {
+        console.log('Invalid button text');
+    } else if (!buttonLink) {
+        console.log('Invalid button link');
+    } else {
+        FutureGoal.findById(id, (err, futureGoal) => {
+            if (err) {
+                console.log('Error: ' + err);
+            } else {
+                futureGoal.headerText = headerText|| futureGoal.headerText;
+                futureGoal.subHeaderText = subHeaderText || futureGoal.subHeaderText;
+                futureGoal.buttonText = buttonText || futureGoal.buttonText;
+                futureGoal.buttonLink = buttonLink || futureGoal.buttonLink;
+                futureGoal.save((err, futureGoal) => {
+                    if (err) {
+                        console.log('Error: ' + error);
+                    } else {
+                        console.log('updated Future Goal');
+                        console.log(futureGoal);
+                        res.redirect('/defaultSite/futureGoals');
+                    }
+                });
+            }
+        });
+    }
+};
+
+let createFutureGoal = (req, res, next) => {
+    let instanceId = req.body.instanceId,
+        headerText = req.body.headerText,
+        subHeaderText = req.body.subHeaderText,
+        buttonText = req.body.buttonText,
+        buttonLink = req.body.buttonLink;
+    if (!instanceId) {
+        console.log('Invalid instance id');
+    } else if (!headerText) {
+        console.log('Invalid header text');
+    } else if (!subHeaderText) {
+        console.log('Invalid sub header text');
+    } else if (!buttonText) {
+        console.log('Invalid button text');
+    } else if (!buttonLink) {
+        console.log('Invalid button link');
+    } else {
+        Instance.findOne({isHome: true}, (err, instance) => {
+            if (err) {
+                console.log('Error: ' + err);
+            } else {
+                console.log('Get the default instance');
+                let futureGoal = new FutureGoal({
+                    instanceId: instance._id,
+                    headerText: headerText,
+                    subHeaderText: subHeaderText,
+                    buttonText: buttonText,
+                    buttonLink: buttonLink
+                });
+                futureGoal.save((err, futureGoal) => {
+                    if (err) {
+                        console.log('Error: ' + err);
+                    } else {
+                        console.log('Saved future goal');
+                        console.log(futureGoal);
+                        res.render('defaultSite/futureGoals', {'title': 'Future Goal'});
+                    }
+                });
+            }
+        });
+    }
 };
 
 let renderAssessRisk = (req, res, next) => {
@@ -158,6 +257,8 @@ module.exports = {
     renderHomePage,
     renderAccomplishments,
     renderFutureGoals,
+    createFutureGoal,
+    updateFutureGoal,
     renderAssessRisk,
     renderMyPlan,
     createHomePage,
@@ -183,4 +284,20 @@ let traverseAllCategories = (categories, cb) => {
             });
         }
     }
+};
+
+let cookCategories = (instanceId, cb) => {
+    Category.find({instanceId: instanceId}, (err, categories) => {
+        if (err) {
+            console.log('Error: ' + err);
+        } else {
+            traverseAllCategories(categories, (err, categories) => {
+                if (err) {
+                    return cb (err, null);
+                } else {
+                    return cb (null, categories);
+                }
+            });
+        }
+    });
 };

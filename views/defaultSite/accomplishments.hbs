@@ -68,6 +68,7 @@
                     <div class="modal-body">
                         <form action="/category/create" method="post">
                             <input type="hidden" name="callBackURL" value="/defaultSite/accomplishments">
+                            <input type="hidden" name="instanceId" value="{{instanceId}}">
                             <div class="form-group">
                                 <label>Category Id</label>
                                 <input type="text" class="form-control" name="catId" placeholder="Enter Category Id">
@@ -76,7 +77,6 @@
                                 <label>Category Name</label>
                                 <input type="text" class="form-control" name="categoryName" placeholder="Enter Category Name">
                             </div>
-
                             <button type="submit" class="btn btn-primary">Create</button>
                         </form>
                     </div>
