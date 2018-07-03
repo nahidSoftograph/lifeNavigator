@@ -164,18 +164,18 @@
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="exampleModalLabel">Change Goals Visibilty and Text</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <button class="btn btn-primary" data-toggle="modal" data-target="#{{this.categoryName}}createGoal">Create Goal for {{this.categoryName}}</button>
+                                        <button class="btn btn-primary" data-toggle="modal" data-target="#{{this.categoryName}}createGoal">Create Option for {{this.categoryName}}</button>
                                     </button>
                                     <div class="modal fade" id="{{this.categoryName}}createGoal" tabindex="-1" role="dialog" aria-labelledby="createGoal" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="createGoal">Creating Goal for {{this.categoryName}}</h5>
+                                                    <h5 class="modal-title" id="createGoal">Creating Option for {{this.categoryName}}</h5>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form action="/goal/create" method="post"  enctype="multipart/form-data">
+                                                    <form action="/option/create" method="post"  enctype="multipart/form-data">
                                                         <input type="hidden" name="callBackURL" value="/defaultSite/accomplishments">
-                                                        <input type="hidden" name="categoryId" value={{this._id}}>
+                                                        <input type="hidden" name="catId" value={{this._id}}>
                                                         <div class="form-group row">
                                                             <div class="custom-file">
                                                                 <input type="file" name="image" class="custom-file-input">
@@ -183,12 +183,24 @@
                                                             </div>
                                                         </div>
                                                         <div class="form-group">
-                                                            <label>Goal Name</label>
-                                                            <input type="text" class="form-control" name="goalName" placeholder="Enter Goal Name">
+                                                            <label>Category Id</label>
+                                                            <input type="text" class="form-control" name="catId" placeholder="Enter Category Id">
                                                         </div>
                                                         <div class="form-group">
-                                                            <label>Goal Text</label>
-                                                            <input type="text" class="form-control" name="goalText" placeholder="Enter Goal Text">
+                                                            <label>Option Id</label>
+                                                            <input type="text" class="form-control" name="optId" placeholder="Enter Option Id">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Option Name</label>
+                                                            <input type="text" class="form-control" name="optionName" placeholder="Enter Option Name">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Title Past</label>
+                                                            <input type="text" class="form-control" name="titlePast" placeholder="Enter Title Past">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Title Future</label>
+                                                            <input type="text" class="form-control" name="titleFuture" placeholder="Enter Title Future">
                                                         </div>
 
                                                         <button type="submit" class="btn btn-primary">Create</button>
