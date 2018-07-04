@@ -3,6 +3,6 @@ let express = require('express'),
     assessRiskController = require('../controller/assessRisk');
 
 router.post('/create', assessRiskController.createAssessRisk);
-router.get('/display', assessRiskController.displayAssessRisk);
+router.post('/update/:id', assessRiskController.updateAssessRisk);
 
 module.exports = router;

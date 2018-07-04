@@ -255,6 +255,8 @@ let renderAssessRisk = (req, res, next) => {
                 if (err) {
                     console.log('Error: ' + err)    ;
                 } else {
+                    console.log('Assess risk');
+                    console.log(assessRisk);
                     res.render('defaultSite/assessRisk', {
                         title: 'Assess Risk',
                         assessRisk: assessRisk,

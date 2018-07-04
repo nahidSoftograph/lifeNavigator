@@ -1,40 +1,43 @@
+{{assessRisk}}
+
 <div class="row">
     <div class="col-12">
-        <form action="/defaultSite/updateFutureGoal/{{assessRisk._id}}" method="post">
+        <form action="/assessRisk/update/{{assessRisk._id}}" method="post">
 
-            <input type="hidden" value="{{assessRisk._id}}">
+            <input type="hidden" name="instanceId" value="{{instanceId}}">
+            <input type="hidden" name="callBackURL" value="/defaultSite/assessRisk">
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label font-weight-bold">Enter Header</label>
                 <div class="col-sm-10">
-                    <input type="text" name="headerText" class="form-control" placeholder="Header" value="{{assessRisk.headerText}}">
+                    <input type="text" name="headerText" class="form-control" placeholder="Enter Header" value="{{assessRisk.headerText}}">
                 </div>
             </div>
 
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label font-weight-bold">Enter Paragraph</label>
                 <div class="col-sm-10">
-                    <input type="text" name="paragraphText" class="form-control" placeholder="paragraph" value="{{assessRisk.paragraphText}}">
+                    <input type="text" name="paragraphText" class="form-control" placeholder="Enter Paragraph" value="{{assessRisk.paragraphText}}">
                 </div>
             </div>
 
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label font-weight-bold">Enter Sub Header</label>
                 <div class="col-sm-10">
-                    <input type="text" name="subHeaderText" class="form-control" placeholder="Sub Header" value="{{assessRisk.subHeaderText}}">
+                    <input type="text" name="subHeaderText" class="form-control" placeholder="Enter Sub Header" value="{{assessRisk.subHeaderText}}">
                 </div>
             </div>
 
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label font-weight-bold">Button Text</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" name="buttonText" placeholder="Button Text" value="{{assessRisk.buttonText}}">
+                    <input type="text" class="form-control" name="buttonText" placeholder="Enter Button Text" value="{{assessRisk.buttonText}}">
                 </div>
             </div>
 
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label font-weight-bold">Button Link</label>
                 <div class="col-sm-10">
-                    <input type="text" name="buttonLink" class="form-control" placeholder="Button Link" value="{{assessRisk.buttonLink}}">
+                    <input type="text" name="buttonLink" class="form-control" placeholder="Enter Button Link" value="{{assessRisk.buttonLink}}">
                 </div>
             </div>
             <div class="row">
