@@ -2,6 +2,9 @@ let Instance = require('../models/instance'),
     Category = require('../models/category'),
     Option = require('../models/option'),
     Home = require('../models/home'),
+    Industry = require('../models/industry'),
+    Occupation = require('../models/occupation'),
+    Sick = require('../models/sick'),
     Accomplishment = require('../models/accomplishment'),
     AssessRisk = require('../models/assessRisk'),
     FutureGoal = require('../models/futureGoal');
@@ -255,12 +258,19 @@ let renderAssessRisk = (req, res, next) => {
                 if (err) {
                     console.log('Error: ' + err)    ;
                 } else {
-                    console.log('Assess risk');
-                    console.log(assessRisk);
-                    res.render('defaultSite/assessRisk', {
-                        title: 'Assess Risk',
-                        assessRisk: assessRisk,
-                        instanceId: instance._id
+                    getRiskUtilities(instance._id, (err, data) => {
+                        if (err) {
+                            console.log('Error: ' + err);
+                        } else {
+                            res.render('defaultSite/assessRisk', {
+                                title: 'Assess Risk',
+                                assessRisk: assessRisk,
+                                industries: data.industries,
+                                occupations: data.occupations,
+                                sicks: data.sicks,
+                                instanceId: instance._id
+                            });
+                        }
                     });
                 }
             });
@@ -319,4 +329,39 @@ let cookCategories = (instanceId, cb) => {
             });
         }
     });
+};
+
+let getRiskUtilities = (instanceId, cb) => {
+    Industry.find({instanceId: instanceId}, (err, industries) => {
+        if (err) {
+            console.log('Error: ' + err);
+            return cb (err, null);
+        } else {
+            Occupation.find({instanceId: instanceId}, (err, occupations) => {
+                if (err) {
+                    console.log('Error: ' + err);
+                    return cb (err, null);
+                } else {
+                    Sick.find({instanceId: instanceId}, (err, sicks) => {
+                        if (err) {
+                            console.log('Error: ' + err);
+                            return cb (err, null);
+                        } else {
+                            console.log('Industries -------------------------------- ');
+                            console.log(industries);
+                            console.log('occupations -------------------------------- ');
+                            console.log(occupations);
+                            console.log('sicks -------------------------------- ');
+                            console.log(sicks);
+                            return cb (null, {
+                                industries: industries,
+                                occupations: occupations,
+                                sicks: sicks
+                            });
+                        }
+                    });
+                }
+            });
+        }
+    })
 };
