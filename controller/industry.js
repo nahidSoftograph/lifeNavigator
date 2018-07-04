@@ -89,8 +89,36 @@ let deleteIndustry = (req, res, next) => {
     }
 };
 
+let alterIndustryVisibility = (req, res, next) => {
+    let id = req.params.id,
+        callbackUrl = req.body.callBackURL;
+    if (!id) {
+        console.log('Invalid id');
+    } else if (!callbackUrl) {
+        console.log('Invalid call back url');
+    } else {
+        Industry.findById(id, (err, industry) => {
+            if (err) {
+                console.log('Error: ' + err);
+            } else {
+                industry.isVisible = !industry.isVisible;
+                industry.save((err, industry) => {
+                    if (err) {
+                        console.log('Error: ' + err);
+                    } else {
+                        console.log('Industry visibility altered.');
+                        console.log(industry);
+                        res.redirect(callbackUrl);
+                    }
+                });
+            }
+        });
+    }
+};
+
 module.exports = {
   createIndustry,
   updateIndustry,
-  deleteIndustry
+  deleteIndustry,
+  alterIndustryVisibility
 };
