@@ -29,6 +29,7 @@ let instancesRouter = require('./routes/instances'),
     industryRoutes = require('./routes/industry'),
     sickRoutes = require('./routes/sick'),
     occupationRoutes = require('./routes/occupation'),
+    assessRiskRoutes = require('./routes/assessRisk');
     defaultSiteRouter = require('./routes/defaultSite');
 
 var configDB     = require('./config/database');
@@ -90,6 +91,7 @@ app.use('/api', apiRoutes);
 app.use('/industry', industryRoutes);
 app.use('/occupation', occupationRoutes);
 app.use('/sick', sickRoutes);
+app.use('/assessRisk', assessRiskRoutes);
 
 // launch ======================================================================
 app.listen(port);

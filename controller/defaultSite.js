@@ -3,6 +3,7 @@ let Instance = require('../models/instance'),
     Option = require('../models/option'),
     Home = require('../models/home'),
     Accomplishment = require('../models/accomplishment'),
+    AssessRisk = require('../models/assessRisk'),
     FutureGoal = require('../models/futureGoal');
 
 let renderHomePage = (req, res, next) => {
@@ -246,7 +247,23 @@ let createFutureGoal = (req, res, next) => {
 };
 
 let renderAssessRisk = (req, res, next) => {
-    res.render('defaultSite/assessRisk', {'title': 'Assess Risk'});
+    Instance.findOne({isHome: true}, (err, instance) => {
+        if (err) {
+            console.log('Error: ' + err);
+        } else {
+            AssessRisk.findOne({instanceId: instance._id}, (err, assessRisk) => {
+                if (err) {
+                    console.log('Error: ' + err)    ;
+                } else {
+                    res.render('defaultSite/assessRisk', {
+                        title: 'Assess Risk',
+                        assessRisk: assessRisk,
+                        instanceId: instance._id
+                    });
+                }
+            });
+        }
+    });
 };
 
 let renderMyPlan = (req, res, next) => {
