@@ -24,6 +24,7 @@ let instancesRouter = require('./routes/instances'),
     userRoutes = require('./routes/user'),
     categoryRoutes = require('./routes/category'),
     goalRoutes = require('./routes/goal'),
+    apiRoutes = require('./routes/api'),
     optionRoutes = require('./routes/option'),
     defaultSiteRouter = require('./routes/defaultSite');
 
@@ -82,6 +83,7 @@ app.use('/instances', instancesRouter);
 app.use('/category', categoryRoutes);
 app.use('/goal', goalRoutes);
 app.use('/option', optionRoutes);
+app.use('/api', apiRoutes);
 
 // launch ======================================================================
 app.listen(port);

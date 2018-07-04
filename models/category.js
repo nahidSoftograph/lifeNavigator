@@ -5,7 +5,8 @@ let categorySchema = mongoose.Schema({
     name: { type: String, required: true },
     class: { type: String, required: true },
     catId: { type: String, required: true },
-    isVisible: { type: Boolean, required: true, default: false }
+    isVisible: { type: Boolean, required: true, default: false },
+    options: []
 });
 
 module.exports = mongoose.model('Category', categorySchema);
