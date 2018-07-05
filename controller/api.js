@@ -44,18 +44,25 @@ let getCategories = (req, res, next) => {
                                                                } else {
                                                                    console.log('Get sicks');
                                                                    console.log(sicks);
-                                                                   res.status(201).json({
-                                                                       title: 'My Title',
-                                                                       futureGoal: futureGoal,
-                                                                       accomplishment: accomplishment,
-                                                                       assessRisk: assessRisk,
-                                                                       categories: categories,
-                                                                       occupations: occupations,
-                                                                       industries: industries,
-                                                                       sicks: sicks,
-                                                                       instanceId: instance._id,
-                                                                       genericIconMisc: '/images/iconMisc.png'
-                                                                   });
+                                                                    getHome(instance._id, (err, home) => {
+                                                                        if (err) {
+                                                                            console.log('err: ' + err);
+                                                                        } else {
+                                                                            res.status(201).json({
+                                                                                title: 'My Title',
+                                                                                home: home,
+                                                                                futureGoal: futureGoal,
+                                                                                accomplishment: accomplishment,
+                                                                                assessRisk: assessRisk,
+                                                                                categories: categories,
+                                                                                occupations: occupations,
+                                                                                industries: industries,
+                                                                                sicks: sicks,
+                                                                                instanceId: instance._id,
+                                                                                genericIconMisc: '/images/iconMisc.png'
+                                                                            });
+                                                                        }
+                                                                    });
                                                                }
                                                            });
                                                        }
@@ -151,6 +158,17 @@ let getSicks = (instanceId, cb) => {
             return cb (err, null);
         } else {
             return cb (null, sicks);
+        }
+    });
+};
+
+let getHome = (instanceId, cb) => {
+    Home.findOne({instanceId: instanceId}, (err, home) => {
+        if (err) {
+            console.log('Error: ' + err);
+            return cb (err, null);
+        } else {
+            return cb (null, home);
         }
     });
 };
