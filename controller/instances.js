@@ -44,6 +44,23 @@ let createInstance = (req, res, next) => {
             if (err) {
                 console.log(err);
             } else {
+                let currentInstanceId = instance._id;
+                Instance.findOne({isHome: true}, (err, homeInstance) => {
+                    if (err) {
+                        console.log('Error: ' + err);
+                    } else {
+                        let homeInstanceId = homeInstance._id;
+                        cloneAccomplishment(currentInstanceId, homeInstanceId, (err, accomplishment) => {
+                            if (err) {
+                                console.log('Error: ' + err);
+                            } else {
+                                console.log('New Instance Accomplishment: ');
+                                console.log(accomplishment);
+                            }
+                        });
+                        console.log();
+                    }
+                });
                 res.redirect('/instances/createSelectInstances');
             }
         });
@@ -132,11 +149,32 @@ module.exports = {
     deleteInstance
 };
 
-let cloneAccomplishment = (instanceId, cb) => {
-
+let cloneAccomplishment = (currentInstanceId, homeInstanceId, cb) => {
+    Accomplishment.findOne({instanceId: homeInstanceId}, (err, accomplishment) => {
+        if (err) {
+            console.log('Error: ' + err);
+        } else {
+            let newAccomplishment = new Accomplishment({
+                instanceId: currentInstanceId,
+                headerText: accomplishment.headerText,
+                subHeaderText: accomplishment.subHeaderText,
+                buttonText: accomplishment.buttonText,
+                buttonLink: accomplishment.buttonLink
+            });
+            newAccomplishment.save((err, accomplishment) => {
+                if (err) {
+                    return cb (err, null);
+                } else {
+                    console.log('New Accomplishment');
+                    console.log(accomplishment);
+                    return cb (null, accomplishment);
+                }
+            });
+        }
+    });
 };
 
-let cloneAssessRisk = (instanceId, cb) => {
+let cloneAssessRisk = (currentInstanceId, homeInstanceId, cb) => {
 
 };
 
