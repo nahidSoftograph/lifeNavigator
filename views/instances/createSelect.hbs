@@ -8,6 +8,7 @@
                 <th scope="col">Company Name</th>
                 <th scope="col">URL</th>
                 <th scope="col">Activation</th>
+                <th scope="col">Edit</th>
                 <th scope="col">Operation</th>
             </tr>
             </thead>
@@ -57,6 +58,40 @@
                                             <input type="text" class="form-control" name="instanceLink" placeholder="Instance Link" value="{{this.instanceLink}}">
                                         </div>
                                         <button type="submit" class="btn btn-primary">Submit</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <button class="btn btn-success" data-toggle="modal" data-target="#operation{{_id}}">Operation</button>
+                    <div class="modal fade" id="operation{{_id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    <form action="/homePage/display/{{_id}}" method="post">
+                                        <input type="hidden" name="id" value="{{_id}}">
+                                        <input type="hidden" name="callBackUrl" value="/instances/createSelectInstances">
+                                        <button type="submit" class="btn btn-primary btn-block">Edit Home Page</button>
+                                    </form>
+                                    <br>
+                                    <form action="/accomplishment/display/{{_id}}" method="post">
+                                        <input type="hidden" name="id" value="{{this._id}}">
+                                        <input type="hidden" name="callBackUrl" value="/instances/createSelectInstances">
+                                        <button type="submit" class="btn btn-primary btn-block">Edit Accomplishment</button>
+                                    </form>
+                                    <br>
+                                    <form action="/futureGoal/display/{{this._id}}" method="post">
+                                        <input type="hidden" name="id" value="{{this._id}}">
+                                        <input type="hidden" name="callBackUrl" value="/instances/createSelectInstances">
+                                        <button type="submit" class="btn btn-primary btn-block">Edit FutureGoals</button>
+                                    </form>
+                                    <br>
+                                    <form action="/category/display/{{this._id}}" method="post">
+                                        <input type="hidden" name="id" value="{{this._id}}">
+                                        <input type="hidden" name="callBackUrl" value="/instances/createSelectInstances">
+                                        <button type="submit" class="btn btn-primary btn-block">Edit Category</button>
                                     </form>
                                 </div>
                             </div>

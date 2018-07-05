@@ -129,7 +129,7 @@ router.post('/updateHomePage/:id', upload.single('image'), (req, res, next) => {
                     if (err) {
                         console.log('Error: ' + err);
                     } else {
-                        res.redirect('/defaultSite/homePage');
+                        res.redirect('/homePage/display/' + id);
                         // res.render('defaultSite/homePage', {'title': 'Home Page', defaultHome: home});
                     }
                 });
