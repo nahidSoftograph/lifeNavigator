@@ -37,6 +37,7 @@ let updateCategory = (req, res, next) => {
     let id = req.params.id,
         name = req.body.categoryName,
         catId = req.body.catId,
+        catClass = req.body.class,
         callBackURL = req.body.callBackURL;
     if (!id) {
         console.log('Invalid category id');
@@ -44,6 +45,8 @@ let updateCategory = (req, res, next) => {
         console.log('Invalid category name');
     } else if (!catId) {
         console.log('Invalid category cat Id');
+    } else if (!catClass) {
+        console.log('Invalid category cat calss');
     } else if (!callBackURL) {
         console.log('invalid call back url');
     } else {
@@ -53,6 +56,7 @@ let updateCategory = (req, res, next) => {
             } else {
                 category.name = name || category.name;
                 category.catId = catId || category.catId;
+                category.class = catClass || category.catClass;
                 category.save((err, category) => {
                     if (err) {
                         console.log('Error: ' + err);
