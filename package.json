@@ -1,9 +1,16 @@
 {
-  "name": "node-authentication",
+  "name": "life-navigator-admin",
+  "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon server"
+    "start": "node server"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bmshamsnahid/lifeNavigator.git"
+  },
+  "author": "Softograph",
+  "license": "ISC",
   "dependencies": {
     "bcrypt-nodejs": "latest",
     "body-parser": "~1.15.2",
