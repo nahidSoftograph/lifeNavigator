@@ -1,4 +1,13 @@
-let Category = require('../models/category');
+let Instance = require('../models/instance'),
+    Category = require('../models/category'),
+    Option = require('../models/option'),
+    Home = require('../models/home'),
+    Industry = require('../models/industry'),
+    Occupation = require('../models/occupation'),
+    Sick = require('../models/sick'),
+    Accomplishment = require('../models/accomplishment'),
+    AssessRisk = require('../models/assessRisk'),
+    FutureGoal = require('../models/futureGoal');
 
 let createCategory = (req, res, next) => {
     let name = req.body.categoryName,
@@ -114,9 +123,70 @@ let alterCategoryVisibility = (req, res, next) => {
     }
 };
 
+let displayCategory = (req, res, next) => {
+    let instanceId = req.params.id;
+    if (!instanceId) {
+        console.log('Invalid instance id');
+    } else {
+        Category.find({instanceId: instanceId}, (err, categories) => {
+            console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>..  Instance Id:: ' + instanceId);
+            console.log(categories);
+            console.log("----------------------------------------------------------------------");
+            cookCategories(instanceId, (err, categories) => {
+                if (err) {
+                    console.log('Error: ' + err);
+                } else {
+                    res.render('instanceSite/category', {
+                        title: 'Category',
+                        categories: categories,
+                        instanceId: instanceId
+                    });
+                }
+            });
+        });
+    }
+};
+
 module.exports = {
     createCategory,
     updateCategory,
     deleteCategory,
-    alterCategoryVisibility
+    alterCategoryVisibility,
+    displayCategory
+};
+
+let traverseAllCategories = (categories, instanceId, cb) => {
+
+    if (categories.length == 0) {
+        return cb (null, categories);
+    } else {
+        for (let index=0; index<categories.length; index++) {
+            Option.find({instanceId: categories[index].instanceId}, (err, options) => {
+                if (err) {
+                    return cb (err, null);
+                } else {
+                    categories[index].options = options;
+                    if (categories.length - 1 == index) {
+                        return cb (null, categories);
+                    }
+                }
+            });
+        }
+    }
+};
+
+let cookCategories = (instanceId, cb) => {
+    Category.find({instanceId: instanceId}, (err, categories) => {
+        if (err) {
+            console.log('Error: ' + err);
+        } else {
+            traverseAllCategories(categories, instanceId, (err, categories) => {
+                if (err) {
+                    return cb (err, null);
+                } else {
+                    return cb (null, categories);
+                }
+            });
+        }
+    });
 };

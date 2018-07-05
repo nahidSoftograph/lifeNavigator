@@ -4,6 +4,7 @@ let express = require('express'),
     categoryController = require('../controller/category'),
     Category = require('../models/category');
 
+router.get('/display/:id', categoryController.displayCategory);
 router.post('/create', categoryController.createCategory);
 router.post('/update/:id', categoryController.updateCategory);
 router.post('/delete/:categoryId', categoryController.deleteCategory);
