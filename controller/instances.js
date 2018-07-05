@@ -1,4 +1,13 @@
-let Instance = require('../models/instance');
+let Instance = require('../models/instance'),
+    Accomplishment = require('../models/accomplishment'),
+    AssessRisk = require('../models/assessRisk'),
+    Category = require('../models/category'),
+    FutureGoal = require('../models/futureGoal'),
+    Home = require('../models/home'),
+    Industry = require('../models/industry'),
+    Occupation = require('../models/occupation'),
+    Option = require('../models/option'),
+    Sick = require('../models/sick');
 
 let renderEditInstances = (req, res, next) => {
     res.render('instances/edit', {'title': 'Edit instances'});
@@ -20,11 +29,11 @@ let createInstance = (req, res, next) => {
         instanceLink = req.body.instanceLink;
 
     if (!instanceName) {
-
+        console.log('Invalid instance name');
     } else if (!companyName) {
-
+        console.log('Invalid company name');
     } else if (!instanceLink) {
-
+        console.log('Invalid instance link');
     } else {
         let instance = new Instance({
             instanceName: instanceName,
@@ -121,4 +130,44 @@ module.exports = {
     updateInstance,
     changeInstanceActivation,
     deleteInstance
+};
+
+let cloneAccomplishment = (instanceId, cb) => {
+
+};
+
+let cloneAssessRisk = (instanceId, cb) => {
+
+};
+
+let cloneCategory = (instanceId, cb) => {
+
+};
+
+let cloneHomePage = (instanceId, cb) => {
+
+};
+
+let cloneFutureGoal = (instanceId, cb) => {
+
+};
+
+let cloneHome = (instanceId, cb) => {
+
+};
+
+let cloneIndustry = (instanceId, cb) => {
+
+};
+
+let cloneOccupation = (instanceId, cb) => {
+
+};
+
+let cloneOptions = (instanceId, cb) => {
+
+};
+
+let cloneSick = (instanceId, cb) => {
+
 };

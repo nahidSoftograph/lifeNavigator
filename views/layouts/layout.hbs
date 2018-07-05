@@ -31,11 +31,21 @@
 {{ else }}
     <div class="container-fluid">
         <div class="row d-flex d-md-block flex-nowrap wrapper">
+            <div class="col-md-2 float-left col-1 pl-0 pr-0 width " id="sidebar">
+                {{> navigation }}
+            </div>
             <main class="col-md-10 col px-5 pl-md-2 pt-2 main mx-auto">
                 {{{body}}}
             </main>
         </div>
     </div>
+    <!--<div class="container-fluid">
+        <div class="row d-flex d-md-block flex-nowrap wrapper">
+            <main class="col-md-10 col px-5 pl-md-2 pt-2 main mx-auto">
+                {{{body}}}
+            </main>
+        </div>
+    </div>-->
 {{/if }}
 
 
