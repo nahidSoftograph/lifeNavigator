@@ -56,12 +56,42 @@ let createInstance = (req, res, next) => {
                             } else {
                                 console.log('New Instance Accomplishment: ');
                                 console.log(accomplishment);
+                                cloneAssessRisk(currentInstanceId, homeInstanceId, (err, assessRisk) => {
+                                    if (err) {
+                                        console.log('Error: ' + err);
+                                    } else {
+                                        console.log('Assess Risk Created');
+                                        console.log(assessRisk);
+                                        cloneFutureGoal(currentInstanceId, homeInstanceId, (err, futureGoal) => {
+                                            if (err) {
+                                                console.log('Error: ' + err);
+                                            } else {
+                                                console.log('Future Goal Created');
+                                                console.log(futureGoal);
+                                                cloneHome(currentInstanceId, homeInstanceId, (err, home) => {
+                                                    if (err) {
+                                                        console.log('Error: ' + err);
+                                                    } else {
+                                                        console.log('Cloned Home: ');
+                                                        console.log(home);
+                                                        cloneCategory(currentInstanceId, homeInstanceId, (err, done) => {
+                                                            if (err) {
+                                                                console.log('Error: ' + err);
+                                                            } else {
+                                                                console.log('Update the category');
+                                                                res.redirect('/instances/createSelectInstances');
+                                                            }
+                                                        });
+                                                    }
+                                                });
+                                            }
+                                        });
+                                    }
+                                });
                             }
                         });
-                        console.log();
                     }
                 });
-                res.redirect('/instances/createSelectInstances');
             }
         });
     }
@@ -153,6 +183,7 @@ let cloneAccomplishment = (currentInstanceId, homeInstanceId, cb) => {
     Accomplishment.findOne({instanceId: homeInstanceId}, (err, accomplishment) => {
         if (err) {
             console.log('Error: ' + err);
+            return cb (err, null);
         } else {
             let newAccomplishment = new Accomplishment({
                 instanceId: currentInstanceId,
@@ -175,23 +206,131 @@ let cloneAccomplishment = (currentInstanceId, homeInstanceId, cb) => {
 };
 
 let cloneAssessRisk = (currentInstanceId, homeInstanceId, cb) => {
-
+    AssessRisk.findOne({instanceId: homeInstanceId}, (err, assessRisk) => {
+        if (err) {
+            console.log('Error: ' + err);
+            return cb (err, null);
+        } else {
+            let newAssessRisk = new AssessRisk({
+                instanceId: currentInstanceId,
+                headerText: assessRisk.headerText,
+                paragraphText: assessRisk.paragraphText,
+                subHeaderText: assessRisk.subHeaderText,
+                buttonText: assessRisk.buttonText,
+                buttonLink: assessRisk.buttonLink
+            });
+            newAssessRisk.save((err, assessRisk) => {
+                if (err) {
+                    console.log('Error: ' + err);
+                    return cb (err, null);
+                } else {
+                    console.log('Cloned assess Risk');
+                    console.log(assessRisk);
+                    return cb (null, assessRisk);
+                }
+            });
+        }
+    });
 };
 
-let cloneCategory = (instanceId, cb) => {
+let cloneCategory = (currentInstanceId, homeInstanceId, cb) => {
+    Category.find({instanceId: homeInstanceId}, (err, categories) => {
+        if (categories.length == 0) {
+            return cb (null, 'done');
+        } else if (err) {
+            console.log('error: ' + err);
+            return cb (err, null);
+        } else {
+            for (let index=0; index<categories.length; index++) {
+                let currentCategory = categories[index];
+                let newCategory = new Category({
+                    instanceId: currentInstanceId,
+                    name: currentCategory.name,
+                    class: currentCategory.class,
+                    catId: currentCategory.catId,
+                    isVisible: currentCategory.isVisible,
+                    options: currentCategory.options
+                });
 
+                newCategory.save((err, newCategory) => {
+                    if (err) {
+                        console.log('Error: ' + err);
+                        return cb (err, null);
+                    } else {
+                        cloneOptions(currentCategory._id, newCategory._id, (err, val) => {
+                            if (err) {
+                                console.log('Error: ' + err);
+                                return cb (err, null);
+                            } else {
+                                console.log('Updated the options');
+                                if (index == (categories.length - 1)) {
+                                    return cb (null, 'Done');
+                                }
+                            }
+                        });
+                    }
+                });
+            }
+        }
+    });
 };
 
-let cloneHomePage = (instanceId, cb) => {
-
+let cloneHome = (currentInstanceId, homeInstanceId, cb) => {
+    Home.findOne({instanceId: homeInstanceId}, (err, home) => {
+        if (err) {
+            console.log('Error: ' + err);
+            return cb (err, null);
+        } else {
+            let newHome = new Home({
+                instanceId: currentInstanceId,
+                welComeText: home.welComeText,
+                logoPath: home.logoPath,
+                header: home.header,
+                info: home.info,
+                anchorText: home.anchorText,
+                anchorLink: home.anchorLink,
+                buttonText: home.buttonText,
+                buttonLink: home.buttonLink
+            });
+            newHome.save((err, home) => {
+                if (err) {
+                    console.log('Error: ' + err);
+                    return cb (err, null);
+                } else {
+                    console.log('new cloned Home');
+                    console.log(home);
+                    return cb (null, home);
+                }
+            });
+        }
+    });
 };
 
-let cloneFutureGoal = (instanceId, cb) => {
-
-};
-
-let cloneHome = (instanceId, cb) => {
-
+let cloneFutureGoal = (currentInstanceId, homeInstanceId, cb) => {
+    FutureGoal.findOne({instanceId: homeInstanceId}, (err, futureGoal) => {
+        if (err) {
+            console.log('Error: ' + err);
+            return cb (err, null);
+        } else {
+            let newFutureGoal = new FutureGoal({
+                instanceId: currentInstanceId,
+                headerText: futureGoal.headerText,
+                subHeaderText: futureGoal.subHeaderText,
+                buttonText: futureGoal.buttonText,
+                buttonLink: futureGoal.buttonLink
+            });
+            newFutureGoal.save((err, futureGoal) => {
+                if (err) {
+                    console.log('Error: ' + err);
+                    return cb (err, null);
+                } else {
+                    console.log('create future goal');
+                    console.log(futureGoal);
+                    return cb (null, futureGoal);
+                }
+            });
+        }
+    });
 };
 
 let cloneIndustry = (instanceId, cb) => {
@@ -202,8 +341,39 @@ let cloneOccupation = (instanceId, cb) => {
 
 };
 
-let cloneOptions = (instanceId, cb) => {
-
+let cloneOptions = (currentCategoryId, newCategoryId, cb) => {
+    Option.find({catId: currentCategoryId}, (err, options) => {
+        if (options.length == 0) {
+            return cb (null, 'done');
+        } else if (err) {
+            console.log('Error: ' + err);
+            return cb (err, null);
+        } else {
+            for (let index=0; index<options.length; index++) {
+                let existingOption = options[index];
+                let newOption = new Option({
+                    optionName: existingOption.optionName,
+                    catId: newCategoryId,
+                    optId: existingOption.optId,
+                    titlePast: existingOption.titlePast,
+                    titleFuture: existingOption.titleFuture,
+                    selected: existingOption.selected,
+                    iconPath: existingOption.iconPath,
+                    isVisible: existingOption.isVisible
+                });
+                newOption.save((err, option) => {
+                    if (err) {
+                        console.log('Error: ' + err);
+                        return cb (err, null);
+                    } else {
+                        if (index == (options.length - 1)) {
+                            return cb (null, 'Done');
+                        }
+                    }
+                });
+            }
+        }
+    });
 };
 
 let cloneSick = (instanceId, cb) => {

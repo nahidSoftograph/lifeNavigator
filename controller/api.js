@@ -53,7 +53,8 @@ let getCategories = (req, res, next) => {
                                                                        occupations: occupations,
                                                                        industries: industries,
                                                                        sicks: sicks,
-                                                                       instanceId: instance._id
+                                                                       instanceId: instance._id,
+                                                                       genericIconMisc: '/images/iconMisc.png'
                                                                    });
                                                                }
                                                            });
