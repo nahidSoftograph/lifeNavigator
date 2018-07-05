@@ -172,6 +172,8 @@
                                                     <form action="/option/create" method="post"  enctype="multipart/form-data">
                                                         <input type="hidden" name="callBackURL" value="/defaultSite/accomplishments">
                                                         <input type="hidden" name="catId" value={{this.catId}}>
+                                                        <input type="hidden" name="categoryId" value={{this._id}}>
+                                                        <input type="hidden" name="instanceId" value={{instanceId}}>
                                                         <div class="form-group row">
                                                             <div class="custom-file">
                                                                 <input type="file" name="image" class="custom-file-input">

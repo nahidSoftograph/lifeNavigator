@@ -54,26 +54,18 @@ let createInstance = (req, res, next) => {
                             if (err) {
                                 console.log('Error: ' + err);
                             } else {
-                                console.log('New Instance Accomplishment: ');
-                                console.log(accomplishment);
                                 cloneAssessRisk(currentInstanceId, homeInstanceId, (err, assessRisk) => {
                                     if (err) {
                                         console.log('Error: ' + err);
                                     } else {
-                                        console.log('Assess Risk Created');
-                                        console.log(assessRisk);
                                         cloneFutureGoal(currentInstanceId, homeInstanceId, (err, futureGoal) => {
                                             if (err) {
                                                 console.log('Error: ' + err);
                                             } else {
-                                                console.log('Future Goal Created');
-                                                console.log(futureGoal);
                                                 cloneHome(currentInstanceId, homeInstanceId, (err, home) => {
                                                     if (err) {
                                                         console.log('Error: ' + err);
                                                     } else {
-                                                        console.log('Cloned Home: ');
-                                                        console.log(home);
                                                         cloneCategory(currentInstanceId, homeInstanceId, (err, done) => {
                                                             if (err) {
                                                                 console.log('Error: ' + err);
@@ -135,16 +127,16 @@ let changeInstanceActivation = (req, res, next) => {
     let id = req.params.id;
 
     if (!id) {
-
+        console.log('Invalid id');
     } else {
         Instance.findById(id, (err, instance) => {
             if (err) {
-
+                console.log('Error: ' + err);
             } else {
                 instance.isActive = !instance.isActive;
                 instance.save((err, instance) => {
                     if (err) {
-
+                        console.log('Error: ' + err);
                     } else {
                         res.redirect('/instances/createSelectInstances');
                     }
@@ -158,11 +150,11 @@ let deleteInstance = (req, res, next) => {
     let id = req.params.id;
 
     if (!id) {
-
+        console.log('Invalid id');
     } else {
         Instance.findByIdAndRemove(id, (err, instance) => {
             if (err) {
-
+                console.log('Error: ' + err);
             } else {
                 res.redirect('/instances/createSelectInstances');
             }
@@ -196,8 +188,6 @@ let cloneAccomplishment = (currentInstanceId, homeInstanceId, cb) => {
                 if (err) {
                     return cb (err, null);
                 } else {
-                    console.log('New Accomplishment');
-                    console.log(accomplishment);
                     return cb (null, accomplishment);
                 }
             });
@@ -224,8 +214,6 @@ let cloneAssessRisk = (currentInstanceId, homeInstanceId, cb) => {
                     console.log('Error: ' + err);
                     return cb (err, null);
                 } else {
-                    console.log('Cloned assess Risk');
-                    console.log(assessRisk);
                     return cb (null, assessRisk);
                 }
             });
@@ -257,7 +245,11 @@ let cloneCategory = (currentInstanceId, homeInstanceId, cb) => {
                         console.log('Error: ' + err);
                         return cb (err, null);
                     } else {
-                        cloneOptions(currentCategory._id, newCategory._id, (err, val) => {
+                        console.log('<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Existing category');
+                        console.log(currentCategory);
+                        console.log('<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< New category');
+                        console.log(newCategory)
+                        cloneOptions(currentCategory._id, newCategory._id, currentInstanceId, homeInstanceId, (err, val) => {
                             if (err) {
                                 console.log('Error: ' + err);
                                 return cb (err, null);
@@ -297,8 +289,6 @@ let cloneHome = (currentInstanceId, homeInstanceId, cb) => {
                     console.log('Error: ' + err);
                     return cb (err, null);
                 } else {
-                    console.log('new cloned Home');
-                    console.log(home);
                     return cb (null, home);
                 }
             });
@@ -324,8 +314,6 @@ let cloneFutureGoal = (currentInstanceId, homeInstanceId, cb) => {
                     console.log('Error: ' + err);
                     return cb (err, null);
                 } else {
-                    console.log('create future goal');
-                    console.log(futureGoal);
                     return cb (null, futureGoal);
                 }
             });
@@ -341,8 +329,12 @@ let cloneOccupation = (instanceId, cb) => {
 
 };
 
-let cloneOptions = (currentCategoryId, newCategoryId, cb) => {
-    Option.find({catId: currentCategoryId}, (err, options) => {
+let cloneOptions = (currentCategoryId, newCategoryId, currentInstanceId, homeInstanceId, cb) => {
+    Option.find({categoryId: currentCategoryId, instanceId: homeInstanceId}, (err, options) => {
+        console.log('*************************Options**************************');
+        console.log('Cloning option for: ' + currentInstanceId);
+        console.log(options);
+        console.log("*************************Options***************************");
         if (options.length == 0) {
             return cb (null, 'done');
         } else if (err) {
@@ -353,7 +345,9 @@ let cloneOptions = (currentCategoryId, newCategoryId, cb) => {
                 let existingOption = options[index];
                 let newOption = new Option({
                     optionName: existingOption.optionName,
-                    catId: newCategoryId,
+                    instanceId: currentInstanceId,
+                    catId: existingOption.catId,
+                    categoryId: newCategoryId,
                     optId: existingOption.optId,
                     titlePast: existingOption.titlePast,
                     titleFuture: existingOption.titleFuture,
@@ -366,6 +360,10 @@ let cloneOptions = (currentCategoryId, newCategoryId, cb) => {
                         console.log('Error: ' + err);
                         return cb (err, null);
                     } else {
+                        console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Existing option');
+                        console.log(existingOption);
+                        console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> New option');
+                        console.log(option);
                         if (index == (options.length - 1)) {
                             return cb (null, 'Done');
                         }

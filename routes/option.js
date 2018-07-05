@@ -16,7 +16,9 @@ let upload = multer({storage: storage});
 
 router.post('/create', upload.single('image'), (req, res, next) => {
     let optionName = req.body.optionName,
+        instanceId = req.body.instanceId,
         catId = req.body.catId,
+        categoryId = req.body.categoryId,
         optId = req.body.optId,
         titlePast = req.body.titlePast,
         titleFuture = req.body.titleFuture,
@@ -27,6 +29,10 @@ router.post('/create', upload.single('image'), (req, res, next) => {
 
     if (!optionName) {
         console.log('Invalid option name.');
+    } else if (!categoryId) {
+        console.log('Invalid category id');
+    } else if (!instanceId) {
+        console.log('Invalid instance id');
     } else if (!catId) {
         console.log('Invalid catId.');
     } else if (!optId) {
@@ -39,7 +45,9 @@ router.post('/create', upload.single('image'), (req, res, next) => {
         console.log('Invalid callBackURL');
     } else {
         let option = new Option({
+            instanceId: instanceId,
             optionName: optionName,
+            categoryId: categoryId,
             catId: catId,
             optId: optId,
             titlePast: titlePast,
