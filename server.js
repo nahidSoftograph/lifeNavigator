@@ -32,6 +32,7 @@ let instancesRouter = require('./routes/instances'),
     assessRiskRoutes = require('./routes/assessRisk'),
     homePageRoutes = require('./routes/homePage'),
     accomplishmentRoutes = require('./routes/accomplishment'),
+    futureGoalRoutes = require('./routes/futureGoal'),
     defaultSiteRouter = require('./routes/defaultSite');
 
 var configDB     = require('./config/database');
@@ -95,6 +96,7 @@ app.use('/occupation', occupationRoutes);
 app.use('/sick', sickRoutes);
 app.use('/assessRisk', assessRiskRoutes);
 app.use('/homePage', homePageRoutes);
+app.use('/futureGoal', futureGoalRoutes);
 app.use('/accomplishment', accomplishmentRoutes);
 
 // launch ======================================================================

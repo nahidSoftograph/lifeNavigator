@@ -82,9 +82,9 @@
                                         <button type="submit" class="btn btn-primary btn-block">Edit Accomplishment</button>
                                     </form>
                                     <br>
-                                    <form action="/futureGoal/display/{{this._id}}" method="post">
-                                        <input type="hidden" name="id" value="{{this._id}}">
-                                        <input type="hidden" name="callBackUrl" value="/instances/createSelectInstances">
+                                    <form action="/futureGoal/display/{{_id}}" method=get>
+                                        <!--<input type="hidden" name="id" value="{{this._id}}">
+                                        <input type="hidden" name="callBackUrl" value="/instances/createSelectInstances">-->
                                         <button type="submit" class="btn btn-primary btn-block">Edit FutureGoals</button>
                                     </form>
                                     <br>
