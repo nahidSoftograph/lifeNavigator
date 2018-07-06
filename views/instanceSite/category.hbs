@@ -15,7 +15,7 @@
             <tbody>
             {{#each categories}}
                 <tr>
-                    <td>{{this.catId}}</td>
+                    <td>{{this.catId}} - {{this.options.length}}</td>
                     <td>{{this.name}}</td>
                     <td>
                         <button class="btn btn-primary" data-toggle="modal" data-target="#updateCategory{{this._id}}">Update</button>
