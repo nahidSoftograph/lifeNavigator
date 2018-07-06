@@ -10,7 +10,8 @@ let Instance = require('../models/instance'),
     FutureGoal = require('../models/futureGoal');
 
 let getCategories = (req, res, next) => {
-    Instance.findOne({isHome: true}, (err, instance) => {
+    let companyName = req.params.companyName || 'default';
+    Instance.findOne({companyName: companyName}, (err, instance) => {
         if (err) {
             console.log('Error: ' + err);
         } else {
@@ -85,7 +86,9 @@ module.exports = {
   getCategories
 };
 
-let cookCategories = (instanceId, cb) => {
+
+
+/*let cookCategories = (instanceId, cb) => {
     Category.find({instanceId: instanceId}, (err, categories) => {
         if (err) {
             console.log('Error: ' + err);
@@ -127,6 +130,43 @@ let traverseAllCategories = (categories, instanceId, cb) => {
             });
         }
     }
+};*/
+
+let traverseAllCategories = (categories, instanceId, cb) => {
+
+    if (categories.length == 0) {
+        return cb (null, categories);
+    } else {
+        for (let index=0; index<categories.length; index++) {
+            Option.find({instanceId: categories[index].instanceId, categoryId: categories[index]._id}, (err, options) => {
+                if (err) {
+                    return cb (err, null);
+                } else {
+                    categories[index].options = options;
+                    if (categories.length - 1 == index) {
+                        return cb (null, categories);
+                    }
+                }
+            });
+        }
+    }
+};
+
+let cookCategories = (instanceId, cb) => {
+    console.log('Cooking categoies');
+    Category.find({instanceId: instanceId}, (err, categories) => {
+        if (err) {
+            console.log('Error: ' + err);
+        } else {
+            traverseAllCategories(categories, instanceId, (err, categories) => {
+                if (err) {
+                    return cb (err, null);
+                } else {
+                    return cb (null, categories);
+                }
+            });
+        }
+    });
 };
 
 let getIndustries = (instanceId, cb) => {
