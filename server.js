@@ -109,6 +109,9 @@ app.use('/homePage', homePageRoutes);
 app.use('/futureGoal', futureGoalRoutes);
 app.use('/siteUser', siteUserRoutes);
 app.use('/accomplishment', accomplishmentRoutes);
+app.use('*', (req, res, next) => {
+    res.sendFile(path.join(__dirname, 'public/index.html'));
+});
 
 // launch ======================================================================
 app.listen(port);
