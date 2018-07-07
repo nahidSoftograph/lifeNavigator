@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":1,"key":{"_id":1},"name":"_id_","ns":"photopher-api.photographers"},{"v":1,"unique":true,"key":{"name":1},"name":"name_1","ns":"photopher-api.photographers","background":true}]}

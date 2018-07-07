@@ -3,5 +3,6 @@ let express = require('express'),
     router = express.Router();
 
 router.get('/rawInfo/:companyName', apiController.getCategories);
+router.get('/createUser', apiController.addSiteUser);
 
 module.exports = router;

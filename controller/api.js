@@ -7,6 +7,7 @@ let Instance = require('../models/instance'),
     Industry = require('../models/industry'),
     Occupation = require('../models/occupation'),
     Sick = require('../models/sick'),
+    SiteUser = require('../models/siteUser'),
     FutureGoal = require('../models/futureGoal');
 
 let getCategories = (req, res, next) => {
@@ -82,8 +83,39 @@ let getCategories = (req, res, next) => {
     });
 };
 
+let addSiteUser = (req, res, next) => {
+    let age = req.body.age,
+        gender = req.body.gender,
+        zip = req.body.zip;
+    if (!age) {
+
+    } else if (!gender) {
+
+    } else if (!zip) {
+
+    } else {
+        let siteUser = new SiteUser({
+            age: age,
+            gender: gender,
+            zip: zip
+        });
+        siteUser.save((err, siteUser) => {
+            if (err) {
+                console.log('Error: ' + err);
+            } else {
+                console.log('User Created');
+                res.status(201).json({
+                    success: true,
+                    user: siteUser
+                });
+            }
+        });
+    }
+};
+
 module.exports = {
-  getCategories
+  getCategories,
+    addSiteUser
 };
 
 

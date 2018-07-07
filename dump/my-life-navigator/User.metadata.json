@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":1,"key":{"_id":1},"name":"_id_","ns":"my-life-navigator.User"},{"v":1,"unique":true,"key":{"email":1},"name":"email_1","ns":"my-life-navigator.User","background":true}]}

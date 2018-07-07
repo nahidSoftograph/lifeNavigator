@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":1,"key":{"_id":1},"name":"_id_","ns":"air-ticket-booking-api.User"},{"v":1,"unique":true,"key":{"email":1},"name":"email_1","ns":"air-ticket-booking-api.User","background":true}]}
