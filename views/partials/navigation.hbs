@@ -1,6 +1,6 @@
 <div class="list-group border-0 card text-center text-md-left">
     {{#each instances}}
-        <a id="mainMenu" href="#defaultSiteMenu{{this.companyName}}" class="list-group-item d-inline-block collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false"><i class="fa fa-anchor"></i> <span class="d-none d-md-inline">{{this.instanceName}}</span> </a>
+        <a id="mainMenu" href="#defaultSiteMenu{{this.companyName}}" class="list-group-item d-inline-block collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false"> <span class="d-none d-md-inline">{{this.instanceName}}</span> </a>
         <div class="collapse" id="defaultSiteMenu{{this.companyName}}">
             <a id="subMenu" href="/homePage/display/{{this._id}}" class="list-group-item" data-parent="#defaultSiteMenu{{this.companyName}}">
                 &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-home" aria-hidden="true"></i>
@@ -17,7 +17,7 @@
         </div>
     {{/each}}
 
-    <a id="mainMenu" href="#instancesMenu" class="list-group-item d-inline-block collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false"><i class="fa fa-window-restore"></i> <span class="d-none d-md-inline">Instances</span> </a>
+    <a id="mainMenu" href="#instancesMenu" class="list-group-item d-inline-block collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false"> <span class="d-none d-md-inline">Select Instances</span> </a>
     <div class="collapse" id="instancesMenu">
         <a id="subMenu" href="/instances/createSelectInstances" class="list-group-item" data-parent="#instancesMenu">
             &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-paragraph" aria-hidden="true"></i>

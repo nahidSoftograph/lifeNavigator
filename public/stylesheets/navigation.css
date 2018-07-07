@@ -128,14 +128,14 @@
 
 /*custom design*/
     #mainMenu {
-        font-weight: bold;
-        font-style: italic;
-        font-size: 25px;
+        font-weight: normal;
+        font-style: normal;
+        font-size: 15px;
     }
     #subMenu {
-        font-weight: bold;
+        font-weight: normal;
         font-style: normal;
-        font-size: 20px;
+        font-size: 12px;
     }
     #mainMenu:hover {
         background-color: grey;

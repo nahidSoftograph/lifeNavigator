@@ -84,6 +84,7 @@ let getCategories = (req, res, next) => {
 };
 
 let addSiteUser = (req, res, next) => {
+    console.log(req.body);
     let age = req.body.age,
         gender = req.body.gender,
         zip = req.body.zip;
