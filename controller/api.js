@@ -348,10 +348,14 @@ getOptionsId = (options, cb) => {
 };
 
 let getApiInstance = (instanceLink, cb) => {
+    console.log('Instance link: ' + instanceLink);
     Instance.findOne({instanceLink: instanceLink}, (err, instance) => {
         if (err) {
-
+            console.log('Errro: ' + err);
+            return cb (err, null);
         } else if (!instance) {
+            console.log('Instance: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
+            console.log(instance);
             Instance.findOne({isHome: true}, (err, instance) => {
                 if (err) {
                     console.log('Error: ' + err);
