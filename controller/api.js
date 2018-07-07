@@ -11,10 +11,13 @@ let Instance = require('../models/instance'),
     FutureGoal = require('../models/futureGoal');
 
 let getCategories = (req, res, next) => {
-    let companyName = req.params.companyName || 'default';
-    Instance.findOne({companyName: companyName}, (err, instance) => {
+    let instanceLink = req.params.instanceLink;
+    getApiInstance(instanceLink, (err, instance) => {
         if (err) {
-            console.log('Error: ' + err);
+            return res.status(202).json({
+                success: false,
+                error: err
+            });
         } else {
             Accomplishment.findOne({instanceId: instance._id}, (err, accomplishment) => {
                 if (err) {
@@ -37,15 +40,15 @@ let getCategories = (req, res, next) => {
                                                     console.log(err);
                                                 } else {
                                                     getOccupations(instance._id, (err, occupations) => {
-                                                       if (err) {
-                                                           console.log('Error: ' + err);
-                                                       } else {
-                                                           getSicks(instance._id, (err, sicks) => {
-                                                               if (err) {
-                                                                   console.log('Error: ' + err);
-                                                               } else {
-                                                                   console.log('Get sicks');
-                                                                   console.log(sicks);
+                                                        if (err) {
+                                                            console.log('Error: ' + err);
+                                                        } else {
+                                                            getSicks(instance._id, (err, sicks) => {
+                                                                if (err) {
+                                                                    console.log('Error: ' + err);
+                                                                } else {
+                                                                    console.log('Get sicks');
+                                                                    console.log(sicks);
                                                                     getHome(instance._id, (err, home) => {
                                                                         if (err) {
                                                                             console.log('err: ' + err);
@@ -65,9 +68,9 @@ let getCategories = (req, res, next) => {
                                                                             });
                                                                         }
                                                                     });
-                                                               }
-                                                           });
-                                                       }
+                                                                }
+                                                            });
+                                                        }
                                                     });
                                                 }
                                             });
@@ -342,4 +345,23 @@ getOptionsId = (options, cb) => {
             return cb (null, optionsId);
         }
     }
+};
+
+let getApiInstance = (instanceLink, cb) => {
+    Instance.findOne({instanceLink: instanceLink}, (err, instance) => {
+        if (err) {
+
+        } else if (!instance) {
+            Instance.findOne({isHome: true}, (err, instance) => {
+                if (err) {
+                    console.log('Error: ' + err);
+                    return cb (err, null);
+                } else {
+                    return cb (null, instance);
+                }
+            });
+        } else {
+            return cb (null, instance);
+        }
+    });
 };
