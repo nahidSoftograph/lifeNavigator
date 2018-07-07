@@ -1,4 +1,39 @@
 <div class="row">
+    <div class="col-8"></div>
+    <div class="col-4">
+        <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#{{accomplishment._id}}categoryCreate">
+            Create Category
+        </button>
+        <div class="modal fade" id="{{accomplishment._id}}categoryCreate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Create Category</h5>
+                    </div>
+                    <div class="modal-body">
+                        <form action="/category/create" method="post">
+                            <input type="hidden" name="callBackURL" value="/category/display/{{instanceId}}">
+                            <input type="hidden" name="instanceId" value="{{instanceId}}">
+                            <div class="form-group">
+                                <label>Category Id</label>
+                                <input type="text" class="form-control" name="catId" placeholder="Enter Category Id">
+                            </div>
+                            <div class="form-group">
+                                <label>Category Name</label>
+                                <input type="text" class="form-control" name="categoryName" placeholder="Enter Category Name">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Create</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br>
+
+<div class="row">
     <div class="col-12">
         <div class="text-center font-weight-bold d-block p-2 bg-secondary text-white">Category</div>
         <table class="table table-hover">
@@ -81,9 +116,9 @@
                                                     <div class="modal-body">
                                                         <form action="/option/create" method="post"  enctype="multipart/form-data">
                                                             <input type="hidden" name="callBackURL" value="/category/display/{{instanceId}}">
-                                                            <input type="text" name="catId" value={{this.catId}}>
-                                                            <input type="text" name="categoryId" value={{this._id}}>
-                                                            <input type="text" name="instanceId" value={{instanceId}}>
+                                                            <input type="hidden" name="catId" value={{this.catId}}>
+                                                            <input type="hidden" name="categoryId" value={{this._id}}>
+                                                            <input type="hidden" name="instanceId" value={{instanceId}}>
                                                             <div class="form-group row">
                                                                 <div class="custom-file">
                                                                     <input type="file" name="image" class="custom-file-input">
@@ -140,13 +175,13 @@
                                                                     <div class="modal-header">
                                                                         <h5 class="modal-title" id="exampleModalLabel">Update Option</h5>
                                                                         <form action="/option/delete/{{this._id}}" method="post">
-                                                                            <input type="hidden" name="callBackURL" value="/defaultSite/accomplishments">
+                                                                            <input type="hidden" name="callBackURL" value="/category/display/{{instanceId}}">
                                                                             <button class="btn btn-danger" type="submit">Delete</button>
                                                                         </form>
                                                                     </div>
                                                                     <div class="modal-body">
                                                                         <form action="/option/update/{{this._id}}" method="post" enctype="multipart/form-data">
-                                                                            <input type="hidden" name="callBackURL" value="/defaultSite/accomplishments">
+                                                                            <input type="hidden" name="callBackURL" value="/category/display/{{instanceId}}">
                                                                             <div class="form-group row">
                                                                                 <div class="custom-file">
                                                                                     <input type="file" name="image" class="custom-file-input">
@@ -174,7 +209,7 @@
                                                     </td>
                                                     <td>
                                                         <form action="/option/alterVisibility/{{this._id}}" method="post">
-                                                            <input type="hidden" name="callBackURL" value="/defaultSite/accomplishments">
+                                                            <input type="hidden" name="callBackURL" value="/category/display/{{instanceId}}">
                                                             {{#if this.isVisible}}
                                                                 <button class="btn btn-danger" type="submit">Make Option Invisible</button>
                                                             {{else}}

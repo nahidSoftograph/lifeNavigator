@@ -67,7 +67,7 @@ router.post('/update/:id', upload.single('image'), (req, res, next) => {
                         console.log('Error: ' + err);
                     } else {
                         console.log('Successfully updated');
-                        res.redirect('/instances/createSelectInstances');
+                        res.redirect('/homePage/display/' + instanceId);
                         // res.render('defaultSite/homePage', {'title': 'Home Page', defaultHome: home});
                     }
                 });

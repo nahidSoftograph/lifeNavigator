@@ -88,11 +88,20 @@ let addSiteUser = (req, res, next) => {
         gender = req.body.gender,
         zip = req.body.zip;
     if (!age) {
-
+        return res.status(202).json({
+            success: false,
+            message: 'Invalid age.'
+        });
     } else if (!gender) {
-
+        return res.status(202).json({
+            success: false,
+            message: 'Invalid age.'
+        });
     } else if (!zip) {
-
+        return res.status(202).json({
+            success: false,
+            message: 'Invalid age.'
+        });
     } else {
         let siteUser = new SiteUser({
             age: age,
@@ -102,9 +111,13 @@ let addSiteUser = (req, res, next) => {
         siteUser.save((err, siteUser) => {
             if (err) {
                 console.log('Error: ' + err);
+                return res.status(202).json({
+                    success: false,
+                    message: 'Error: ' + err
+                });
             } else {
                 console.log('User Created');
-                res.status(201).json({
+                return res.status(201).json({
                     success: true,
                     user: siteUser
                 });
