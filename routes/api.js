@@ -4,5 +4,6 @@ let express = require('express'),
 
 router.get('/rawInfo/:companyName', apiController.getCategories);
 router.post('/createUser', apiController.addSiteUser);
+router.post('/updateUser', apiController.updateSiteUserOptionSelection);
 
 module.exports = router;

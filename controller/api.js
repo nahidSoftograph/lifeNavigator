@@ -126,9 +126,66 @@ let addSiteUser = (req, res, next) => {
     }
 };
 
+let updateSiteUserOptionSelection = (req, res, next) => {
+
+    let userId = req.body.userId,
+        accomplishmentOptions = req.body.accomplishments,
+        futureGolOptions = req.body.futureGoals;
+    SiteUser.findById(userId, (err, siteUser) => {
+        if (err) {
+            console.log('Error: ' + err);
+            return res.status(202).json({
+                success: false,
+                message: err
+            });
+        } else {
+            getOptionsId(accomplishmentOptions, (err, accomplishmentOptions) => {
+                if (err) {
+                    console.log('Error: ' + err);
+                    console.log('Error: ' + err);
+                    return res.status(202).json({
+                        success: false,
+                        message: err
+                    });
+                } else {
+                    getOptionsId(futureGolOptions, (err, futureGoalOptions) => {
+                        if (err) {
+                            console.log('Error: ' + err);
+                            return res.status(202).json({
+                                success: false,
+                                message: err
+                            });
+                        } else {
+                            siteUser.accomplishmentOptions = accomplishmentOptions;
+                            siteUser.futureGoalOptions = futureGoalOptions;
+                            siteUser.save((err, siteUser) => {
+                                if (err) {
+                                    console.log('Error: ' + err);
+                                    return res.status(202).json({
+                                        success: false,
+                                        message: err
+                                    });
+                                } else {
+                                    console.log('Site User Updated.');
+                                    return res.status(202).json({
+                                        success: true,
+                                        message: 'Successfully updated the site user',
+                                        siteUser: siteUser
+                                    });
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+        }
+    });
+};
+
 module.exports = {
-  getCategories,
-    addSiteUser
+    getCategories,
+    addSiteUser,
+    updateSiteUserOptionSelection
 };
 
 
@@ -270,6 +327,18 @@ let setOptionId = (options, cb) => {
                 // console.log(options);
                 return cb (null, options);
             }
+        }
+    }
+};
+
+getOptionsId = (options, cb) => {
+    let optionsId = [];
+    for (let index=0; index<options.length; index++) {
+        currentOption = options[index];
+        optionsId.push(currentOption._id);
+
+        if (index == (options.length - 1)) {
+            return cb (null, optionsId);
         }
     }
 };
