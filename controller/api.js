@@ -244,7 +244,7 @@ let traverseAllCategories = (categories, instanceId, cb) => {
         return cb (null, categories);
     } else {
         for (let index=0; index<categories.length; index++) {
-            Option.find({instanceId: categories[index].instanceId, categoryId: categories[index]._id}, (err, options) => {
+            Option.find({instanceId: categories[index].instanceId, categoryId: categories[index]._id, isVisible: true}, (err, options) => {
                 if (err) {
                     return cb (err, null);
                 } else {
@@ -260,7 +260,7 @@ let traverseAllCategories = (categories, instanceId, cb) => {
 
 let cookCategories = (instanceId, cb) => {
     console.log('Cooking categoies');
-    Category.find({instanceId: instanceId}, (err, categories) => {
+    Category.find({instanceId: instanceId, isVisible: true}, (err, categories) => {
         if (err) {
             console.log('Error: ' + err);
         } else {
