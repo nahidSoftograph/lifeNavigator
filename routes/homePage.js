@@ -15,6 +15,7 @@ let storage = multer.diskStorage({
 let upload = multer({storage: storage});
 
 router.post('/display/:id', homePageController.displayHomePage);
+router.get('/display/:id', homePageController.displayHomePageGet);
 router.post('/update/:id', upload.single('image'), (req, res, next) => {
     let id = req.params.id,
         instanceId = req.body.instanceId,

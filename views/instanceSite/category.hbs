@@ -1,4 +1,3 @@
-{{categories.length}}
 <div class="row">
     <div class="col-12">
         <div class="text-center font-weight-bold d-block p-2 bg-secondary text-white">Category</div>
@@ -25,13 +24,13 @@
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="exampleModalLabel">Update Category</h5>
                                         <form action="/category/delete/{{this._id}}" method="post">
-                                            <input type="hidden" name="callBackURL" value="/defaultSite/accomplishments">
+                                            <input type="hidden" name="callBackURL" value="/category/display/{{instanceId}}">
                                             <button class="btn btn-danger" type="submit">Delete {{this.categoryName}}</button>
                                         </form>
                                     </div>
                                     <div class="modal-body">
                                         <form action="/category/update/{{this._id}}" method="post">
-                                            <input type="hidden" name="callBackURL" value="/defaultSite/accomplishments">
+                                            <input type="hidden" name="callBackURL" value="/category/display/{{instanceId}}">
                                             <div class="form-group">
                                                 <label>Category Id</label>
                                                 <input type="text" class="form-control" name="catId" placeholder="Enter Category Id" value="{{this.catId}}">
@@ -53,7 +52,7 @@
                     </td>
                     <td>
                         <form action="/category/alterVisibility/{{this._id}}" method="post">
-                            <input type="hidden" name="callBackURL" value="/defaultSite/accomplishments">
+                            <input type="hidden" name="callBackURL" value="/category/display/{{instanceId}}">
                             {{#if this.isVisible}}
                                 <button class="btn btn-danger" type="submit">Make Invisible</button>
                             {{else}}
@@ -81,7 +80,7 @@
                                                     </div>
                                                     <div class="modal-body">
                                                         <form action="/option/create" method="post"  enctype="multipart/form-data">
-                                                            <input type="hidden" name="callBackURL" value="/defaultSite/accomplishments">
+                                                            <input type="hidden" name="callBackURL" value="/category/display/{{instanceId}}">
                                                             <input type="text" name="catId" value={{this.catId}}>
                                                             <input type="text" name="categoryId" value={{this._id}}>
                                                             <input type="text" name="instanceId" value={{instanceId}}>

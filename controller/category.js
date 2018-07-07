@@ -51,6 +51,7 @@ let updateCategory = (req, res, next) => {
     if (!id) {
         console.log('Invalid category id');
     } else if (!name) {
+        req.flash('info', 'Invalid or incomplete .');
         console.log('Invalid category name');
     } else if (!catId) {
         console.log('Invalid category cat Id');
@@ -71,6 +72,7 @@ let updateCategory = (req, res, next) => {
                         console.log('Error: ' + err);
                     } else {
                         console.log('Updated category: ');
+                        res.locals.alertMessage = 'Category Updated Successfully.';
                         console.log(category);
                         res.redirect(callBackURL);
                     }

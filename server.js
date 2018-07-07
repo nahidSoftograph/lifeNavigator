@@ -8,8 +8,7 @@ var path     = require('path');
 var port     = process.env.PORT || 8080;
 var mongoose = require('mongoose');
 var passport = require('passport');
-var flash    = require('connect-flash');
-
+var flash = require('express-flash');
 var morgan       = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
@@ -17,6 +16,8 @@ var session      = require('express-session');
 var expressHbs   = require('express-handlebars');
 
 var viewRoutes   = require('./routes/viewRoutes');
+
+var Instance = require('./models/instance');
 
 let instancesRouter = require('./routes/instances'),
     authRoutes = require('./routes/auth'),
@@ -74,11 +75,19 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
-app.use(flash()); // use connect-flash for flash messages stored in session
+app.use(flash());
 
 app.use(function (req, res, next) {
-    res.locals.login = req.isAuthenticated();
-    next();
+    Instance.find({}, (err, instances) => {
+        if (err) {
+            console.log('Error: ' + err);
+        } else {
+            res.locals.login = req.isAuthenticated();
+            res.locals.instances = instances;
+            res.locals.messages = require('express-messages')(req, res);
+            next();
+        }
+    });
 });
 
 app.use('/view', viewRoutes);
