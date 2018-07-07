@@ -16,16 +16,7 @@
                 Categories</a>
         </div>
     {{/each}}
-
-    <a id="mainMenu" href="#instancesMenu" class="list-group-item d-inline-block collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false"> <span class="d-none d-md-inline">Select Instances</span> </a>
-    <div class="collapse" id="instancesMenu">
-        <a id="subMenu" href="/instances/createSelectInstances" class="list-group-item" data-parent="#instancesMenu">
-            &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-paragraph" aria-hidden="true"></i>
-            Create/Select</a>
-        <a id="subMenu" href="/instances/editInstances" class="list-group-item" data-parent="#instancesMenu">
-            &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-pencil-square" aria-hidden="true"></i>
-            Edit</a>
-    </div>
+    <a id="mainMenu" href="/instances/createSelectInstances" class="list-group-item d-inline-block collapsed" data-parent="#sidebar"><span class="d-none d-md-inline">Instance Operation</span></a>
     <hr color="white">
     <a id="mainMenu" href="/siteUser/display" class="list-group-item d-inline-block collapsed" data-parent="#sidebar"><span class="d-none d-md-inline">Users Data</span></a>
     <a id="mainMenu" href="/user" class="list-group-item d-inline-block collapsed" data-parent="#sidebar"><i class="fa fa-users"></i> <span class="d-none d-md-inline">Admins</span></a>

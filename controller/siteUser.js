@@ -18,8 +18,24 @@ let displaySiteUser = (req, res, next) => {
     });
 };
 
+let deleteUser = (req, res, next) => {
+    let siteUserId = req.params.siteUserId;
+    if (!siteUserId) {
+        console.log('Invalid site user id');
+    } else {
+        SiteUser.findByIdAndRemove(siteUserId, (err, siteUser) => {
+            if (err) {
+                console.log('Error: ' + err);
+            } else {
+                res.redirect('/siteUser/display');
+            }
+        });
+    }
+};
+
 module.exports = {
-  displaySiteUser
+  displaySiteUser,
+  deleteUser
 };
 
 let cookUser = (siteUsers, cb) => {
