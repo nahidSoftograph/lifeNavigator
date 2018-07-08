@@ -131,9 +131,6 @@ let displayCategory = (req, res, next) => {
         console.log('Invalid instance id');
     } else {
         Category.find({instanceId: instanceId}, (err, categories) => {
-            console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>..  Instance Id:: ' + instanceId);
-            console.log(categories);
-            console.log("----------------------------------------------------------------------");
             cookCategories(instanceId, (err, categories) => {
                 if (err) {
                     console.log('Error: ' + err);
@@ -149,12 +146,30 @@ let displayCategory = (req, res, next) => {
     }
 };
 
+let cookCategories = (instanceId, cb) => {
+    console.log('Cooking categoies');
+    Category.find({instanceId: instanceId}, (err, categories) => {
+        if (err) {
+            console.log('Error: ' + err);
+        } else {
+            traverseAllCategories(categories, instanceId, (err, categories) => {
+                if (err) {
+                    return cb (err, null);
+                } else {
+                    return cb (null, categories);
+                }
+            });
+        }
+    });
+};
+
 module.exports = {
     createCategory,
     updateCategory,
     deleteCategory,
     alterCategoryVisibility,
-    displayCategory
+    displayCategory,
+    cookCategories
 };
 
 let traverseAllCategories = (categories, instanceId, cb) => {
@@ -175,21 +190,4 @@ let traverseAllCategories = (categories, instanceId, cb) => {
             });
         }
     }
-};
-
-let cookCategories = (instanceId, cb) => {
-    console.log('Cooking categoies');
-    Category.find({instanceId: instanceId}, (err, categories) => {
-        if (err) {
-            console.log('Error: ' + err);
-        } else {
-            traverseAllCategories(categories, instanceId, (err, categories) => {
-                if (err) {
-                    return cb (err, null);
-                } else {
-                    return cb (null, categories);
-                }
-            });
-        }
-    });
 };

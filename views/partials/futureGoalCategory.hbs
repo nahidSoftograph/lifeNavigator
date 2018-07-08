@@ -1,34 +1,29 @@
 <div class="row">
-    <div class="col-8"></div>
-    <div class="col-4">
-        <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#{{accomplishment._id}}categoryCreate">
-            Create Category
-        </button>
-        <div class="modal fade" id="{{accomplishment._id}}categoryCreate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Create Category</h5>
-                    </div>
-                    <div class="modal-body">
-                        <form action="/category/create" method="post">
-                            <input type="hidden" name="callBackURL" value="/category/display/{{instanceId}}">
-                            <input type="hidden" name="instanceId" value="{{instanceId}}">
-                            <div class="form-group">
-                                <label>Category Id</label>
-                                <input type="text" class="form-control" name="catId" placeholder="Enter Category Id">
-                            </div>
-                            <div class="form-group">
-                                <label>Category Name</label>
-                                <input type="text" class="form-control" name="categoryName" placeholder="Enter Category Name">
-                            </div>
-                            <button type="submit" class="btn btn-primary">Create</button>
-                        </form>
-                    </div>
+    <div class="modal fade" id="{{futureGoal._id}}categoryCreate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Create Category</h5>
+                </div>
+                <div class="modal-body">
+                    <form action="/category/create" method="post">
+                        <input type="hidden" name="callBackURL" value="/futureGoal/display/{{instanceId}}">
+                        <input type="hidden" name="instanceId" value="{{instanceId}}">
+                        <div class="form-group">
+                            <label>Category Id</label>
+                            <input type="text" class="form-control" name="catId" placeholder="Enter Category Id">
+                        </div>
+                        <div class="form-group">
+                            <label>Category Name</label>
+                            <input type="text" class="form-control" name="categoryName" placeholder="Enter Category Name">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Create</button>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>
 
 <br>
@@ -49,7 +44,7 @@
             <tbody>
             {{#each categories}}
                 <tr>
-                    <td>{{this.catId}} - {{this.options.length}}</td>
+                    <td>{{this.catId}}</td>
                     <td>{{this.name}}</td>
                     <td>
                         <button class="btn btn-primary" data-toggle="modal" data-target="#updateCategory{{this._id}}">Update</button>
@@ -58,14 +53,14 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="exampleModalLabel">Update Category</h5>
-                                        <form action="/category/delete/{{this._id}}" method="post">
-                                            <input type="hidden" name="callBackURL" value="/category/display/{{instanceId}}">
+                                        <!--<form action="/category/delete/{{this._id}}" method="post">
+                                            <input type="hidden" name="callBackURL" value="/futureGoal/display/{{instanceId}}">
                                             <button class="btn btn-danger" type="submit">Delete {{this.categoryName}}</button>
-                                        </form>
+                                        </form>-->
                                     </div>
                                     <div class="modal-body">
                                         <form action="/category/update/{{this._id}}" method="post">
-                                            <input type="hidden" name="callBackURL" value="/category/display/{{instanceId}}">
+                                            <input type="hidden" name="callBackURL" value="/futureGoal/display/{{instanceId}}">
                                             <div class="form-group">
                                                 <label>Category Id</label>
                                                 <input type="text" class="form-control" name="catId" placeholder="Enter Category Id" value="{{this.catId}}">
@@ -74,10 +69,7 @@
                                                 <label>Category Name</label>
                                                 <input type="text" class="form-control" name="categoryName" placeholder="Enter Category Name" value="{{this.name}}">
                                             </div>
-                                            <div class="form-group">
-                                                <label>Category Class</label>
-                                                <input type="text" class="form-control" name="class" placeholder="Enter Category Class" value="{{this.class}}">
-                                            </div>
+                                            <input type="hidden" class="form-control" name="class" placeholder="Enter Category Class" value="{{this.class}}">
                                             <button type="submit" class="btn btn-primary">Update</button>
                                         </form>
                                     </div>
@@ -87,7 +79,7 @@
                     </td>
                     <td>
                         <form action="/category/alterVisibility/{{this._id}}" method="post">
-                            <input type="hidden" name="callBackURL" value="/category/display/{{instanceId}}">
+                            <input type="hidden" name="callBackURL" value="/futureGoal/display/{{instanceId}}">
                             {{#if this.isVisible}}
                                 <button class="btn btn-danger" type="submit">Make Invisible</button>
                             {{else}}
@@ -115,7 +107,7 @@
                                                     </div>
                                                     <div class="modal-body">
                                                         <form action="/option/create" method="post"  enctype="multipart/form-data">
-                                                            <input type="hidden" name="callBackURL" value="/category/display/{{instanceId}}">
+                                                            <input type="hidden" name="callBackURL" value="/futureGoal/display/{{instanceId}}">
                                                             <input type="hidden" name="catId" value={{this.catId}}>
                                                             <input type="hidden" name="categoryId" value={{this._id}}>
                                                             <input type="hidden" name="instanceId" value={{instanceId}}>
@@ -175,13 +167,13 @@
                                                                     <div class="modal-header">
                                                                         <h5 class="modal-title" id="exampleModalLabel">Update Option</h5>
                                                                         <form action="/option/delete/{{this._id}}" method="post">
-                                                                            <input type="hidden" name="callBackURL" value="/category/display/{{instanceId}}">
+                                                                            <input type="hidden" name="callBackURL" value="/futureGoal/display/{{instanceId}}">
                                                                             <button class="btn btn-danger" type="submit">Delete</button>
                                                                         </form>
                                                                     </div>
                                                                     <div class="modal-body">
                                                                         <form action="/option/update/{{this._id}}" method="post" enctype="multipart/form-data">
-                                                                            <input type="hidden" name="callBackURL" value="/category/display/{{instanceId}}">
+                                                                            <input type="hidden" name="callBackURL" value="/futureGoal/display/{{instanceId}}">
                                                                             <div class="form-group row">
                                                                                 <div class="custom-file">
                                                                                     <input type="file" name="image" class="custom-file-input">
@@ -209,7 +201,7 @@
                                                     </td>
                                                     <td>
                                                         <form action="/option/alterVisibility/{{this._id}}" method="post">
-                                                            <input type="hidden" name="callBackURL" value="/category/display/{{instanceId}}">
+                                                            <input type="hidden" name="callBackURL" value="/futureGoal/display/{{instanceId}}">
                                                             {{#if this.isVisible}}
                                                                 <button class="btn btn-danger" type="submit">Make Option Invisible</button>
                                                             {{else}}
@@ -235,6 +227,3 @@
         </table>
     </div>
 </div>
-
-<br>
-<hr>

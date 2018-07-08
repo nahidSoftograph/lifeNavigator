@@ -1,4 +1,6 @@
-let FutureGoal = require('../models/futureGoal');
+let FutureGoal = require('../models/futureGoal'),
+    Category = require('../models/category'),
+    categoryController = require('../controller/category');
 
 let displayFutureGoal = (req, res, next) => {
     let instanceId = req.params.instanceId;
@@ -9,7 +11,19 @@ let displayFutureGoal = (req, res, next) => {
             if (err) {
                 console.log('Error: ' + err);
             } else {
-                res.render('instanceSite/futureGoal', { instanceId: instanceId, futureGoal: futureGoal });
+                Category.find({instanceId: instanceId}, (err, categories) => {
+                    categoryController.cookCategories(instanceId, (err, categories) => {
+                        if (err) {
+                            console.log('Error: ' + err);
+                        } else {
+                            res.render('instanceSite/futureGoal', {
+                                instanceId: instanceId,
+                                categories: categories,
+                                futureGoal: futureGoal
+                            });
+                        }
+                    });
+                });
             }
         });
     }

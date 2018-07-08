@@ -1,4 +1,6 @@
-let Accomplishment = require('../models/accomplishment');
+let Accomplishment = require('../models/accomplishment'),
+    categoryController = require('../controller/category'),
+    Category = require('../models/category');
 
 let displayAccomplishment = (req, res, next) => {
     let instanceId = req.params.instanceId;
@@ -10,7 +12,19 @@ let displayAccomplishment = (req, res, next) => {
             if (err) {
                 console.log('Error: ' + err);
             } else {
-                res.render('instanceSite/accomplishment', { instanceId: instanceId, accomplishment: accomplishment });
+                Category.find({instanceId: instanceId}, (err, categories) => {
+                    categoryController.cookCategories(instanceId, (err, categories) => {
+                        if (err) {
+                            console.log('Error: ' + err);
+                        } else {
+                            res.render('instanceSite/accomplishment', {
+                                instanceId: instanceId,
+                                categories: categories,
+                                accomplishment: accomplishment
+                            });
+                        }
+                    });
+                });
             }
         });
     }
