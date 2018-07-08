@@ -1,5 +1,22 @@
 let AssessRisk = require('../models/assessRisk');
 
+let displayAssessRisk = (req, res, next) => {
+    console.log('assess risk');
+
+    let instanceId = req.params.instanceId;
+
+    AssessRisk.findOne({instanceId: instanceId}, (err, assessRisk) => {
+        if (err) {
+            console.log('Error: ' + err);
+        } else {
+            res.render('instanceSite/assessRisk', {
+                instanceId: instanceId,
+                assessRisk: assessRisk
+            });
+        }
+    });
+};
+
 let createAssessRisk = (req, res, next) => {
     let instanceId = req.body.instanceId,
         headerText = req.body.headerText,
@@ -10,18 +27,39 @@ let createAssessRisk = (req, res, next) => {
         callBackURL = req.body.callBackURL;
     if (!instanceId) {
         console.log('Invalid instance id');
+        res.status(202).json({
+            message: 'Invalid instance id'
+        });
     } else if (!headerText) {
         console.log('Invalid header text');
+        res.status(202).json({
+            message: 'Invalid instance id'
+        });
     } else if (!paragraphText) {
-        conosole.log('Invalid paragraph text');
+        console.log('Invalid paragraph text');
+        res.status(202).json({
+            message: 'Invalid instance id'
+        });
     } else if (!subHeaderText) {
         console.log('Invalid sub header text');
+        res.status(202).json({
+            message: 'Invalid instance id'
+        });
     } else if (!buttonText) {
         console.log('Invalid button text');
+        res.status(202).json({
+            message: 'Invalid instance id'
+        });
     } else if (!buttonLink) {
         console.log('Invalid button link');
+        res.status(202).json({
+            message: 'Invalid instance id'
+        });
     } else if (!callBackURL) {
         console.log('Invalid call back url');
+        res.status(202).json({
+            message: 'Invalid call back url'
+        });
     } else {
         let assessRisk = new AssessRisk({
             instanceId: instanceId,
@@ -37,7 +75,11 @@ let createAssessRisk = (req, res, next) => {
             } else {
                 console.log('Creating assessRisk');
                 console.log(assessRisk);
-                res.redirect(callBackURL);
+                // res.redirect(callBackURL);
+                res.status(201).json({
+                    instanceId: instanceId,
+                    assessRisk: assessRisk
+                });
             }
         });
     }
@@ -84,7 +126,7 @@ let updateAssessRisk = (req, res, next) => {
                     } else {
                         console.log('updated assessRisk');
                         console.log(assessRisk);
-                        res.redirect(callBackURL);
+                        res.redirect('/assessRisk/display/' + instanceId);
                     }
                 });
             }
@@ -99,5 +141,6 @@ let deleteAssessRisk = (req, res, next) => {
 module.exports = {
   createAssessRisk,
   updateAssessRisk,
-  deleteAssessRisk
+  deleteAssessRisk,
+  displayAssessRisk
 };
