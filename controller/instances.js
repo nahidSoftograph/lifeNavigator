@@ -3,6 +3,7 @@ let Instance = require('../models/instance'),
     AssessRisk = require('../models/assessRisk'),
     Category = require('../models/category'),
     FutureGoal = require('../models/futureGoal'),
+    MyPlan = require('../models/myPlan'),
     Home = require('../models/home'),
     Industry = require('../models/industry'),
     Occupation = require('../models/occupation'),
@@ -71,7 +72,14 @@ let createInstance = (req, res, next) => {
                                                                 console.log('Error: ' + err);
                                                             } else {
                                                                 console.log('Update the category');
-                                                                res.redirect('/instances/createSelectInstances');
+                                                                cloneMyPlan(currentInstanceId, homeInstanceId, (err, myPlan) => {
+                                                                    if (err) {
+                                                                        console.log('Error: ' + err);
+                                                                    } else {
+                                                                        console.log('Cloned the my Plan');
+                                                                        res.redirect('/instances/createSelectInstances');
+                                                                    }
+                                                                });
                                                             }
                                                         });
                                                     }
@@ -376,4 +384,29 @@ let cloneOptions = (currentCategoryId, newCategoryId, currentInstanceId, homeIns
 
 let cloneSick = (instanceId, cb) => {
 
+};
+
+let cloneMyPlan = (currentInstanceId, homeInstanceId, cb) => {
+    MyPlan.findOne({instanceId: homeInstanceId}, (err, myPlan) => {
+        if (err) {
+            console.log('Error: ' + err);
+            return cb (err, null);
+        } else {
+            let newMyPlan = new MyPlan({
+                instanceId: currentInstanceId,
+                headerText: myPlan.headerText,
+                subHeaderText: myPlan.subHeaderText,
+                complement: myPlan.complement,
+                finalInstruction: myPlan.finalInstruction
+            });
+            newMyPlan.save((err, myPlan) => {
+                if (err) {
+                    console.log('Error: ' + err);
+                    return cb (err, null);
+                } else {
+                    return cb (null, myPlan);
+                }
+            });
+        }
+    });
 };
