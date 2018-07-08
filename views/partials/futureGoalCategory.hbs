@@ -37,7 +37,6 @@
                 <th scope="col">Id</th>
                 <th scope="col">Name</th>
                 <th scope="col">Edit</th>
-                <th scope="col">Visibility</th>
                 <th scope="col">Goals</th>
             </tr>
             </thead>
@@ -76,16 +75,6 @@
                                 </div>
                             </div>
                         </div>
-                    </td>
-                    <td>
-                        <form action="/category/alterVisibility/{{this._id}}" method="post">
-                            <input type="hidden" name="callBackURL" value="/futureGoal/display/{{instanceId}}">
-                            {{#if this.isVisible}}
-                                <button class="btn btn-danger" type="submit">Make Invisible</button>
-                            {{else}}
-                                <button class="btn btn-success" type="submit">Make Visibile</button>
-                            {{/if}}
-                        </form>
                     </td>
                     <td>
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#{{this._id}}goalList">
