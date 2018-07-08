@@ -18,7 +18,7 @@
                     <td>{{this.gender}}</td>
                     <td>{{this.zip}}</td>
                     <td>
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#{{this._id}}accomplishmentFullOptions">
+                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#{{this._id}}accomplishmentFullOptions">
                             Acccomplishment ({{this.accomplishmentFullOptions.length}})
                         </button>
                         <div class="modal fade" id="{{this._id}}accomplishmentFullOptions" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -40,7 +40,7 @@
                         </div>
                     </td>
                     <td>
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#{{this._id}}futureGoalFullOptions">
+                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#{{this._id}}futureGoalFullOptions">
                             Future Goals ({{this.futureGoalFullOptions.length}})
                         </button>
                         <div class="modal fade" id="{{this._id}}futureGoalFullOptions" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -62,7 +62,7 @@
                         </div>
                     </td>
                     <td>
-                        <a href="/siteUser/delete/{{this._id}}">Delete</a>
+                        <a href="/siteUser/delete/{{this._id}}" style="color: red">Delete</a>
                     </td>
                 </tr>
             {{/each}}
