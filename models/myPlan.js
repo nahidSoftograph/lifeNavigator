@@ -4,7 +4,7 @@ let MyPlanSchema = mongoose.Schema({
     instanceId: { type: String, required: true },
     headerText: { type: String, required: true },
     subHeaderText: { type: String, required: true },
-    complements: { type: [String] },
+    complement: { type: String, required: true },
     finalInstruction: { type: String, required: true }
 });
 
