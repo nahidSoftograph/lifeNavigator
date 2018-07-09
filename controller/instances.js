@@ -17,43 +17,57 @@ let renderEditInstances = (req, res, next) => {
     if (!instanceId) {
         console.log('Invalid instance id');
     } else {
-        getHomePageInformation(instanceId, (err, home) => {
+        detectInstance(instanceId, (err, instance) => {
             if (err) {
                 console.log('Error: ' + err);
             } else {
-                getSiteUserSignUpInformation(instanceId, (err, siteUserSignUp) => {
+                instanceId = instance._id;
+                getHomePageInformation(instanceId, (err, home) => {
                     if (err) {
                         console.log('Error: ' + err);
                     } else {
-                        getAccomplishmentInformation(instanceId, (err, accomplishment) => {
+                        getSiteUserSignUpInformation(instanceId, (err, siteUserSignUp) => {
                             if (err) {
                                 console.log('Error: ' + err);
                             } else {
-                                getFutureGoalInformation(instanceId, (err, futureGoal) => {
+                                getAccomplishmentInformation(instanceId, (err, accomplishment) => {
                                     if (err) {
                                         console.log('Error: ' + err);
                                     } else {
-                                        getAssessRiskInformation(instanceId, (err, assessRisk) => {
+                                        getFutureGoalInformation(instanceId, (err, futureGoal) => {
                                             if (err) {
                                                 console.log('Error: ' + err);
                                             } else {
-                                                getMyPlanInformation(instanceId, (err, myPlan) => {
+                                                getAssessRiskInformation(instanceId, (err, assessRisk) => {
                                                     if (err) {
                                                         console.log('Error: ' + err);
                                                     } else {
-                                                        optionController.cookOptions(instanceId, (err, options) => {
+                                                        getMyPlanInformation(instanceId, (err, myPlan) => {
                                                             if (err) {
                                                                 console.log('Error: ' + err);
                                                             } else {
-                                                                res.render('instances/edit', {
-                                                                    'title': 'Edit instances',
-                                                                    home: home,
-                                                                    siteUserSignUp: siteUserSignUp,
-                                                                    accomplishment: accomplishment,
-                                                                    futureGoal: futureGoal,
-                                                                    assessRisk: assessRisk,
-                                                                    myPlan: myPlan,
-                                                                    options: options
+                                                                optionController.cookOptions(instanceId, (err, options) => {
+                                                                    if (err) {
+                                                                        console.log('Error: ' + err);
+                                                                    } else {
+                                                                        Instance.find({}, (err, instances) => {
+                                                                            if (err) {
+                                                                                console.log('Error: ' + err);
+                                                                            } else {
+                                                                                res.render('instances/edit', {
+                                                                                    'title': 'Edit instances',
+                                                                                    home: home,
+                                                                                    siteUserSignUp: siteUserSignUp,
+                                                                                    accomplishment: accomplishment,
+                                                                                    futureGoal: futureGoal,
+                                                                                    assessRisk: assessRisk,
+                                                                                    myPlan: myPlan,
+                                                                                    options: options,
+                                                                                    instances: instances
+                                                                                });
+                                                                            }
+                                                                        });
+                                                                    }
                                                                 });
                                                             }
                                                         });
@@ -525,6 +539,32 @@ let getMyPlanInformation = (instanceId, cb) => {
             return cb (err, null);
         } else {
             return cb (null, myPlan);
+        }
+    });
+};
+
+let detectInstance = (instanceId, cb) => {
+    Instance.findById(instanceId, (err, instance) => {
+        if (err) {
+            Instance.findOne({isHome: true}, (err, instance) => {
+                if (err) {
+                    return cb (err, null);
+                } else {
+                    return cb (null, instance);
+                }
+            });
+        } else {
+            if (!instance) {
+                Instance.findOne({isHome: true}, (err, instance) => {
+                    if (err) {
+                        return cb (err, null);
+                    } else {
+                        return cb (null, instance);
+                    }
+                });
+            } else {
+                return cb (null, instance);
+            }
         }
     });
 };

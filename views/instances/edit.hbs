@@ -1,4 +1,15 @@
 <div class="col s12 m8 l9">
+    <div class="dropdown">
+        <button class="dropbtn">Select Instance</button>
+        <div class="dropdown-content-custom">
+            {{#each instances}}
+                <a href="/instances/editInstances/{{this._id}}">{{this.instanceName}}</a>
+            {{/each}}
+        </div>
+    </div>
+</div>
+
+<div class="col s12 m8 l9">
 
     <div class="card white">
         <div class="card-content black-text">
@@ -37,3 +48,11 @@
     </div>
 
 </div>
+
+<script>
+    // document.addEventListener('DOMContentLoaded', function() {
+    //     var elems = document.querySelectorAll('.dropdown-trigger');
+    //     var instances = M.Dropdown.init(elems, options);
+    // });
+    // $('.dropdown-trigger').dropdown();
+</script>
