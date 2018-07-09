@@ -13,81 +13,37 @@
                 </thead>
 
                 <tbody>
+                {{#each instances}}
                 <tr>
-                    <td>Instance 1</td>
+                    <td>{{this.instanceName}}</td>
                     <td>
-                        <input value="url 1" type="text" >
+                        <input value="{{this.instanceLink}}" type="text" >
                     <td>
+                    {{#if this.isActive}}
                         <div class="switch">
                             <label>
-                                Inactive
-                                <input type="checkbox">
+                                hide
+                                <input type="checkbox" checked>
                                 <span class="lever"></span>
-                                Active
+                                show
                             </label>
                         </div>
+                    {{else}}
+                        <div class="switch">
+                            <label>
+                                hide
+                                <input type="checkbox">
+                                <span class="lever"></span>
+                                show
+                            </label>
+                        </div>
+                    {{/if}}
                     </td>
                     <td>
                         <a class="waves-effect waves-light btn">Update</a>
                     </td>
                 </tr>
-
-                <tr>
-                    <td>Instance 2</td>
-                    <td>
-                        <input value="url 1" type="text" >
-                    <td>
-                        <div class="switch">
-                            <label>
-                                Inactive
-                                <input type="checkbox">
-                                <span class="lever"></span>
-                                Active
-                            </label>
-                        </div>
-                    </td>
-                    <td>
-                        <a class="waves-effect waves-light btn">Update</a>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>Instance 3</td>
-                    <td>
-                        <input value="url 1" type="text" >
-                    <td>
-                        <div class="switch">
-                            <label>
-                                Inactive
-                                <input type="checkbox">
-                                <span class="lever"></span>
-                                Active
-                            </label>
-                        </div>
-                    </td>
-                    <td>
-                        <a class="waves-effect waves-light btn">Update</a>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>Instance 4</td>
-                    <td>
-                        <input value="url 1" type="text" >
-                    <td>
-                        <div class="switch">
-                            <label>
-                                Inactive
-                                <input type="checkbox">
-                                <span class="lever"></span>
-                                Active
-                            </label>
-                        </div>
-                    </td>
-                    <td>
-                        <a class="waves-effect waves-light btn">Update</a>
-                    </td>
-                </tr>
+                {{/each}}
                 </tbody>
             </table>
         </div>
@@ -97,22 +53,22 @@
 
 <div class="col m2 s12">
     <div class="card grey lighten-5" id="login-body">
-        <form action="#" method="post">
+        <form action="/instances/createInstance" method="post">
             <div class="card-content black-text">
                 <span class="card-title">Add Instance</span>
                 <div class="row">
                     <div class="input-field col s12">
-                        <input placeholder="Instance Name" name="name" type="text" class="validate">
+                        <input placeholder="Enter Instance Name" name="instanceName" type="text" class="validate">
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
-                        <input placeholder="Company Name" name="name" type="text" class="validate">
+                        <input placeholder="Enter Company Name" name="companyName" type="text" class="validate">
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
-                        <input placeholder="Instance URL" name="email" type="text" class="validate">
+                        <input placeholder="Enter Instance URL" name="instanceLink" type="text" class="validate">
                     </div>
                 </div>
                 <div class="row">
