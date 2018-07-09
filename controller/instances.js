@@ -8,10 +8,68 @@ let Instance = require('../models/instance'),
     Industry = require('../models/industry'),
     Occupation = require('../models/occupation'),
     Option = require('../models/option'),
+    SiteUserSignUp = require('../models/siteUserSignUp'),
+    optionController = require('../controller/option'),
     Sick = require('../models/sick');
 
 let renderEditInstances = (req, res, next) => {
-    res.render('instances/edit', {'title': 'Edit instances'});
+    let instanceId = req.params.instanceId;
+    if (!instanceId) {
+        console.log('Invalid instance id');
+    } else {
+        getHomePageInformation(instanceId, (err, home) => {
+            if (err) {
+                console.log('Error: ' + err);
+            } else {
+                getSiteUserSignUpInformation(instanceId, (err, siteUserSignUp) => {
+                    if (err) {
+                        console.log('Error: ' + err);
+                    } else {
+                        getAccomplishmentInformation(instanceId, (err, accomplishment) => {
+                            if (err) {
+                                console.log('Error: ' + err);
+                            } else {
+                                getFutureGoalInformation(instanceId, (err, futureGoal) => {
+                                    if (err) {
+                                        console.log('Error: ' + err);
+                                    } else {
+                                        getAssessRiskInformation(instanceId, (err, assessRisk) => {
+                                            if (err) {
+                                                console.log('Error: ' + err);
+                                            } else {
+                                                getMyPlanInformation(instanceId, (err, myPlan) => {
+                                                    if (err) {
+                                                        console.log('Error: ' + err);
+                                                    } else {
+                                                        optionController.cookOptions(instanceId, (err, options) => {
+                                                            if (err) {
+                                                                console.log('Error: ' + err);
+                                                            } else {
+                                                                res.render('instances/edit', {
+                                                                    'title': 'Edit instances',
+                                                                    home: home,
+                                                                    siteUserSignUp: siteUserSignUp,
+                                                                    accomplishment: accomplishment,
+                                                                    futureGoal: futureGoal,
+                                                                    assessRisk: assessRisk,
+                                                                    myPlan: myPlan,
+                                                                    options: options
+                                                                });
+                                                            }
+                                                        });
+                                                    }
+                                                });
+                                            }
+                                        });
+                                    }
+                                });
+                            }
+                        });
+                    }
+                });
+            }
+        });
+    }
 };
 
 let renderCreateSelect = (req, res, next) => {
@@ -410,3 +468,64 @@ let cloneMyPlan = (currentInstanceId, homeInstanceId, cb) => {
         }
     });
 };
+
+let getHomePageInformation = (instanceId, cb) => {
+  Home.findOne((err, home) => {
+      if (err) {
+        return cb (err, null);
+      } else {
+          return cb (null, home);
+      }
+  });
+};
+
+let getSiteUserSignUpInformation = (instanceId, cb) => {
+    SiteUserSignUp.findOne((err, siteUserSignUp) => {
+        if (err) {
+            return cb (err, null);
+        } else {
+            return cb (null, siteUserSignUp);
+        }
+    });
+};
+
+let getAccomplishmentInformation = (instanceId, cb) => {
+    Accomplishment.findOne((err, accomplishment) => {
+        if (err) {
+            return cb (err, null);
+        } else {
+            return cb (null, accomplishment);
+        }
+    });
+};
+
+let getFutureGoalInformation = (instanceId, cb) => {
+    FutureGoal.findOne((err, futureGoal) => {
+        if (err) {
+            return cb (err, null);
+        } else {
+            return cb (null, futureGoal);
+        }
+    });
+};
+
+let getAssessRiskInformation = (instanceId, cb) => {
+    AssessRisk.findOne((err, assessRisk) => {
+        if (err) {
+            return cb (err, null);
+        } else {
+            return cb (null, assessRisk);
+        }
+    });
+};
+
+let getMyPlanInformation = (instanceId, cb) => {
+    MyPlan.findOne((err, myPlan) => {
+        if (err) {
+            return cb (err, null);
+        } else {
+            return cb (null, myPlan);
+        }
+    });
+};
+

@@ -1,0 +1,42 @@
+<form action="/assessRisk/update/{{assessRisk._id}}" method="post">
+
+    <div class="row">
+        <div class="input-field col s12">
+            <input name="headerText" value="{{assessRisk.headerText}}" id="headerText" type="text" class="validate">
+            <label class="active" for="headerText">Enter Header Text</label>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="input-field col s12">
+            <input name="paragraphText" value="{{assessRisk.paragraphText}}" id="paragraphText" type="text" class="validate">
+            <label class="active" for="paragraphText">Enter Paragraph Text</label>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="input-field col s12">
+            <input name="subHeaderText" value="{{assessRisk.subHeaderText}}" id="subHeaderText" type="text" class="validate">
+            <label class="active" for="subHeaderText">Enter Sub Header Text</label>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="input-field col s12">
+            <input name="buttonText" value="{{assessRisk.buttonText}}" id="buttonText" type="text" class="validate">
+            <label class="active" for="buttonText">Enter Button Text</label>
+        </div>
+    </div>
+
+    <input type="hidden" name="instanceId" value="{{instanceId}}">
+    <input type="hidden" name="buttonLink" value="{{assessRisk.buttonLink}}">
+    <input type="hidden" name="callbackURL" value="/assessRisk/display/{{assessRisk._id}}">
+
+    <div class="row">
+        <div class="col s12 m6 l6" ><p><a class="waves-effect waves-light btn" style="background-color: green;">Preview</a>
+        </p></div>
+        <div type="submit" class="col s12 m6 l6"><p><input value="Update" type="submit" class="waves-effect waves-light btn" style="background-color: #4a148c;">
+        </p></div>
+    </div>
+
+</form>

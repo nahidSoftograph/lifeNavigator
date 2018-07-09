@@ -1,0 +1,62 @@
+<form action="/homePage/update/{{home._id}}" method="post" enctype="multipart/form-data">
+    <div class="file-field input-field">
+        <div class="btn">
+            <span>Select Home Page Logo</span>
+            <input type="file" name="image">
+        </div>
+        <div class="file-path-wrapper">
+            <img style="height: 50px; width: 180px;" src="{{home.logoPath}}" alt="Logo">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="input-field col s12">
+            <input name="welComeText" value="{{home.welComeText}}" id="welComeText" type="text" class="validate">
+            <label class="active" for="">Welcome Text</label>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="input-field col s12">
+            <input name="header" value="{{home.header}}" id="header" type="text" class="validate">
+            <label class="active" for="header">Header</label>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="input-field col s12">
+            <input name="info" value="{{home.info}}" id="info" type="text" class="validate">
+            <label class="active" for="info">Info</label>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="input-field col s12">
+            <input name="anchorText" value="{{home.anchorText}}" id="anchorText" type="text" class="validate">
+            <label class="active" for="anchorText">Anchor Text</label>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="input-field col s12">
+            <input name="anchorLink" value="{{home.anchorLink}}" id="anchorLink" type="text" class="validate">
+            <label class="active" for="anchorLink">Anchor Tooltip</label>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="input-field col s12">
+            <input name="buttonText" value="{{home.buttonText}}" id="buttonText" type="text" class="validate">
+            <label class="active" for="buttonText">Button Text</label>
+        </div>
+    </div>
+
+    <input type="hidden" name="instanceId" value="{{home.instanceId}}">
+    <input type="hidden" name="buttonLink" value="{{home.buttonLink}}">
+    <div class="row">
+        <div class="col s12 m6 l6" ><p><a class="waves-effect waves-light btn" style="background-color: green;">Preview</a>
+        </p></div>
+        <div type="submit" class="col s12 m6 l6"><p><input value="Update" type="submit" class="waves-effect waves-light btn" style="background-color: #4a148c;">
+        </p></div>
+    </div>
+</form>

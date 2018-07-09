@@ -3,7 +3,7 @@ let express = require('express'),
     instancesController = require('../controller/instances');
 
 router.get('/createSelectInstances', instancesController.renderCreateSelect);
-router.get('/editInstances', instancesController.renderEditInstances);
+router.get('/editInstances/:instanceId', instancesController.renderEditInstances);
 router.post('/createInstance', instancesController.createInstance);
 router.post('/updateInstance', instancesController.updateInstance);
 router.get('/changeInstanceActivation/:id', instancesController.changeInstanceActivation);
