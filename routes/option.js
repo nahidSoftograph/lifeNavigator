@@ -67,6 +67,7 @@ router.post('/create', upload.single('image'), (req, res, next) => {
 
 });
 router.post('/alterVisibility/:id', optionController.alterVisibility);
+router.get('/alterVisibility/:id', optionController.alterVisibilityGet);
 router.post('/update/:id', upload.single('image'), (req, res, next) => {
     console.log(req.body);
     let id = req.params.id,

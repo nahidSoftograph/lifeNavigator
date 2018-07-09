@@ -50,9 +50,15 @@
 </div>
 
 <script>
-    // document.addEventListener('DOMContentLoaded', function() {
-    //     var elems = document.querySelectorAll('.dropdown-trigger');
-    //     var instances = M.Dropdown.init(elems, options);
-    // });
-    // $('.dropdown-trigger').dropdown();
+    $(document).ready(function(){
+        $('.show_hide').on('change',function(){
+            var id = $(this).attr('data-id');
+            var url = location.origin+'/option/alterVisibility/'+id;
+            $.get(url).done(function(data){
+                /*M.toast({html: '<span style="color:green;">Successfully done</span>'});*/
+            }).fail(function(data){
+                /*M.toast({html: '<span style="color:red;">Failed! Please try again later</span>'});*/
+            });
+        });
+    });
 </script>

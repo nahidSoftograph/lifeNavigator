@@ -14,35 +14,27 @@
 
                 <tbody>
                 {{#each instances}}
+                <form action="/instance/update/{{this._id}}" method="post">
                 <tr>
                     <td>{{this.instanceName}}</td>
                     <td>
-                        <input value="{{this.instanceLink}}" type="text" >
-                    <td>
-                    {{#if this.isActive}}
-                        <div class="switch">
-                            <label>
-                                hide
-                                <input type="checkbox" checked>
-                                <span class="lever"></span>
-                                show
-                            </label>
-                        </div>
-                    {{else}}
-                        <div class="switch">
-                            <label>
-                                hide
-                                <input type="checkbox">
-                                <span class="lever"></span>
-                                show
-                            </label>
-                        </div>
-                    {{/if}}
+                        <input value="{{this.instanceLink}}" name="instanceLink" type="text">
                     </td>
                     <td>
-                        <a class="waves-effect waves-light btn">Update</a>
+                        <div class="switch">
+                            <label class="show_hide" data-id="{{ this._id}}">
+                                hide
+                                <input type="checkbox" {{#if this.isActive}} checked {{/if}}>
+                                <span class="lever"></span>
+                                show
+                            </label>
+                        </div>
+                    </td>
+                    <td>
+                        <button type="submit" class=" waves-effect waves-light btn" rel="{{this.instanceName}}formId">Update</button>
                     </td>
                 </tr>
+                </form>
                 {{/each}}
                 </tbody>
             </table>
@@ -73,10 +65,24 @@
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
-                        <input value="Submit" type="submit" class="waves-effect waves-light btn">
+                        <input onClick="formSubmit('val'); value="Submit" type="submit" class="waves-effect waves-light btn">
                     </div>
                 </div>
             </div>
         </form>
     </div>
 </div>
+
+<script>
+    $(document).ready(function(){
+        $('.show_hide').on('change',function(){
+            var id = $(this).attr('data-id');
+            var url = location.origin+'/instances/alterVisibility/'+id;
+            $.get(url).done(function(data){
+                /*M.toast({html: '<span style="color:green;">Successfully done</span>'});*/
+            }).fail(function(data){
+                /*M.toast({html: '<span style="color:red;">Failed! Please try again later</span>'});*/
+            });
+        });
+    });
+</script>

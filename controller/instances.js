@@ -12,6 +12,41 @@ let Instance = require('../models/instance'),
     optionController = require('../controller/option'),
     Sick = require('../models/sick');
 
+let alterVisibility = (req, res, next) => {
+    let instanceId = req.params.instanceId;
+    if (!instanceId) {
+        res.status(202).json({
+            success: false,
+            message: err
+        });
+    } else {
+        Instance.findById(instanceId, (err, instance) => {
+            if (err) {
+                res.status(202).json({
+                    success: false,
+                    message: err
+                });
+            } else {
+                instance.isActive = !instance.isActive;
+                instance.save((err, instance) => {
+                    if (err) {
+                        res.status(202).json({
+                            success: false,
+                            message: err
+                        });
+                    } else {
+                        console.log('Instance visibility changed');
+                        res.status(201).json({
+                            success: true,
+                            instance: instance
+                        });
+                    }
+                });
+            }
+        });
+    }
+};
+
 let renderEditInstances = (req, res, next) => {
     let instanceId = req.params.instanceId;
     if (!instanceId) {
@@ -251,7 +286,8 @@ module.exports = {
     createInstance,
     updateInstance,
     changeInstanceActivation,
-    deleteInstance
+    deleteInstance,
+    alterVisibility
 };
 
 let cloneAccomplishment = (currentInstanceId, homeInstanceId, cb) => {

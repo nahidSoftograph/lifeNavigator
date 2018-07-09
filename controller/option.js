@@ -51,6 +51,37 @@ let alterVisibility = (req, res, next) => {
     });
 };
 
+let alterVisibilityGet = (req, res, next) => {
+    let id = req.params.id,
+        callBackURL = req.body.callBackURL;
+
+    Option.findById(id, (err, option) => {
+        if (err) {
+            console.log('Error: ' + err);
+            res.status(202).json({
+                success: false,
+                message: err
+            });
+        } else {
+            option.isVisible = !option.isVisible;
+            option.save((err, option) => {
+                if (err) {
+                    console.log('Error: ' + err);
+                } else {
+                    console.log('Update view');
+                    console.log(option);
+
+                    // res.redirect(callBackURL);
+                    res.status(202).json({
+                        success: false,
+                        option: option
+                    });
+                }
+            });
+        }
+    });
+};
+
 let cookOptions = (instanceId, cb) => {
     Option.find({instanceId: instanceId}, (err, options) => {
         if (err) {
@@ -74,6 +105,7 @@ module.exports = {
     updateOption,
     deleteOption,
     alterVisibility,
+    alterVisibilityGet,
     cookOptions
 };
 

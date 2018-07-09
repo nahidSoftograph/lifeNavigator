@@ -50,26 +50,14 @@
             <td>{{this.categoryName}}</td>
             <td>{{this.titleFuture}}</td>
             <td>
-                {{#if this.isVisible}}
-                    <div class="switch">
-                        <label>
-                            hide
-                            <input type="checkbox" checked>
-                            <span class="lever"></span>
-                            show
-                        </label>
-                    </div>
-                {{else}}
-                    <div class="switch">
-                        <label>
-                            hide
-                            <input type="checkbox">
-                            <span class="lever"></span>
-                            show
-                        </label>
-                    </div>
-                {{/if}}
-
+                <div class="switch">
+                    <label class="show_hide" data-id="{{ this._id}}">
+                        hide
+                        <input type="checkbox" {{#if this.isVisible}} checked {{/if}}>
+                        <span class="lever"></span>
+                        show
+                    </label>
+                </div>
             </td>
         </tr>
     {{/each}}

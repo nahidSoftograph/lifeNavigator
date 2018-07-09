@@ -48,33 +48,20 @@
                     <th>Visibility</th>
                 </tr>
                 </thead>
-
                 <tbody>
                 {{#each options}}
                     <tr>
                         <td>{{this.categoryName}}</td>
                         <td>{{this.titleFuture}}</td>
                         <td>
-                            {{#if this.isVisible}}
-                                <div class="switch">
-                                    <label>
-                                        hide
-                                        <input type="checkbox" checked>
-                                        <span class="lever"></span>
-                                        show
-                                    </label>
-                                </div>
-                            {{else}}
-                                <div class="switch">
-                                    <label>
-                                        hide
-                                        <input type="checkbox">
-                                        <span class="lever"></span>
-                                        show
-                                    </label>
-                                </div>
-                            {{/if}}
-
+                            <div class="switch">
+                                <label class="show_hide" data-id="{{ this._id}}">
+                                    hide
+                                    <input type="checkbox" {{#if this.isVisible}} checked {{/if}}>
+                                    <span class="lever"></span>
+                                    show
+                                </label>
+                            </div>
                         </td>
                     </tr>
                 {{/each}}
@@ -83,3 +70,17 @@
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function(){
+        $('.show_hide').on('change',function(){
+            var id = $(this).attr('data-id');
+            var url = location.origin+'/option/alterVisibility/'+id;
+            $.get(url).done(function(data){
+                /*M.toast({html: '<span style="color:green;">Successfully done</span>'});*/
+            }).fail(function(data){
+                /*M.toast({html: '<span style="color:red;">Failed! Please try again later</span>'});*/
+            });
+        });
+    });
+</script>

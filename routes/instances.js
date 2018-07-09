@@ -8,5 +8,6 @@ router.post('/createInstance', instancesController.createInstance);
 router.post('/updateInstance', instancesController.updateInstance);
 router.get('/changeInstanceActivation/:id', instancesController.changeInstanceActivation);
 router.get('/deleteInstance/:id', instancesController.deleteInstance);
+router.get('/alterVisibility/:instanceId', instancesController.alterVisibility);
 
 module.exports = router;
