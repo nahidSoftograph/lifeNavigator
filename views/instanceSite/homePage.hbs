@@ -1,75 +1,71 @@
+<div class="col s12 m8 l9">
 
-<div class="row">
-    <div class="col-12">
-        <form action="/homePage/update/{{home._id}}" method="post" enctype="multipart/form-data">
-            <input type="hidden" name="instanceId" value="{{home.instanceId}}">
-
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label font-weight-bold">Current Logo</label>
-                <div class="col-sm-6">
-                    <img src="{{home.logoPath}}" alt="" width="180px" height="50px">
-                </div>
-                <div class="col-4">
-                    <div class="custom-file" style="margin-top: 6px;">
-                        <input type="file" name="image" class="custom-file-input">
-                        <label class="custom-file-label font-weight-bold" for="customFile" style="margin: 0;margin-top: 8px;">Update Logo</label>
+    <div class="card white">
+        <div class="card-content black-text">
+            <span class="card-title">Home Page </span>
+            <form action="/homePage/update/{{home._id}}" method="post" enctype="multipart/form-data">
+                <div class="file-field input-field">
+                    <div class="btn">
+                        <span>Select Home Page Logo</span>
+                        <input type="file" name="image">
+                    </div>
+                    <div class="file-path-wrapper">
+                        <img style="height: 50px; width: 180px;" src="{{home.logoPath}}" alt="Logo">
                     </div>
                 </div>
-            </div>
 
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label font-weight-bold">Welcome Text</label>
-                <div class="col-sm-10">
-                    <input type="text" name="welComeText" class="form-control" placeholder="Welcome Text" value="{{home.welComeText}}">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input name="welComeText" value="{{home.welComeText}}" id="welComeText" type="text" class="validate">
+                        <label class="active" for="">Welcome Text</label>
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label font-weight-bold">Enter Header</label>
-                <div class="col-sm-10">
-                    <input type="text" name="header" class="form-control" placeholder="Header" value="{{home.header}}">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input name="header" value="{{home.header}}" id="header" type="text" class="validate">
+                        <label class="active" for="header">Header</label>
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label font-weight-bold">Enter Info</label>
-                <div class="col-sm-10">
-                    <input type="text" name="info" class="form-control" placeholder="Home Page Info" value="{{home.info}}">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input name="info" value="{{home.info}}" id="info" type="text" class="validate">
+                        <label class="active" for="info">Info</label>
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label font-weight-bold">Anchor Text</label>
-                <div class="col-sm-10">
-                    <input type="text" name="anchorText" class="form-control" placeholder="Anchor Text" value="{{home.anchorText}}">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input name="anchorText" value="{{home.anchorText}}" id="anchorText" type="text" class="validate">
+                        <label class="active" for="anchorText">Anchor Text</label>
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label font-weight-bold">Anchor Tooltip</label>
-                <div class="col-sm-10">
-                    <input type="text" name="anchorLink" class="form-control" placeholder="Enter Anchor Tooltip" value="{{home.anchorLink}}">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input name="anchorLink" value="{{home.anchorLink}}" id="anchorLink" type="text" class="validate">
+                        <label class="active" for="anchorLink">Anchor Tooltip</label>
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label font-weight-bold">Button Text</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" name="buttonText" placeholder="Button Text" value="{{home.buttonText}}">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input name="buttonText" value="{{home.buttonText}}" id="buttonText" type="text" class="validate">
+                        <label class="active" for="buttonText">Button Text</label>
+                    </div>
                 </div>
-            </div>
-            <input type="hidden" name="buttonLink" class="form-control" placeholder="Button Link" value="{{home.buttonLink}}">
-            <div class="row">
-                <div class="col-3"></div>
-                <div class="col-2">
-                    <button class="btn btn-block btn-sm bg-secondary text-white">Preview</button>
+
+                <input type="hidden" name="instanceId" value="{{home.instanceId}}">
+                <input type="hidden" name="buttonLink" value="{{home.buttonLink}}">
+                <div class="row">
+                    <div class="col s12 m6 l6" ><p><a class="waves-effect waves-light btn" style="background-color: green;">Preview</a>
+                    </p></div>
+                    <div type="submit" class="col s12 m6 l6"><p><input value="Update" type="submit" class="waves-effect waves-light btn" style="background-color: #4a148c;">
+                    </p></div>
                 </div>
-                <div class="col-2"></div>
-                <div class="col-2">
-                    <button class="btn btn-block btn-sm bg-info text-white" type="submit">Update</button>
-                </div>
-                <div class="col-3"></div>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
+
 </div>

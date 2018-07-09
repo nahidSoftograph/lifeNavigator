@@ -81,12 +81,12 @@ app.use(passport.session()); // persistent login sessions
 app.use(flash());
 
 app.use(function (req, res, next) {
-    Instance.find({}, (err, instances) => {
+    Instance.findOne({isHome: true}, (err, defaultInstance) => {
         if (err) {
             console.log('Error: ' + err);
         } else {
             res.locals.login = req.isAuthenticated();
-            res.locals.instances = instances;
+            res.locals.defaultInstance = defaultInstance;
             res.locals.messages = require('express-messages')(req, res);
             next();
         }
