@@ -1,47 +1,51 @@
-<div class="row">
-    <div class="col-12">
-        <form action="/myPlan/update/{{myPlan._id}}" method="post">
-            <input type="hidden" name="instanceId" value="{{myPlan.instanceId}}">
+<div class="col s12 m8 l9">
 
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label font-weight-bold">Header Text</label>
-                <div class="col-sm-10">
-                    <input type="text" name="headerText" class="form-control" placeholder="Enter Header Text" value="{{myPlan.headerText}}">
-                </div>
-            </div>
+    <div class="card white">
+        <div class="card-content black-text">
+            <span class="card-title">Save My Plan</span>
+            <form action="/myPlan/update/{{myPlan._id}}" method="post">
 
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label font-weight-bold">Sub Header Text</label>
-                <div class="col-sm-10">
-                    <input type="text" name="subHeaderText" class="form-control" placeholder="Enter Sub Header Text" value="{{myPlan.subHeaderText}}">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input name="headerText" value="{{myPlan.headerText}}" id="headerText" type="text" class="validate">
+                        <label class="active" for="headerText">Enter Header Text</label>
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label font-weight-bold">Complement</label>
-                <div class="col-sm-10">
-                    <input type="text" name="complement" class="form-control" placeholder="Enter Complement" value="{{myPlan.complement}}">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input name="subHeaderText" value="{{myPlan.subHeaderText}}" id="subHeaderText" type="text" class="validate">
+                        <label class="active" for="subHeaderText">Enter Sub Header Text</label>
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label font-weight-bold">Final Instruction</label>
-                <div class="col-sm-10">
-                    <input type="text" name="finalInstruction" class="form-control" placeholder="Enter Final Instruction" value="{{myPlan.finalInstruction}}">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input name="complement" value="{{myPlan.complement}}" id="complement" type="text" class="validate">
+                        <label class="active" for="complement">Enter Complement</label>
+                    </div>
                 </div>
-            </div>
 
-            <div class="row">
-                <div class="col-3"></div>
-                <div class="col-2">
-                    <button class="btn btn-block btn-sm bg-secondary text-white">Preview</button>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input name="finalInstruction" value="{{myPlan.finalInstruction}}" id="finalInstruction" type="text" class="validate">
+                        <label class="active" for="finalInstruction">Enter Final Instruction</label>
+                    </div>
                 </div>
-                <div class="col-2"></div>
-                <div class="col-2">
-                    <button class="btn btn-block btn-sm bg-info text-white" type="submit">Update</button>
+
+                <input type="hidden" name="instanceId" value="{{instanceId}}">
+                <input type="hidden" name="buttonLink" value="{{myPlan.buttonLink}}">
+                <input type="hidden" name="callbackURL" value="/myPlan/display/{{myPlan._id}}">
+
+                <div class="row">
+                    <div class="col s12 m6 l6" ><p><a class="waves-effect waves-light btn" style="background-color: green;">Preview</a>
+                    </p></div>
+                    <div type="submit" class="col s12 m6 l6"><p><input value="Update" type="submit" class="waves-effect waves-light btn" style="background-color: #4a148c;">
+                    </p></div>
                 </div>
-                <div class="col-3"></div>
-            </div>
-        </form>
+
+            </form>
+        </div>
     </div>
+
 </div>
