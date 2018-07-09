@@ -1,46 +1,486 @@
-<div class="row">
-    <div class="col-12">
-        <form action="/accomplishment/update/{{accomplishment._id}}" method="post">
+<div class="col s12 m8 l9">
 
-            <input type="hidden" name="accomplishmentId" value="{{accomplishment._id}}">
-            <input type="hidden" name="instanceId" value="{{instanceId}}">
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label font-weight-bold">Enter Header</label>
-                <div class="col-sm-10">
-                    <input type="text" name="headerText" class="form-control" placeholder="Header" value="{{accomplishment.headerText}}">
+    <div class="card white">
+        <div class="card-content black-text">
+            <span class="card-title">Accomplishments </span>
+            <form action="#">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input value="Accomplishments Header" id="Header" type="text" class="validate">
+                        <label class="active" for="Header">Header</label>
+                    </div>
                 </div>
-            </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input value="Accomplishments Sub Header" id="SubHeader" type="text" class="validate">
+                        <label class="active" for="Sub Header">Sub Header</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input value="Accomplishments Button Text" id="buttonText" type="text" class="validate">
+                        <label class="active" for="Sub Header">Button Text</label>
+                    </div>
+                </div>
+            </form>
 
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label font-weight-bold">Enter Sub Header</label>
-                <div class="col-sm-10">
-                    <input type="text" name="subHeaderText" class="form-control" placeholder="Sub Header" value="{{accomplishment.subHeaderText}}">
-                </div>
-            </div>
+            <br>
+            <br>
 
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label font-weight-bold">Button Text</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" name="buttonText" placeholder="Button Text" value="{{accomplishment.buttonText}}">
-                </div>
-            </div>
+            <span class="card-title">Goal Lists</span>
+            <hr>
+            <table class="responsive-table">
+                <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>Goal</th>
+                    <th>Visibility</th>
+                </tr>
+                </thead>
 
-            <input type="hidden" name="buttonLink" class="form-control" placeholder="Button Link" value="{{accomplishment.buttonLink}}">
+                <tbody>
+                <tr>
+                    <td>Category 1</td>
+                    <td>Goal Text</td>
+                    <td>
+                        <div class="switch">
+                            <label>
+                                Show
+                                <input type="checkbox">
+                                <span class="lever"></span>
+                                Hide
+                            </label>
+                        </div>
+                    </td>
+                </tr>
 
-            <div class="row">
-                <div class="col-3"></div>
-                <div class="col-2">
-                    <button class="btn btn-block btn-sm bg-secondary text-white">Preview</button>
-                </div>
-                <div class="col-2"></div>
-                <div class="col-2">
-                    <button class="btn btn-block btn-sm bg-info text-white" type="submit">Update</button>
-                </div>
-                <div class="col-3"></div>
-            </div>
-        </form>
+                <tr>
+                    <td>Category 2</td>
+                    <td>Goal Text</td>
+                    <td>
+                        <div class="switch">
+                            <label>
+                                Show
+                                <input type="checkbox">
+                                <span class="lever"></span>
+                                Hide
+                            </label>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Category 3</td>
+                    <td>Goal Text</td>
+                    <td>
+                        <div class="switch">
+                            <label>
+                                Show
+                                <input type="checkbox">
+                                <span class="lever"></span>
+                                Hide
+                            </label>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Category 4</td>
+                    <td>Goal Text</td>
+                    <td>
+                        <div class="switch">
+                            <label>
+                                Show
+                                <input type="checkbox">
+                                <span class="lever"></span>
+                                Hide
+                            </label>
+                        </div><% include ./partials/head %>
+                        <div class="col s12 m8 l9">
+
+                            <div class="card white">
+                                <div class="card-content black-text">
+                                    <span class="card-title">Edit Instances</span>
+                                    <div class="row">
+                                        <div class="col s12">
+                                            <ul class="tabs">
+                                                <li class="tab col s2"><a href="#test1">Home</a></li>
+                                                <li class="tab col s2"><a href="#test2">Accomplishment</a></li>
+                                                <li class="tab col s2"><a href="#test3">Future Goal</a></li>
+                                                <li class="tab col s2"><a href="#test4">Assess Risk</a></li>
+                                                <li class="tab col s2"><a href="#test5">My Plan</a></li>
+                                            </ul>
+                                        </div>
+                                        <div id="test1" class="col s12">
+                                            <form action="#">
+                                                <div class="file-field input-field">
+                                                    <div class="btn">
+                                                        <span>Select Home Page Logo</span>
+                                                        <input type="file">
+                                                    </div>
+                                                    <div class="file-path-wrapper">
+                                                        <input class="file-path validate" type="text">
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="input-field col s12">
+                                                        <input value="Home Page Header" id="Header" type="text" class="validate">
+                                                        <label class="active" for="Header">Header</label>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="input-field col s12">
+                                                        <input value="Home Page Sub Header" id="SubHeader" type="text" class="validate">
+                                                        <label class="active" for="Sub Header">Sub Header</label>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="input-field col s12">
+                                                        <input value="Home Page Button Text" id="buttonText" type="text" class="validate">
+                                                        <label class="active" for="buttonText">Button Text</label>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="input-field col s12">
+                                                        <input value="Home Page Button Link" id="buttonLink" type="text" class="validate">
+                                                        <label class="active" for="buttonLink">Button Link</label>
+                                                    </div>
+                                                </div>
+                                            </form>
+
+                                            <br>
+                                            <br>
+                                            <br>
+                                            <br>
+                                            <div class="row">
+                                                <div class="col s12 m6 l6" ><p><a class="waves-effect waves-light btn" style="background-color: green;">Preview</a>
+                                                </p></div>
+                                                <div class="col s12 m6 l6"><p><a class="waves-effect waves-light btn" style="background-color: #4a148c;">Update</a>
+                                                </p></div>
+                                            </div>
+                                            <br>
+                                        </div>
+                                        <div id="test2" class="col s12">
+                                            <span class="card-title">Accomplishments </span>
+                                            <form action="#">
+                                                <div class="row">
+                                                    <div class="input-field col s12">
+                                                        <input value="Accomplishments Header" id="Header" type="text" class="validate">
+                                                        <label class="active" for="Header">Header</label>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="input-field col s12">
+                                                        <input value="Accomplishments Sub Header" id="SubHeader" type="text" class="validate">
+                                                        <label class="active" for="Sub Header">Sub Header</label>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="input-field col s12">
+                                                        <input value="Accomplishments Button Text" id="buttonText" type="text" class="validate">
+                                                        <label class="active" for="Sub Header">Button Text</label>
+                                                    </div>
+                                                </div>
+                                            </form>
+
+                                            <br>
+                                            <br>
+
+                                            <span class="card-title">Goal Lists</span>
+                                            <hr>
+                                            <table class="responsive-table">
+                                                <thead>
+                                                <tr>
+                                                    <th>Category</th>
+                                                    <th>Goal</th>
+                                                    <th>Visibility</th>
+                                                </tr>
+                                                </thead>
+
+                                                <tbody>
+                                                <tr>
+                                                    <td>Category 1</td>
+                                                    <td>Goal Text</td>
+                                                    <td>
+                                                        <div class="switch">
+                                                            <label>
+                                                                Show
+                                                                <input type="checkbox">
+                                                                <span class="lever"></span>
+                                                                Hide
+                                                            </label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>Category 2</td>
+                                                    <td>Goal Text</td>
+                                                    <td>
+                                                        <div class="switch">
+                                                            <label>
+                                                                Show
+                                                                <input type="checkbox">
+                                                                <span class="lever"></span>
+                                                                Hide
+                                                            </label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>Category 3</td>
+                                                    <td>Goal Text</td>
+                                                    <td>
+                                                        <div class="switch">
+                                                            <label>
+                                                                Show
+                                                                <input type="checkbox">
+                                                                <span class="lever"></span>
+                                                                Hide
+                                                            </label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>Category 4</td>
+                                                    <td>Goal Text</td>
+                                                    <td>
+                                                        <div class="switch">
+                                                            <label>
+                                                                Show
+                                                                <input type="checkbox">
+                                                                <span class="lever"></span>
+                                                                Hide
+                                                            </label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                            <br>
+                                            <br>
+                                            <br>
+                                            <br>
+                                            <div class="row">
+                                                <div class="col s12 m6 l6" ><p><a class="waves-effect waves-light btn" style="background-color: green;">Preview</a>
+                                                </p></div>
+                                                <div class="col s12 m6 l6"><p><a class="waves-effect waves-light btn" style="background-color: #4a148c;">Update</a>
+                                                </p></div>
+                                            </div>
+                                            <br>
+                                        </div>
+                                        <div id="test3" class="col s12">
+                                            <span class="card-title">Set Future Goals </span>
+                                            <form action="#">
+                                                <div class="row">
+                                                    <div class="input-field col s12">
+                                                        <input value="Header" id="Header" type="text" class="validate">
+                                                        <label class="active" for="Header">Header</label>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="input-field col s12">
+                                                        <input value="Sub Header" id="SubHeader" type="text" class="validate">
+                                                        <label class="active" for="Sub Header">Sub Header</label>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="input-field col s12">
+                                                        <input value="Button Text" id="buttonText" type="text" class="validate">
+                                                        <label class="active" for="Sub Header">Button Text</label>
+                                                    </div>
+                                                </div>
+                                            </form>
+
+                                            <br>
+                                            <br>
+
+                                            <span class="card-title">Goal Lists</span>
+                                            <hr>
+                                            <table class="responsive-table">
+                                                <thead>
+                                                <tr>
+                                                    <th>Category</th>
+                                                    <th>Goal</th>
+                                                    <th>Visibility</th>
+                                                </tr>
+                                                </thead>
+
+                                                <tbody>
+                                                <tr>
+                                                    <td>Category 1</td>
+                                                    <td>Goal Text</td>
+                                                    <td>
+                                                        <div class="switch">
+                                                            <label>
+                                                                Show
+                                                                <input type="checkbox">
+                                                                <span class="lever"></span>
+                                                                Hide
+                                                            </label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>Category 2</td>
+                                                    <td>Goal Text</td>
+                                                    <td>
+                                                        <div class="switch">
+                                                            <label>
+                                                                Show
+                                                                <input type="checkbox">
+                                                                <span class="lever"></span>
+                                                                Hide
+                                                            </label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>Category 3</td>
+                                                    <td>Goal Text</td>
+                                                    <td>
+                                                        <div class="switch">
+                                                            <label>
+                                                                Show
+                                                                <input type="checkbox">
+                                                                <span class="lever"></span>
+                                                                Hide
+                                                            </label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>Category 4</td>
+                                                    <td>Goal Text</td>
+                                                    <td>
+                                                        <div class="switch">
+                                                            <label>
+                                                                Show
+                                                                <input type="checkbox">
+                                                                <span class="lever"></span>
+                                                                Hide
+                                                            </label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                            <br>
+                                            <br>
+                                            <br>
+                                            <br>
+                                            <div class="row">
+                                                <div class="col s12 m6 l6" ><p><a class="waves-effect waves-light btn" style="background-color: green;">Preview</a>
+                                                </p></div>
+                                                <div class="col s12 m6 l6"><p><a class="waves-effect waves-light btn" style="background-color: #4a148c;">Update</a>
+                                                </p></div>
+                                            </div>
+                                            <br>
+                                        </div>
+                                        <div id="test4" class="col s12">
+                                            <form action="#">
+                                                <div class="row">
+                                                    <div class="input-field col s12">
+                                                        <input value="Assess Risk Header" id="Header" type="text" class="validate">
+                                                        <label class="active" for="Header">Header</label>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="input-field col s12">
+                                                        <input value="Assess Risk Sub Header" id="SubHeader" type="text" class="validate">
+                                                        <label class="active" for="Sub Header">Sub Header</label>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="input-field col s12">
+                                                        <input value="Assess Risk Button Text" id="buttonText" type="text" class="validate">
+                                                        <label class="active" for="Sub Header">Button Text</label>
+                                                    </div>
+                                                </div>
+                                            </form>
+
+                                            <br>
+                                            <br>
+
+                                            <br>
+                                            <br>
+                                            <br>
+                                            <br>
+                                            <div class="row">
+                                                <div class="col s12 m6 l6" ><p><a class="waves-effect waves-light btn" style="background-color: green;">Preview</a>
+                                                </p></div>
+                                                <div class="col s12 m6 l6"><p><a class="waves-effect waves-light btn" style="background-color: #4a148c;">Update</a>
+                                                </p></div>
+                                            </div>
+                                            <br>
+                                        </div>
+                                        <div id="test5" class="col s12">
+                                            <form action="#">
+                                                <div class="row">
+                                                    <div class="input-field col s12">
+                                                        <input value="My Plan Header" id="Header" type="text" class="validate">
+                                                        <label class="active" for="Header">Header</label>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="input-field col s12">
+                                                        <input value="My Plan Sub Header" id="SubHeader" type="text" class="validate">
+                                                        <label class="active" for="Sub Header">Sub Header</label>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="input-field col s12">
+                                                        <input value="My Plan Button Text" id="buttonText" type="text" class="validate">
+                                                        <label class="active" for="Sub Header">Button Text</label>
+                                                    </div>
+                                                </div>
+                                            </form>
+
+                                            <br>
+                                            <br>
+
+                                            <br>
+                                            <br>
+                                            <br>
+                                            <br>
+                                            <div class="row">
+                                                <div class="col s12 m6 l6" ><p><a class="waves-effect waves-light btn" style="background-color: green;">Preview</a>
+                                                </p></div>
+                                                <div class="col s12 m6 l6"><p><a class="waves-effect waves-light btn" style="background-color: #4a148c;">Update</a>
+                                                </p></div>
+                                            </div>
+                                            <br>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <% include ./partials/footer %>
+
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+        <br>
+        <br>
+        <br>
+        <br>
+        <div class="row">
+            <div class="col s12 m6 l6" ><p><a class="waves-effect waves-light btn" style="background-color: green;">Preview</a>
+            </p></div>
+            <div class="col s12 m6 l6"><p><a class="waves-effect waves-light btn" style="background-color: #4a148c;">Update</a>
+            </p></div>
+        </div>
+        <br>
     </div>
-</div>
-<br>
 
-{{> accomplishmentCategory }}
+</div>

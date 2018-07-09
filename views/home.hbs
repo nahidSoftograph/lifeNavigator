@@ -1,6 +1,127 @@
-<div class="row">
-    <div class="col-3"></div>
-    <div class="col-9">
-        This is home page
+<% include ./partials/head %>
+<div class="col m7 s12">
+    <div class="card white">
+        <div class="card-content black-text">
+            <span class="card-title">Instance Lists</span>
+            <table class="responsive-table">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>URL</th>
+                    <th>Activation</th>
+                    <th>Update</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr>
+                    <td>Instance 1</td>
+                    <td>
+                        <input value="url 1" type="text" >
+                    <td>
+                        <div class="switch">
+                            <label>
+                                Inactive
+                                <input type="checkbox">
+                                <span class="lever"></span>
+                                Active
+                            </label>
+                        </div>
+                    </td>
+                    <td>
+                        <a class="waves-effect waves-light btn">Update</a>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Instance 2</td>
+                    <td>
+                        <input value="url 1" type="text" >
+                    <td>
+                        <div class="switch">
+                            <label>
+                                Inactive
+                                <input type="checkbox">
+                                <span class="lever"></span>
+                                Active
+                            </label>
+                        </div>
+                    </td>
+                    <td>
+                        <a class="waves-effect waves-light btn">Update</a>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Instance 3</td>
+                    <td>
+                        <input value="url 1" type="text" >
+                    <td>
+                        <div class="switch">
+                            <label>
+                                Inactive
+                                <input type="checkbox">
+                                <span class="lever"></span>
+                                Active
+                            </label>
+                        </div>
+                    </td>
+                    <td>
+                        <a class="waves-effect waves-light btn">Update</a>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Instance 4</td>
+                    <td>
+                        <input value="url 1" type="text" >
+                    <td>
+                        <div class="switch">
+                            <label>
+                                Inactive
+                                <input type="checkbox">
+                                <span class="lever"></span>
+                                Active
+                            </label>
+                        </div>
+                    </td>
+                    <td>
+                        <a class="waves-effect waves-light btn">Update</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+<div class="col m2 s12">
+    <div class="card grey lighten-5" id="login-body">
+        <form action="#" method="post">
+            <div class="card-content black-text">
+                <span class="card-title">Add Instance</span>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input placeholder="Instance Name" name="name" type="text" class="validate">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input placeholder="Company Name" name="name" type="text" class="validate">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input placeholder="Instance URL" name="email" type="text" class="validate">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input value="Submit" type="submit" class="waves-effect waves-light btn">
+                    </div>
+                </div>
+            </div>
+        </form>
     </div>
 </div>
