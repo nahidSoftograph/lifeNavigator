@@ -182,9 +182,89 @@ let deleteSiteUserSignUp = (req, res, next) => {
 
 };
 
+let updateEditInstanceSiteUserSignUp = (req, res, next) => {
+    console.log(req.body);
+    let id = req.params.siteUserSignUpId,
+        headerText = req.body.headerText,
+        beforeAge = req.body.beforeAge,
+        afterAge = req.body.afterAge,
+        beforeGender = req.body.beforeGender,
+        beforeZip = req.body.beforeZip,
+        buttonText = req.body.buttonText;
+
+    if (!id) {
+        console.log('Invalid id');
+        return res.status(202).json({
+            success: false,
+            message: 'Invalid instance id'
+        });
+    } else if (!headerText) {
+        console.log('Invalid header text');
+        return res.status(202).json({
+            success: false,
+            message: 'Invalid header text'
+        });
+    } else if (!beforeAge) {
+        console.log('Invalid before age');
+        return res.status(202).json({
+            success: false,
+            message: 'Invalid before age'
+        });
+    } else if (!afterAge) {
+        console.log('Invalid after age');
+        return res.status(202).json({
+            success: false,
+            message: 'Invalid after age'
+        });
+    } else if (!beforeGender) {
+        console.log('Invalid before gender');
+        return res.status(202).json({
+            success: false,
+            message: 'Invalid before gender'
+        });
+    } else if (!beforeZip) {
+        console.log('Invalid before zip');
+        return res.status(202).json({
+            success: false,
+            message: 'Invalid before zip'
+        });
+    } else if (!buttonText) {
+        console.log('Invalid button text');
+        return res.status(202).json({
+            success: false,
+            message: 'Invalid button text'
+        });
+    } else {
+        SiteUserSignUp.findById(id, (err, siteUserSignUp) => {
+            if (err) {
+                console.log('Error: ' + err);
+            } else {
+                siteUserSignUp.headerText = headerText || siteUserSignUp.headerText;
+                siteUserSignUp.beforeAge = beforeAge || siteUserSignUp.beforeAge;
+                siteUserSignUp.afterAge = afterAge || siteUserSignUp.afterAge;
+                siteUserSignUp.beforeGender = beforeGender || siteUserSignUp.beforeGender;
+                siteUserSignUp.beforeZip = beforeZip || siteUserSignUp.beforeZip;
+                siteUserSignUp.buttonText = buttonText || siteUserSignUp.buttonText;
+
+                siteUserSignUp.save((err, siteUserSignUp) => {
+                    if (err) {
+                        console.log('Error: ' + err);
+                    } else {
+                        console.log('Updated user');
+                        console.log(siteUserSignUp);
+                        res.redirect('/instances/editInstances/' + siteUserSignUp.instanceId);
+                    }
+                });
+
+            }
+        });
+    }
+};
+
 module.exports = {
   displaySiteUserSignUp,
   createSiteUserSignUp,
   updateSiteUserSignUp,
+  updateEditInstanceSiteUserSignUp,
   deleteSiteUserSignUp
 };

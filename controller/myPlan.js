@@ -130,8 +130,63 @@ let updateMyPlan = (req, res, next) => {
     }
 };
 
+let updateEditInstanceMyPlan = (req, res, next) => {
+    let id = req.params.myPlanId,
+        headerText = req.body.headerText,
+        subHeaderText = req.body.subHeaderText,
+        complement = req.body.complement,
+        finalInstruction = req.body.finalInstruction;
+
+    if (!id) {
+        res.status(202).json({
+            success: false,
+            message: 'Invalid id'
+        });
+    } else if (!headerText) {
+        res.status(202).json({
+            success: false,
+            message: 'Invalid header text'
+        });
+    } else if (!subHeaderText) {
+        res.status(202).json({
+            success: false,
+            message: 'Invalid sub header text'
+        });
+    } else if (!complement) {
+        res.status(202).json({
+            success: false,
+            message: 'Invalid complement'
+        });
+    } else if (!finalInstruction) {
+        res.status(202).json({
+            success: false,
+            message: 'Invalid final instruection'
+        });
+    } else {
+        MyPlan.findById(id, (err, myPlan) => {
+            if (err) {
+                console.log('Error: ' + err);
+            } else {
+                myPlan.headerText = headerText || myPlan.headerText;
+                myPlan.subHeaderText = subHeaderText || myPlan.subHeaderText;
+                myPlan.complement = complement || myPlan.complement;
+                myPlan.finalInstruction = finalInstruction || myPlan.finalInstruction;
+                myPlan.save((err, myPlan) => {
+                    if (err) {
+                        console.log('Errro: ' + err);
+                    } else {
+                        console.log('Updated the my plan');
+                        res.redirect('/instances/editInstances/' + myPlan.instanceId);
+                    }
+                });
+            }
+        });
+    }
+};
+
 module.exports = {
   displayMyPlan,
   createMyPlan,
-  updateMyPlan
+  updateMyPlan,
+  updateEditInstanceMyPlan
 };

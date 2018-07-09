@@ -27,7 +27,6 @@ let displayHomePage = (req, res, next) => {
     });
 };
 
-
 let displayHomePageGet = (req, res, next) => {
     let id = req.params.id;
 

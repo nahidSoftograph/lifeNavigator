@@ -6,5 +6,6 @@ let express = require('express'),
 router.get('/display/:instanceId', myPlanController.displayMyPlan);
 router.post('/create/', myPlanController.createMyPlan);
 router.post('/update/:myPlanId', myPlanController.updateMyPlan);
+router.post('/updateEditInstance/:myPlanId', myPlanController.updateEditInstanceMyPlan);
 
 module.exports = router;
