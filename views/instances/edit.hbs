@@ -3,7 +3,7 @@
         <button class="dropbtn">Select Instance</button>
         <div class="dropdown-content-custom">
             {{#each instances}}
-                <a href="/instances/editInstances/{{this._id}}">{{this.instanceName}}</a>
+                <a href="/instances/editInstances/{{this._id}}">{{this.instanceName}}- {{this._id}}</a>
             {{/each}}
         </div>
     </div>

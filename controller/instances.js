@@ -22,6 +22,7 @@ let renderEditInstances = (req, res, next) => {
                 console.log('Error: ' + err);
             } else {
                 instanceId = instance._id;
+                console.log('-----------------Instance Id: ' + instanceId);
                 getHomePageInformation(instanceId, (err, home) => {
                     if (err) {
                         console.log('Error: ' + err);
@@ -54,6 +55,8 @@ let renderEditInstances = (req, res, next) => {
                                                                             if (err) {
                                                                                 console.log('Error: ' + err);
                                                                             } else {
+                                                                                console.log('Home');
+                                                                                console.log(home);
                                                                                 res.render('instances/edit', {
                                                                                     'title': 'Edit instances',
                                                                                     home: home,
@@ -484,7 +487,7 @@ let cloneMyPlan = (currentInstanceId, homeInstanceId, cb) => {
 };
 
 let getHomePageInformation = (instanceId, cb) => {
-  Home.findOne((err, home) => {
+  Home.findOne({instanceId: instanceId}, (err, home) => {
       if (err) {
         return cb (err, null);
       } else {
@@ -494,7 +497,7 @@ let getHomePageInformation = (instanceId, cb) => {
 };
 
 let getSiteUserSignUpInformation = (instanceId, cb) => {
-    SiteUserSignUp.findOne((err, siteUserSignUp) => {
+    SiteUserSignUp.findOne({instanceId: instanceId}, (err, siteUserSignUp) => {
         if (err) {
             return cb (err, null);
         } else {
@@ -504,7 +507,7 @@ let getSiteUserSignUpInformation = (instanceId, cb) => {
 };
 
 let getAccomplishmentInformation = (instanceId, cb) => {
-    Accomplishment.findOne((err, accomplishment) => {
+    Accomplishment.findOne({instanceId: instanceId}, (err, accomplishment) => {
         if (err) {
             return cb (err, null);
         } else {
@@ -514,7 +517,7 @@ let getAccomplishmentInformation = (instanceId, cb) => {
 };
 
 let getFutureGoalInformation = (instanceId, cb) => {
-    FutureGoal.findOne((err, futureGoal) => {
+    FutureGoal.findOne({instanceId: instanceId}, (err, futureGoal) => {
         if (err) {
             return cb (err, null);
         } else {
@@ -524,7 +527,7 @@ let getFutureGoalInformation = (instanceId, cb) => {
 };
 
 let getAssessRiskInformation = (instanceId, cb) => {
-    AssessRisk.findOne((err, assessRisk) => {
+    AssessRisk.findOne({instanceId: instanceId}, (err, assessRisk) => {
         if (err) {
             return cb (err, null);
         } else {
@@ -534,7 +537,7 @@ let getAssessRiskInformation = (instanceId, cb) => {
 };
 
 let getMyPlanInformation = (instanceId, cb) => {
-    MyPlan.findOne((err, myPlan) => {
+    MyPlan.findOne({instanceId: instanceId}, (err, myPlan) => {
         if (err) {
             return cb (err, null);
         } else {
@@ -546,15 +549,18 @@ let getMyPlanInformation = (instanceId, cb) => {
 let detectInstance = (instanceId, cb) => {
     Instance.findById(instanceId, (err, instance) => {
         if (err) {
+            console.log('Error in find instance');
             Instance.findOne({isHome: true}, (err, instance) => {
                 if (err) {
                     return cb (err, null);
                 } else {
+                    console.log('Set default instance');
                     return cb (null, instance);
                 }
             });
         } else {
             if (!instance) {
+                console.log('Null instance')
                 Instance.findOne({isHome: true}, (err, instance) => {
                     if (err) {
                         return cb (err, null);
@@ -563,6 +569,8 @@ let detectInstance = (instanceId, cb) => {
                     }
                 });
             } else {
+                console.log('Send required instance');
+                console.log(instance);
                 return cb (null, instance);
             }
         }
