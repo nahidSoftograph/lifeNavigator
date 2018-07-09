@@ -211,34 +211,26 @@ let updateInstance = (req, res, next) => {
     let instanceName = req.body.instanceName,
         companyName = req.body.companyName,
         instanceLink = req.body.instanceLink,
-        id = req.body.id;
+        instanceIdParam = req.params.instanceId;
+        id = req.body.id || instanceIdParam;
     console.log(req.body);
-    if (!instanceName) {
+    Instance.findById(id, (err, instance) => {
+        if (err) {
+            console.log('Error: ' + err);
+        } else {
+            instance.instanceName = instanceName || instance.instanceName;
+            instance.companyName = companyName || instance.companyName;
+            instance.instanceLink = instanceLink || instance.instanceLink;
+            instance.save((err, instance) => {
 
-    } else if (!id) {
-
-    } else if (!companyName) {
-
-    } else if (!instanceLink) {
-
-    } else {
-        Instance.findById(id, (err, instance) => {
-            if (err) {
-
-            } else {
-                instance.instanceName = instanceName || instance.instanceName;
-                instance.companyName = companyName || instance.companyName;
-                instance.instanceLink = instanceLink || instance.instanceLink;
-                instance.save((err, instance) => {
-                    if (err) {
-                        console.log(err);
-                    } else {
-                        res.redirect('/instances/createSelectInstances');
-                    }
-                });
-            }
-        });
-    }
+                if (err) {
+                    console.log(err);
+                } else {
+                    res.redirect('/instances/createSelectInstances');
+                }
+            });
+        }
+    });
 };
 
 let changeInstanceActivation = (req, res, next) => {
