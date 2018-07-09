@@ -1,72 +1,36 @@
-<div class="row">
-    <div class="col-12">
-        <table class="table table-hover">
-            <thead>
-            <tr>
-                <th scope="col">Age</th>
-                <th scope="col">Gender</th>
-                <th scope="col">Zip Code</th>
-                <th scope="col">Accomplishments</th>
-                <th scope="col">Future Goals</th>
-                <th scope="col">Delete</th>
-            </tr>
-            </thead>
-            <tbody>
-            {{#each siteUsers}}
+<div class="col s12 m8 l9">
+
+    <div class="card white">
+        <div class="card-content black-text">
+            <span class="card-title">Users Data</span>
+            <table class="responsive-table">
+                <thead>
                 <tr>
-                    <th>{{this.age}}</th>
-                    <td>{{this.gender}}</td>
-                    <td>{{this.zip}}</td>
-                    <td>
-                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#{{this._id}}accomplishmentFullOptions">
-                            Acccomplishment ({{this.accomplishmentFullOptions.length}})
-                        </button>
-                        <div class="modal fade" id="{{this._id}}accomplishmentFullOptions" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-body">
-                                        <table class="table">
-                                            <tbody>
-                                            {{#each this.accomplishmentFullOptions}}
-                                            <tr>
-                                                <td>{{this.titlePast}}</td>
-                                            </tr>
-                                            {{/each}}
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#{{this._id}}futureGoalFullOptions">
-                            Future Goals ({{this.futureGoalFullOptions.length}})
-                        </button>
-                        <div class="modal fade" id="{{this._id}}futureGoalFullOptions" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-body">
-                                        <table class="table">
-                                            <tbody>
-                                            {{#each this.futureGoalFullOptions}}
-                                                <tr>
-                                                    <td>{{this.titlePast}}</td>
-                                                </tr>
-                                            {{/each}}
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        <a href="/siteUser/delete/{{this._id}}" style="color: red">Delete</a>
-                    </td>
+                    <th>Age</th>
+                    <th>Gender</th>
+                    <th>Zip Code</th>
+                    <th>Accomplishments</th>
+                    <th>Future Goals</th>
+                    <th>Delete</th>
                 </tr>
-            {{/each}}
-            </tbody>
-        </table>
+                </thead>
+
+                <tbody>
+                {{#each siteUsers}}
+                    <tr>
+                        <td>{{this.age}}</td>
+                        <td>{{this.gender}}</td>
+                        <td>{{this.zip}}</td>
+                        <td>Accomplishment ({{this.accomplishmentFullOptions.length}}</td>
+                        <td>Future Goal ({{this.futureGoalFullOptions.length}})</td>
+                        <td>
+                            <a href="/siteUser/delete/{{this._id}}" style="color: red">Delete</a>
+                        </td>
+                    </tr>
+                {{/each}}
+                </tbody>
+            </table>
+        </div>
     </div>
+
 </div>
