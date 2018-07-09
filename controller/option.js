@@ -1,4 +1,5 @@
-let Option = require('../models/option');
+let Option = require('../models/option'),
+    Category = require('../models/category');
 
 let createOption = (req, res, next) => {};
 
@@ -48,12 +49,54 @@ let alterVisibility = (req, res, next) => {
             });
         }
     });
+};
 
+let cookOptions = (instanceId, cb) => {
+    Option.find({instanceId: instanceId}, (err, options) => {
+        if (err) {
+            console.log('Error: ' + err);
+            return cb (err, null);
+        } else {
+            updateOptionsCategory(options, (err, options) => {
+                if (err) {
+                    console.log('Error: ' + err);
+                    return cb (err, null);
+                } else {
+                    return cb (null, options);
+                }
+            });
+        }
+    });
 };
 
 module.exports = {
     createOption,
     updateOption,
     deleteOption,
-    alterVisibility
+    alterVisibility,
+    cookOptions
+};
+
+let updateOptionsCategory = (options, cb) => {
+    console.log('Update option category');
+    console.log(options.length);
+    if (options.length == 0) {
+        return cb (null, options);
+    } else {
+        for (let index=0; index<options.length; index++) {
+            let categoryId = options[index].categoryId;
+            console.log('Option name');
+            console.log(options[index].optionName);
+            Category.findById(categoryId, (err, category) => {
+                if (err) {
+                    return cb (err, null);
+                } else {
+                    options[index].categoryName = category.name;
+                    if (index == (options.length - 1)) {
+                        return cb (null, options);
+                    }
+                }
+            });
+        }
+    }
 };

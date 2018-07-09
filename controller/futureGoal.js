@@ -1,5 +1,6 @@
 let FutureGoal = require('../models/futureGoal'),
     Category = require('../models/category'),
+    optionController = require('../controller/option'),
     categoryController = require('../controller/category');
 
 let displayFutureGoal = (req, res, next) => {
@@ -11,18 +12,18 @@ let displayFutureGoal = (req, res, next) => {
             if (err) {
                 console.log('Error: ' + err);
             } else {
-                Category.find({instanceId: instanceId}, (err, categories) => {
-                    categoryController.cookCategories(instanceId, (err, categories) => {
-                        if (err) {
-                            console.log('Error: ' + err);
-                        } else {
-                            res.render('instanceSite/futureGoal', {
-                                instanceId: instanceId,
-                                categories: categories,
-                                futureGoal: futureGoal
-                            });
-                        }
-                    });
+                optionController.cookOptions(instanceId, (err, options) => {
+                    if (err) {
+                        console.log('Error: ' + err);
+                    } else {
+                        console.log('Options');
+                        console.log(options);
+                        res.render('instanceSite/futureGoal', {
+                            instanceId: instanceId,
+                            options: options,
+                            futureGoal: futureGoal
+                        });
+                    }
                 });
             }
         });

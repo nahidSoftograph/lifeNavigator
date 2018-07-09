@@ -101,7 +101,7 @@ let updateAssessRisk = (req, res, next) => {
     } else if (!headerText) {
         console.log('Invalid header text');
     } else if (!paragraphText) {
-        conosole.log('Invalid paragraph text');
+        console.log('Invalid paragraph text');
     } else if (!subHeaderText) {
         console.log('Invalid sub header text');
     } else if (!buttonText) {

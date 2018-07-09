@@ -1,61 +1,63 @@
+<div class="col s12 m8 l9">
 
-<div class="row">
-    <div class="col-12">
-        <form action="/siteUserSignUp/update/{{siteUserSignUp._id}}" method="post">
-            <input type="hidden" name="instanceId" value="{{siteUserSignUp.instanceId}}">
+    <div class="card white">
+        <div class="card-content black-text">
+            <span class="card-title">Sign Up </span>
+            <form action="/siteUserSignUp/update/{{siteUserSignUp._id}}" method="post">
 
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label font-weight-bold">Header Text</label>
-                <div class="col-sm-10">
-                    <input type="text" name="headerText" class="form-control" placeholder="Enter Header Text" value="{{siteUserSignUp.headerText}}">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input name="headerText" value="{{siteUserSignUp.headerText}}" id="headerText" type="text" class="validate">
+                        <label class="active" for="headerText">Enter Header Text</label>
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label font-weight-bold">Before Age Text</label>
-                <div class="col-sm-10">
-                    <input type="text" name="beforeAge" class="form-control" placeholder="Enter Before Age Text" value="{{siteUserSignUp.beforeAge}}">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input name="beforeAge" value="{{siteUserSignUp.beforeAge}}" id="beforeAge" type="text" class="validate">
+                        <label class="active" for="beforeAge">Enter Before Age</label>
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label font-weight-bold">After Age Text</label>
-                <div class="col-sm-10">
-                    <input type="text" name="afterAge" class="form-control" placeholder="Enter After Age Text" value="{{siteUserSignUp.afterAge}}">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input name="afterAge" value="{{siteUserSignUp.afterAge}}" id="afterAge" type="text" class="validate">
+                        <label class="active" for="afterAge">Enter After Age</label>
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label font-weight-bold">Before Gender Text</label>
-                <div class="col-sm-10">
-                    <input type="text" name="beforeGender" class="form-control" placeholder="Enter Before Gender" value="{{siteUserSignUp.beforeGender}}">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input name="beforeGender" value="{{siteUserSignUp.beforeGender}}" id="beforeGender" type="text" class="validate">
+                        <label class="active" for="beforeGender">Enter Before Gender</label>
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label font-weight-bold">Before Zip Text</label>
-                <div class="col-sm-10">
-                    <input type="text" name="beforeZip" class="form-control" placeholder="Enter Before Zip" value="{{siteUserSignUp.beforeZip}}">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input name="beforeZip" value="{{siteUserSignUp.beforeZip}}" id="beforeZip" type="text" class="validate">
+                        <label class="active" for="beforeZip">Enter Before Zip</label>
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label font-weight-bold">Button Text</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" name="buttonText" placeholder="Enter Button Text" value="{{siteUserSignUp.buttonText}}">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input name="buttonText" value="{{siteUserSignUp.buttonText}}" id="buttonText" type="text" class="validate">
+                        <label class="active" for="buttonText">Enter Button Text</label>
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-3"></div>
-                <div class="col-2">
-                    <button class="btn btn-block btn-sm bg-secondary text-white">Preview</button>
+
+                <input type="hidden" value="{{siteUserSignUp.instanceId}}">
+
+                <div class="row">
+                    <div class="col s12 m6 l6" ><p><a class="waves-effect waves-light btn" style="background-color: green;">Preview</a>
+                    </p></div>
+                    <div type="submit" class="col s12 m6 l6"><p><input value="Update" type="submit" class="waves-effect waves-light btn" style="background-color: #4a148c;">
+                    </p></div>
                 </div>
-                <div class="col-2"></div>
-                <div class="col-2">
-                    <button class="btn btn-block btn-sm bg-info text-white" type="submit">Update</button>
-                </div>
-                <div class="col-3"></div>
-            </div>
-        </form>
+
+            </form>
+        </div>
     </div>
+
 </div>

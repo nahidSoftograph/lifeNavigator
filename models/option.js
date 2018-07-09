@@ -10,7 +10,8 @@ let optionSchema = mongoose.Schema({
     titleFuture: { type: String, required: true },
     selected: { type: Boolean, required: true, default: false },
     iconPath: { type: String, required: true },
-    isVisible: { type: Boolean, required: true, default: true }
+    isVisible: { type: Boolean, required: true, default: true },
+    categoryName: { type: String, required: false }
 });
 
 module.exports = mongoose.model('Option', optionSchema);

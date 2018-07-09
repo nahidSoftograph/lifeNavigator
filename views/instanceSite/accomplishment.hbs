@@ -1,46 +1,86 @@
-<div class="row">
-    <div class="col-12">
-        <form action="/accomplishment/update/{{accomplishment._id}}" method="post">
+<div class="col s12 m8 l9">
 
-            <input type="hidden" name="accomplishmentId" value="{{accomplishment._id}}">
-            <input type="hidden" name="instanceId" value="{{instanceId}}">
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label font-weight-bold">Enter Header</label>
-                <div class="col-sm-10">
-                    <input type="text" name="headerText" class="form-control" placeholder="Header" value="{{accomplishment.headerText}}">
+    <div class="card white">
+        <div class="card-content black-text">
+            <span class="card-title">Accomplishments </span>
+            <form action="/accomplishment/update/{{accomplishment._id}}" method="post">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input name="headerText" value="{{accomplishment.headerText}}" id="headerText" type="text" class="validate">
+                        <label class="active" for="headerText"></label>
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label font-weight-bold">Enter Sub Header</label>
-                <div class="col-sm-10">
-                    <input type="text" name="subHeaderText" class="form-control" placeholder="Sub Header" value="{{accomplishment.subHeaderText}}">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input value="{{accomplishment.subHeaderText}}" name="subHeaderText" id="subHeaderText" type="text" class="validate">
+                        <label class="active" for="subHeaderText"></label>
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label font-weight-bold">Button Text</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" name="buttonText" placeholder="Button Text" value="{{accomplishment.buttonText}}">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input value="{{accomplishment.buttonText}}" id="buttonText" name="buttonText" type="text" class="validate">
+                        <label class="active" for="buttonText"></label>
+                    </div>
                 </div>
-            </div>
 
-            <input type="hidden" name="buttonLink" class="form-control" placeholder="Button Link" value="{{accomplishment.buttonLink}}">
+                <input type="hidden" name="instanceId" value="{{accomplishment.instanceId}}">
+                <input type="hidden" name="buttonLink" value="{{accomplishment.buttonLink}}">
+                <div class="row">
+                    <div class="col s12 m6 l6" ><p><a class="waves-effect waves-light btn" style="background-color: green;">Preview</a>
+                    </p></div>
+                    <div type="submit" class="col s12 m6 l6"><p><input value="Update" type="submit" class="waves-effect waves-light btn" style="background-color: #4a148c;">
+                    </p></div>
+                </div>
+            </form>
 
-            <div class="row">
-                <div class="col-3"></div>
-                <div class="col-2">
-                    <button class="btn btn-block btn-sm bg-secondary text-white">Preview</button>
-                </div>
-                <div class="col-2"></div>
-                <div class="col-2">
-                    <button class="btn btn-block btn-sm bg-info text-white" type="submit">Update</button>
-                </div>
-                <div class="col-3"></div>
-            </div>
-        </form>
+            <br>
+            <br>
+
+            <span class="card-title">Goal Lists</span>
+            <hr>
+            <table class="responsive-table">
+                <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>Goal</th>
+                    <th>Visibility</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                {{#each options}}
+                <tr>
+                    <td>{{this.categoryName}}</td>
+                    <td>{{this.titleFuture}}</td>
+                    <td>
+                        {{#if this.isVisible}}
+                            <div class="switch">
+                                <label>
+                                    hide
+                                    <input type="checkbox" checked>
+                                    <span class="lever"></span>
+                                    show
+                                </label>
+                            </div>
+                        {{else}}
+                            <div class="switch">
+                                <label>
+                                    hide
+                                    <input type="checkbox">
+                                    <span class="lever"></span>
+                                    show
+                                </label>
+                            </div>
+                        {{/if}}
+
+                    </td>
+                </tr>
+                {{/each}}
+                </tbody>
+            </table>
+        </div>
     </div>
-</div>
-<br>
 
-{{> accomplishmentCategory }}
+</div>
