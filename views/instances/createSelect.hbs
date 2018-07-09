@@ -1,125 +1,126 @@
-<div class="row">
-    <div class="col-9">
-        <div class="text-center font-weight-bold d-block p-2 bg-secondary text-white">Instances List</div>
-        <table class="table table-hover">
-            <thead>
-            <tr>
-                <th scope="col">Instance Name</th>
-                <th scope="col">Company Name</th>
-                <th scope="col">URL</th>
-                <th scope="col">Activation</th>
-                <th scope="col">Edit</th>
-                <th scope="col">Operation</th>
-            </tr>
-            </thead>
-            <tbody>
-            {{#each instances}}
-            <tr>
-                <td>{{this.instanceName}}</td>
-                <td>{{this.companyName}}</td>
-                <td>{{this.instanceLink}}</td>
-                <td>
-                    {{#if this.isActive}}
-                        <a href="/instances/changeInstanceActivation/{{this._id}}">
-                            <button type="button" class="btn btn-danger btn-sm">Deactivate</button>
-                        </a>
-                    {{else}}
-                        <a href="/instances/changeInstanceActivation/{{this._id}}">
-                            <button type="button" class="btn btn-success btn-sm">Activate</button>
-                        </a>
-                    {{/if}}
-                </td>
-                <td>
-                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#{{_id}}">
-                        Update
-                    </button>
-                    <div class="modal fade" id="{{_id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Update Instance</h5>
-                                    <!--<a href="/instances/deleteInstance/{{this._id}}">
-                                        <button class="btn btn-danger">Delete Instance</button>
-                                    </a>-->
-                                </div>
-                                <div class="modal-body">
-                                    <form action="/instances/updateInstance" method="post">
-                                        <input type="hidden" name="id" value="{{this._id}}">
-                                        <div class="form-group">
-                                            <label>Instance Name</label>
-                                            <input type="text" class="form-control" name="instanceName" placeholder="Enter Instance Name" value="{{this.instanceName}}">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Company Name</label>
-                                            <input type="text" class="form-control" name="companyName" placeholder="Enter Company Name" value="{{this.companyName}}">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Instance Link</label>
-                                            <input type="text" class="form-control" name="instanceLink" placeholder="Instance Link" value="{{this.instanceLink}}">
-                                        </div>
-                                        <button type="submit" class="btn btn-primary btn-sm">Submit</button>
-                                    </form>
-                                </div>
-                            </div>
+<div class="col m7 s12">
+    <div class="card white">
+        <div class="card-content black-text">
+            <span class="card-title">Instance Lists</span>
+            <table class="responsive-table">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>URL</th>
+                    <th>Activation</th>
+                    <th>Update</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr>
+                    <td>Instance 1</td>
+                    <td>
+                        <input value="url 1" type="text" >
+                    <td>
+                        <div class="switch">
+                            <label>
+                                Inactive
+                                <input type="checkbox">
+                                <span class="lever"></span>
+                                Active
+                            </label>
                         </div>
-                    </div>
-                </td>
-                <td>
-                    <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#operation{{_id}}">Operation</button>
-                    <div class="modal fade" id="operation{{_id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-body">
-                                    <form action="/homePage/display/{{_id}}" method="post">
-                                        <input type="hidden" name="id" value="{{_id}}">
-                                        <input type="hidden" name="callBackUrl" value="/instances/createSelectInstances">
-                                        <button type="submit" class="btn btn-primary btn-block ">Edit Home Page</button>
-                                    </form>
-                                    <br>
-                                    <form action="/accomplishment/display/{{_id}}" method="get">
-                                        <!--<input type="hidden" name="id" value="{{this._id}}">
-                                        <input type="hidden" name="callBackUrl" value="/instances/createSelectInstances">-->
-                                        <button type="submit" class="btn btn-primary btn-block">Edit Accomplishment</button>
-                                    </form>
-                                    <br>
-                                    <form action="/futureGoal/display/{{_id}}" method=get>
-                                        <!--<input type="hidden" name="id" value="{{this._id}}">
-                                        <input type="hidden" name="callBackUrl" value="/instances/createSelectInstances">-->
-                                        <button type="submit" class="btn btn-primary btn-block">Edit FutureGoals</button>
-                                    </form>
-                                    <br>
-                                    <form action="/category/display/{{_id}}" method="get">
-                                        <!--<input type="hidden" name="id" value="{{this._id}}">
-                                        <input type="hidden" name="callBackUrl" value="/instances/createSelectInstances">-->
-                                        <button type="submit" class="btn btn-primary btn-block">Edit Category</button>
-                                    </form>
-                                </div>
-                            </div>
+                    </td>
+                    <td>
+                        <a class="waves-effect waves-light btn">Update</a>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Instance 2</td>
+                    <td>
+                        <input value="url 1" type="text" >
+                    <td>
+                        <div class="switch">
+                            <label>
+                                Inactive
+                                <input type="checkbox">
+                                <span class="lever"></span>
+                                Active
+                            </label>
                         </div>
-                    </div>
-                </td>
-            </tr>
-            {{/each}}
-            </tbody>
-        </table>
+                    </td>
+                    <td>
+                        <a class="waves-effect waves-light btn">Update</a>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Instance 3</td>
+                    <td>
+                        <input value="url 1" type="text" >
+                    <td>
+                        <div class="switch">
+                            <label>
+                                Inactive
+                                <input type="checkbox">
+                                <span class="lever"></span>
+                                Active
+                            </label>
+                        </div>
+                    </td>
+                    <td>
+                        <a class="waves-effect waves-light btn">Update</a>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Instance 4</td>
+                    <td>
+                        <input value="url 1" type="text" >
+                    <td>
+                        <div class="switch">
+                            <label>
+                                Inactive
+                                <input type="checkbox">
+                                <span class="lever"></span>
+                                Active
+                            </label>
+                        </div>
+                    </td>
+                    <td>
+                        <a class="waves-effect waves-light btn">Update</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 
-    <div class="col-3">
-        <div class="text-center font-weight-bold d-block p-2 bg-secondary text-white">Create Instance</div>
-        <form action="/instances/createInstance" method="post">
-            <div class="form-group">
-                <label>Instance Name</label>
-                <input type="text" class="form-control" name="instanceName" placeholder="Enter Instance Name">
+</div>
+
+<div class="col m2 s12">
+    <div class="card grey lighten-5" id="login-body">
+        <form action="#" method="post">
+            <div class="card-content black-text">
+                <span class="card-title">Add Instance</span>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input placeholder="Instance Name" name="name" type="text" class="validate">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input placeholder="Company Name" name="name" type="text" class="validate">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input placeholder="Instance URL" name="email" type="text" class="validate">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input value="Submit" type="submit" class="waves-effect waves-light btn">
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label>Company Name</label>
-                <input type="text" class="form-control" name="companyName" placeholder="Enter Company Name">
-            </div>
-            <div class="form-group">
-                <label>Instance Link</label>
-                <input type="text" class="form-control" name="instanceLink" placeholder="Enter Instance Link">
-            </div>
-            <button type="submit" class="btn btn-primary btn-sm">Submit</button>
         </form>
     </div>
 </div>
