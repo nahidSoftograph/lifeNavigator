@@ -3,7 +3,7 @@
         <button class="dropbtn">Select Instance</button>
         <div class="dropdown-content-custom">
             {{#each instances}}
-                <a href="/instances/editInstances/{{this._id}}">{{this.instanceName}}- {{this._id}}</a>
+                <a href="/instances/editInstances/{{this._id}}">{{this.instanceName}}</a>
             {{/each}}
         </div>
     </div>
@@ -13,7 +13,7 @@
 
     <div class="card white">
         <div class="card-content black-text">
-            <span class="card-title">Edit Instances</span>
+            <span class="card-title">{{currentInstance.instanceName}}</span>
             <div class="row">
                 <div class="col s12">
                     <ul class="tabs" style="overflow-x:hidden">

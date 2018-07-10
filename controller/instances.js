@@ -101,7 +101,8 @@ let renderEditInstances = (req, res, next) => {
                                                                                     assessRisk: assessRisk,
                                                                                     myPlan: myPlan,
                                                                                     options: options,
-                                                                                    instances: instances
+                                                                                    instances: instances,
+                                                                                    currentInstance: instance
                                                                                 });
                                                                             }
                                                                         });

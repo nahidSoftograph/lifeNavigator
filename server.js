@@ -37,6 +37,7 @@ let instancesRouter = require('./routes/instances'),
     siteUserRoutes = require('./routes/siteUser'),
     siteUserSignUpRoutes = require('./routes/siteUserSignUp'),
     myPlanRoutes = require('./routes/myPlan'),
+    defaultInstanceRoutes = require('./routes/defaultInstance'),
     defaultSiteRouter = require('./routes/defaultSite');
 
 var configDB     = require('./config/database');
@@ -113,6 +114,7 @@ app.use('/siteUser', siteUserRoutes);
 app.use('/siteUserSignUp', siteUserSignUpRoutes);
 app.use('/accomplishment', accomplishmentRoutes);
 app.use('/myPlan', myPlanRoutes);
+app.use('/defaultInstance', defaultInstanceRoutes);
 app.use('*', (req, res, next) => {
     res.sendFile(path.join(__dirname, 'public/index.html'));
 });

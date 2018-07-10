@@ -1,53 +1,86 @@
 <form action="/homePage/updateEditInstance/{{home._id}}" method="post" enctype="multipart/form-data">
-    <div class="file-field input-field">
-        <div class="btn">
-            <span>Select Home Page Logo</span>
-            <input type="file" name="image">
+
+    <div class="row">
+        <div class="input-field col s10">
+            <div class="file-field input-field">
+                <div class="btn">
+                    <span>Select Home Page Logo</span>
+                    <input type="file" name="image">
+                </div>
+                <div class="file-path-wrapper">
+                    <img style="height: 45px; width: 180px;" id="homePageLogoPath" src="{{home.logoPath}}" alt="Logo">
+                </div>
+            </div>
         </div>
-        <div class="file-path-wrapper">
-            <img style="height: 50px; width: 180px;" src="{{home.logoPath}}" alt="Logo">
+        <div class="col s2" style="margin-top: 35px;">
+            <button class="btn waves-effect waves-light setToDefaultButtonLogoPath">Set to Default
+            </button>
         </div>
     </div>
 
     <div class="row">
-        <div class="input-field col s12">
-            <input name="welComeText" value="{{home.welComeText}}" id="welComeText" type="text" class="validate">
-            <label class="active" for="">Welcome Text</label>
+        <div class="input-field col s10">
+            <input name="welComeText" value="{{home.welComeText}}" id="homePageWelcomeText" type="text" class="validate">
+            <label class="active" for="homePageWelcomeText">Welcome Text</label>
+        </div>
+        <div class="col s2" style="margin-top: 15px;">
+            <button class="btn waves-effect waves-light setToDefaultButtonWelcomeText">Set to Default
+            </button>
         </div>
     </div>
 
     <div class="row">
-        <div class="input-field col s12">
-            <input name="header" value="{{home.header}}" id="header" type="text" class="validate">
-            <label class="active" for="header">Header</label>
+        <div class="input-field col s10">
+            <input name="header" value="{{home.header}}" id="homePageHeader" type="text" class="validate">
+            <label class="active" for="homePageHeader">Header</label>
+        </div>
+        <div class="col s2" style="margin-top: 15px;">
+            <button class="btn waves-effect waves-light btn-lg setToDefaultButtonHeader" name="action">Set to Default
+            </button>
         </div>
     </div>
 
     <div class="row">
-        <div class="input-field col s12">
-            <input name="info" value="{{home.info}}" id="info" type="text" class="validate">
-            <label class="active" for="info">Info</label>
+        <div class="input-field col s10">
+            <input name="info" value="{{home.info}}" id="homePageInfo" type="text" class="validate">
+            <label class="active" for="homePageInfo">Info</label>
+        </div>
+        <div class="col s2" style="margin-top: 15px;">
+            <button class="btn waves-effect waves-light btn-lg setToDefaultButtonInfo" name="action">Set to Default
+            </button>
         </div>
     </div>
 
     <div class="row">
-        <div class="input-field col s12">
-            <input name="anchorText" value="{{home.anchorText}}" id="anchorText" type="text" class="validate">
-            <label class="active" for="anchorText">Anchor Text</label>
+        <div class="input-field col s10">
+            <input name="anchorText" value="{{home.anchorText}}" id="homePageAnchorText" type="text" class="validate">
+            <label class="active" for="homePageAnchorText">Anchor Text</label>
+        </div>
+        <div class="col s2" style="margin-top: 15px;">
+            <button class="btn waves-effect waves-light btn-lg setToDefaultButtonAnchorText" name="action">Set to Default
+            </button>
         </div>
     </div>
 
     <div class="row">
-        <div class="input-field col s12">
-            <input name="anchorLink" value="{{home.anchorLink}}" id="anchorLink" type="text" class="validate">
-            <label class="active" for="anchorLink">Anchor Tooltip</label>
+        <div class="input-field col s10">
+            <input name="anchorLink" value="{{home.anchorLink}}" id="homePageAnchorLink" type="text" class="validate">
+            <label class="active" for="homePageAnchorLink">Anchor Tooltip</label>
+        </div>
+        <div class="col s2" style="margin-top: 15px;">
+            <button class="btn waves-effect waves-light btn-lg setToDefaultButtonAnchorLink" name="action">Set to Default
+            </button>
         </div>
     </div>
 
     <div class="row">
-        <div class="input-field col s12">
-            <input name="buttonText" value="{{home.buttonText}}" id="buttonText" type="text" class="validate">
-            <label class="active" for="buttonText">Button Text</label>
+        <div class="input-field col s10">
+            <input name="buttonText" value="{{home.buttonText}}" id="homePageButtonText" type="text" class="validate">
+            <label class="active" for="homePageButtonText">Button Text</label>
+        </div>
+        <div class="col s2" style="margin-top: 15px;">
+            <button class="btn waves-effect waves-light btn-lg setToDefaultButtonButtonText" name="action">Set to Default
+            </button>
         </div>
     </div>
 
@@ -60,3 +93,77 @@
         </p></div>
     </div>
 </form>
+
+<script>
+    $(document).ready(() => {
+        $('.setToDefaultButtonLogoPath').on('click', () => {
+            event.preventDefault();
+            let url = location.origin + '/defaultInstance/getData/';
+            $.get(url).done(function(data){
+                $('#homePageLogoPath').attr("src", data.home.logoPath);
+            }).fail(function(data){
+                /*M.toast({html: '<span style="color:red;">Failed! Please try again later</span>'});*/
+            });
+        });
+
+        $('.setToDefaultButtonWelcomeText').on('click', () => {
+            event.preventDefault();
+            let url = location.origin + '/defaultInstance/getData/';
+            $.get(url).done(function(data){
+                $('#homePageWelcomeText').val(data.home.welComeText);
+            }).fail(function(data){
+                /*M.toast({html: '<span style="color:red;">Failed! Please try again later</span>'});*/
+            });
+        });
+
+        $('.setToDefaultButtonHeader').on('click', () => {
+            event.preventDefault();
+            let url = location.origin + '/defaultInstance/getData/';
+            $.get(url).done(function(data){
+                $('#homePageHeader').val(data.home.header);
+            }).fail(function(data){
+                /*M.toast({html: '<span style="color:red;">Failed! Please try again later</span>'});*/
+            });
+        });
+
+        $('.setToDefaultButtonInfo').on('click', () => {
+            event.preventDefault();
+            let url = location.origin + '/defaultInstance/getData/';
+            $.get(url).done(function(data){
+                $('#homePageInfo').val(data.home.info);
+            }).fail(function(data){
+                console.log(data);
+            });
+        });
+
+        $('.setToDefaultButtonAnchorText').on('click', () => {
+            event.preventDefault();
+            let url = location.origin + '/defaultInstance/getData/';
+            $.get(url).done(function(data){
+                $('#homePageAnchorText').val(data.home.anchorText);
+            }).fail(function(data){
+                console.log(data);
+            });
+        });
+
+        $('.setToDefaultButtonAnchorLink').on('click', () => {
+            event.preventDefault();
+            let url = location.origin + '/defaultInstance/getData/';
+            $.get(url).done(function(data){
+                $('#homePageAnchorLink').val(data.home.anchorLink);
+            }).fail(function(data){
+                console.log(data);
+            });
+        });
+
+        $('.setToDefaultButtonButtonText').on('click', () => {
+            event.preventDefault();
+            let url = location.origin + '/defaultInstance/getData/';
+            $.get(url).done(function(data){
+                $('#homePageButtonText').val(data.home.buttonText);
+            }).fail(function(data){
+                console.log(data);
+            });
+        });
+    });
+</script>
