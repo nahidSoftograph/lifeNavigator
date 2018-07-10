@@ -79,9 +79,14 @@
             var id = $(this).attr('data-id');
             var url = location.origin+'/instances/alterVisibility/'+id;
             $.get(url).done(function(data){
-                /*M.toast({html: '<span style="color:green;">Successfully done</span>'});*/
+                console.log(data.instance);
+                if (data.instance.isActive) {
+                    Materialize.toast(data.instance.instanceName + ' activated.', 1000);
+                } else {
+                    Materialize.toast(data.instance.instanceName + ' deactivated.', 1000);
+                }
             }).fail(function(data){
-                /*M.toast({html: '<span style="color:red;">Failed! Please try again later</span>'});*/
+                console.log(data);
             });
         });
     });
