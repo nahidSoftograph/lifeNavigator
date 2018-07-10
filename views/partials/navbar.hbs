@@ -55,4 +55,61 @@
     </div>
 
 </div>
+{{else}}
+    <div>
+        <div class="col s12 m4 l3">
+
+            <ul id="slide-out" class="collapsible side-nav fixed">
+                <li>
+                    <div class="collapsible-header">&ensp;&ensp;{{defaultInstance.instanceName}}
+                        <i class="material-icons">
+                            keyboard_arrow_down
+                        </i>
+                    </div>
+                    <div class="collapsible-body"><span> <a href="/homePage/display/{{defaultInstance._id}}">&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;Home Page</a></span></div>
+                    <div class="collapsible-body"><span> <a href="/siteUserSignUp/display/{{defaultInstance._id}}">&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;Sign Up</a></span></div>
+                    <!--<div class="collapsible-body"><span> <a href="/defaultSite/sign-up">&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;User Sign Up</a></span></div>-->
+                    <div class="collapsible-body"><span> <a href="/accomplishment/display/{{defaultInstance._id}}">&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;Accomplishment</a></span></div>
+                    <div class="collapsible-body"><span> <a href="/futureGoal/display/{{defaultInstance._id}}">&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;Future Goal</a></span></div>
+                    <div class="collapsible-body"><span> <a href="/assessRisk/display/{{defaultInstance._id}}">&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;Assess Risk</a></span></div>
+                    <div class="collapsible-body"><span> <a href="/myPlan/display/{{defaultInstance._id}}">&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;Save My Plan</a></span></div>
+                </li>
+                <li>
+                    <div class="collapsible-header">&ensp;&ensp;Instances
+                        <i class="material-icons">
+                            keyboard_arrow_down
+                        </i>
+                    </div>
+                    <div class="collapsible-body"><span> <a href="/instances/createSelectInstances">&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;Create/Select Instance</a></span></div>
+                    <div class="collapsible-body "><span> <a href="/instances/editInstances/{{defaultInstance._id}}">&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;Edit Instance Page</a></span></div>
+                </li>
+                <li><div class="divider"></div></li>
+
+                <li>
+                    <a href="/siteUser/display">
+                        <i class="material-icons">person</i>Users Data
+                    </a>
+                    <a href="/users">
+                        <i class="material-icons">person</i>Users
+                    </a>
+                    <a href="#">
+                        <i class="material-icons">exit_to_app</i>Exports
+                    </a>
+                    <a href="#">
+                        <i class="material-icons">timeline</i>Users Fallout
+                    </a>
+                    <a href="/auth/logout">
+                        <i class="material-icons">forward</i>Logout
+                    </a>
+                </li>
+            </ul>
+            <a href="#" data-activates="slide-out" class="button-collapse">
+        <span class="btn-floating waves-effect waves-light black" style="margin-top: 5%; margin-left: 3%;">
+            <i class="mdi mdi-reorder-horizontal"></i>
+        </span>
+            </a>
+
+        </div>
+
+    </div>
 {{/if}}

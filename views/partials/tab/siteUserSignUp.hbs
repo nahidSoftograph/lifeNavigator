@@ -2,54 +2,143 @@
 <form action="/siteUserSignUp/updateEditInstance/{{siteUserSignUp._id}}" method="post">
 
     <div class="row">
-        <div class="input-field col s12">
-            <input name="headerText" value="{{siteUserSignUp.headerText}}" id="headerText" type="text" class="validate">
-            <label class="active" for="headerText">Enter Header Text</label>
+        <div class="input-field col s10">
+            <input name="headerText" value="{{siteUserSignUp.headerText}}" id="headerTextSiteUserSignUp" type="text" class="validate">
+            <label class="active" for="headerTextSiteUserSignUp">Enter Header Text</label>
+        </div>
+        <div class="col s2" style="margin-top: 35px;">
+            <button class="btn waves-effect waves-light setToDefaultButtonHeaderText">Set to Default
+            </button>
         </div>
     </div>
 
     <div class="row">
-        <div class="input-field col s12">
-            <input name="beforeAge" value="{{siteUserSignUp.beforeAge}}" id="beforeAge" type="text" class="validate">
-            <label class="active" for="beforeAge">Enter Before Age</label>
+        <div class="input-field col s10">
+            <input name="beforeAge" value="{{siteUserSignUp.beforeAge}}" id="beforeAgeSiteUserSignUp" type="text" class="validate">
+            <label class="active" for="beforeAgeSiteUserSignUp">Enter Before Age</label>
+        </div>
+        <div class="col s2" style="margin-top: 35px;">
+            <button class="btn waves-effect waves-light setToDefaultButtonBeforeAge">Set to Default
+            </button>
         </div>
     </div>
 
     <div class="row">
-        <div class="input-field col s12">
-            <input name="afterAge" value="{{siteUserSignUp.afterAge}}" id="afterAge" type="text" class="validate">
+        <div class="input-field col s10">
+            <input name="afterAge" value="{{siteUserSignUp.afterAge}}" id="afterAgeSiteUserSignUp" type="text" class="validate">
             <label class="active" for="afterAge">Enter After Age</label>
         </div>
-    </div>
-
-    <div class="row">
-        <div class="input-field col s12">
-            <input name="beforeGender" value="{{siteUserSignUp.beforeGender}}" id="beforeGender" type="text" class="validate">
-            <label class="active" for="beforeGender">Enter Before Gender</label>
+        <div class="col s2" style="margin-top: 35px;">
+            <button class="btn waves-effect waves-light setToDefaultButtonAfterAge">Set to Default
+            </button>
         </div>
     </div>
 
     <div class="row">
-        <div class="input-field col s12">
-            <input name="beforeZip" value="{{siteUserSignUp.beforeZip}}" id="beforeZip" type="text" class="validate">
+        <div class="input-field col s10">
+            <input name="beforeGender" value="{{siteUserSignUp.beforeGender}}" id="beforeGenderSiteUserSignUp" type="text" class="validate">
+            <label class="active" for="beforeGenderSiteUserSignUp">Enter Before Gender</label>
+        </div>
+        <div class="col s2" style="margin-top: 35px;">
+            <button class="btn waves-effect waves-light setToDefaultButtonBeforeGender">Set to Default
+            </button>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="input-field col s10">
+            <input name="beforeZip" value="{{siteUserSignUp.beforeZip}}" id="beforeZipSiteUserSignUp" type="text" class="validate">
             <label class="active" for="beforeZip">Enter Before Zip</label>
         </div>
+        <div class="col s2" style="margin-top: 35px;">
+            <button class="btn waves-effect waves-light setToDefaultButtonBeforeZip">Set to Default
+            </button>
+        </div>
     </div>
 
     <div class="row">
-        <div class="input-field col s12">
-            <input name="buttonText" value="{{siteUserSignUp.buttonText}}" id="buttonText" type="text" class="validate">
+        <div class="input-field col s10">
+            <input name="buttonText" value="{{siteUserSignUp.buttonText}}" id="buttonTextSiteUserSignUp" type="text" class="validate">
             <label class="active" for="buttonText">Enter Button Text</label>
+        </div>
+        <div class="col s2" style="margin-top: 35px;">
+            <button class="btn waves-effect waves-light setToDefaultButtonButtonText">Set to Default
+            </button>
         </div>
     </div>
 
     <input type="hidden" value="{{siteUserSignUp.instanceId}}">
 
     <div class="row">
-        <div class="col s12 m6 l6" ><p><a class="waves-effect waves-light btn" style="background-color: green;">Preview</a>
+        <div class="col s10 m6 l6" ><p><a class="waves-effect waves-light btn" style="background-color: green;">Preview</a>
         </p></div>
-        <div type="submit" class="col s12 m6 l6"><p><input value="Update" type="submit" class="waves-effect waves-light btn" style="background-color: #4a148c;">
+        <div type="submit" class="col s10 m6 l6"><p><input value="Update" type="submit" class="waves-effect waves-light btn" style="background-color: #4a148c;">
         </p></div>
     </div>
 
 </form>
+
+<script>
+    $(document).ready(() => {
+
+        $('.setToDefaultButtonHeaderText').on('click', () => {
+            event.preventDefault();
+            let url = location.origin + '/defaultInstance/getData/';
+            $.get(url).done(function(data){
+                $('#headerTextSiteUserSignUp').val(data.siteUserSignUp.headerText);
+            }).fail(function(data){
+                /*M.toast({html: '<span style="color:red;">Failed! Please try again later</span>'});*/
+            });
+        });
+
+        $('.setToDefaultButtonBeforeAge').on('click', () => {
+            event.preventDefault();
+            let url = location.origin + '/defaultInstance/getData/';
+            $.get(url).done(function(data){
+                $('#beforeAgeSiteUserSignUp').val(data.siteUserSignUp.beforeAge);
+            }).fail(function(data){
+                console.log(data);
+            });
+        });
+
+        $('.setToDefaultButtonAfterAge').on('click', () => {
+            event.preventDefault();
+            let url = location.origin + '/defaultInstance/getData/';
+            $.get(url).done(function(data){
+                $('#afterAgeSiteUserSignUp').val(data.siteUserSignUp.afterAge);
+            }).fail(function(data){
+                console.log(data);
+            });
+        });
+
+        $('.setToDefaultButtonBeforeGender').on('click', () => {
+            event.preventDefault();
+            let url = location.origin + '/defaultInstance/getData/';
+            $.get(url).done(function(data){
+                $('#beforeGenderSiteUserSignUp').val(data.siteUserSignUp.beforeGender);
+            }).fail(function(data){
+                console.log(data);
+            });
+        });
+
+        $('.setToDefaultButtonBeforeZip').on('click', () => {
+            event.preventDefault();
+            let url = location.origin + '/defaultInstance/getData/';
+            $.get(url).done(function(data){
+                $('#beforeZipSiteUserSignUp').val(data.siteUserSignUp.beforeZip);
+            }).fail(function(data){
+                console.log(data);
+            });
+        });
+
+        $('.setToDefaultButtonButtonText').on('click', () => {
+            event.preventDefault();
+            let url = location.origin + '/defaultInstance/getData/';
+            $.get(url).done(function(data){
+                $('#buttonTextSiteUserSignUp').val(data.siteUserSignUp.buttonText);
+            }).fail(function(data){
+                console.log(data);
+            });
+        });
+    });
+</script>
