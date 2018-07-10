@@ -77,9 +77,13 @@
             var id = $(this).attr('data-id');
             var url = location.origin+'/option/alterVisibility/'+id;
             $.get(url).done(function(data){
-                /*M.toast({html: '<span style="color:green;">Successfully done</span>'});*/
+                if (data.option.isVisible) {
+                    Materialize.toast('Goal is now visible.', 1000);
+                } else {
+                    Materialize.toast('Goal is now not visible.', 1000);
+                }
             }).fail(function(data){
-                /*M.toast({html: '<span style="color:red;">Failed! Please try again later</span>'});*/
+                console.log(data);
             });
         });
     });
