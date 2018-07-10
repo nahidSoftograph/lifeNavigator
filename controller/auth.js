@@ -11,8 +11,8 @@ let signUpRender = (req, res, next) => {
 };
 
 var userSignUp = passport.authenticate('local-signup', {
-    successRedirect : '/view/profile',
-    failureRedirect : '/signup',
+    successRedirect : '/auth/signin',
+    failureRedirect : '/auth/signup',
     failureFlash : true
 });
 
