@@ -136,7 +136,7 @@ let renderCreateSelect = (req, res, next) => {
 let createInstance = (req, res, next) => {
     let instanceName = req.body.instanceName,
         companyName = req.body.companyName,
-        instanceLink = req.body.instanceLink;
+        instanceLink = req.body.instanceLink.split(' ').join('_');
 
     if (!instanceName) {
         console.log('Invalid instance name');
@@ -622,7 +622,7 @@ let detectInstance = (instanceId, cb) => {
             });
         } else {
             if (!instance) {
-                console.log('Null instance')
+                console.log('Null instance');
                 Instance.findOne({isHome: true}, (err, instance) => {
                     if (err) {
                         return cb (err, null);
