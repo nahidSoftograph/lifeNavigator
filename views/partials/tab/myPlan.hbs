@@ -1,30 +1,46 @@
 <form action="/myPlan/updateEditInstance/{{myPlan._id}}" method="post">
 
     <div class="row">
-        <div class="input-field col s12">
-            <input name="headerText" value="{{myPlan.headerText}}" id="headerText" type="text" class="validate">
-            <label class="active" for="headerText">Enter Header Text</label>
+        <div class="input-field col s10">
+            <input name="headerText" value="{{myPlan.headerText}}" id="headerTextMyPlan" type="text" class="validate">
+            <label class="active" for="headerTextMyPlan">Enter Header Text</label>
+        </div>
+        <div class="col s2" style="margin-top: 15px;">
+            <button class="btn waves-effect waves-light setToDefaultButtonHeaderText">Set to Default
+            </button>
         </div>
     </div>
 
     <div class="row">
-        <div class="input-field col s12">
-            <input name="subHeaderText" value="{{myPlan.subHeaderText}}" id="subHeaderText" type="text" class="validate">
-            <label class="active" for="subHeaderText">Enter Sub Header Text</label>
+        <div class="input-field col s10">
+            <input name="subHeaderText" value="{{myPlan.subHeaderText}}" id="subHeaderTextMyPlan" type="text" class="validate">
+            <label class="active" for="subHeaderTextMyPlan">Enter Sub Header Text</label>
+        </div>
+        <div class="col s2" style="margin-top: 15px;">
+            <button class="btn waves-effect waves-light setToDefaultButtonSubHeaderText">Set to Default
+            </button>
         </div>
     </div>
 
     <div class="row">
-        <div class="input-field col s12">
-            <input name="complement" value="{{myPlan.complement}}" id="complement" type="text" class="validate">
-            <label class="active" for="complement">Enter Complement</label>
+        <div class="input-field col s10">
+            <input name="complement" value="{{myPlan.complement}}" id="complementMyPlan" type="text" class="validate">
+            <label class="active" for="complementMyPlan">Enter Complement</label>
+        </div>
+        <div class="col s2" style="margin-top: 15px;">
+            <button class="btn waves-effect waves-light setToDefaultButtonComplement">Set to Default
+            </button>
         </div>
     </div>
 
     <div class="row">
-        <div class="input-field col s12">
-            <input name="finalInstruction" value="{{myPlan.finalInstruction}}" id="finalInstruction" type="text" class="validate">
-            <label class="active" for="finalInstruction">Enter Final Instruction</label>
+        <div class="input-field col s10">
+            <input name="finalInstruction" value="{{myPlan.finalInstruction}}" id="finalInstructionMyPlan" type="text" class="validate">
+            <label class="active" for="finalInstructionMyPlan">Enter Final Instruction</label>
+        </div>
+        <div class="col s2" style="margin-top: 15px;">
+            <button class="btn waves-effect waves-light setToDefaultButtonFinalInstruction">Set to Default
+            </button>
         </div>
     </div>
 
@@ -40,3 +56,49 @@
     </div>
 
 </form>
+
+<script>
+    $(document).ready(() => {
+
+        $('.setToDefaultButtonHeaderText').on('click', () => {
+            event.preventDefault();
+            let url = location.origin + '/defaultInstance/getData/';
+            $.get(url).done(function(data){
+                $('#headerTextMyPlan').val(data.myPlan.headerText);
+            }).fail(function(data){
+                console.log(data);
+            });
+        });
+
+        $('.setToDefaultButtonSubHeaderText').on('click', () => {
+            event.preventDefault();
+            let url = location.origin + '/defaultInstance/getData/';
+            $.get(url).done(function(data){
+                $('#subHeaderTextMyPlan').val(data.myPlan.subHeaderText);
+            }).fail(function(data){
+                console.log(data);
+            });
+        });
+
+        $('.setToDefaultButtonComplement').on('click', () => {
+            event.preventDefault();
+            let url = location.origin + '/defaultInstance/getData/';
+            $.get(url).done(function(data){
+                $('#complementMyPlan').val(data.myPlan.complement);
+            }).fail(function(data){
+                console.log(data);
+            });
+        });
+
+        $('.setToDefaultButtonFinalInstruction').on('click', () => {
+            event.preventDefault();
+            let url = location.origin + '/defaultInstance/getData/';
+            $.get(url).done(function(data){
+                $('#finalInstructionMyPlan').val(data.myPlan.finalInstruction);
+            }).fail(function(data){
+                console.log(data);
+            });
+        });
+
+    });
+</script>

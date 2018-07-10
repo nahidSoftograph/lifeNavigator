@@ -192,52 +192,6 @@ module.exports = {
     updateSiteUserOptionSelection
 };
 
-
-
-/*let cookCategories = (instanceId, cb) => {
-    Category.find({instanceId: instanceId}, (err, categories) => {
-        if (err) {
-            console.log('Error: ' + err);
-        } else {
-            traverseAllCategories(categories, instanceId, (err, categories) => {
-                if (err) {
-                    return cb (err, null);
-                } else {
-                    return cb (null, categories);
-                }
-            });
-        }
-    });
-};
-
-let traverseAllCategories = (categories, instanceId, cb) => {
-
-    if (categories.length == 0) {
-        return cb (null, categories);
-    } else {
-        for (let index=0; index<categories.length; index++) {
-            Option.find({catId: categories[index].catId, isVisible: true, instanceId: instanceId}, (err, options) => {
-                if (err) {
-                    return cb (err, null);
-                } else {
-                    setOptionId(options, (err, options) => {
-                        if (err) {
-                            return cb (err, null);
-                        } else {
-                            categories[index].options = options;
-                            console.log(categories[index].options);
-                            console.log('Length: ' + categories.length + ' index: ' +  index);
-                            if (categories.length - 1 == index) {
-                                return cb (null, categories);
-                            }
-                        }
-                    });
-                }
-            });
-        }
-    }
-};*/
-
 let traverseAllCategories = (categories, instanceId, cb) => {
 
     if (categories.length == 0) {
@@ -349,7 +303,7 @@ getOptionsId = (options, cb) => {
 
 let getApiInstance = (instanceLink, cb) => {
     console.log('Instance link: ' + instanceLink);
-    Instance.findOne({instanceLink: instanceLink}, (err, instance) => {
+    Instance.findOne({instanceLink: instanceLink, isActive: true }, (err, instance) => {
         if (err) {
             console.log('Errro: ' + err);
             return cb (err, null);
