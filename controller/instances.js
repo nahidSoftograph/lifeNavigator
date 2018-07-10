@@ -90,8 +90,6 @@ let renderEditInstances = (req, res, next) => {
                                                                             if (err) {
                                                                                 console.log('Error: ' + err);
                                                                             } else {
-                                                                                console.log('Home');
-                                                                                console.log(home);
                                                                                 res.render('instances/edit', {
                                                                                     'title': 'Edit instances',
                                                                                     home: home,
@@ -188,7 +186,14 @@ let createInstance = (req, res, next) => {
                                                                         console.log('Error: ' + err);
                                                                     } else {
                                                                         console.log('Cloned the my Plan');
-                                                                        res.redirect('/instances/createSelectInstances');
+                                                                        cloneSiteUserSignUp(currentInstanceId, homeInstanceId, (err, siteUserSignUp) => {
+                                                                            if (err) {
+                                                                                console.log('Error: ' + err);
+                                                                            } else {
+                                                                                console.log('Site user sign up cloned');
+                                                                                res.redirect('/instances/createSelectInstances');
+                                                                            }
+                                                                        });
                                                                     }
                                                                 });
                                                             }
@@ -281,6 +286,32 @@ module.exports = {
     changeInstanceActivation,
     deleteInstance,
     alterVisibility
+};
+
+let cloneSiteUserSignUp = (currentInstanceId, homeInstanceId, cb) => {
+    SiteUserSignUp.findOne({instanceId: homeInstanceId}, (err, siteUserSignUp) => {
+        if (err) {
+            console.log('Error: ' + err);
+            return cb (err, null);
+        } else {
+            let newSiteUserSignUp = new SiteUserSignUp({
+                instanceId: currentInstanceId,
+                headerText: siteUserSignUp.headerText,
+                beforeAge: siteUserSignUp.beforeAge,
+                afterAge: siteUserSignUp.afterAge,
+                beforeGender: siteUserSignUp.beforeGender,
+                beforeZip: siteUserSignUp.beforeZip,
+                buttonText: siteUserSignUp.buttonText
+            });
+            newSiteUserSignUp.save((err, siteUserSignUp) => {
+                if (err) {
+                    return cb (err, null);
+                } else {
+                    return cb (null, siteUserSignUp);
+                }
+            });
+        }
+    });
 };
 
 let cloneAccomplishment = (currentInstanceId, homeInstanceId, cb) => {
@@ -530,6 +561,8 @@ let getSiteUserSignUpInformation = (instanceId, cb) => {
         if (err) {
             return cb (err, null);
         } else {
+            console.log('-----------------------------------------------------------------------------');
+            console.log(siteUserSignUp);
             return cb (null, siteUserSignUp);
         }
     });

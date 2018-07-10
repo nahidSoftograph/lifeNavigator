@@ -84,6 +84,7 @@ router.post('/updateEditInstance/:id', upload.single('image'), (req, res, next) 
         anchorText = req.body.anchorText,
         anchorLink = req.body.anchorLink,
         buttonText = req.body.buttonText,
+        logoPathDefaultConversion = req.body.logoPathDefaultConversion,
         buttonLink = req.body.buttonLink;
 
     if (!id) {
@@ -118,6 +119,7 @@ router.post('/updateEditInstance/:id', upload.single('image'), (req, res, next) 
                 home.anchorLink = req.body.anchorLink || home.anchorLink;
                 home.buttonText = req.body.buttonText || home.buttonText;
                 home.buttonLink = req.body.buttonLink || home.buttonLink;
+                home.logoPath = req.body.logoPathDefaultConversion || home.logoPath;
                 if (typeof req.file != 'undefined') {
                     home.logoPath = '/images/logo/' + req.file.filename || home.logoPath;
                 }
