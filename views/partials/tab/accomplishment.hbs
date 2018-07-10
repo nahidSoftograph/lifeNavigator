@@ -85,7 +85,7 @@
             $.get(url).done(function(data){
                 $('#headerTextAccomplishment').val(data.accomplishment.headerText);
             }).fail(function(data){
-                /*M.toast({html: '<span style="color:red;">Failed! Please try again later</span>'});*/
+                console.log(data);
             });
         });
 
@@ -95,7 +95,7 @@
             $.get(url).done(function(data){
                 $('#subHeaderTextAccomplishment').val(data.accomplishment.subHeaderText);
             }).fail(function(data){
-                /*M.toast({html: '<span style="color:red;">Failed! Please try again later</span>'});*/
+                console.log(data);
             });
         });
 
@@ -105,7 +105,7 @@
             $.get(url).done(function(data){
                 $('#buttonTextAccomplishment').val(data.accomplishment.buttonText);
             }).fail(function(data){
-                /*M.toast({html: '<span style="color:red;">Failed! Please try again later</span>'});*/
+                console.log(data);
             });
         });
 
