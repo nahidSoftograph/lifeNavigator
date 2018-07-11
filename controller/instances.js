@@ -2,6 +2,8 @@ let Instance = require('../models/instance'),
     Accomplishment = require('../models/accomplishment'),
     AssessRisk = require('../models/assessRisk'),
     Category = require('../models/category'),
+    Card = require('../models/card'),
+    CardButton = require('../models/cardButton'),
     FutureGoal = require('../models/futureGoal'),
     MyPlan = require('../models/myPlan'),
     Home = require('../models/home'),
@@ -35,7 +37,6 @@ let alterVisibility = (req, res, next) => {
                             message: err
                         });
                     } else {
-                        console.log('Instance visibility changed');
                         res.status(201).json({
                             success: true,
                             instance: instance
@@ -50,57 +51,53 @@ let alterVisibility = (req, res, next) => {
 let renderEditInstances = (req, res, next) => {
     let instanceId = req.params.instanceId;
     if (!instanceId) {
-        console.log('Invalid instance id');
     } else {
         detectInstance(instanceId, (err, instance) => {
             if (err) {
-                console.log('Error: ' + err);
             } else {
                 instanceId = instance._id;
-                console.log('-----------------Instance Id: ' + instanceId);
                 getHomePageInformation(instanceId, (err, home) => {
                     if (err) {
-                        console.log('Error: ' + err);
                     } else {
                         getSiteUserSignUpInformation(instanceId, (err, siteUserSignUp) => {
                             if (err) {
-                                console.log('Error: ' + err);
                             } else {
                                 getAccomplishmentInformation(instanceId, (err, accomplishment) => {
                                     if (err) {
-                                        console.log('Error: ' + err);
                                     } else {
                                         getFutureGoalInformation(instanceId, (err, futureGoal) => {
                                             if (err) {
-                                                console.log('Error: ' + err);
                                             } else {
                                                 getAssessRiskInformation(instanceId, (err, assessRisk) => {
                                                     if (err) {
-                                                        console.log('Error: ' + err);
                                                     } else {
                                                         getMyPlanInformation(instanceId, (err, myPlan) => {
                                                             if (err) {
-                                                                console.log('Error: ' + err);
                                                             } else {
                                                                 optionController.cookOptions(instanceId, (err, options) => {
                                                                     if (err) {
-                                                                        console.log('Error: ' + err);
                                                                     } else {
                                                                         Instance.find({}, (err, instances) => {
                                                                             if (err) {
-                                                                                console.log('Error: ' + err);
                                                                             } else {
-                                                                                res.render('instances/edit', {
-                                                                                    'title': 'Edit instances',
-                                                                                    home: home,
-                                                                                    siteUserSignUp: siteUserSignUp,
-                                                                                    accomplishment: accomplishment,
-                                                                                    futureGoal: futureGoal,
-                                                                                    assessRisk: assessRisk,
-                                                                                    myPlan: myPlan,
-                                                                                    options: options,
-                                                                                    instances: instances,
-                                                                                    currentInstance: instance
+                                                                                getCardButton(instanceId, (err, cardButtons) => {
+                                                                                    if (err) {
+
+                                                                                    } else {
+                                                                                        res.render('instances/edit', {
+                                                                                            'title': 'Edit instances',
+                                                                                            home: home,
+                                                                                            siteUserSignUp: siteUserSignUp,
+                                                                                            accomplishment: accomplishment,
+                                                                                            futureGoal: futureGoal,
+                                                                                            assessRisk: assessRisk,
+                                                                                            myPlan: myPlan,
+                                                                                            options: options,
+                                                                                            instances: instances,
+                                                                                            currentInstance: instance,
+                                                                                            cardButtons: cardButtons
+                                                                                        });
+                                                                                    }
                                                                                 });
                                                                             }
                                                                         });
@@ -126,7 +123,6 @@ let renderEditInstances = (req, res, next) => {
 let renderCreateSelect = (req, res, next) => {
     Instance.find({}, (err, instances) => {
         if (err) {
-            console.log(err);
         } else {
             res.render('instances/createSelect', {'title': 'Create Select Instances', instances: instances });
         }
@@ -139,11 +135,8 @@ let createInstance = (req, res, next) => {
         instanceLink = req.body.instanceLink.split(' ').join('_');
 
     if (!instanceName) {
-        console.log('Invalid instance name');
     } else if (!companyName) {
-        console.log('Invalid company name');
     } else if (!instanceLink) {
-        console.log('Invalid instance link');
     } else {
         let instance = new Instance({
             instanceName: instanceName,
@@ -152,46 +145,39 @@ let createInstance = (req, res, next) => {
         });
         instance.save((err, instance) => {
             if (err) {
-                console.log(err);
             } else {
                 let currentInstanceId = instance._id;
                 Instance.findOne({isHome: true}, (err, homeInstance) => {
                     if (err) {
-                        console.log('Error: ' + err);
                     } else {
                         let homeInstanceId = homeInstance._id;
                         cloneAccomplishment(currentInstanceId, homeInstanceId, (err, accomplishment) => {
                             if (err) {
-                                console.log('Error: ' + err);
                             } else {
                                 cloneAssessRisk(currentInstanceId, homeInstanceId, (err, assessRisk) => {
                                     if (err) {
-                                        console.log('Error: ' + err);
                                     } else {
                                         cloneFutureGoal(currentInstanceId, homeInstanceId, (err, futureGoal) => {
                                             if (err) {
-                                                console.log('Error: ' + err);
                                             } else {
                                                 cloneHome(currentInstanceId, homeInstanceId, (err, home) => {
                                                     if (err) {
-                                                        console.log('Error: ' + err);
                                                     } else {
                                                         cloneCategory(currentInstanceId, homeInstanceId, (err, done) => {
                                                             if (err) {
-                                                                console.log('Error: ' + err);
                                                             } else {
-                                                                console.log('Update the category');
                                                                 cloneMyPlan(currentInstanceId, homeInstanceId, (err, myPlan) => {
                                                                     if (err) {
-                                                                        console.log('Error: ' + err);
                                                                     } else {
-                                                                        console.log('Cloned the my Plan');
                                                                         cloneSiteUserSignUp(currentInstanceId, homeInstanceId, (err, siteUserSignUp) => {
                                                                             if (err) {
-                                                                                console.log('Error: ' + err);
                                                                             } else {
-                                                                                console.log('Site user sign up cloned');
-                                                                                res.redirect('/instances/createSelectInstances');
+                                                                                cloneCard(currentInstanceId, homeInstanceId, (err, cards) => {
+                                                                                    if (err) {
+                                                                                    } else {
+                                                                                        res.redirect('/instances/createSelectInstances');
+                                                                                    }
+                                                                                });
                                                                             }
                                                                         });
                                                                     }
@@ -219,18 +205,14 @@ let updateInstance = (req, res, next) => {
         instanceLink = req.body.instanceLink,
         instanceIdParam = req.params.instanceId;
         id = req.body.id || instanceIdParam;
-    console.log(req.body);
     Instance.findById(id, (err, instance) => {
         if (err) {
-            console.log('Error: ' + err);
         } else {
             instance.instanceName = instanceName || instance.instanceName;
             instance.companyName = companyName || instance.companyName;
             instance.instanceLink = instanceLink || instance.instanceLink;
             instance.save((err, instance) => {
-
                 if (err) {
-                    console.log(err);
                 } else {
                     res.redirect('/instances/createSelectInstances');
                 }
@@ -243,16 +225,13 @@ let changeInstanceActivation = (req, res, next) => {
     let id = req.params.id;
 
     if (!id) {
-        console.log('Invalid id');
     } else {
         Instance.findById(id, (err, instance) => {
             if (err) {
-                console.log('Error: ' + err);
             } else {
                 instance.isActive = !instance.isActive;
                 instance.save((err, instance) => {
                     if (err) {
-                        console.log('Error: ' + err);
                     } else {
                         res.redirect('/instances/createSelectInstances');
                     }
@@ -266,11 +245,9 @@ let deleteInstance = (req, res, next) => {
     let id = req.params.id;
 
     if (!id) {
-        console.log('Invalid id');
     } else {
         Instance.findByIdAndRemove(id, (err, instance) => {
             if (err) {
-                console.log('Error: ' + err);
             } else {
                 res.redirect('/instances/createSelectInstances');
             }
@@ -291,7 +268,6 @@ module.exports = {
 let cloneSiteUserSignUp = (currentInstanceId, homeInstanceId, cb) => {
     SiteUserSignUp.findOne({instanceId: homeInstanceId}, (err, siteUserSignUp) => {
         if (err) {
-            console.log('Error: ' + err);
             return cb (err, null);
         } else {
             let newSiteUserSignUp = new SiteUserSignUp({
@@ -317,7 +293,6 @@ let cloneSiteUserSignUp = (currentInstanceId, homeInstanceId, cb) => {
 let cloneAccomplishment = (currentInstanceId, homeInstanceId, cb) => {
     Accomplishment.findOne({instanceId: homeInstanceId}, (err, accomplishment) => {
         if (err) {
-            console.log('Error: ' + err);
             return cb (err, null);
         } else {
             let newAccomplishment = new Accomplishment({
@@ -341,7 +316,6 @@ let cloneAccomplishment = (currentInstanceId, homeInstanceId, cb) => {
 let cloneAssessRisk = (currentInstanceId, homeInstanceId, cb) => {
     AssessRisk.findOne({instanceId: homeInstanceId}, (err, assessRisk) => {
         if (err) {
-            console.log('Error: ' + err);
             return cb (err, null);
         } else {
             let newAssessRisk = new AssessRisk({
@@ -354,7 +328,6 @@ let cloneAssessRisk = (currentInstanceId, homeInstanceId, cb) => {
             });
             newAssessRisk.save((err, assessRisk) => {
                 if (err) {
-                    console.log('Error: ' + err);
                     return cb (err, null);
                 } else {
                     return cb (null, assessRisk);
@@ -369,7 +342,6 @@ let cloneCategory = (currentInstanceId, homeInstanceId, cb) => {
         if (categories.length == 0) {
             return cb (null, 'done');
         } else if (err) {
-            console.log('error: ' + err);
             return cb (err, null);
         } else {
             for (let index=0; index<categories.length; index++) {
@@ -385,19 +357,12 @@ let cloneCategory = (currentInstanceId, homeInstanceId, cb) => {
 
                 newCategory.save((err, newCategory) => {
                     if (err) {
-                        console.log('Error: ' + err);
                         return cb (err, null);
                     } else {
-                        console.log('<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Existing category');
-                        console.log(currentCategory);
-                        console.log('<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< New category');
-                        console.log(newCategory)
                         cloneOptions(currentCategory._id, newCategory._id, currentInstanceId, homeInstanceId, (err, val) => {
                             if (err) {
-                                console.log('Error: ' + err);
                                 return cb (err, null);
                             } else {
-                                console.log('Updated the options');
                                 if (index == (categories.length - 1)) {
                                     return cb (null, 'Done');
                                 }
@@ -413,7 +378,6 @@ let cloneCategory = (currentInstanceId, homeInstanceId, cb) => {
 let cloneHome = (currentInstanceId, homeInstanceId, cb) => {
     Home.findOne({instanceId: homeInstanceId}, (err, home) => {
         if (err) {
-            console.log('Error: ' + err);
             return cb (err, null);
         } else {
             let newHome = new Home({
@@ -429,7 +393,6 @@ let cloneHome = (currentInstanceId, homeInstanceId, cb) => {
             });
             newHome.save((err, home) => {
                 if (err) {
-                    console.log('Error: ' + err);
                     return cb (err, null);
                 } else {
                     return cb (null, home);
@@ -442,7 +405,6 @@ let cloneHome = (currentInstanceId, homeInstanceId, cb) => {
 let cloneFutureGoal = (currentInstanceId, homeInstanceId, cb) => {
     FutureGoal.findOne({instanceId: homeInstanceId}, (err, futureGoal) => {
         if (err) {
-            console.log('Error: ' + err);
             return cb (err, null);
         } else {
             let newFutureGoal = new FutureGoal({
@@ -454,7 +416,6 @@ let cloneFutureGoal = (currentInstanceId, homeInstanceId, cb) => {
             });
             newFutureGoal.save((err, futureGoal) => {
                 if (err) {
-                    console.log('Error: ' + err);
                     return cb (err, null);
                 } else {
                     return cb (null, futureGoal);
@@ -474,14 +435,9 @@ let cloneOccupation = (instanceId, cb) => {
 
 let cloneOptions = (currentCategoryId, newCategoryId, currentInstanceId, homeInstanceId, cb) => {
     Option.find({categoryId: currentCategoryId, instanceId: homeInstanceId}, (err, options) => {
-        console.log('*************************Options**************************');
-        console.log('Cloning option for: ' + currentInstanceId);
-        console.log(options);
-        console.log("*************************Options***************************");
         if (options.length == 0) {
             return cb (null, 'done');
         } else if (err) {
-            console.log('Error: ' + err);
             return cb (err, null);
         } else {
             for (let index=0; index<options.length; index++) {
@@ -500,13 +456,8 @@ let cloneOptions = (currentCategoryId, newCategoryId, currentInstanceId, homeIns
                 });
                 newOption.save((err, option) => {
                     if (err) {
-                        console.log('Error: ' + err);
                         return cb (err, null);
                     } else {
-                        console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Existing option');
-                        console.log(existingOption);
-                        console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> New option');
-                        console.log(option);
                         if (index == (options.length - 1)) {
                             return cb (null, 'Done');
                         }
@@ -524,7 +475,6 @@ let cloneSick = (instanceId, cb) => {
 let cloneMyPlan = (currentInstanceId, homeInstanceId, cb) => {
     MyPlan.findOne({instanceId: homeInstanceId}, (err, myPlan) => {
         if (err) {
-            console.log('Error: ' + err);
             return cb (err, null);
         } else {
             let newMyPlan = new MyPlan({
@@ -532,11 +482,13 @@ let cloneMyPlan = (currentInstanceId, homeInstanceId, cb) => {
                 headerText: myPlan.headerText,
                 subHeaderText: myPlan.subHeaderText,
                 complement: myPlan.complement,
-                finalInstruction: myPlan.finalInstruction
+                finalInstruction: myPlan.finalInstruction,
+                bottomButtonText: myPlan.bottomButtonText,
+                bottomButtonLink: myPlan.bottomButtonLink,
+                bottomButtonVisibility: myPlan.bottomButtonVisibility
             });
             newMyPlan.save((err, myPlan) => {
                 if (err) {
-                    console.log('Error: ' + err);
                     return cb (err, null);
                 } else {
                     return cb (null, myPlan);
@@ -561,8 +513,6 @@ let getSiteUserSignUpInformation = (instanceId, cb) => {
         if (err) {
             return cb (err, null);
         } else {
-            console.log('-----------------------------------------------------------------------------');
-            console.log(siteUserSignUp);
             return cb (null, siteUserSignUp);
         }
     });
@@ -611,18 +561,15 @@ let getMyPlanInformation = (instanceId, cb) => {
 let detectInstance = (instanceId, cb) => {
     Instance.findById(instanceId, (err, instance) => {
         if (err) {
-            console.log('Error in find instance');
             Instance.findOne({isHome: true}, (err, instance) => {
                 if (err) {
                     return cb (err, null);
                 } else {
-                    console.log('Set default instance');
                     return cb (null, instance);
                 }
             });
         } else {
             if (!instance) {
-                console.log('Null instance');
                 Instance.findOne({isHome: true}, (err, instance) => {
                     if (err) {
                         return cb (err, null);
@@ -631,10 +578,121 @@ let detectInstance = (instanceId, cb) => {
                     }
                 });
             } else {
-                console.log('Send required instance');
-                console.log(instance);
                 return cb (null, instance);
             }
+        }
+    });
+};
+
+let cloneCard = (currentInstanceId, homeInstanceId, cb) => {
+
+    Card.find({instanceId: homeInstanceId}, (err, cards) => {
+        if (err) {
+            return cb (err, null);
+        } else {
+            if (cards.lelngth == 0) {
+                return cb (null, cards);
+            } else {
+                for (let index=0; index<cards.length; index++) {
+                    let currentCard = cards[index];
+                    let newCard = new Card ({
+                        instanceId: currentInstanceId,
+                        cardName: currentCard.cardName,
+                        headerText: currentCard.headerText,
+                        subHeaderText: currentCard.subHeaderText,
+                        cardBody: currentCard.cardBody,
+                        isVisible: currentCard.isVisible
+                    });
+                    console.log('Card Index: ' + index);
+                    newCard.save((err, newCard) => {
+                        if (err) {
+                            return cb (err, null);
+                        } else {
+                            cloneCardButton(currentInstanceId, homeInstanceId, currentCard._id, newCard._id, (err, cardButtons) => {
+                                if (err) {
+                                    return cb (err, null);
+                                } else {
+                                    if (index == (cards.length - 1)) {
+                                        return cb (null, cards);
+                                    }
+                                }
+                            });
+                        }
+                    });
+                }
+            }
+        }
+    });
+};
+
+let cloneCardButton = (currentInstanceId, homeInstanceId, currentCardId, newCardId, cb) => {
+    CardButton.find({instanceId: homeInstanceId, cardId: currentCardId }, (err, cardButtons) => {
+        if (err) {
+            return cb (err, null);
+        } else {
+            console.log('Card Button length: ' + cardButtons.length);
+            if (cardButtons.length == 0) {
+                return cb (null, cardButtons);
+            } else {
+                for (let index=0; index<cardButtons.length; index++) {
+                    let currentCardButton = cardButtons[index];
+                    let newCardButton = new CardButton ({
+                        instanceId: currentInstanceId,
+                        cardId: newCardId,
+                        buttonName: currentCardButton.buttonName,
+                        buttonUrl: currentCardButton.buttonUrl,
+                        buttonText: currentCardButton.buttonText,
+                        isVisible: currentCardButton.isVisible,
+                        cardName: currentCardButton.cardName
+                    });
+                    newCardButton.save((err, cardButton) => {
+                        if (err) {
+                            return cb (err, null);
+                        } else {
+                            if (index == (cardButtons.length - 1)) {
+                                return cb (null, cardButtons);
+                            }
+                        }
+                    });
+                }
+            }
+        }
+    });
+};
+
+let cardButtonsInfo = (cardButtons, cb) => {
+    if (cardButtons.length == 0) {
+        return cb(null, cardButtons);
+    } else {
+        for (let index=0; index<cardButtons.length; index++) {
+            Card.findById(cardButtons[index].cardId, (err, card) => {
+                if (err) {
+                    return cb (err, null);
+                } else {
+                    cardButtons[index].cardName = card.cardName;
+                    if (index == (cardButtons.length - 1)) {
+                        return cb (null, cardButtons);
+                    }
+                }
+            });
+        }
+    }
+};
+
+let getCardButton = (instanceId, cb) => {
+    CardButton.find({instanceId: instanceId}, (err, cardButtons) => {
+        if (err) {
+            return cb (err, null);
+        } else {
+            cardButtonsInfo(cardButtons, (err, cardButtons) => {
+                if (err) {
+                    return cb (err, null);
+                } else {
+                    console.log('Getting card buttons');
+                    console.log(cardButtons);
+                    return cb (null, cardButtons);
+                }
+            });
         }
     });
 };

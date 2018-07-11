@@ -1,4 +1,6 @@
-let MyPlan = require('../models/myPlan');
+let MyPlan = require('../models/myPlan'),
+    CardButton = require('../models/cardButton'),
+    Card = require('../models/card');
 
 let displayMyPlan = (req, res, next) => {
     console.log('in making plan');
@@ -11,9 +13,26 @@ let displayMyPlan = (req, res, next) => {
                 console.log('Error: ' + err);
             } else {
                 console.log(myPlan);
-                res.render('instanceSite/myPlan', {
-                    instanceId: instanceId,
-                    myPlan: myPlan
+                CardButton.find({instanceId: instanceId}, (err, cardButtons) => {
+                    if (err) {
+                        console.log('Error: ' + err);
+                    } else {
+                        console.log('Pre card Buttons');
+                        console.log(cardButtons);
+                        cardButtonsInfo(cardButtons, (err, cardButtons) => {
+                            if (err) {
+                                console.log('Error: ' + err);
+                            } else {
+                                console.log('Card Buttons: ');
+                                console.log(cardButtons);
+                                res.render('instanceSite/myPlan', {
+                                    instanceId: instanceId,
+                                    myPlan: myPlan,
+                                    cardButtons: cardButtons
+                                });
+                            }
+                        });
+                    }
                 });
             }
         });
@@ -81,7 +100,10 @@ let updateMyPlan = (req, res, next) => {
         headerText = req.body.headerText,
         subHeaderText = req.body.subHeaderText,
         complement = req.body.complement,
-        finalInstruction = req.body.finalInstruction;
+        finalInstruction = req.body.finalInstruction,
+        bottomButtonText = req.body.bottomButtonText,
+        bottomButtonLink = req.body.bottomButtonLink,
+        bottomButtonVisibility = req.body.bottomButtonVisibility;
 
     if (!id) {
         res.status(202).json({
@@ -117,6 +139,11 @@ let updateMyPlan = (req, res, next) => {
                myPlan.subHeaderText = subHeaderText || myPlan.subHeaderText;
                myPlan.complement = complement || myPlan.complement;
                myPlan.finalInstruction = finalInstruction || myPlan.finalInstruction;
+               myPlan.bottomButtonText = bottomButtonText || myPlan.bottomButtonText;
+               myPlan.bottomButtonLink = bottomButtonLink || myPlan.bottomButtonLink;
+               if (typeof bottomButtonVisibility != 'undefined') {
+                   myPlan.bottomButtonVisibility = bottomButtonVisibility;
+               }
                myPlan.save((err, myPlan) => {
                    if (err) {
                        console.log('Errro: ' + err);
@@ -135,7 +162,10 @@ let updateEditInstanceMyPlan = (req, res, next) => {
         headerText = req.body.headerText,
         subHeaderText = req.body.subHeaderText,
         complement = req.body.complement,
-        finalInstruction = req.body.finalInstruction;
+        finalInstruction = req.body.finalInstruction,
+        bottomButtonText = req.body.bottomButtonText,
+        bottomButtonLink = req.body.bottomButtonLink,
+        bottomButtonVisibility = req.body.bottomButtonVisibility;
 
     if (!id) {
         res.status(202).json({
@@ -171,6 +201,11 @@ let updateEditInstanceMyPlan = (req, res, next) => {
                 myPlan.subHeaderText = subHeaderText || myPlan.subHeaderText;
                 myPlan.complement = complement || myPlan.complement;
                 myPlan.finalInstruction = finalInstruction || myPlan.finalInstruction;
+                myPlan.bottomButtonText = bottomButtonText || myPlan.bottomButtonText;
+                myPlan.bottomButtonLink = bottomButtonLink || myPlan.bottomButtonLink;
+                if (typeof bottomButtonVisibility != 'undefined') {
+                    myPlan.bottomButtonVisibility = bottomButtonVisibility;
+                }
                 myPlan.save((err, myPlan) => {
                     if (err) {
                         console.log('Errro: ' + err);
@@ -189,4 +224,26 @@ module.exports = {
   createMyPlan,
   updateMyPlan,
   updateEditInstanceMyPlan
+};
+
+let cardButtonsInfo = (cardButtons, cb) => {
+    console.log('Card Length: ' + cardButtons.length);
+    if (cardButtons.length == 0) {
+        return cb(null, cardButtons);
+    } else {
+        for (let index=0; index<cardButtons.length; index++) {
+            Card.findById(cardButtons[index].cardId, (err, card) => {
+                if (err) {
+                    return cb (err, null);
+                } else {
+                    cardButtons[index].cardName = card.cardName;
+                    console.log('Card Name ' + index);
+                    console.log(cardButtons[index].cardName);
+                    if (index == (cardButtons.length - 1)) {
+                        return cb (null, cardButtons);
+                    }
+                }
+            });
+        }
+    }
 };

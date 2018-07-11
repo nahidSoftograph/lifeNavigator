@@ -62,7 +62,9 @@ let updateCardButton = (req, res, next) => {
         cardId = req.body.cardId,
         buttonName = req.body.buttonName,
         buttonUrl = req.body.buttonUrl,
+        callBackUrl = req.body.callBackUrl,
         buttonText = req.body.buttonText;
+    console.log('Updating card buttons ***********************************************************************************************************');
     if (!cardButtonId) {
         console.log('Invalid card button id');
     } else {
@@ -79,6 +81,7 @@ let updateCardButton = (req, res, next) => {
                         console.log('Error: ' + err);
                     } else {
                         console.log('Card Button updated');
+                        res.redirect(callBackUrl);
                     }
                 });
             }
@@ -101,6 +104,11 @@ let alterVisibility = (req, res, next) => {
                         console.log('Error: ' + err);
                     } else {
                         console.log('Card Button visibility changed');
+                        res.status(201).json({
+                            success: true,
+                            message: 'Successfully cahnge the visibility',
+                            data: cardButton
+                        });
                     }
                 });
             }

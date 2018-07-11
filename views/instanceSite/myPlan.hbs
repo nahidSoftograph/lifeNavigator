@@ -33,6 +33,20 @@
                     </div>
                 </div>
 
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input name="bottomButtonText" value="{{myPlan.bottomButtonText}}" id="bottomButtonText" type="text" class="validate">
+                        <label class="active" for="bottomButtonText">Bottom Button Text</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input name="bottomButtonLink" value="{{myPlan.bottomButtonLink}}" id="bottomButtonLink" type="text" class="validate">
+                        <label class="active" for="bottomButtonLink">bottomButtonLink</label>
+                    </div>
+                </div>
+
                 <input type="hidden" name="instanceId" value="{{instanceId}}">
                 <input type="hidden" name="buttonLink" value="{{myPlan.buttonLink}}">
                 <input type="hidden" name="callbackURL" value="/myPlan/display/{{myPlan._id}}">
@@ -45,7 +59,71 @@
                 </div>
 
             </form>
+
+            <br>
+            <br>
+
+            <span class="card-title">Card Buttons</span>
+            <hr>
+            <table class="responsive-table">
+                <thead>
+                <tr>
+                    <th>Card Name</th>
+                    <th>Button Text</th>
+                    <th>Button URL</th>
+                    <th>Visibility</th>
+                </tr>
+                </thead>
+                <tbody>
+                {{#each cardButtons}}
+                    <form action="/cardButton/update/{{myPlan.instanceId}}" method="post">
+                    <input type="hidden" name="callBackUrl" value="/myPlan/display/{{instanceId}}">
+                    <tr>
+                        <td>{{this.cardName}}</td>
+                        <td>
+                            <input value="{{this.buttonText}}" name="buttonText" type="text">
+                        </td>
+                        <td>
+                            <input value="{{this.buttonUrl}}" name="buttonUrl" type="text">
+                        </td>
+                        <td>
+                            <div class="switch">
+                                <label class="show_hide" data-id="{{ this._id}}">
+                                    hide
+                                    <input type="checkbox" {{#if this.isVisible}} checked {{/if}}>
+                                    <span class="lever"></span>
+                                    show
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <button type="submit" class=" waves-effect waves-light btn">Update</button>
+                        </td>
+                    </tr>
+                    </form>
+                {{/each}}
+                </tbody>
+            </table>
         </div>
     </div>
 
 </div>
+
+<script>
+    $(document).ready(function(){
+        $('.show_hide').on('change',function(){
+            var id = $(this).attr('data-id');
+            var url = location.origin + '/cardButton/alterVisibility/' + id;
+            $.get(url).done(function(data){
+                console.log(data);
+                if (data.data.isVisible) {
+                    Materialize.toast('Card button is now visible.', 1000);
+                } else {
+                    Materialize.toast('Card button is now not visible.', 1000);
+                }
+            }).fail(function(data){
+                console.log(data);
+            });
+        });
+    });
+</script>

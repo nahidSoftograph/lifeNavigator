@@ -44,6 +44,28 @@
         </div>
     </div>
 
+    <div class="row">
+        <div class="input-field col s10">
+            <input name="bottomButtonText" value="{{myPlan.bottomButtonText}}" id="bottomButtonTextMyPlan" type="text" class="validate">
+            <label class="active" for="bottomButtonTextMyPlan"></label>
+        </div>
+        <div class="col s2" style="margin-top: 15px;">
+            <button class="btn waves-effect waves-light setToDefaultButtonBottomButtonText">Set to Default
+            </button>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="input-field col s10">
+            <input name="bottomButtonLink" value="{{myPlan.bottomButtonLink}}" id="bottomButtonLinkMyPlan" type="text" class="validate">
+            <label class="active" for="bottomButtonLinkMyPlan"></label>
+        </div>
+        <div class="col s2" style="margin-top: 15px;">
+            <button class="btn waves-effect waves-light setToDefaultButtonBottomButtonLink">Set to Default
+            </button>
+        </div>
+    </div>
+
     <input type="hidden" name="instanceId" value="{{instanceId}}">
     <input type="hidden" name="buttonLink" value="{{myPlan.buttonLink}}">
     <input type="hidden" name="callbackURL" value="/myPlan/display/{{myPlan._id}}">
@@ -57,8 +79,68 @@
 
 </form>
 
+<br>
+<br>
+<br>
+<span class="card-title">Card Buttons</span>
+<hr>
+<table class="responsive-table">
+    <thead>
+    <tr>
+        <th>Card Name</th>
+        <th>Button Text</th>
+        <th>Button URL</th>
+        <th>Visibility</th>
+    </tr>
+    </thead>
+    <tbody>
+    {{#each cardButtons}}
+        <form action="/cardButton/update/{{this._id}}" method="post">
+            <input type="hidden" name="callBackUrl" value="/instances/editInstances/{{instanceId}}">
+            <tr>
+                <td>{{this.cardName}}</td>
+                <td>
+                    <input value="{{this.buttonText}}" name="buttonText" type="text">
+                </td>
+                <td>
+                    <input value="{{this.buttonUrl}}" name="buttonUrl" type="text">
+                </td>
+                <td>
+                    <div class="switch">
+                        <label class="button_show_hide" data-id="{{ this._id}}">
+                            hide
+                            <input type="checkbox" {{#if this.isVisible}} checked {{/if}}>
+                            <span class="lever"></span>
+                            show
+                        </label>
+                    </div>
+                </td>
+                <td>
+                    <button type="submit" class=" waves-effect waves-light btn">Update</button>
+                </td>
+            </tr>
+        </form>
+    {{/each}}
+    </tbody>
+</table>
+
 <script>
     $(document).ready(() => {
+
+        $('.button_show_hide').on('change',function(){
+            var id = $(this).attr('data-id');
+            var url = location.origin + '/cardButton/alterVisibility/' + id;
+            $.get(url).done(function(data){
+                console.log(data);
+                if (data.data.isVisible) {
+                    Materialize.toast('Card button is now visible.', 1000);
+                } else {
+                    Materialize.toast('Card button is now not visible.', 1000);
+                }
+            }).fail(function(data){
+                console.log(data);
+            });
+        });
 
         $('.setToDefaultButtonHeaderText').on('click', () => {
             event.preventDefault();
@@ -96,6 +178,26 @@
             $.get(url).done(function(data){
                 $('#finalInstructionMyPlan').val(data.myPlan.finalInstruction);
             }).fail(function(data){
+                console.log(data);
+            });
+        });
+
+        $('.setToDefaultButtonBottomButtonText').on('click', () => {
+            event.preventDefault();
+            let url = location.origin + '/defaultInstance/getData/';
+            $.get(url).done(function(data){
+                $('#bottomButtonTextMyPlan').val(data.myPlan.bottomButtonText);
+            }).fail(function(data) {
+                console.log(data);
+            });
+        });
+
+        $('.setToDefaultButtonBottomButtonLink').on('click', () => {
+            event.preventDefault();
+            let url = location.origin + '/defaultInstance/getData/';
+            $.get(url).done(function(data){
+                $('#bottomButtonLinkMyPlan').val(data.myPlan.bottomButtonLink);
+            }).fail(function(data) {
                 console.log(data);
             });
         });
