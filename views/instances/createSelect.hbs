@@ -6,9 +6,10 @@
                 <thead>
                 <tr>
                     <th>Name</th>
-                    <th>URL</th>
+                    <th>URL Suffix</th>
                     <th>Activation</th>
                     <th>Update</th>
+                    <th>Visit</th>
                 </tr>
                 </thead>
 
@@ -32,6 +33,9 @@
                     </td>
                     <td>
                         <button type="submit" class=" waves-effect waves-light btn" rel="{{this.instanceName}}formId">Update</button>
+                    </td>
+                    <td>
+                        <a href="http://167.99.70.55:8080/{{this.instanceLink}}"  target="_blank" >Go</a>
                     </td>
                 </tr>
                 </form>
@@ -60,7 +64,7 @@
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
-                        <input placeholder="Instance URL Without Space" name="instanceLink" type="text" class="validate">
+                        <input placeholder="Instance URL Suffix" name="instanceLink" type="text" class="validate">
                     </div>
                 </div>
                 <div class="row">
