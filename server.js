@@ -8,7 +8,8 @@ var path     = require('path');
 var port     = process.env.PORT || 8080;
 var mongoose = require('mongoose');
 var passport = require('passport');
-var flash = require('express-flash');
+// var flash = require('express-flash');
+var flash = require('connect-flash');
 var morgan       = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
@@ -115,6 +116,24 @@ app.use('/siteUserSignUp', siteUserSignUpRoutes);
 app.use('/accomplishment', accomplishmentRoutes);
 app.use('/myPlan', myPlanRoutes);
 app.use('/defaultInstance', defaultInstanceRoutes);
+
+app.get('/flash', function(req, res){
+    // Set a flash message by passing the key, followed by the value, to req.flash().
+    req.flash('info', 'Flash is back!');
+    req.flash('info', 'Flash is back 2!');
+    req.flash('warning', 'Flash is back 2!');
+    // res.send(req.flash('info'));
+    res.redirect('/redirect');
+});
+
+app.get('/redirect', function(req, res){
+    // Get an array of flash messages by passing the key to req.flash()
+    res.render('index', {
+        messages: req.flash('info'),
+        info: 'Test Info'
+    });
+});
+
 app.use('*', (req, res, next) => {
     res.sendFile(path.join(__dirname, 'public/index.html'));
 });
