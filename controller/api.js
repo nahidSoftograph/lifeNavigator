@@ -2,11 +2,13 @@ let Instance = require('../models/instance'),
     Category = require('../models/category'),
     Option = require('../models/option'),
     Home = require('../models/home'),
+    SiteUserSignUp = require('../models/siteUserSignUp'),
     Accomplishment = require('../models/accomplishment'),
     AssessRisk = require('../models/assessRisk'),
     Industry = require('../models/industry'),
     Occupation = require('../models/occupation'),
     Sick = require('../models/sick'),
+    MyPlan = require('../models/myPlan'),
     SiteUser = require('../models/siteUser'),
     FutureGoal = require('../models/futureGoal');
 
@@ -53,18 +55,33 @@ let getCategories = (req, res, next) => {
                                                                         if (err) {
                                                                             console.log('err: ' + err);
                                                                         } else {
-                                                                            res.status(201).json({
-                                                                                title: 'My Title',
-                                                                                home: home,
-                                                                                futureGoal: futureGoal,
-                                                                                accomplishment: accomplishment,
-                                                                                assessRisk: assessRisk,
-                                                                                categories: categories,
-                                                                                occupations: occupations,
-                                                                                industries: industries,
-                                                                                sicks: sicks,
-                                                                                instanceId: instance._id,
-                                                                                genericIconMisc: '/images/iconMisc.png'
+                                                                            console.log('Got home');
+                                                                            getSiteUserSignUp(instance._id, (err, siteUserSignUp) => {
+                                                                                if (err) {
+                                                                                    console.log('Error: ' + err);
+                                                                                } else {
+                                                                                    getMyPlan(instance._id, (err, myPlan) => {
+                                                                                        if (err) {
+                                                                                            console.log('err: ' + err);
+                                                                                        } else {
+                                                                                            res.status(201).json({
+                                                                                                title: 'My Title',
+                                                                                                home: home,
+                                                                                                futureGoal: futureGoal,
+                                                                                                accomplishment: accomplishment,
+                                                                                                assessRisk: assessRisk,
+                                                                                                categories: categories,
+                                                                                                occupations: occupations,
+                                                                                                industries: industries,
+                                                                                                sicks: sicks,
+                                                                                                instanceId: instance._id,
+                                                                                                siteUserSignUp: siteUserSignUp,
+                                                                                                saveMyPlan: myPlan,
+                                                                                                genericIconMisc: '/images/iconMisc.png'
+                                                                                            });
+                                                                                        }
+                                                                                    });
+                                                                                }
                                                                             });
                                                                         }
                                                                     });
@@ -269,6 +286,26 @@ let getHome = (instanceId, cb) => {
             return cb (err, null);
         } else {
             return cb (null, home);
+        }
+    });
+};
+
+let getSiteUserSignUp = (instanceId, cb) => {
+    SiteUserSignUp.findOne({instanceId: instanceId}, (err, siteUserSignUp) => {
+        if (err) {
+            return cb (err, null);
+        } else {
+            return cb (null, siteUserSignUp);
+        }
+    });
+};
+
+let getMyPlan = (instanceId, cb) => {
+    MyPlan.findOne({instanceId: instanceId}, (err, myPlan) => {
+        if (err) {
+            return cb (err, null);
+        } else {
+            return cb (null, myPlan);
         }
     });
 };
