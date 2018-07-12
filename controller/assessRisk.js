@@ -86,6 +86,7 @@ let createAssessRisk = (req, res, next) => {
 };
 
 let updateAssessRisk = (req, res, next) => {
+    console.log(req.body);
     let id  = req.params.id,
         instanceId = req.body.instanceId,
         headerText = req.body.headerText,
@@ -93,7 +94,15 @@ let updateAssessRisk = (req, res, next) => {
         subHeaderText = req.body.subHeaderText,
         buttonText = req.body.buttonText,
         buttonLink = req.body.buttonLink,
-        callBackURL = req.body.callBackURL;
+        callBackURL = req.body.callBackURL,
+
+        workInfoRow = req.body.workInfoRow,
+        incomeRow = req.body.incomeRow,
+        heightWeightRow = req.body.heightWeightRow,
+        smokeRow = req.body.smokeRow,
+        healthIssueRow = req.body.healthIssueRow,
+        retireAgeRow = req.body.retireAgeRow;
+
     if (!id) {
         console.log('Invalid id');
     } else if (!instanceId) {
@@ -110,6 +119,15 @@ let updateAssessRisk = (req, res, next) => {
         console.log('Invalid button link');
     } else if (!callBackURL) {
         console.log('Invalid call back url');
+    } else if ((workInfoRow === incomeRow) || (workInfoRow === heightWeightRow) ||  (workInfoRow === smokeRow) ||  (workInfoRow === healthIssueRow) ||  (workInfoRow === retireAgeRow) ||
+        (incomeRow === heightWeightRow) || (incomeRow === smokeRow) || (incomeRow === healthIssueRow) || (incomeRow === retireAgeRow) ||
+        (heightWeightRow === smokeRow) || (heightWeightRow === healthIssueRow) || (heightWeightRow === retireAgeRow) ||
+        (smokeRow === healthIssueRow) || (smokeRow === retireAgeRow) ||
+        (healthIssueRow === retireAgeRow)) {
+        return res.status(202).json({
+            success: false,
+            message: "invalid form row"
+        });
     } else {
         AssessRisk.findById(id, (err, assessRisk) => {
             if (err) {
@@ -120,6 +138,14 @@ let updateAssessRisk = (req, res, next) => {
                 assessRisk.subHeaderText = subHeaderText || assessRisk.subHeaderText;
                 assessRisk.buttonText = buttonText || assessRisk.buttonText;
                 assessRisk.buttonLink = buttonLink || assessRisk.buttonLink;
+
+                assessRisk.workInfoRow = workInfoRow || assessRisk.workInfoRow;
+                assessRisk.incomeRow = incomeRow || assessRisk.incomeRow;
+                assessRisk.heightWeightRow = heightWeightRow || assessRisk.heightWeightRow;
+                assessRisk.smokeRow = smokeRow || assessRisk.smokeRow;
+                assessRisk.healthIssueRow = healthIssueRow || assessRisk.healthIssueRow;
+                assessRisk.retireAgeRow = retireAgeRow || assessRisk.retireAgeRow;
+
                 assessRisk.save((err, assessRisk) => {
                     if (err) {
                         console.log('Error: ' + err);
@@ -135,6 +161,7 @@ let updateAssessRisk = (req, res, next) => {
 };
 
 let updateEditInstanceAssessRisk = (req, res, next) => {
+    console.log(req.body);
     let id  = req.params.id,
         instanceId = req.body.instanceId,
         headerText = req.body.headerText,
@@ -142,7 +169,14 @@ let updateEditInstanceAssessRisk = (req, res, next) => {
         subHeaderText = req.body.subHeaderText,
         buttonText = req.body.buttonText,
         buttonLink = req.body.buttonLink,
-        callBackURL = req.body.callBackURL;
+        callBackURL = req.body.callBackURL,
+
+        workInfoRow = req.body.workInfoRow,
+        incomeRow = req.body.incomeRow,
+        heightWeightRow = req.body.heightWeightRow,
+        smokeRow = req.body.smokeRow,
+        healthIssueRow = req.body.healthIssueRow,
+        retireAgeRow = req.body.retireAgeRow;
     if (!id) {
         console.log('Invalid id');
     } else if (!instanceId) {
@@ -159,6 +193,15 @@ let updateEditInstanceAssessRisk = (req, res, next) => {
         console.log('Invalid button link');
     } else if (!callBackURL) {
         console.log('Invalid call back url');
+    } else if ((workInfoRow == incomeRow) || (workInfoRow == heightWeightRow) ||  (workInfoRow == smokeRow) ||  (workInfoRow == healthIssueRow) ||  (workInfoRow == retireAgeRow) ||
+        (incomeRow == heightWeightRow) || (incomeRow == smokeRow) || (incomeRow == healthIssueRow) || (incomeRow == retireAgeRow) ||
+        (heightWeightRow == smokeRow) || (heightWeightRow == healthIssueRow) || (heightWeightRow == retireAgeRow) ||
+        (smokeRow == healthIssueRow) || (smokeRow == retireAgeRow) ||
+        (healthIssueRow == retireAgeRow)) {
+        return res.status(202).json({
+            success: false,
+            message: "invalid form row"
+        });
     } else {
         AssessRisk.findById(id, (err, assessRisk) => {
             if (err) {
@@ -169,6 +212,14 @@ let updateEditInstanceAssessRisk = (req, res, next) => {
                 assessRisk.subHeaderText = subHeaderText || assessRisk.subHeaderText;
                 assessRisk.buttonText = buttonText || assessRisk.buttonText;
                 assessRisk.buttonLink = buttonLink || assessRisk.buttonLink;
+
+                assessRisk.workInfoRow = workInfoRow || assessRisk.workInfoRow;
+                assessRisk.incomeRow = incomeRow || assessRisk.incomeRow;
+                assessRisk.heightWeightRow = heightWeightRow || assessRisk.heightWeightRow;
+                assessRisk.smokeRow = smokeRow || assessRisk.smokeRow;
+                assessRisk.healthIssueRow = healthIssueRow || assessRisk.healthIssueRow;
+                assessRisk.retireAgeRow = retireAgeRow || assessRisk.retireAgeRow;
+
                 assessRisk.save((err, assessRisk) => {
                     if (err) {
                         console.log('Error: ' + err);

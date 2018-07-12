@@ -33,7 +33,7 @@ let getCategories = (req, res, next) => {
                                 if (err) {
                                     console.log('Error: ' + err);
                                 } else {
-                                    AssessRisk.findOne({instanceId: instance._id}, (err, assessRisk) => {
+                                    getAssessRisk(instance._id, (err, assessRisk) => {
                                         if (err) {
                                             console.log('Error: ' + err);
                                         } else {
@@ -363,6 +363,25 @@ let getApiInstance = (instanceLink, cb) => {
             });
         } else {
             return cb (null, instance);
+        }
+    });
+};
+
+let getAssessRisk = (instanceId, cb) => {
+    AssessRisk.findOne({instanceId: instanceId}, (err, assessRisk) => {
+        if (err) {
+            return cb (err, null);
+        } else {
+            let formFieldOrders = {
+                workInfoRow: assessRisk.workInfoRow,
+                incomeRow: assessRisk.incomeRow,
+                heightWeightRow: assessRisk.heightWeightRow,
+                smokeRow: assessRisk.smokeRow,
+                healthIssueRow: assessRisk.healthIssueRow,
+                retireAgeRow: assessRisk.retireAgeRow
+            };
+            assessRisk.formFieldOrders = formFieldOrders;
+            return cb (null, assessRisk);
         }
     });
 };

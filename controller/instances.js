@@ -327,7 +327,13 @@ let cloneAssessRisk = (currentInstanceId, homeInstanceId, cb) => {
                 paragraphText: assessRisk.paragraphText,
                 subHeaderText: assessRisk.subHeaderText,
                 buttonText: assessRisk.buttonText,
-                buttonLink: assessRisk.buttonLink
+                buttonLink: assessRisk.buttonLink,
+                workInfoRow: assessRisk.workInfoRow,
+                incomeRow: assessRisk.incomeRow,
+                heightWeightRow: assessRisk.heightWeightRow,
+                smokeRow: assessRisk.smokeRow,
+                healthIssueRow: assessRisk.healthIssueRow,
+                retireAgeRow: assessRisk.retireAgeRow
             });
             newAssessRisk.save((err, assessRisk) => {
                 if (err) {
