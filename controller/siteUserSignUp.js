@@ -107,7 +107,10 @@ let updateSiteUserSignUp = (req, res, next) => {
         afterAge = req.body.afterAge,
         beforeGender = req.body.beforeGender,
         beforeZip = req.body.beforeZip,
-        buttonText = req.body.buttonText;
+        buttonText = req.body.buttonText,
+        yearRow = req.body.yearRow,
+        genderRow = req.body.genderRow,
+        zipRow = req.body.zipRow;
 
     if (!id) {
         console.log('Invalid id');
@@ -151,6 +154,12 @@ let updateSiteUserSignUp = (req, res, next) => {
             success: false,
             message: 'Invalid button text'
         });
+    } else if ((yearRow == genderRow) || (yearRow == zipRow) || (yearRow == zipRow)) {
+        console.log('Invalid row sequence');
+        return res.status(202).json({
+            success: false,
+            message: 'Invalid row sequence'
+        });
     } else {
         SiteUserSignUp.findById(id, (err, siteUserSignUp) => {
             if (err) {
@@ -162,6 +171,9 @@ let updateSiteUserSignUp = (req, res, next) => {
                 siteUserSignUp.beforeGender = beforeGender || siteUserSignUp.beforeGender;
                 siteUserSignUp.beforeZip = beforeZip || siteUserSignUp.beforeZip;
                 siteUserSignUp.buttonText = buttonText || siteUserSignUp.buttonText;
+                siteUserSignUp.yearRow = yearRow || siteUserSignUp.yearRow;
+                siteUserSignUp.genderRow = genderRow || siteUserSignUp.genderRow;
+                siteUserSignUp.zipRow = zipRow || siteUserSignUp.zipRow;
 
                 siteUserSignUp.save((err, siteUserSignUp) => {
                     if (err) {
@@ -190,7 +202,10 @@ let updateEditInstanceSiteUserSignUp = (req, res, next) => {
         afterAge = req.body.afterAge,
         beforeGender = req.body.beforeGender,
         beforeZip = req.body.beforeZip,
-        buttonText = req.body.buttonText;
+        buttonText = req.body.buttonText,
+        yearRow = req.body.yearRow,
+        genderRow = req.body.genderRow,
+        zipRow = req.body.zipRow;
 
     if (!id) {
         console.log('Invalid id');
@@ -234,6 +249,12 @@ let updateEditInstanceSiteUserSignUp = (req, res, next) => {
             success: false,
             message: 'Invalid button text'
         });
+    } else if ((yearRow == genderRow) || (yearRow == zipRow) || (yearRow == zipRow)) {
+        console.log('Invalid row sequence');
+        return res.status(202).json({
+            success: false,
+            message: 'Invalid row sequence'
+        });
     } else {
         SiteUserSignUp.findById(id, (err, siteUserSignUp) => {
             if (err) {
@@ -245,6 +266,9 @@ let updateEditInstanceSiteUserSignUp = (req, res, next) => {
                 siteUserSignUp.beforeGender = beforeGender || siteUserSignUp.beforeGender;
                 siteUserSignUp.beforeZip = beforeZip || siteUserSignUp.beforeZip;
                 siteUserSignUp.buttonText = buttonText || siteUserSignUp.buttonText;
+                siteUserSignUp.yearRow = yearRow || siteUserSignUp.yearRow;
+                siteUserSignUp.genderRow = genderRow || siteUserSignUp.genderRow;
+                siteUserSignUp.zipRow = zipRow || siteUserSignUp.zipRow;
 
                 siteUserSignUp.save((err, siteUserSignUp) => {
                     if (err) {
@@ -255,7 +279,6 @@ let updateEditInstanceSiteUserSignUp = (req, res, next) => {
                         res.redirect('/instances/editInstances/' + siteUserSignUp.instanceId);
                     }
                 });
-
             }
         });
     }

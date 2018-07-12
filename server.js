@@ -67,11 +67,51 @@ app.use(cookieParser()); // read cookies (needed for auth)
 app.use(bodyParser.json()); // get information from html forms
 app.use(bodyParser.urlencoded({ extended: true }));
 
+var hbs = expressHbs.create({
+    // Specify helpers which are only registered on this instance.
+    helpers: {
+        foo: function () { return 'FOO!'; },
+        equal: function (lvalue, rvalue, options) {
+            if (arguments.length < 3)
+                throw new Error("Handlebars Helper equal needs 2 parameters");
+            if( lvalue!=rvalue ) {
+                return options.inverse(this);
+            } else {
+                return options.fn(this);
+            }
+        }
+    }
+});
+
 app.engine('.hbs', expressHbs({
+    helpers: {
+        foo: function () { return 'FOO!'; },
+        equal: function (lvalue, rvalue, options) {
+            if (arguments.length < 3)
+                throw new Error("Handlebars Helper equal needs 2 parameters");
+            if( lvalue!=rvalue ) {
+                return options.inverse(this);
+            } else {
+                return options.fn(this);
+            }
+        }
+    },
     defaultLayout: 'layout',
     extname: '.hbs'
 }));
 app.set('view engine', '.hbs');
+/*app.engine('.hbs', hbs.engine);
+app.set('view engine', 'handlebars');*/
+
+/*expressHbs.registerHelper('equal', function(lvalue, rvalue, options) {
+    if (arguments.length < 3)
+        throw new Error("Handlebars Helper equal needs 2 parameters");
+    if( lvalue!=rvalue ) {
+        return options.inverse(this);
+    } else {
+        return options.fn(this);
+    }
+});*/
 
 // required for passport
 app.use(session({

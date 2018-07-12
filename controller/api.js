@@ -295,6 +295,12 @@ let getSiteUserSignUp = (instanceId, cb) => {
         if (err) {
             return cb (err, null);
         } else {
+            let formFieldOrders = {
+              yearRow: siteUserSignUp.yearRow,
+              genderRow: siteUserSignUp.genderRow,
+              zipRow: siteUserSignUp.zipRow
+            };
+            siteUserSignUp.formFieldOrders = formFieldOrders;
             return cb (null, siteUserSignUp);
         }
     });

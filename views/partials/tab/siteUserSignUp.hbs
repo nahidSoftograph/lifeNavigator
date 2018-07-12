@@ -67,6 +67,38 @@
         </div>
     </div>
 
+    <div class="row">
+        <div class="input-field col s3">
+            <select name="yearRow">
+                <option value="" disabled selected>Select Row {{siteUserSignUp.yearRow}}</option>
+                <option {{#equal siteUserSignUp.yearRow "1"}} selected {{/equal}} value="1">First Row</option>
+                <option {{#equal siteUserSignUp.yearRow "2"}} selected {{/equal}} value="2">Second Row</option>
+                <option {{#equal siteUserSignUp.yearRow "3"}} selected {{/equal}} value="3">Third Row</option>
+            </select>
+            <label>Age Row In Form</label>
+        </div>
+        <div class="input-field col s1"></div>
+        <div class="input-field col s3">
+            <select name="genderRow">
+                <option value="" disabled selected>Select Row</option>
+                <option {{#equal siteUserSignUp.genderRow "1"}} selected {{/equal}} value="1">First Row</option>
+                <option {{#equal siteUserSignUp.genderRow "2"}} selected {{/equal}} value="2">Second Row</option>
+                <option {{#equal siteUserSignUp.genderRow "3"}} selected {{/equal}} value="3">Third Row</option>
+            </select>
+            <label>Gender Row In Form</label>
+        </div>
+        <div class="input-field col s1"></div>
+        <div class="input-field col s3">
+            <select name="zipRow">
+                <option value="" disabled selected>Select Row</option>
+                <option {{#equal siteUserSignUp.zipRow "1"}} selected {{/equal}} value="1">First Row</option>
+                <option {{#equal siteUserSignUp.zipRow "2"}} selected {{/equal}} value="2">Second Row</option>
+                <option {{#equal siteUserSignUp.zipRow "3"}} selected {{/equal}} value="3">Third Row</option>
+            </select>
+            <label>ZipCode Row In Form</label>
+        </div>
+    </div>
+
     <input type="hidden" value="{{siteUserSignUp.instanceId}}">
 
     <div class="row">

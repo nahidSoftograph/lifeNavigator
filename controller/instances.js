@@ -277,7 +277,10 @@ let cloneSiteUserSignUp = (currentInstanceId, homeInstanceId, cb) => {
                 afterAge: siteUserSignUp.afterAge,
                 beforeGender: siteUserSignUp.beforeGender,
                 beforeZip: siteUserSignUp.beforeZip,
-                buttonText: siteUserSignUp.buttonText
+                buttonText: siteUserSignUp.buttonText,
+                yearRow: siteUserSignUp.yearRow,
+                genderRow: siteUserSignUp.genderRow,
+                zipRow: siteUserSignUp.zipRow
             });
             newSiteUserSignUp.save((err, siteUserSignUp) => {
                 if (err) {
