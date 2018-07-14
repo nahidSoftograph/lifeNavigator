@@ -9,6 +9,14 @@ let displaySiteUserSignUp = (req, res, next) => {
             if (err) {
                 console.log('Error: ' + err);
             } else {
+                let successMessage = req.flash('success'),
+                    infoMessage = req.flash('info'),
+                    warningMessage = req.flash('warning'),
+                    errorMessage = req.flash('error');
+                res.locals.successMessages = successMessage;
+                res.locals.infoMessages = infoMessage;
+                res.locals.warningMessages = warningMessage;
+                res.locals.errorMessages = errorMessage;
                 res.render('instanceSite/siteUserSignUp', {
                     instanceId: instanceId,
                     siteUserSignUp: siteUserSignUp
@@ -179,8 +187,7 @@ let updateSiteUserSignUp = (req, res, next) => {
                     if (err) {
                         console.log('Error: ' + err);
                     } else {
-                        console.log('Updated user');
-                        console.log(siteUserSignUp);
+                        req.flash('success', 'Successfully updated the Sign Up page.');
                         res.redirect('/siteUserSignUp/display/' + siteUserSignUp.instanceId);
                     }
                 });
@@ -274,8 +281,7 @@ let updateEditInstanceSiteUserSignUp = (req, res, next) => {
                     if (err) {
                         console.log('Error: ' + err);
                     } else {
-                        console.log('Updated user');
-                        console.log(siteUserSignUp);
+                        req.flash('success', 'Successfully updated the Sign Up page.');
                         res.redirect('/instances/editInstances/' + siteUserSignUp.instanceId);
                     }
                 });

@@ -8,7 +8,7 @@ var path     = require('path');
 var port     = process.env.PORT || 8080;
 var mongoose = require('mongoose');
 var passport = require('passport');
-var flash = require('express-flash');
+var flash = require('connect-flash');
 var morgan       = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
@@ -100,18 +100,6 @@ app.engine('.hbs', expressHbs({
     extname: '.hbs'
 }));
 app.set('view engine', '.hbs');
-/*app.engine('.hbs', hbs.engine);
-app.set('view engine', 'handlebars');*/
-
-/*expressHbs.registerHelper('equal', function(lvalue, rvalue, options) {
-    if (arguments.length < 3)
-        throw new Error("Handlebars Helper equal needs 2 parameters");
-    if( lvalue!=rvalue ) {
-        return options.inverse(this);
-    } else {
-        return options.fn(this);
-    }
-});*/
 
 // required for passport
 app.use(session({
@@ -130,7 +118,8 @@ app.use(function (req, res, next) {
         } else {
             res.locals.login = req.isAuthenticated();
             res.locals.defaultInstance = defaultInstance;
-            res.locals.messages = require('express-messages')(req, res);
+            // res.locals.messages = require('express-messages')(req, res);
+            res.locals.userInfo = req.user;
             next();
         }
     });

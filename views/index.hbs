@@ -1,1 +1,30 @@
-This is index
+<div class="col s12 m8 l9 ">
+
+    <div class="card white">
+        <div class="card-content black-text" style="margin-top: 100px;">
+            info: {{info}} <br>
+            message length:  {{messages.length}} <br>
+            success message length:  <span>{{successFlashMessage.length}}</span> <br>
+            error message length:  <span>{{errorFlashMessage.length}}</span> <br>
+            user info message length:  <span>{{userInfo}}</span> <br>
+            warning message length:  <span>{{warningFlashMessage.length}}</span> <br>
+            messages:  <span hidden id="messages">{{messages}}</span> <br>
+            {{#if messages.length}} call jQuery Method {{/if}}
+        </div>
+    </div>
+
+</div>
+
+<script>
+    $( document ).ready(function() {
+        console.log('jQuery ready');
+        var messages = $('#messages').text();
+        let myMessageArray = messages.split(',');
+        console.log(messages);
+        console.log(myMessageArray);
+        for (let index=0; index<myMessageArray.length; index++) {
+            Materialize.toast(myMessageArray[index], 4000);
+        }
+        return false;
+    });
+</script>

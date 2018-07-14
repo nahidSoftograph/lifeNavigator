@@ -1,3 +1,43 @@
 {{> head}}
 {{{body}}}
 {{> footer}}
+<span hidden id="successMessages">{{successMessages}}</span>
+<span hidden id="infoMessages">{{infoMessages}}</span>
+<span hidden id="warningMessages">{{warningMessages}}</span>
+<span hidden id="errorMessages">{{errorMessages}}</span>
+
+<script>
+    $( document ).ready(function() {
+        let successMessages = $('#successMessages').text(),
+            infoMessages = $('#infoMessages').text(),
+            warningMessages = $('#warningMessages').text(),
+            errorMessages = $('#errorMessages').text();
+
+        let successMessagesArray = successMessages.split(','),
+            infoMessagesArray = infoMessages.split(','),
+            warningMessagesArray = warningMessages.split(','),
+            errorMessagesArray = errorMessages.split(',');
+
+        console.log('Success: ' + successMessagesArray.length);
+        console.log('info: ' + infoMessagesArray.length);
+        console.log('warning: ' + warningMessagesArray.length);
+        console.log('error: ' + errorMessagesArray.length);
+
+        for (let index=0; index<successMessagesArray.length; index++) {
+            Materialize.toast(successMessagesArray[index], 3000);
+        }
+
+        for (let index=0; index<infoMessagesArray.length; index++) {
+            Materialize.toast(infoMessagesArray[index], 3000);
+        }
+
+        for (let index=0; index<warningMessagesArray.length; index++) {
+            Materialize.toast(warningMessagesArray[index], 3000);
+        }
+
+        for (let index=0; index<errorMessagesArray.length; index++) {
+            Materialize.toast(errorMessagesArray[index], 3000);
+        }
+        return false;
+    });
+</script>

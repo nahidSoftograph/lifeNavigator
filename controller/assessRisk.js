@@ -9,6 +9,14 @@ let displayAssessRisk = (req, res, next) => {
         if (err) {
             console.log('Error: ' + err);
         } else {
+            let successMessage = req.flash('success'),
+                infoMessage = req.flash('info'),
+                warningMessage = req.flash('warning'),
+                errorMessage = req.flash('error');
+            res.locals.successMessages = successMessage;
+            res.locals.infoMessages = infoMessage;
+            res.locals.warningMessages = warningMessage;
+            res.locals.errorMessages = errorMessage;
             res.render('instanceSite/assessRisk', {
                 instanceId: instanceId,
                 assessRisk: assessRisk
@@ -73,9 +81,6 @@ let createAssessRisk = (req, res, next) => {
             if (err) {
                 console.log('Error: ' + err);
             } else {
-                console.log('Creating assessRisk');
-                console.log(assessRisk);
-                // res.redirect(callBackURL);
                 res.status(201).json({
                     instanceId: instanceId,
                     assessRisk: assessRisk
@@ -150,8 +155,7 @@ let updateAssessRisk = (req, res, next) => {
                     if (err) {
                         console.log('Error: ' + err);
                     } else {
-                        console.log('updated assessRisk');
-                        console.log(assessRisk);
+                        req.flash('success', 'Successfully updated the Assess Risk page.');
                         res.redirect('/assessRisk/display/' + instanceId);
                     }
                 });
@@ -224,8 +228,7 @@ let updateEditInstanceAssessRisk = (req, res, next) => {
                     if (err) {
                         console.log('Error: ' + err);
                     } else {
-                        console.log('updated assessRisk');
-                        console.log(assessRisk);
+                        req.flash('success', 'Successfully updated the Assess Risk page.');
                         res.redirect('/instances/editInstances/' + instanceId);
                     }
                 });

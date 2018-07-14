@@ -84,6 +84,14 @@ let renderEditInstances = (req, res, next) => {
                                                                                     if (err) {
 
                                                                                     } else {
+                                                                                        let successMessage = req.flash('success'),
+                                                                                            infoMessage = req.flash('info'),
+                                                                                            warningMessage = req.flash('warning'),
+                                                                                            errorMessage = req.flash('error');
+                                                                                        res.locals.successMessages = successMessage;
+                                                                                        res.locals.infoMessages = infoMessage;
+                                                                                        res.locals.warningMessages = warningMessage;
+                                                                                        res.locals.errorMessages = errorMessage;
                                                                                         res.render('instances/edit', {
                                                                                             'title': 'Edit instances',
                                                                                             home: home,

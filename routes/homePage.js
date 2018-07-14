@@ -6,7 +6,7 @@ let express = require('express'),
 
 let storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, 'public/images/logo')
+        cb(null, 'public/images/logo');
     },
     filename: (req, file, cb) => {
         cb(null, file.fieldname + '-' + Date.now())
@@ -66,7 +66,7 @@ router.post('/update/:id', upload.single('image'), (req, res, next) => {
                     if (err) {
                         console.log('Error: ' + err);
                     } else {
-                        console.log('Successfully updated');
+                        req.flash('success', 'Successfully updated the home page.');
                         res.redirect('/homePage/display/' + instanceId);
                         // res.render('defaultSite/homePage', {'title': 'Home Page', defaultHome: home});
                     }
@@ -127,7 +127,7 @@ router.post('/updateEditInstance/:id', upload.single('image'), (req, res, next) 
                     if (err) {
                         console.log('Error: ' + err);
                     } else {
-                        console.log('Successfully updated');
+                        req.flash('success', 'Successfully updated the home page.');
                         res.redirect('/instances/editInstances/' + instanceId);
                     }
                 });

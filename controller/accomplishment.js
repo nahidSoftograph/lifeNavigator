@@ -17,8 +17,14 @@ let displayAccomplishment = (req, res, next) => {
                     if (err) {
                         console.log('Error: ' + err);
                     } else {
-                        console.log('Options');
-                        console.log(options);
+                        let successMessage = req.flash('success'),
+                            infoMessage = req.flash('info'),
+                            warningMessage = req.flash('warning'),
+                            errorMessage = req.flash('error');
+                        res.locals.successMessages = successMessage;
+                        res.locals.infoMessages = infoMessage;
+                        res.locals.warningMessages = warningMessage;
+                        res.locals.errorMessages = errorMessage;
                         res.render('instanceSite/accomplishment', {
                             instanceId: instanceId,
                             options: options,
@@ -67,8 +73,7 @@ let updateAccomplishment = (req, res, next) => {
                     if (err) {
                         console.log('Error: ' + error);
                     } else {
-                        console.log('updated Accomplishment');
-                        console.log(accomplishment);
+                        req.flash('success', 'Successfully updated the Accomplishment page.');
                         res.redirect('/accomplishment/display/' + instanceId);
                     }
                 });
@@ -109,8 +114,7 @@ let updateEditInstanceAccomplishment = (req, res, next) => {
                     if (err) {
                         console.log('Error: ' + error);
                     } else {
-                        console.log('updated Accomplishment');
-                        console.log(accomplishment);
+                        req.flash('success', 'Successfully updated the Accomplishment page.');
                         res.redirect('/instances/editInstances/' + instanceId);
                     }
                 });

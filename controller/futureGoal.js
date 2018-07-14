@@ -16,8 +16,14 @@ let displayFutureGoal = (req, res, next) => {
                     if (err) {
                         console.log('Error: ' + err);
                     } else {
-                        console.log('Options');
-                        console.log(options);
+                        let successMessage = req.flash('success'),
+                            infoMessage = req.flash('info'),
+                            warningMessage = req.flash('warning'),
+                            errorMessage = req.flash('error');
+                        res.locals.successMessages = successMessage;
+                        res.locals.infoMessages = infoMessage;
+                        res.locals.warningMessages = warningMessage;
+                        res.locals.errorMessages = errorMessage;
                         res.render('instanceSite/futureGoal', {
                             instanceId: instanceId,
                             options: options,
@@ -67,8 +73,7 @@ let updateFutureGoal = (req, res, next) => {
                     if (err) {
                         console.log('Error: ' + error);
                     } else {
-                        console.log('updated Future Goal');
-                        console.log(futureGoal);
+                        req.flash('success', 'Successfully updated the Future Goal page.');
                         res.redirect('/futureGoal/display/' + instanceId);
                     }
                 });
@@ -110,8 +115,7 @@ let updateEditInstanceFutureGoal = (req, res, next) => {
                     if (err) {
                         console.log('Error: ' + error);
                     } else {
-                        console.log('updated Future Goal');
-                        console.log(futureGoal);
+                        req.flash('success', 'Successfully updated the Future Goal page.');
                         res.redirect('/instances/editInstances/' + instanceId);
                     }
                 });
