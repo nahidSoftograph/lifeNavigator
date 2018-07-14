@@ -18,11 +18,6 @@
             warningMessagesArray = warningMessages.split(','),
             errorMessagesArray = errorMessages.split(',');
 
-        console.log('Success: ' + successMessagesArray.length);
-        console.log('info: ' + infoMessagesArray.length);
-        console.log('warning: ' + warningMessagesArray.length);
-        console.log('error: ' + errorMessagesArray.length);
-
         for (let index=0; index<successMessagesArray.length; index++) {
             Materialize.toast(successMessagesArray[index], 3000);
         }
