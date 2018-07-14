@@ -1,10 +1,12 @@
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 
 <div class="col s12 m8 l9">
 
     <div class="card white">
         <div class="card-content black-text">
             <span class="card-title">Users Data</span>
-            <table class="responsive-table">
+            <table class="responsive-table" id="myTableId">
                 <thead>
                 <tr>
                     <th>Age</th>
@@ -75,3 +77,9 @@
     </div>
 
 </div>
+
+<script>
+    $(document).ready( function () {
+        $('#myTableId').DataTable();
+    } );
+</script>
