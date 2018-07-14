@@ -4,6 +4,7 @@ let createCard = (req, res, next) => {
     let instanceId = req.params.instanceId,
         headerText = req.body.headerText,
         subHeaderText = req.body.subHeaderText,
+        cardName = req.body.cardName,
         cardBody = req.body.cardBody;
     if (!instanceId) {
         res.status(202).json({
@@ -25,9 +26,15 @@ let createCard = (req, res, next) => {
             success: false,
             message: 'Invalid card body'
         });
+    } else if (!cardName) {
+        res.status(202).json({
+            success: false,
+            message: 'Invalid card name'
+        });
     } else {
         let card = new Card({
             instanceId: instanceId,
+            cardName: cardName,
             headerText: headerText,
             subHeaderText: subHeaderText,
             cardBody: cardBody
