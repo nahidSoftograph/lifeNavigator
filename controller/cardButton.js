@@ -64,7 +64,6 @@ let updateCardButton = (req, res, next) => {
         buttonUrl = req.body.buttonUrl,
         callBackUrl = req.body.callBackUrl,
         buttonText = req.body.buttonText;
-    console.log('Updating card buttons ***********************************************************************************************************');
     if (!cardButtonId) {
         console.log('Invalid card button id');
     } else {
@@ -80,7 +79,7 @@ let updateCardButton = (req, res, next) => {
                     if (err) {
                         console.log('Error: ' + err);
                     } else {
-                        console.log('Card Button updated');
+                        req.flash('success', 'Successfully updated the card button.');
                         res.redirect(callBackUrl);
                     }
                 });

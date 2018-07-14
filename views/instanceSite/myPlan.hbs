@@ -76,7 +76,7 @@
                 </thead>
                 <tbody>
                 {{#each cardButtons}}
-                    <form action="/cardButton/update/{{myPlan.instanceId}}" method="post">
+                    <form action="/cardButton/update/{{this._id}}" method="post">
                     <input type="hidden" name="callBackUrl" value="/myPlan/display/{{instanceId}}">
                     <tr>
                         <td>{{this.cardName}}</td>

@@ -58,8 +58,9 @@ module.exports = function(passport) {
                         return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.'));
 
                     // all is well, return user
-                    else
+                    else {
                         return done(null, user);
+                    }
                 });
             });
 
