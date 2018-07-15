@@ -45,88 +45,106 @@
     </div>
 
     <div class="row">
-        <div class="input-field col s3">
-            <select name="workInfoRow">
-                <option value="" disabled selected>Select Row</option>
-                <option {{#equal assessRisk.workInfoRow "0"}} selected {{/equal}} value="0">First Row</option>
-                <option {{#equal assessRisk.workInfoRow "1"}} selected {{/equal}} value="1">Second Row</option>
-                <option {{#equal assessRisk.workInfoRow "2"}} selected {{/equal}} value="2">Third Row</option>
-                <option {{#equal assessRisk.workInfoRow "3"}} selected {{/equal}} value="3">Fourth Row</option>
-                <option {{#equal assessRisk.workInfoRow "4"}} selected {{/equal}} value="4">Fifth Row</option>
-                <option {{#equal assessRisk.workInfoRow "5"}} selected {{/equal}} value="5">Sixth Row</option>
-            </select>
-            <label> Row In Form</label>
-        </div>
-
-        <div class="input-field col s1"></div>
-        <div class="input-field col s3">
-            <select name="incomeRow">
-                <option value="" disabled selected>Select Row</option>
-                <option {{#equal assessRisk.incomeRow "0"}} selected {{/equal}} value="0">First Row</option>
-                <option {{#equal assessRisk.incomeRow "1"}} selected {{/equal}} value="1">Second Row</option>
-                <option {{#equal assessRisk.incomeRow "2"}} selected {{/equal}} value="2">Third Row</option>
-                <option {{#equal assessRisk.incomeRow "3"}} selected {{/equal}} value="3">Fourth Row</option>
-                <option {{#equal assessRisk.incomeRow "4"}} selected {{/equal}} value="4">Fifth Row</option>
-                <option {{#equal assessRisk.incomeRow "5"}} selected {{/equal}} value="5">Sixth Row</option>
-            </select>
-            <label> Row In Form</label>
-        </div>
-
-        <div class="input-field col s1"></div>
-        <div class="input-field col s3">
-            <select name="heightWeightRow">
-                <option value="" disabled selected>Select Row</option>
-                <option {{#equal assessRisk.heightWeightRow "0"}} selected {{/equal}} value="0">First Row</option>
-                <option {{#equal assessRisk.heightWeightRow "1"}} selected {{/equal}} value="1">Second Row</option>
-                <option {{#equal assessRisk.heightWeightRow "2"}} selected {{/equal}} value="2">Third Row</option>
-                <option {{#equal assessRisk.heightWeightRow "3"}} selected {{/equal}} value="3">Fourth Row</option>
-                <option {{#equal assessRisk.heightWeightRow "4"}} selected {{/equal}} value="4">Fifth Row</option>
-                <option {{#equal assessRisk.heightWeightRow "5"}} selected {{/equal}} value="5">Sixth Row</option>
-            </select>
-            <label> Row In Form</label>
+        <div class="input-field col s12">
+            <input name="buttonText" value="{{siteUserSignUp.buttonText}}" id="buttonText" type="text" class="validate">
+            <label class="active" for="buttonText">Enter Button Text</label>
         </div>
     </div>
 
     <div class="row">
-        <div class="input-field col s3">
-            <select name="smokeRow">
-                <option value="" disabled selected>Select Row</option>
-                <option {{#equal assessRisk.smokeRow "0"}} selected {{/equal}} value="0">First Row</option>
-                <option {{#equal assessRisk.smokeRow "1"}} selected {{/equal}} value="1">Second Row</option>
-                <option {{#equal assessRisk.smokeRow "2"}} selected {{/equal}} value="2">Third Row</option>
-                <option {{#equal assessRisk.smokeRow "3"}} selected {{/equal}} value="3">Fourth Row</option>
-                <option {{#equal assessRisk.smokeRow "4"}} selected {{/equal}} value="4">Fifth Row</option>
-                <option {{#equal assessRisk.smokeRow "5"}} selected {{/equal}} value="5">Sixth Row</option>
-            </select>
-            <label>Smoke Row In Form</label>
+        <div class="col s6">
+            <div class="row">
+                <div class="col s4" style="margin-top: 30px;">
+                    workInfoRow Input
+                </div>
+                <div class="input-field col s1">
+                    <select id="workInfoRow" name="workInfoRow">
+                        <option {{#equal assessRisk.workInfoRow "0"}} selected {{/equal}} value="0">1</option>
+                        <option {{#equal assessRisk.workInfoRow "1"}} selected {{/equal}} value="1">2</option>
+                        <option {{#equal assessRisk.workInfoRow "2"}} selected {{/equal}} value="2">3</option>
+                        <option {{#equal assessRisk.workInfoRow "3"}} selected {{/equal}} value="3">4</option>
+                        <option {{#equal assessRisk.workInfoRow "4"}} selected {{/equal}} value="4">5</option>
+                        <option {{#equal assessRisk.workInfoRow "5"}} selected {{/equal}} value="5">6</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s4" style="margin-top: 30px;">
+                    incomeRow Input
+                </div>
+                <div class="input-field col s1">
+                    <select id="incomeRow" name="incomeRow">
+                        <option {{#equal assessRisk.incomeRow "0"}} selected {{/equal}} value="0">1</option>
+                        <option {{#equal assessRisk.incomeRow "1"}} selected {{/equal}} value="1">2</option>
+                        <option {{#equal assessRisk.incomeRow "2"}} selected {{/equal}} value="2">3</option>
+                        <option {{#equal assessRisk.incomeRow "3"}} selected {{/equal}} value="3">4</option>
+                        <option {{#equal assessRisk.incomeRow "4"}} selected {{/equal}} value="4">5</option>
+                        <option {{#equal assessRisk.incomeRow "5"}} selected {{/equal}} value="5">6</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s4" style="margin-top: 30px;">
+                    heightWeightRow Input
+                </div>
+                <div class="input-field col s1">
+                    <select id="heightWeightRow" name="heightWeightRow">
+                        <option {{#equal assessRisk.heightWeightRow "0"}} selected {{/equal}} value="0">1</option>
+                        <option {{#equal assessRisk.heightWeightRow "1"}} selected {{/equal}} value="1">2</option>
+                        <option {{#equal assessRisk.heightWeightRow "2"}} selected {{/equal}} value="2">3</option>
+                        <option {{#equal assessRisk.heightWeightRow "3"}} selected {{/equal}} value="3">4</option>
+                        <option {{#equal assessRisk.heightWeightRow "4"}} selected {{/equal}} value="4">5</option>
+                        <option {{#equal assessRisk.heightWeightRow "5"}} selected {{/equal}} value="5">6</option>
+                    </select>
+                </div>
+            </div>
         </div>
-
-        <div class="input-field col s1"></div>
-        <div class="input-field col s3">
-            <select name="healthIssueRow">
-                <option value="" disabled selected>Select Row</option>
-                <option {{#equal assessRisk.healthIssueRow "0"}} selected {{/equal}} value="0">First Row</option>
-                <option {{#equal assessRisk.healthIssueRow "1"}} selected {{/equal}} value="1">Second Row</option>
-                <option {{#equal assessRisk.healthIssueRow "2"}} selected {{/equal}} value="2">Third Row</option>
-                <option {{#equal assessRisk.healthIssueRow "3"}} selected {{/equal}} value="3">Fourth Row</option>
-                <option {{#equal assessRisk.healthIssueRow "4"}} selected {{/equal}} value="4">Fifth Row</option>
-                <option {{#equal assessRisk.healthIssueRow "5"}} selected {{/equal}} value="5">Sixth Row</option>
-            </select>
-            <label>Health Issue Row In Form</label>
-        </div>
-
-        <div class="input-field col s1"></div>
-        <div class="input-field col s3">
-            <select name="retireAgeRow">
-                <option value="" disabled selected>Select Row</option>
-                <option {{#equal assessRisk.retireAgeRow "0"}} selected {{/equal}} value="0">First Row</option>
-                <option {{#equal assessRisk.retireAgeRow "1"}} selected {{/equal}} value="1">Second Row</option>
-                <option {{#equal assessRisk.retireAgeRow "2"}} selected {{/equal}} value="2">Third Row</option>
-                <option {{#equal assessRisk.retireAgeRow "3"}} selected {{/equal}} value="3">Fourth Row</option>
-                <option {{#equal assessRisk.retireAgeRow "4"}} selected {{/equal}} value="4">Fifth Row</option>
-                <option {{#equal assessRisk.retireAgeRow "5"}} selected {{/equal}} value="5">Sixth Row</option>
-            </select>
-            <label>Retire Age Row In Form</label>
+        <div class="col s6">
+            <div class="row">
+                <div class="col s4" style="margin-top: 30px;">
+                    smokeRow Input
+                </div>
+                <div class="input-field col s1">
+                    <select id="smokeRow" name="smokeRow">
+                        <option {{#equal assessRisk.smokeRow "0"}} selected {{/equal}} value="0">1</option>
+                        <option {{#equal assessRisk.smokeRow "1"}} selected {{/equal}} value="1">2</option>
+                        <option {{#equal assessRisk.smokeRow "2"}} selected {{/equal}} value="2">3</option>
+                        <option {{#equal assessRisk.smokeRow "3"}} selected {{/equal}} value="3">4</option>
+                        <option {{#equal assessRisk.smokeRow "4"}} selected {{/equal}} value="4">5</option>
+                        <option {{#equal assessRisk.smokeRow "5"}} selected {{/equal}} value="5">6</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s4" style="margin-top: 30px;">
+                    healthIssueRow Input
+                </div>
+                <div class="input-field col s1">
+                    <select id="healthIssueRow" name="healthIssueRow">
+                        <option {{#equal assessRisk.healthIssueRow "0"}} selected {{/equal}} value="0">1</option>
+                        <option {{#equal assessRisk.healthIssueRow "1"}} selected {{/equal}} value="1">2</option>
+                        <option {{#equal assessRisk.healthIssueRow "2"}} selected {{/equal}} value="2">3</option>
+                        <option {{#equal assessRisk.healthIssueRow "3"}} selected {{/equal}} value="3">4</option>
+                        <option {{#equal assessRisk.healthIssueRow "4"}} selected {{/equal}} value="4">5</option>
+                        <option {{#equal assessRisk.healthIssueRow "5"}} selected {{/equal}} value="5">6</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s4" style="margin-top: 30px;">
+                    retireAgeRow Input- {{assessRisk.retireAgeRow}}
+                </div>
+                <div class="input-field col s1">
+                    <select id="retireAgeRow" name="retireAgeRow">
+                        <option {{#equal assessRisk.retireAgeRow "0"}} selected {{/equal}} value="0">1</option>
+                        <option {{#equal assessRisk.retireAgeRow "1"}} selected {{/equal}} value="1">2</option>
+                        <option {{#equal assessRisk.retireAgeRow "2"}} selected {{/equal}} value="2">3</option>
+                        <option {{#equal assessRisk.retireAgeRow "3"}} selected {{/equal}} value="3">4</option>
+                        <option {{#equal assessRisk.retireAgeRow "4"}} selected {{/equal}} value="4">5</option>
+                        <option {{#equal assessRisk.retireAgeRow "5"}} selected {{/equal}} value="5">6</option>
+                    </select>
+                </div>
+            </div>
         </div>
     </div>
 

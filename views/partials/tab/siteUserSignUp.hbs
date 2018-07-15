@@ -78,10 +78,10 @@
             Age Input
         </div>
         <div class="input-field col s1">
-            <select id="ageRow" name="ageRow">
-                <option {{#equal siteUserSignUp.ageRow "1"}} selected {{/equal}} value="0">1</option>
-                <option {{#equal siteUserSignUp.ageRow "2"}} selected {{/equal}} value="1">2</option>
-                <option {{#equal siteUserSignUp.ageRow "3"}} selected {{/equal}} value="2">3</option>
+            <select id="yearRow" name="yearRow">
+                <option {{#equal siteUserSignUp.yearRow "0"}} selected {{/equal}} value="0">1</option>
+                <option {{#equal siteUserSignUp.yearRow "1"}} selected {{/equal}} value="1">2</option>
+                <option {{#equal siteUserSignUp.yearRow "2"}} selected {{/equal}} value="2">3</option>
             </select>
         </div>
     </div>
@@ -91,9 +91,9 @@
         </div>
         <div class="input-field col s1">
             <select id="genderRow" name="genderRow">
-                <option {{#equal siteUserSignUp.genderRow "1"}} selected {{/equal}} value="0">1</option>
-                <option {{#equal siteUserSignUp.genderRow "2"}} selected {{/equal}} value="1">2</option>
-                <option {{#equal siteUserSignUp.genderRow "3"}} selected {{/equal}} value="2">3</option>
+                <option {{#equal siteUserSignUp.genderRow "0"}} selected {{/equal}} value="0">1</option>
+                <option {{#equal siteUserSignUp.genderRow "1"}} selected {{/equal}} value="1">2</option>
+                <option {{#equal siteUserSignUp.genderRow "2"}} selected {{/equal}} value="2">3</option>
             </select>
         </div>
     </div>
@@ -103,9 +103,9 @@
         </div>
         <div class="input-field col s1">
             <select id="zipRow" name="zipRow">
-                <option {{#equal siteUserSignUp.zipRow "1"}} selected {{/equal}} value="0">1</option>
-                <option {{#equal siteUserSignUp.zipRow "2"}} selected {{/equal}} value="1">2</option>
-                <option {{#equal siteUserSignUp.zipRow "3"}} selected {{/equal}} value="2">3</option>
+                <option {{#equal siteUserSignUp.zipRow "0"}} selected {{/equal}} value="0">1</option>
+                <option {{#equal siteUserSignUp.zipRow "1"}} selected {{/equal}} value="1">2</option>
+                <option {{#equal siteUserSignUp.zipRow "2"}} selected {{/equal}} value="2">3</option>
             </select>
         </div>
     </div>
@@ -184,29 +184,29 @@
             });
         });
 
-        $('#ageRow').on('change', function() {
-            let ageRow = $('#ageRow').find(":selected").val();
+        $('#yearRow').on('change', function() {
+            let yearRow = $('#yearRow').find(":selected").val();
             let genderRow = $('#genderRow').find(":selected").val();
             let zipRow = $('#zipRow').find(":selected").val();
-            if (ageRow == genderRow || ageRow == zipRow || genderRow == zipRow) {
+            if (yearRow == genderRow || yearRow == zipRow || genderRow == zipRow) {
                 Materialize.toast('Invalid Form Section Order', 3000);
             }
         });
 
         $('#genderRow').on('change', function() {
-            let ageRow = $('#ageRow').find(":selected").val();
+            let yearRow = $('#yearRow').find(":selected").val();
             let genderRow = $('#genderRow').find(":selected").val();
             let zipRow = $('#zipRow').find(":selected").val();
-            if (ageRow == genderRow || ageRow == zipRow || genderRow == zipRow) {
+            if (yearRow == genderRow || yearRow == zipRow || genderRow == zipRow) {
                 Materialize.toast('Invalid Form Section Order', 3000);
             }
         });
 
         $('#zipRow').on('change', function() {
-            let ageRow = $('#ageRow').find(":selected").val();
+            let yearRow = $('#yearRow').find(":selected").val();
             let genderRow = $('#genderRow').find(":selected").val();
             let zipRow = $('#zipRow').find(":selected").val();
-            if (ageRow == genderRow || ageRow == zipRow || genderRow == zipRow) {
+            if (yearRow == genderRow || yearRow == zipRow || genderRow == zipRow) {
                 Materialize.toast('Invalid Form Section Order', 3000);
             }
         });
