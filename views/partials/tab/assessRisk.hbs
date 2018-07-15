@@ -54,6 +54,10 @@
     <div class="row">
         <div class="col s6">
             <div class="row">
+                <div class="col s4"><u>Forms Input Section</u></div>
+                <div class="col s1"><u>Order</u></div>
+            </div>
+            <div class="row">
                 <div class="col s4" style="margin-top: 30px;">
                     workInfoRow Input
                 </div>
@@ -101,6 +105,10 @@
         </div>
         <div class="col s6">
             <div class="row">
+                <div class="col s4"><u>Forms Input Section</u></div>
+                <div class="col s1"><u>Order</u></div>
+            </div>
+            <div class="row">
                 <div class="col s4" style="margin-top: 30px;">
                     smokeRow Input
                 </div>
@@ -132,7 +140,7 @@
             </div>
             <div class="row">
                 <div class="col s4" style="margin-top: 30px;">
-                    retireAgeRow Input- {{assessRisk.retireAgeRow}}
+                    retireAgeRow Input
                 </div>
                 <div class="input-field col s1">
                     <select id="retireAgeRow" name="retireAgeRow">
@@ -202,6 +210,103 @@
             }).fail(function(data){
                 console.log(data);
             });
+        });
+
+        $('#workInfoRow').on('change', function() {
+            console.log('WorkInfo row changed.');
+            let workInfoRow = $('#workInfoRow').find(":selected").val(),
+                incomeRow = $('#incomeRow').find(":selected").val(),
+                heightWeightRow = $('#heightWeightRow').find(":selected").val(),
+                smokeRow = $('#smokeRow').find(":selected").val(),
+                healthIssueRow = $('#healthIssueRow').find(":selected").val(),
+                retireAgeRow = $('#retireAgeRow').find(":selected").val();
+            if ((workInfoRow == incomeRow) || (workInfoRow == heightWeightRow) ||  (workInfoRow == smokeRow) ||  (workInfoRow == healthIssueRow) ||  (workInfoRow == retireAgeRow) ||
+                    (incomeRow == heightWeightRow) || (incomeRow == smokeRow) || (incomeRow == healthIssueRow) || (incomeRow == retireAgeRow) ||
+                    (heightWeightRow == smokeRow) || (heightWeightRow == healthIssueRow) || (heightWeightRow == retireAgeRow) ||
+                    (smokeRow == healthIssueRow) || (smokeRow == retireAgeRow) ||
+                    (healthIssueRow == retireAgeRow)) {
+                Materialize.toast('Invalid Form Section Order', 3000);
+            }
+        });
+        $('#incomeRow').on('change', function() {
+            console.log('WorkInfo row changed.');
+            let workInfoRow = $('#workInfoRow').find(":selected").val(),
+                    incomeRow = $('#incomeRow').find(":selected").val(),
+                    heightWeightRow = $('#heightWeightRow').find(":selected").val(),
+                    smokeRow = $('#smokeRow').find(":selected").val(),
+                    healthIssueRow = $('#healthIssueRow').find(":selected").val(),
+                    retireAgeRow = $('#retireAgeRow').find(":selected").val();
+            if ((workInfoRow == incomeRow) || (workInfoRow == heightWeightRow) ||  (workInfoRow == smokeRow) ||  (workInfoRow == healthIssueRow) ||  (workInfoRow == retireAgeRow) ||
+                    (incomeRow == heightWeightRow) || (incomeRow == smokeRow) || (incomeRow == healthIssueRow) || (incomeRow == retireAgeRow) ||
+                    (heightWeightRow == smokeRow) || (heightWeightRow == healthIssueRow) || (heightWeightRow == retireAgeRow) ||
+                    (smokeRow == healthIssueRow) || (smokeRow == retireAgeRow) ||
+                    (healthIssueRow == retireAgeRow)) {
+                Materialize.toast('Invalid Form Section Order', 3000);
+            }
+        });
+        $('#heightWeightRow').on('change', function() {
+            console.log('WorkInfo row changed.');
+            let workInfoRow = $('#workInfoRow').find(":selected").val(),
+                    incomeRow = $('#incomeRow').find(":selected").val(),
+                    heightWeightRow = $('#heightWeightRow').find(":selected").val(),
+                    smokeRow = $('#smokeRow').find(":selected").val(),
+                    healthIssueRow = $('#healthIssueRow').find(":selected").val(),
+                    retireAgeRow = $('#retireAgeRow').find(":selected").val();
+            if ((workInfoRow == incomeRow) || (workInfoRow == heightWeightRow) ||  (workInfoRow == smokeRow) ||  (workInfoRow == healthIssueRow) ||  (workInfoRow == retireAgeRow) ||
+                    (incomeRow == heightWeightRow) || (incomeRow == smokeRow) || (incomeRow == healthIssueRow) || (incomeRow == retireAgeRow) ||
+                    (heightWeightRow == smokeRow) || (heightWeightRow == healthIssueRow) || (heightWeightRow == retireAgeRow) ||
+                    (smokeRow == healthIssueRow) || (smokeRow == retireAgeRow) ||
+                    (healthIssueRow == retireAgeRow)) {
+                Materialize.toast('Invalid Form Section Order', 3000);
+            }
+        });
+        $('#smokeRow').on('change', function() {
+            console.log('WorkInfo row changed.');
+            let workInfoRow = $('#workInfoRow').find(":selected").val(),
+                    incomeRow = $('#incomeRow').find(":selected").val(),
+                    heightWeightRow = $('#heightWeightRow').find(":selected").val(),
+                    smokeRow = $('#smokeRow').find(":selected").val(),
+                    healthIssueRow = $('#healthIssueRow').find(":selected").val(),
+                    retireAgeRow = $('#retireAgeRow').find(":selected").val();
+            if ((workInfoRow == incomeRow) || (workInfoRow == heightWeightRow) ||  (workInfoRow == smokeRow) ||  (workInfoRow == healthIssueRow) ||  (workInfoRow == retireAgeRow) ||
+                    (incomeRow == heightWeightRow) || (incomeRow == smokeRow) || (incomeRow == healthIssueRow) || (incomeRow == retireAgeRow) ||
+                    (heightWeightRow == smokeRow) || (heightWeightRow == healthIssueRow) || (heightWeightRow == retireAgeRow) ||
+                    (smokeRow == healthIssueRow) || (smokeRow == retireAgeRow) ||
+                    (healthIssueRow == retireAgeRow)) {
+                Materialize.toast('Invalid Form Section Order', 3000);
+            }
+        });
+        $('#healthIssueRow').on('change', function() {
+            console.log('WorkInfo row changed.');
+            let workInfoRow = $('#workInfoRow').find(":selected").val(),
+                    incomeRow = $('#incomeRow').find(":selected").val(),
+                    heightWeightRow = $('#heightWeightRow').find(":selected").val(),
+                    smokeRow = $('#smokeRow').find(":selected").val(),
+                    healthIssueRow = $('#healthIssueRow').find(":selected").val(),
+                    retireAgeRow = $('#retireAgeRow').find(":selected").val();
+            if ((workInfoRow == incomeRow) || (workInfoRow == heightWeightRow) ||  (workInfoRow == smokeRow) ||  (workInfoRow == healthIssueRow) ||  (workInfoRow == retireAgeRow) ||
+                    (incomeRow == heightWeightRow) || (incomeRow == smokeRow) || (incomeRow == healthIssueRow) || (incomeRow == retireAgeRow) ||
+                    (heightWeightRow == smokeRow) || (heightWeightRow == healthIssueRow) || (heightWeightRow == retireAgeRow) ||
+                    (smokeRow == healthIssueRow) || (smokeRow == retireAgeRow) ||
+                    (healthIssueRow == retireAgeRow)) {
+                Materialize.toast('Invalid Form Section Order', 3000);
+            }
+        });
+        $('#retireAgeRow').on('change', function() {
+            console.log('WorkInfo row changed.');
+            let workInfoRow = $('#workInfoRow').find(":selected").val(),
+                    incomeRow = $('#incomeRow').find(":selected").val(),
+                    heightWeightRow = $('#heightWeightRow').find(":selected").val(),
+                    smokeRow = $('#smokeRow').find(":selected").val(),
+                    healthIssueRow = $('#healthIssueRow').find(":selected").val(),
+                    retireAgeRow = $('#retireAgeRow').find(":selected").val();
+            if ((workInfoRow == incomeRow) || (workInfoRow == heightWeightRow) ||  (workInfoRow == smokeRow) ||  (workInfoRow == healthIssueRow) ||  (workInfoRow == retireAgeRow) ||
+                    (incomeRow == heightWeightRow) || (incomeRow == smokeRow) || (incomeRow == healthIssueRow) || (incomeRow == retireAgeRow) ||
+                    (heightWeightRow == smokeRow) || (heightWeightRow == healthIssueRow) || (heightWeightRow == retireAgeRow) ||
+                    (smokeRow == healthIssueRow) || (smokeRow == retireAgeRow) ||
+                    (healthIssueRow == retireAgeRow)) {
+                Materialize.toast('Invalid Form Section Order', 3000);
+            }
         });
 
     });
