@@ -40,6 +40,7 @@ let instancesRouter = require('./routes/instances'),
     defaultInstanceRoutes = require('./routes/defaultInstance'),
     cardRoutes = require('./routes/card'),
     cardButtonRoutes = require('./routes/cardButton'),
+    csvGeneratorRoutes = require('./routes/csvGenerator'),
     defaultSiteRouter = require('./routes/defaultSite');
 
 var configDB     = require('./config/database');
@@ -148,6 +149,7 @@ app.use('/myPlan', myPlanRoutes);
 app.use('/card', cardRoutes);
 app.use('/cardButton', cardButtonRoutes);
 app.use('/defaultInstance', defaultInstanceRoutes);
+app.use('/csvGenerator', csvGeneratorRoutes);
 app.use('*', (req, res, next) => {
     res.sendFile(path.join(__dirname, 'public/index.html'));
 });
