@@ -9,6 +9,7 @@ let MyPlanSchema = mongoose.Schema({
     bottomButtonText: { type: String, required: false },
     bottomButtonLink: { type: String, required: false },
     bottomButtonVisibility: { type: Boolean, required: false, default: true },
+    cards: []
 });
 
 module.exports = mongoose.model('MyPlan', MyPlanSchema);

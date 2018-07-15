@@ -15,7 +15,7 @@ let assessRiskSchema = mongoose.Schema({
     healthIssueRow: { type: String, required: true },
     retireAgeRow: { type: String, required: true },
 
-    formFieldOrders: { type: Object, required: false }
+    formFieldOrders: []
 });
 
 module.exports = mongoose.model('AssessRisks', assessRiskSchema);

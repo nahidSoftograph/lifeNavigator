@@ -10,6 +10,8 @@ let Instance = require('../models/instance'),
     Sick = require('../models/sick'),
     MyPlan = require('../models/myPlan'),
     SiteUser = require('../models/siteUser'),
+    Card = require('../models/card'),
+    CardButton = require('../models/cardButton'),
     FutureGoal = require('../models/futureGoal');
 
 let getCategories = (req, res, next) => {
@@ -49,13 +51,10 @@ let getCategories = (req, res, next) => {
                                                                 if (err) {
                                                                     console.log('Error: ' + err);
                                                                 } else {
-                                                                    console.log('Get sicks');
-                                                                    console.log(sicks);
                                                                     getHome(instance._id, (err, home) => {
                                                                         if (err) {
                                                                             console.log('err: ' + err);
                                                                         } else {
-                                                                            console.log('Got home');
                                                                             getSiteUserSignUp(instance._id, (err, siteUserSignUp) => {
                                                                                 if (err) {
                                                                                     console.log('Error: ' + err);
@@ -64,20 +63,27 @@ let getCategories = (req, res, next) => {
                                                                                         if (err) {
                                                                                             console.log('err: ' + err);
                                                                                         } else {
-                                                                                            res.status(201).json({
-                                                                                                title: 'My Title',
-                                                                                                home: home,
-                                                                                                futureGoal: futureGoal,
-                                                                                                accomplishment: accomplishment,
-                                                                                                assessRisk: assessRisk,
-                                                                                                categories: categories,
-                                                                                                occupations: occupations,
-                                                                                                industries: industries,
-                                                                                                sicks: sicks,
-                                                                                                instanceId: instance._id,
-                                                                                                siteUserSignUp: siteUserSignUp,
-                                                                                                saveMyPlan: myPlan,
-                                                                                                genericIconMisc: '/images/iconMisc.png'
+                                                                                            getSiteUser(instance._id, (err, siteUser) => {
+                                                                                                if (err) {
+                                                                                                    console.log('Error: ' + err);
+                                                                                                } else {
+                                                                                                    res.status(201).json({
+                                                                                                        title: 'My Title',
+                                                                                                        home: home,
+                                                                                                        futureGoal: futureGoal,
+                                                                                                        accomplishment: accomplishment,
+                                                                                                        assessRisk: assessRisk,
+                                                                                                        categories: categories,
+                                                                                                        occupations: occupations,
+                                                                                                        industries: industries,
+                                                                                                        sicks: sicks,
+                                                                                                        instanceId: instance._id,
+                                                                                                        siteUserSignUp: siteUserSignUp,
+                                                                                                        saveMyPlan: myPlan,
+                                                                                                        genericIconMisc: '/images/iconMisc.png',
+                                                                                                        siteUser: siteUser
+                                                                                                    });
+                                                                                                }
                                                                                             });
                                                                                         }
                                                                                     });
@@ -104,7 +110,6 @@ let getCategories = (req, res, next) => {
 };
 
 let addSiteUser = (req, res, next) => {
-    console.log(req.body);
     let age = req.body.age,
         gender = req.body.gender,
         zip = req.body.zip;
@@ -137,7 +142,6 @@ let addSiteUser = (req, res, next) => {
                     message: 'Error: ' + err
                 });
             } else {
-                console.log('User Created');
                 return res.status(201).json({
                     success: true,
                     user: siteUser
@@ -163,7 +167,6 @@ let updateSiteUserOptionSelection = (req, res, next) => {
             getOptionsId(accomplishmentOptions, (err, accomplishmentOptions) => {
                 if (err) {
                     console.log('Error: ' + err);
-                    console.log('Error: ' + err);
                     return res.status(202).json({
                         success: false,
                         message: err
@@ -187,7 +190,6 @@ let updateSiteUserOptionSelection = (req, res, next) => {
                                         message: err
                                     });
                                 } else {
-                                    console.log('Site User Updated.');
                                     return res.status(202).json({
                                         success: true,
                                         message: 'Successfully updated the site user',
@@ -230,7 +232,6 @@ let traverseAllCategories = (categories, instanceId, cb) => {
 };
 
 let cookCategories = (instanceId, cb) => {
-    console.log('Cooking categoies');
     Category.find({instanceId: instanceId, isVisible: true}, (err, categories) => {
         if (err) {
             console.log('Error: ' + err);
@@ -296,14 +297,53 @@ let getSiteUserSignUp = (instanceId, cb) => {
             return cb (err, null);
         } else {
             let formFieldOrders = {
-              yearRow: siteUserSignUp.yearRow,
               genderRow: siteUserSignUp.genderRow,
+              yearRow: siteUserSignUp.yearRow,
               zipRow: siteUserSignUp.zipRow
             };
-            siteUserSignUp.formFieldOrders = formFieldOrders;
-            return cb (null, siteUserSignUp);
+            formatSiteUserSignUpFormFiledOrders(formFieldOrders, (err, formFieldOrders) => {
+               if (err) {
+                   console.log('Error: ' + err);
+                   return cb (err, null);
+               } else {
+                   siteUserSignUp.formFieldOrders = formFieldOrders;
+                   return cb (null, siteUserSignUp);
+               }
+            });
         }
     });
+};
+
+let formatSiteUserSignUpFormFiledOrders = (data, cb) => {
+    let newFormFieldOrders = [];
+    for (let index=0; index<3; index++) {
+        for (var key in data) {
+            var item = data[key];
+            if (index == item) {
+                newFormFieldOrders.push(key);
+                if (newFormFieldOrders.length == 3) {
+                    console.log(newFormFieldOrders);
+                    return cb (null, newFormFieldOrders);
+                }
+            }
+        }
+    }
+};
+
+let formatAssessRiskFormFiledOrders = (data, cb) => {
+    let newFormFieldOrders = [];
+    for (let index=0; index<6; index++) {
+        for (var key in data) {
+            var item = data[key];
+            if (index == item) {
+                newFormFieldOrders.push(key);
+                if (newFormFieldOrders.length == 6) {
+                    console.log(newFormFieldOrders);
+                    return cb (null, newFormFieldOrders);
+                }
+            }
+        }
+    }
 };
 
 let getMyPlan = (instanceId, cb) => {
@@ -311,21 +351,25 @@ let getMyPlan = (instanceId, cb) => {
         if (err) {
             return cb (err, null);
         } else {
-            return cb (null, myPlan);
+            getCard(instanceId, (err, cards) => {
+                if (err) {
+                    return cb (err, null);
+                } else {
+                    myPlan.cards = cards;
+                    return cb (null, myPlan);
+                }
+            });
         }
     });
 };
 
 let setOptionId = (options, cb) => {
-    console.log('Get options');
     if (options.length == 0) {
         return cb (null, options);
     } else {
         for (let index=0; index<options.length; index++) {
             options[index].optId = index;
-            console.log('Index: ' + index + ' length: ' + (options.length - 1));
             if (index == options.length - 1) {
-                // console.log(options);
                 return cb (null, options);
             }
         }
@@ -345,14 +389,11 @@ getOptionsId = (options, cb) => {
 };
 
 let getApiInstance = (instanceLink, cb) => {
-    console.log('Instance link: ' + instanceLink);
     Instance.findOne({instanceLink: instanceLink, isActive: true }, (err, instance) => {
         if (err) {
             console.log('Errro: ' + err);
             return cb (err, null);
         } else if (!instance) {
-            console.log('Instance: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
-            console.log(instance);
             Instance.findOne({isHome: true}, (err, instance) => {
                 if (err) {
                     console.log('Error: ' + err);
@@ -380,8 +421,61 @@ let getAssessRisk = (instanceId, cb) => {
                 healthIssueRow: assessRisk.healthIssueRow,
                 retireAgeRow: assessRisk.retireAgeRow
             };
-            assessRisk.formFieldOrders = formFieldOrders;
-            return cb (null, assessRisk);
+            formatAssessRiskFormFiledOrders(formFieldOrders, (err, formFieldOrders) => {
+                if (err) {
+                    console.log('Error: ' + err);
+                } else {
+                    assessRisk.formFieldOrders = formFieldOrders;
+                    return cb (null, assessRisk);
+                }
+            });
+        }
+    });
+};
+
+let getCard = (instanceId, cb) => {
+    Card.find({instanceId: instanceId}, (err, cards) => {
+        if (err) {
+            return cb (err, null);
+        } else {
+            if (cards.length == 0) {
+                return cb (null, cards);
+            } else {
+                for (let index=0; index<cards.length; index++) {
+                    getCardButton(cards[index]._id, (err, cardsButton) => {
+                        if (err) {
+                            return cb (err, null);
+                        } else {
+                            if (index == (cards.length - 1)) {
+                                cards[index].cardButtons = cardsButton;
+                                return cb (null, cards);
+                            }
+                        }
+                    });
+                }
+            }
+        }
+    });
+};
+
+let getCardButton = (cardId, cb) => {
+    CardButton.find({cardId: cardId}, (err, cardButtons) => {
+        if (err) {
+            return cb (err, null);
+        } else {
+            return cb (null, cardButtons);
+        }
+    });
+};
+
+let getSiteUser = (instanceId, cb) => {
+    let siteUser = new SiteUser ({});
+    siteUser.save((err, siteUser) => {
+        if (err) {
+            return cb (err, null);
+        } else {
+            siteUser.instanceId = instanceId;
+            return cb (null, siteUser);
         }
     });
 };

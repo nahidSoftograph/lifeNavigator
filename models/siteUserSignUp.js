@@ -11,7 +11,7 @@ let siteUserSignUpSchema = mongoose.Schema({
     yearRow: { type: String, required: true },
     genderRow: { type: String, required: true },
     zipRow: { type: String, required: true },
-    formFieldOrders: { type: Object, required: false }
+    formFieldOrders: []
 });
 
 module.exports = mongoose.model('SiteUserSignUp', siteUserSignUpSchema);

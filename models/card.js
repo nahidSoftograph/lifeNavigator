@@ -6,7 +6,8 @@ let cardSchema = mongoose.Schema({
     headerText: { type: String, required: true },
     subHeaderText: { type: String, required: true },
     cardBody: { type: String, required: true },
-    isVisible: { type: Boolean, required: true, default: true }
+    isVisible: { type: Boolean, required: true, default: true },
+    cardButtons: []
 });
 
 module.exports = mongoose.model('Card', cardSchema);

@@ -1,9 +1,11 @@
 let mongoose = require('mongoose');
 
 let siteUserSchema = mongoose.Schema({
-    age: { type: String, required: true },
-    gender: { type: String, required: true },
-    zip: { type: String, required: true },
+    instanceId: { type: String, required: false },
+    instanceName: { type: String, required: false },
+    age: { type: String, required: false },
+    gender: { type: String, required: false },
+    zip: { type: String, required: false },
     accomplishmentOptions: [String],
     futureGoalOptions: [String],
     accomplishmentFullOptions: [],
