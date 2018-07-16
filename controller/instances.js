@@ -183,7 +183,22 @@ let createInstance = (req, res, next) => {
                                                                                 cloneCard(currentInstanceId, homeInstanceId, (err, cards) => {
                                                                                     if (err) {
                                                                                     } else {
-                                                                                        res.redirect('/instances/createSelectInstances');
+                                                                                        cloneIndustry(currentInstanceId, homeInstanceId, (err, industries) => {
+                                                                                            if (err) {
+                                                                                            } else {
+                                                                                                cloneOccupation(currentInstanceId, homeInstanceId, (err, occupations) => {
+                                                                                                    if (err) {
+                                                                                                    } else {
+                                                                                                        cloneSick(currentInstanceId, homeInstanceId, (err, sicks) => {
+                                                                                                            if (err) {
+                                                                                                            } else {
+                                                                                                                res.redirect('/instances/createSelectInstances');
+                                                                                                            }
+                                                                                                        })
+                                                                                                    }
+                                                                                                });
+                                                                                            }
+                                                                                        });
                                                                                     }
                                                                                 });
                                                                             }
@@ -442,12 +457,94 @@ let cloneFutureGoal = (currentInstanceId, homeInstanceId, cb) => {
     });
 };
 
-let cloneIndustry = (instanceId, cb) => {
-
+let cloneIndustry = (currentInstanceId, homeInstanceId, cb) => {
+    Industry.find({instanceId: homeInstanceId}, (err, industries) => {
+        if (err) {
+            return cb (err, null);
+        } else {
+            if (industries.length == 0) {
+                return cb (null, industries);
+            } else {
+                for (let index=0; index<industries.length; index++) {
+                    let industry = new Industry ({
+                        instanceId: currentInstanceId,
+                        name: industries[index].name,
+                        text: industries[index].text,
+                        isVisible: industries[index].isVisible
+                    });
+                    industry.save((err, industry) => {
+                        if (err) {
+                            return cb (err, null);
+                        } else {
+                            if (index == (industries.length - 1)) {
+                                return cb (null, 'done');
+                            }
+                        }
+                    });
+                }
+            }
+        }
+    });
 };
 
-let cloneOccupation = (instanceId, cb) => {
+let cloneOccupation = (currentInstanceId, homeInstanceId, cb) => {
+    Occupation.find({instanceId: homeInstanceId}, (err, occupations) => {
+        if (err) {
+            return cb (err, null);
+        } else {
+            if (occupations.length == 0) {
+                return cb (null, occupations);
+            } else {
+                for (let index=0; index<occupations.length; index++) {
+                    let occupation = new Occupation ({
+                        instanceId: currentInstanceId,
+                        name: occupations[index].name,
+                        text: occupations[index].text,
+                        isVisible: occupations[index].isVisible
+                    });
+                    occupation.save((err, occupation) => {
+                        if (err) {
+                            return cb (err, null);
+                        } else {
+                            if (index == (occupations.length - 1)) {
+                                return cb (null, 'done');
+                            }
+                        }
+                    });
+                }
+            }
+        }
+    });
+};
 
+let cloneSick = (currentInstanceId, homeInstanceId, cb) => {
+    Sick.find({instanceId: homeInstanceId}, (err, sicks) => {
+        if (err) {
+            return cb (err, null);
+        } else {
+            if (sicks.length == 0) {
+                return cb (null, sicks);
+            } else {
+                for (let index=0; index<sicks.length; index++) {
+                    let sick = new Sick ({
+                        instanceId: currentInstanceId,
+                        name: sicks[index].name,
+                        text: sicks[index].text,
+                        isVisible: sicks[index].isVisible
+                    });
+                    sick.save((err, sick) => {
+                        if (err) {
+                            return cb (err, null);
+                        } else {
+                            if (index == (sicks.length - 1)) {
+                                return cb (null, 'done');
+                            }
+                        }
+                    });
+                }
+            }
+        }
+    });
 };
 
 let cloneOptions = (currentCategoryId, newCategoryId, currentInstanceId, homeInstanceId, cb) => {
@@ -483,10 +580,6 @@ let cloneOptions = (currentCategoryId, newCategoryId, currentInstanceId, homeIns
             }
         }
     });
-};
-
-let cloneSick = (instanceId, cb) => {
-
 };
 
 let cloneMyPlan = (currentInstanceId, homeInstanceId, cb) => {
@@ -620,7 +713,6 @@ let cloneCard = (currentInstanceId, homeInstanceId, cb) => {
                         cardBody: currentCard.cardBody,
                         isVisible: currentCard.isVisible
                     });
-                    console.log('Card Index: ' + index);
                     newCard.save((err, newCard) => {
                         if (err) {
                             return cb (err, null);
@@ -647,7 +739,6 @@ let cloneCardButton = (currentInstanceId, homeInstanceId, currentCardId, newCard
         if (err) {
             return cb (err, null);
         } else {
-            console.log('Card Button length: ' + cardButtons.length);
             if (cardButtons.length == 0) {
                 return cb (null, cardButtons);
             } else {
@@ -705,8 +796,6 @@ let getCardButton = (instanceId, cb) => {
                 if (err) {
                     return cb (err, null);
                 } else {
-                    console.log('Getting card buttons');
-                    console.log(cardButtons);
                     return cb (null, cardButtons);
                 }
             });

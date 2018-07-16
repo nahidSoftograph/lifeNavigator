@@ -1,0 +1,82 @@
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
+<div class="col s12 m8 l9">
+
+    <div class="card white">
+        <div class="card-content black-text">
+            <span class="card-title">Users Data</span>
+            <table class="responsive-table" id="myTableId">
+                <thead>
+                <tr>
+                    <th>Age</th>
+                    <th>Gender</th>
+                    <th>Zip Code</th>
+                    <th>Accomplishments</th>
+                    <th>Future Goals</th>
+                    <!--<th>Delete</th>-->
+                </tr>
+                </thead>
+
+                <tbody>
+                {{#each siteUsers}}
+                    <tr>
+                        <td>{{this.age}}</td>
+                        <td>{{this.gender}}</td>
+                        <td>{{this.zip}}</td>
+                        <td>
+                            <button data-target="modalAccomplishment{{this._id}}" class="btn modal-trigger">Accomplishment ({{this.accomplishmentFullOptions.length}})</button>
+
+                            <!-- Modal Structure -->
+                            <div id="modalAccomplishment{{this._id}}" class="modal">
+                                <div class="modal-content">
+                                    <table>
+                                        <tbody>
+                                        {{#each this.accomplishmentFullOptions}}
+                                            <tr>
+                                                <td class="center-align">{{this.titlePast}}</td>
+                                            </tr>
+                                        {{/each}}
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="modal-footer">
+                                    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <button data-target="modalFutureGoal{{this._id}}" class="btn modal-trigger">Future Goals ({{this.futureGoalFullOptions.length}})</button>
+
+                            <!-- Modal Structure -->
+                            <div id="modalFutureGoal{{this._id}}" class="modal">
+                                <div class="modal-content">
+                                    <table>
+                                        <tbody>
+                                        {{#each this.futureGoalFullOptions}}
+                                            <tr>
+                                                <td class="center-align">{{this.titleFuture}}</td>
+                                            </tr>
+                                        {{/each}}
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="modal-footer">
+                                    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    $(document).ready( function () {
+        $('#myTableId').DataTable();
+    } );
+</script>

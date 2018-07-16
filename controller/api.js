@@ -10,6 +10,8 @@ let Instance = require('../models/instance'),
     Sick = require('../models/sick'),
     MyPlan = require('../models/myPlan'),
     SiteUser = require('../models/siteUser'),
+    SiteUserPiiData = require('../models/siteUserPiiData'),
+    SiteUserNonPiiData = require('../models/siteUserNonPiiData'),
     Card = require('../models/card'),
     CardButton = require('../models/cardButton'),
     FutureGoal = require('../models/futureGoal');
@@ -51,6 +53,9 @@ let getCategories = (req, res, next) => {
                                                                 if (err) {
                                                                     console.log('Error: ' + err);
                                                                 } else {
+                                                                    assessRisk.industry = industries;
+                                                                    assessRisk.occupation = occupations;
+                                                                    assessRisk.healthIssue = sicks;
                                                                     getHome(instance._id, (err, home) => {
                                                                         if (err) {
                                                                             console.log('err: ' + err);
@@ -446,8 +451,8 @@ let getCard = (instanceId, cb) => {
                         if (err) {
                             return cb (err, null);
                         } else {
+                            cards[index].cardButtons = cardsButton;
                             if (index == (cards.length - 1)) {
-                                cards[index].cardButtons = cardsButton;
                                 return cb (null, cards);
                             }
                         }
@@ -469,13 +474,22 @@ let getCardButton = (cardId, cb) => {
 };
 
 let getSiteUser = (instanceId, cb) => {
-    let siteUser = new SiteUser ({});
-    siteUser.save((err, siteUser) => {
+    let siteUserPiiData = new SiteUserPiiData ({});
+    siteUserPiiData.save((err, siteUserPiiData) => {
         if (err) {
             return cb (err, null);
         } else {
-            siteUser.instanceId = instanceId;
-            return cb (null, siteUser);
+            let siteUserNonPiiData = new SiteUserNonPiiData ({
+                referencePiiId: siteUserPiiData._id
+            });
+            siteUserNonPiiData.save((err, siteUserNonPiiData) => {
+                if (err) {
+                    return cb (err, null);
+                } else {
+                    return cb (null, siteUserNonPiiData);
+                }
+            });
         }
     });
 };
+

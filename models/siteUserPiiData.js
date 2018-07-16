@@ -1,6 +1,6 @@
 let mongoose = require('mongoose');
 
-let siteUserSchema = mongoose.Schema({
+let siteUserPiiSchema = mongoose.Schema({
     instanceId: { type: String, required: false },
     instanceName: { type: String, required: false },
 
@@ -23,7 +23,9 @@ let siteUserSchema = mongoose.Schema({
     healthIssue: [],
     retireAge: { type: String, required: false },
 
-    events: []
+    events: [],
+
+    date: { type: Date, default: Date.now }
 });
 
-module.exports = mongoose.model('SiteUser', siteUserSchema);
+module.exports = mongoose.model('SiteUserPii', siteUserPiiSchema);

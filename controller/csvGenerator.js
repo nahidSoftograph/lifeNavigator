@@ -9,7 +9,7 @@ let generateCSV = (req, res, next) => {
         if (err) {
             console.log('Error: ' + err);
         } else {
-            let myArray= [{
+            /*let myArray= [{
               "age": '12',
               'gender': 'male',
               'zip': '1234',
@@ -23,16 +23,12 @@ let generateCSV = (req, res, next) => {
                 'futureOption': ['a', 'b', 'c'],
                 'accomplishmentOption': ['a', 'b', 'e', 'f'],
                 'steps': ['a', 'b'],
-            }];
-            let fields = ['age', 'gender', 'zip', 'futureOption', 'accomplishmentOption', 'steps'];
-            const opts = { fields, unwind: ['futureOption', 'accomplishmentOption', 'steps'] };
+            }];*/
+            // let fields = ['age', 'gender', 'zip', 'futureOption', 'accomplishmentOption', 'steps'];
+            let fields = ['instanceId', 'instanceName', 'age', 'gender', 'zip', 'occupation', 'industry', 'income', 'heightFeet', 'heightInch', 'weight', 'isSmoke', 'retireAge'];
+            const opts = { fields, unwind: ['accomplishmentOptions', 'futureGoalOptions', 'accomplishmentFullOptions', 'futureGoalFullOptions', 'healthIssue', 'events'] };
             const parser = new Json2csvParser(opts);
-            const csv = parser.parse(myArray);
-            console.log('Generated Data');
-            console.log(siteUsers);
-            console.log('Generated CSV');
-            console.log(csv);
-            // var csv = json2csv({ data: siteUsers, fields: fields });
+            const csv = parser.parse(siteUsers);
             fs.writeFile('public/csvFiles/file.csv', csv, function(err) {
                 if (err) {
                     return res.status(400).json({

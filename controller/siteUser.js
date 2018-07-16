@@ -18,6 +18,14 @@ let displaySiteUser = (req, res, next) => {
     });
 };
 
+let displaySiteUserPiiData = (req, res, next) => {
+
+};
+
+let displaySiteUserNonPiiData = (req, res, next) => {
+
+};
+
 let deleteUser = (req, res, next) => {
     let siteUserId = req.params.siteUserId;
     if (!siteUserId) {
