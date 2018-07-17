@@ -9,6 +9,7 @@ let generateCSV = (req, res, next) => {
         if (err) {
             console.log('Error: ' + err);
         } else {
+            console.log(siteUsers);
             /*let myArray= [{
               "age": '12',
               'gender': 'male',
@@ -22,13 +23,17 @@ let generateCSV = (req, res, next) => {
                 'zip': '12343',
                 'futureOption': ['a', 'b', 'c'],
                 'accomplishmentOption': ['a', 'b', 'e', 'f'],
-                'steps': ['a', 'b'],
+                'steps': [{ 'a': '1', 'b': '2'}, {}],
             }];*/
             // let fields = ['age', 'gender', 'zip', 'futureOption', 'accomplishmentOption', 'steps'];
-            let fields = ['instanceId', 'instanceName', 'age', 'gender', 'zip', 'occupation', 'industry', 'income', 'heightFeet', 'heightInch', 'weight', 'isSmoke', 'retireAge'];
-            const opts = { fields, unwind: ['accomplishmentOptions', 'futureGoalOptions', 'accomplishmentFullOptions', 'futureGoalFullOptions', 'healthIssue', 'events'] };
+            let fields = ['_id', 'age', 'gender', 'zip', 'events', 'healthIssue', 'futureGoalFullOptions', 'accomplishmentFullOptions', 'futureGoalOptions', 'accomplishmentOptions'];
+            // let fields = ['instanceId', 'instanceName', 'age', 'gender', 'zip', 'occupation', 'industry', 'income', 'heightFeet', 'heightInch', 'weight', 'isSmoke', 'retireAge'];
+            const opts = {fields};
+            /*unwind: ['events', 'healthIssue', 'futureGoalFullOptions', 'accomplishmentFullOptions', 'futureGoalOptions', 'accomplishmentOptions']*/
+            // const opts = { fields, unwind: ['accomplishmentOptions', 'futureGoalOptions', 'accomplishmentFullOptions', 'futureGoalFullOptions', 'healthIssue', 'events'] };
             const parser = new Json2csvParser(opts);
             const csv = parser.parse(siteUsers);
+            // const csv = parser.parse(myArray);
             fs.writeFile('public/csvFiles/file.csv', csv, function(err) {
                 if (err) {
                     return res.status(400).json({

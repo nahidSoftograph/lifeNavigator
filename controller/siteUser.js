@@ -1,4 +1,6 @@
 let SiteUser = require('../models/siteUser'),
+    SiteUserPiiData = require('../models/siteUserPiiData'),
+    SiteUserNonPiiData = require('../models/siteUserNonPiiData'),
     Option = require('../models/option');
 
 let displaySiteUser = (req, res, next) => {
@@ -6,7 +8,6 @@ let displaySiteUser = (req, res, next) => {
         if (err) {
             console.log('Error: ' + err);
         } else {
-            console.log(siteUsers.length);
             cookUser(siteUsers, (err, siteUsers) => {
                 if (err) {
                     console.log('Error: ' + err);
@@ -19,11 +20,41 @@ let displaySiteUser = (req, res, next) => {
 };
 
 let displaySiteUserPiiData = (req, res, next) => {
-
+    SiteUserPiiData.find({}, (err, siteUsersPiiData) => {
+        if (err) {
+            console.log('Error: ' + err);
+        } else {
+            res.render('siteUserData/siteUserPiiData', {
+                siteUsers: siteUsersPiiData
+            });
+        }
+    });
 };
 
 let displaySiteUserNonPiiData = (req, res, next) => {
+    SiteUserNonPiiData.find({}, (err, siteUsersNonPiiData) => {
+        if (err) {
+            console.log('Error: ' + err);
+        } else {
+            res.render('siteUserData/siteUserNonPiiData', {
+                siteUsers: siteUsersNonPiiData
+            });
+        }
+    });
+};
 
+let displayIndividualSiteUser = (req, res, next) => {
+    let id = req.params.siteUserNonPiiDataId;
+    console.log('Id: ' + id);
+    SiteUserNonPiiData.findById(id, (err, siteUserNonPiiData) => {
+        if (err) {
+            console.log('Error: ' + err);
+        } else {
+            res.render('siteUserData/individualSiteUser', {
+                siteUser: siteUserNonPiiData
+            });
+        }
+    });
 };
 
 let deleteUser = (req, res, next) => {
@@ -43,6 +74,9 @@ let deleteUser = (req, res, next) => {
 
 module.exports = {
   displaySiteUser,
+  displaySiteUserPiiData,
+  displaySiteUserNonPiiData,
+  displayIndividualSiteUser,
   deleteUser
 };
 
