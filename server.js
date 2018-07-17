@@ -150,9 +150,18 @@ app.use('/card', cardRoutes);
 app.use('/cardButton', cardButtonRoutes);
 app.use('/defaultInstance', defaultInstanceRoutes);
 app.use('/csvGenerator', csvGeneratorRoutes);
+/*app.use('/default', (req, res, next) => {
+    console.log('------in redirect url');
+    res.sendFile(path.join(__dirname, 'public/index.html'));
+});
+app.use('/', (req, res, next) => {
+    console.log('In root routing');
+    res.redirect('/default');
+});*/
 app.use('*', (req, res, next) => {
     res.sendFile(path.join(__dirname, 'public/index.html'));
 });
+
 
 // launch ======================================================================
 app.listen(port);
