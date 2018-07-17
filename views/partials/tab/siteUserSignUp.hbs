@@ -72,6 +72,11 @@
     <div class="row">
         <div class="col s2"><u>Forms Input Section</u></div>
         <div class="col s1"><u>Order</u></div>
+        <div class="col s7"><u></u></div>
+        <div class="col s2" style="margin-top: 35px;">
+            <button class="btn waves-effect waves-light setToDefaultButtonOrderInput">Set to Default
+            </button>
+        </div>
     </div>
     <div class="row">
         <div class="col s2" style="margin-top: 30px;">
@@ -103,9 +108,9 @@
         </div>
         <div class="input-field col s1">
             <select id="zipRow" name="zipRow">
-                <option {{#equal siteUserSignUp.zipRow "0"}} selected {{/equal}} value="0">1</option>
-                <option {{#equal siteUserSignUp.zipRow "1"}} selected {{/equal}} value="1">2</option>
-                <option {{#equal siteUserSignUp.zipRow "2"}} selected {{/equal}} value="2">3</option>
+                <option {{#equal siteUserSignUp.zipRow "0"}} selected {{/equal}} value="0">1 </option>
+                <option {{#equal siteUserSignUp.zipRow "1"}} selected {{/equal}} value="1">2 </option>
+                <option {{#equal siteUserSignUp.zipRow "2"}} selected {{/equal}} value="2">3 </option>
             </select>
         </div>
     </div>
@@ -209,6 +214,25 @@
             if (yearRow == genderRow || yearRow == zipRow || genderRow == zipRow) {
                 Materialize.toast('Invalid Form Section Order', 3000);
             }
+        });
+
+        $('.setToDefaultButtonOrderInput').on('click', () => {
+            event.preventDefault();
+            let url = location.origin + '/defaultInstance/getData/';
+            $.get(url).done(function(data){
+
+                $('#genderRow').val(data.siteUserSignUp.genderRow);
+                $('#genderRow').material_select();
+
+                $('#zipRow').val(data.siteUserSignUp.zipRow);
+                $('#zipRow').material_select();
+
+                $('#yearRow').val(data.siteUserSignUp.yearRow);
+                $('#yearRow').material_select();
+
+            }).fail(function(data){
+                console.log(data);
+            });
         });
     });
 </script>
