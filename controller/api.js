@@ -134,11 +134,7 @@ let addSiteUser = (req, res, next) => {
             message: 'Invalid age.'
         });
     } else {
-        let siteUser = new SiteUser({
-            age: age,
-            gender: gender,
-            zip: zip
-        });
+        let siteUser = new SiteUser(req.body);
         siteUser.save((err, siteUser) => {
             if (err) {
                 console.log('Error: ' + err);

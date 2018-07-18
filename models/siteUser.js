@@ -23,7 +23,9 @@ let siteUserSchema = mongoose.Schema({
     healthIssue: [],
     retireAge: { type: String, required: false },
 
-    events: []
+    events: [],
+
+    createdDate: { type: Date, default: new Date }
 });
 
 module.exports = mongoose.model('SiteUser', siteUserSchema);
