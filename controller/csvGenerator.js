@@ -7,7 +7,14 @@ let generateCSV = (req, res, next) => {
     const fields = ['id', 'age', 'gender', 'zip', 'futureGoalOptions', 'accomplishmentOptions'];
     const json2csvParser = new Json2csvParser({ fields });
 
-    SiteUser.find({}, (err, siteUsers) => {
+    SiteUser.find(
+        { createdDate: {
+            /*$gte: new Date('2018-07-18T07:41:02.815Z'),
+            $lte: new Date('2018-07-18T07:27:52.055Z'),*/
+                $gte: new Date('2018-07-18T07:27:52.055Z'),
+                $lte: new Date('2018-07-18T07:41:02.815Z'),
+        }
+    }, (err, siteUsers) => {
         if (err) {
             console.log('Error: ' + err);
         } else {
@@ -40,6 +47,9 @@ module.exports = {
 
 let formatUser = (siteUsers, cb) => {
     let formatedUsers = [];
+    if (siteUsers.length == 0) {
+        return cb (null, []);
+    }
     for (let index=0; index<siteUsers.length; index++) {
         let currentSiteUsers = siteUsers[index];
 
