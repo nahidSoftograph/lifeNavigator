@@ -6,7 +6,7 @@ let Json2csvParser = require('json2csv').Parser,
     path = require('path'),
     Instance = require('../models/instance');
 
-const fields = ['id', 'age', 'gender', 'zip', 'futureGoalOptions', 'accomplishmentOptions'];
+const fields = ['createdDate', 'instanceName', 'id', 'age', 'gender', 'zip', 'futureGoalOptions', 'accomplishmentOptions', 'occupation', 'industry', 'income', 'heightFeet', 'heightInch', 'weight', 'isSmoke', 'healthIssue', 'retireAge', 'events', 'finalStep'];
 const json2csvParser = new Json2csvParser({ fields });
 
 let displayCsvGeneratorForm = (req, res, next) => {
@@ -59,7 +59,7 @@ let generateCSV = (req, res, next) => {
 let generateFilteredCsv = (req, res, next) => {
     let instanceId = req.body.instanceId,
         startDate = req.body.startDate + 'T00:00:00.000Z',
-        endDate = req.body.endDate + 'T00:00:00.000Z';
+        endDate = req.body.endDate + 'T12:00:00.000Z';
 
     console.log('instanceId: ' + instanceId);
     console.log('startDate: ' + startDate);
@@ -67,8 +67,6 @@ let generateFilteredCsv = (req, res, next) => {
 
     SiteUserPiiData.find(
         { createdDate: {
-                /*$gte: new Date('2018-07-18T07:41:02.815Z'),
-                $lte: new Date('2018-07-18T07:27:52.055Z'),*/
                 $gte: new Date(startDate),
                 $lte: new Date(endDate),
             }, instanceId: instanceId
@@ -114,31 +112,59 @@ let formatUser = (siteUsers, cb) => {
         let currentSiteUsers = siteUsers[index];
 
         let lengthArray = [];
+
         let allAccomplishmentGoalOptions = currentSiteUsers.accomplishmentOptions;
         let allFutureGoalOptions = siteUsers[index].futureGoalOptions;
+        let allHealthIssues = siteUsers[index].healthIssue;
+        let allEvents = siteUsers[index].events;
+
         lengthArray.push (allAccomplishmentGoalOptions.length);
         lengthArray.push (allFutureGoalOptions.length);
+        lengthArray.push (allHealthIssues.length);
+        lengthArray.push (allEvents.length);
 
         findMax(lengthArray, (err, maxVal) => {
             if (maxVal == 0) {
                 let myObject = {
+                    instanceName: currentSiteUsers.instanceName || '',
+                    createdDate: currentSiteUsers.createdDate || '',
+                    occupation: currentSiteUsers.occupation || '',
+                    industry: currentSiteUsers.industry || '',
+                    income: currentSiteUsers.income || '',
+                    heightFeet: currentSiteUsers.heightFeet || '',
+                    heightInch: currentSiteUsers.heightInch || '',
+                    weight: currentSiteUsers.weight || '',
+                    isSmoke: currentSiteUsers.isSmoke || '',
                     id: currentSiteUsers._id || '',
                     age: currentSiteUsers.age || '',
                     gender: currentSiteUsers.gender || '',
                     zip: currentSiteUsers.zip || '',
                     accomplishmentOptions: '',
-                    futureGoalOptions: ''
+                    futureGoalOptions: '',
+                    finalStep: 'Start'
                 };
                 formatedUsers.push(myObject);
             } else {
                 for (let index2=0; index2<maxVal; index2++) {
                     let myObject = {
+                        instanceName: currentSiteUsers.instanceName || '',
+                        createdDate: currentSiteUsers.createdDate || '',
+                        occupation: currentSiteUsers.occupation || '',
+                        industry: currentSiteUsers.industry || '',
+                        income: currentSiteUsers.income || '',
+                        heightFeet: currentSiteUsers.heightFeet || '',
+                        heightInch: currentSiteUsers.heightInch || '',
+                        weight: currentSiteUsers.weight || '',
+                        isSmoke: currentSiteUsers.isSmoke || '',
                         id: currentSiteUsers._id || '',
                         age: currentSiteUsers.age || '',
                         gender: currentSiteUsers.gender || '',
                         zip: currentSiteUsers.zip || '',
                         accomplishmentOptions: allAccomplishmentGoalOptions[index2] || '',
-                        futureGoalOptions: allFutureGoalOptions[index2] || ''
+                        futureGoalOptions: allFutureGoalOptions[index2] || '',
+
+                        healthIssue: allHealthIssue[index2] || '',
+                        events: allEvents[index2] || '',
                     };
                     formatedUsers.push(myObject);
                 }

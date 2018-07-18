@@ -68,7 +68,7 @@ let getCategories = (req, res, next) => {
                                                                                         if (err) {
                                                                                             console.log('err: ' + err);
                                                                                         } else {
-                                                                                            getSiteUser(instance._id, (err, siteUser) => {
+                                                                                            getSiteUser(instance, (err, siteUser) => {
                                                                                                 if (err) {
                                                                                                     console.log('Error: ' + err);
                                                                                                 } else {
@@ -469,9 +469,11 @@ let getCardButton = (cardId, cb) => {
     });
 };
 
-let getSiteUser = (instanceId, cb) => {
+let getSiteUser = (instance, cb) => {
+    let instanceId = instance._id;
     let siteUserPiiData = new SiteUserPiiData ({
-        instanceId: instanceId
+        instanceId: instanceId,
+        instanceName: instance.instanceName
     });
     siteUserPiiData.save((err, siteUserPiiData) => {
         if (err) {
@@ -479,6 +481,7 @@ let getSiteUser = (instanceId, cb) => {
         } else {
             let siteUserNonPiiData = new SiteUserNonPiiData ({
                 instanceId: instanceId,
+                instanceName: instance.instanceName,
                 referencePiiId: siteUserPiiData._id
             });
             siteUserNonPiiData.save((err, siteUserNonPiiData) => {
