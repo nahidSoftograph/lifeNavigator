@@ -4,6 +4,6 @@ let express = require('express'),
 
 router.get('/rawInfo/:instanceLink', apiController.getCategories);
 router.post('/createUser', apiController.addSiteUser);
-router.post('/updateUser', apiController.updateSiteUserOptionSelection);
+router.post('/updateUser', apiController.updateSiteUserData);
 
 module.exports = router;

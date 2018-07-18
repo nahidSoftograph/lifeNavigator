@@ -5,13 +5,13 @@
 
     <div class="card white">
         <div class="card-content black-text">
-            <span class="card-title">Users Data</span>
+            <span class="card-title">Users Non PII Data</span>
             <table class="responsive-table" id="myTableId">
                 <thead>
                 <tr>
-                    <th>Age</th>
-                    <th>Gender</th>
-                    <th>Zip Code</th>
+                    <th>Instance</th>
+                    <th>Weight</th>
+                    <th>Height</th>
                     <th>Accomplishments</th>
                     <th>Future Goals</th>
                     <!--<th>Delete</th>-->
@@ -21,9 +21,9 @@
                 <tbody>
                 {{#each siteUsers}}
                     <tr>
-                        <td>{{this.age}}</td>
-                        <td>{{this.gender}}</td>
-                        <td>{{this.zip}}</td>
+                        <td>{{this.instanceName}}</td>
+                        <td>{{this.weight}}</td>
+                        <td>{{#if this.heightFeet}} {{this.heightFeet}} ft {{this.heightInch}} inch {{/if}}</td>
                         <td>
                             <button data-target="modalAccomplishment{{this._id}}" class="btn modal-trigger">Accomplishment ({{this.accomplishmentFullOptions.length}})</button>
 

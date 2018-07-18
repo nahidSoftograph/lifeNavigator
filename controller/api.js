@@ -16,6 +16,8 @@ let Instance = require('../models/instance'),
     CardButton = require('../models/cardButton'),
     FutureGoal = require('../models/futureGoal');
 
+let apiHelperUpdateUser = require('./apiHelperUpdateUser');
+
 let getCategories = (req, res, next) => {
     let instanceLink = req.params.instanceLink;
     getApiInstance(instanceLink, (err, instance) => {
@@ -152,64 +154,40 @@ let addSiteUser = (req, res, next) => {
     }
 };
 
-let updateSiteUserOptionSelection = (req, res, next) => {
+let updateSiteUserData = (req, res, next) => {
 
     let userId = req.body.userId,
-        accomplishmentOptions = req.body.accomplishments,
-        futureGolOptions = req.body.futureGoals;
-    SiteUser.findById(userId, (err, siteUser) => {
-        if (err) {
-            console.log('Error: ' + err);
-            return res.status(202).json({
-                success: false,
-                message: err
-            });
-        } else {
-            getOptionsId(accomplishmentOptions, (err, accomplishmentOptions) => {
-                if (err) {
-                    console.log('Error: ' + err);
-                    return res.status(202).json({
-                        success: false,
-                        message: err
-                    });
-                } else {
-                    getOptionsId(futureGolOptions, (err, futureGoalOptions) => {
-                        if (err) {
-                            console.log('Error: ' + err);
-                            return res.status(202).json({
-                                success: false,
-                                message: err
-                            });
-                        } else {
-                            siteUser.accomplishmentOptions = accomplishmentOptions;
-                            siteUser.futureGoalOptions = futureGoalOptions;
-                            siteUser.save((err, siteUser) => {
-                                if (err) {
-                                    console.log('Error: ' + err);
-                                    return res.status(202).json({
-                                        success: false,
-                                        message: err
-                                    });
-                                } else {
-                                    return res.status(202).json({
-                                        success: true,
-                                        message: 'Successfully updated the site user',
-                                        siteUser: siteUser
-                                    });
-                                }
-                            });
-                        }
-                    });
-                }
-            });
-        }
-    });
+        instanceId = req.body.instanceId,
+        instanceName = req.body.instanceName,
+        accomplishmentOptionId = req.body.accomplishmentOptionId,
+        futureGoalOptionId = req.body.futureGoalOptionId,
+        heightFeet = req.body.heightFeet,
+        heightInch = req.body.heightInch,
+        weight = req.body.weight,
+        eventDescription = req.body.eventDescription;
+    if (instanceId) {
+        apiHelperUpdateUser.updateInstanceId(req, res, next, userId, instanceId, eventDescription);
+    } else if (instanceName) {
+        apiHelperUpdateUser.updateInstanceName(req, res, next, userId, instanceName, eventDescription);
+    } else if (accomplishmentOptionId) {
+        apiHelperUpdateUser.updateAccomplishmentOptionId(req, res, next, userId, accomplishmentOptionId, eventDescription);
+    } else if (futureGoalOptionId) {
+        apiHelperUpdateUser.updateFutureGoalOptionId(req, res, next, userId, futureGoalOptionId, eventDescription);
+    } else if (heightFeet) {
+        apiHelperUpdateUser.updateHeightFeet(req, res, next, userId, heightFeet, eventDescription);
+    } else if (heightInch) {
+        apiHelperUpdateUser.updateHeightInch(req, res, next, userId, heightInch, eventDescription);
+    } else if (weight) {
+        apiHelperUpdateUser.updateWeight(req, res, next, userId, weight, eventDescription);
+    } else {
+        apiHelperUpdateUser.updateEventDescription(req, res, next, userId, eventDescription);
+    }
 };
 
 module.exports = {
     getCategories,
     addSiteUser,
-    updateSiteUserOptionSelection
+    updateSiteUserData
 };
 
 let traverseAllCategories = (categories, instanceId, cb) => {
@@ -473,7 +451,27 @@ let getSiteUser = (instance, cb) => {
     let instanceId = instance._id;
     let siteUserPiiData = new SiteUserPiiData ({
         instanceId: instanceId,
-        instanceName: instance.instanceName
+        instanceName: instance.instanceName,
+
+        age: '',
+        gender: '',
+        zip: '',
+
+        accomplishmentOptions: [],
+        futureGoalOptions: [],
+        accomplishmentFullOptions: [],
+        futureGoalFullOptions: [],
+
+        occupation: '',
+        industry: '',
+        income: '',
+        heightFeet: '',
+        heightInch: '',
+        weight: '',
+        healthIssue: [],
+        retireAge: '',
+
+        events: []
     });
     siteUserPiiData.save((err, siteUserPiiData) => {
         if (err) {
@@ -482,7 +480,27 @@ let getSiteUser = (instance, cb) => {
             let siteUserNonPiiData = new SiteUserNonPiiData ({
                 instanceId: instanceId,
                 instanceName: instance.instanceName,
-                referencePiiId: siteUserPiiData._id
+                referencePiiId: siteUserPiiData._id,
+
+                age: '',
+                gender: '',
+                zip: '',
+
+                accomplishmentOptions: [],
+                futureGoalOptions: [],
+                accomplishmentFullOptions: [],
+                futureGoalFullOptions: [],
+
+                occupation: '',
+                industry: '',
+                income: '',
+                heightFeet: '',
+                heightInch: '',
+                weight: '',
+                healthIssue: [],
+                retireAge: '',
+
+                events: []
             });
             siteUserNonPiiData.save((err, siteUserNonPiiData) => {
                 if (err) {

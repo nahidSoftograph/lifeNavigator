@@ -163,7 +163,7 @@ let formatUser = (siteUsers, cb) => {
                         accomplishmentOptions: allAccomplishmentGoalOptions[index2] || '',
                         futureGoalOptions: allFutureGoalOptions[index2] || '',
 
-                        healthIssue: allHealthIssue[index2] || '',
+                        healthIssue: allHealthIssues[index2] || '',
                         events: allEvents[index2] || '',
                     };
                     formatedUsers.push(myObject);
