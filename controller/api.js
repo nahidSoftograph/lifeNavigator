@@ -470,12 +470,15 @@ let getCardButton = (cardId, cb) => {
 };
 
 let getSiteUser = (instanceId, cb) => {
-    let siteUserPiiData = new SiteUserPiiData ({});
+    let siteUserPiiData = new SiteUserPiiData ({
+        instanceId: instanceId
+    });
     siteUserPiiData.save((err, siteUserPiiData) => {
         if (err) {
             return cb (err, null);
         } else {
             let siteUserNonPiiData = new SiteUserNonPiiData ({
+                instanceId: instanceId,
                 referencePiiId: siteUserPiiData._id
             });
             siteUserNonPiiData.save((err, siteUserNonPiiData) => {

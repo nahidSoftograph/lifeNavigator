@@ -4,7 +4,6 @@
         //initialize all modals
         $('.modal').modal();
         $('select').material_select();
-
         //now you can open modal from code
         // $('#modal1').modal('open');
 

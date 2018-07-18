@@ -1,18 +1,33 @@
 let Json2csvParser = require('json2csv').Parser,
     fs = require('fs'),
     SiteUser = require('../models/siteUser'),
-    path = require('path');
+    SiteUserPiiData = require('../models/siteUserPiiData'),
+    SiteUserNonPiiData = require('../models/siteUserNonPiiData'),
+    path = require('path'),
+    Instance = require('../models/instance');
+
+const fields = ['id', 'age', 'gender', 'zip', 'futureGoalOptions', 'accomplishmentOptions'];
+const json2csvParser = new Json2csvParser({ fields });
+
+let displayCsvGeneratorForm = (req, res, next) => {
+    Instance.find({}, (err, instances) => {
+        if (err) {
+
+        } else {
+            res.render('csvGenerator', {
+                instances: instances
+            });
+        }
+    });
+};
 
 let generateCSV = (req, res, next) => {
-    const fields = ['id', 'age', 'gender', 'zip', 'futureGoalOptions', 'accomplishmentOptions'];
-    const json2csvParser = new Json2csvParser({ fields });
-
     SiteUser.find(
         { createdDate: {
             /*$gte: new Date('2018-07-18T07:41:02.815Z'),
             $lte: new Date('2018-07-18T07:27:52.055Z'),*/
-                $gte: new Date('2018-07-18T07:27:52.055Z'),
-                $lte: new Date('2018-07-18T07:41:02.815Z'),
+                $gte: new Date('2018-07-18T00:00:00.000Z'),
+                $lte: new Date('2018-08-18T00:00:00.000Z'),
         }
     }, (err, siteUsers) => {
         if (err) {
@@ -41,8 +56,53 @@ let generateCSV = (req, res, next) => {
     });
 };
 
+let generateFilteredCsv = (req, res, next) => {
+    let instanceId = req.body.instanceId,
+        startDate = req.body.startDate + 'T00:00:00.000Z',
+        endDate = req.body.endDate + 'T00:00:00.000Z';
+
+    console.log('instanceId: ' + instanceId);
+    console.log('startDate: ' + startDate);
+    console.log('endDate: ' + endDate);
+
+    SiteUserPiiData.find(
+        { createdDate: {
+                /*$gte: new Date('2018-07-18T07:41:02.815Z'),
+                $lte: new Date('2018-07-18T07:27:52.055Z'),*/
+                $gte: new Date(startDate),
+                $lte: new Date(endDate),
+            }, instanceId: instanceId
+        }, (err, siteUsers) => {
+            if (err) {
+                console.log('Error: ' + err);
+            } else {
+                console.log(siteUsers);
+                formatUser(siteUsers, (err, siteUsers) => {
+                    console.log('After formating: ');
+                    console.log(siteUsers);
+                    const csv = json2csvParser.parse(siteUsers);
+
+                    console.log(csv);
+
+                    fs.writeFile('public/csvFiles/file.csv', csv, function(err) {
+                        if (err) {
+                            return res.status(400).json({
+                                success: false,
+                                message: 'Fatal server err: ' + err
+                            });
+                        } else {
+                            res.download(path.join(__dirname, '../public/csvFiles/file.csv'));
+                        }
+                    });
+                });
+            }
+        });
+};
+
 module.exports = {
-  generateCSV
+  generateCSV,
+  generateFilteredCsv,
+  displayCsvGeneratorForm
 };
 
 let formatUser = (siteUsers, cb) => {

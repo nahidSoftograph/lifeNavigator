@@ -1,0 +1,35 @@
+
+<div class="col s12 m8 l9 ">
+
+    <div class="card white">
+        <div class="card-content black-text" style="margin-top: 100px;">
+            <span class="card-title center-align">Welcome to CSV Generator</span>
+            <br>
+            <form action="/csvGenerator/generateFilteredData" method="post">
+                <div class="row">
+                    <div class="input-field col s3">
+                        <select id="instanceId" name="instanceId">
+                            <option value="select bitch" selected>Select Instance</option>
+                            {{#each instances}}
+                                <option value="{{this._id}}">{{this.instanceName}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+                    <div class="col s1"></div>
+                    <div class="col s2">
+                        <input type="date" class="datepicker" name="startDate">
+                    </div>
+                    <div class="col s1"></div>
+                    <div class="col s2">
+                        <input type="date" class="datepicker" name="endDate">
+                    </div>
+                    <div class="col s1">
+                        <button class="btn waves-effect waves-light setToDefaultButtonOrderInput">Submit
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>

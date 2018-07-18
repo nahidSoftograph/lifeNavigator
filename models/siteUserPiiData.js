@@ -25,7 +25,7 @@ let siteUserPiiSchema = mongoose.Schema({
 
     events: [],
 
-    date: { type: Date, default: Date.now }
+    createdDate: { type: Date, default: new Date }
 });
 
 module.exports = mongoose.model('SiteUserPii', siteUserPiiSchema);
